@@ -1,0 +1,35 @@
+<section class="module mod-join-us">
+  <div class="container">
+    <h2 class="h1 text-center text-uppercase"><?php echo $this->translate('JOIN US'); ?></h2>
+    <div class="form-join-us">
+        <h3><?php echo $this->translate('Please contact us for <br>detail information'); ?></h3>
+        <form id="fitness_joinus_form">
+
+          <div class="form-group ">
+            <div class="msg-input ">
+              <input type="text" class="form-control" name="name" placeholder="<?php echo $this->translate('YOUR NAME'); ?>">
+              <div class="messages-error">
+                <div></div>
+              </div>
+            </div>
+          </div>
+   
+          <div class="form-group ">
+            <div class="msg-input ">
+              <input type="tel" class="form-control" name="phone" placeholder="<?php echo $this->translate('YOUR PHONE'); ?>">
+              <div class="messages-error">
+                <div></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align:center; height: 0px;">
+            <span id="joinus-error-msg"></span>
+            <img id="joinus-ajax-loading" style="display:none;" src="<?php echo BASE_URL_SKIN_IMAGE.'/d-ajax-loader.gif'; ?>" />
+          </div>
+
+        </form>
+        <button class="btn-custom" onclick="javascript:App.FitnessJoinUs.submit();"><?php echo $this->translate('REGISTER NOW'); ?></button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,43 @@
+<?php
+  if($floorplans){
+?>
+  <!-- module 'Mod Floorplan' -->
+  <section class="module mod-floorplan animation">
+    <div class="container ani-bottom">
+      <div class="name-floorplan">
+        <h2 class="h1 text-center line"><?php echo $this->translate('FLOOR PLAN'); ?></h2>
+      </div>
+      
+      <!-- module 'Mod Map Floorplan' -->
+      <section class="module mod-map-floorplan mod-map-floorplan-2" data-module="floor">
+        <div class="row info-map-floor">
+          <div class="col-md-3 box-left-floor">
+            <?php
+            foreach ($floorplans as $key => $value) {
+              $cActive = $key == 0 ? 'active' : '';
+             ?>
+              <div class="info-left-floor <?php echo $cActive; ?>">
+                <span class="btn-custom box-name"><?php echo $value['title']; ?></span>
+                <?php echo $value['body']; ?>
+                <a href="javascript:void(0)" class="link"></a>
+              </div>
+            <?php }
+            ?>    
+          </div>
+          <div class="col-md-9 box-map-floor">
+            <?php
+            foreach ($floorplans as $key => $value) {
+              $cActive = $key == 0 ? 'active' : '';
+              $cImage = BASE_URL_MEDIA_IMAGE.'/'.$value['image'];
+            ?>
+              <div class="img-map <?php echo $cActive; ?>">
+                <img src="<?php echo $cImage; ?>" alt="<?php echo $value['title']; ?>">
+              </div>
+            <?php }
+            ?> 
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+<?php } ?>

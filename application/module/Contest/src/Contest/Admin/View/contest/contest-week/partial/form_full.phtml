@@ -1,0 +1,58 @@
+<div class="form-group">
+    <label class="col-sm-2 control-label" for="">Title <span class="asterisk">*</span></label>
+    <div class="col-sm-10">
+        <?php echo $this->formInput($form->get('title')); ?>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label" for="">Intro Text</label>
+    <div class="col-sm-10">
+        <?php echo $this->formTextarea($form->get('intro')); ?>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label" for="">Image</label>
+    <div class="col-sm-10">
+        <?php echo $this->cropimageupload()->upload('image', $form->get('image')->getValue(), '', array(450, 450), 0); ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label" for="">From date</label>
+    <div class="col-sm-10">
+        <?php echo $this->formInput($form->get('from_date')); ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label" for="">To date</label>
+    <div class="col-sm-10">
+        <?php echo $this->formInput($form->get('to_date')); ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label" for="">Ordering</label>
+    <div class="col-sm-10">
+        <?php echo $this->formInput($form->get('ordering')); ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label" for="">Status</label>
+    <div class="col-sm-10">
+        <?php echo $this->formSelect($form->get('status')); ?>
+    </div>
+</div>
+<?php //echo $this->formHidden($form->get('csrf')); ?>
+
+<script>
+    $(function(){
+        $('#from_date, #to_date').datepicker({
+            format: 'yyyy-mm-dd',
+            startDate: '-3d',
+            endDate: 'today',
+            autoclose: true
+        });
+    });
+</script>   

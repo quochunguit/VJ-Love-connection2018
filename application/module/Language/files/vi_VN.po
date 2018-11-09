@@ -1,0 +1,199 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi_VN\n"
+"X-Generator: Poedit 1.8.6\n"
+
+# ************--TRANSLATE--*************------
+msgid "Home"
+msgstr "Trang chủ"
+
+msgid "Contact"
+msgstr "Liên hệ"
+
+msgid "Thank you for subscribed"
+msgstr "Cám ơn bạn đã đăng ký nhận tin"
+
+msgid "Email is invalid"
+msgstr "Email sai định dạng"
+
+msgid "Please enter email"
+msgstr "Vui lòng nhập email"
+
+msgid "ENTER YOUR EMAIL"
+msgstr "NHẬP EMAIL CỦA BẠN"
+
+msgid "Subscribe to our newsletter"
+msgstr "Theo dõi bản tin"
+
+msgid "Artemis All rights reserved."
+msgstr "Artemis Đã đăng ký Bản quyền."
+
+msgid "Developed by Jodric"
+msgstr "Phát triển bởi Jodric"
+
+msgid "RETAIL"
+msgstr "TRUNG TÂM THƯƠNG MẠI"
+
+msgid "PROMOTION"
+msgstr "KHUYẾN MÃI"
+
+msgid "FLOORPLAN"
+msgstr "KẾ HOẠCH SÀN"
+
+msgid "EVENTS"
+msgstr "SỰ KIỆN"
+
+msgid "SOCIAL MEDIA"
+msgstr "TRUYỀN THÔNG XÃ HỘI"
+
+msgid "BRANDS"
+msgstr "THƯƠNG HIỆU"
+
+msgid "RESIDENTIAL"
+msgstr "KHU CĂN HỘ"
+
+msgid "VIRTUAL TOUR & GALLERY"
+msgstr "TOUR & BỘ SƯU TẬP"
+
+msgid "OVERVIEW"
+msgstr "TỔNG QUAN"
+
+msgid "FLOORPLANS"
+msgstr "KẾ HOẠCH SÀN"
+
+msgid "FITNESS"
+msgstr "CLB THỂ THAO"
+
+msgid "GALLERY"
+msgstr "HÌNH ẢNH"
+
+msgid "PACKAGE"
+msgstr "GÓI"
+
+msgid "GALLERY | SOCIAL MEDIA"
+msgstr "HÌNH ẢNH | MẠNG XÃ HỘI"
+
+msgid "BRAND HIGHLIGHTS"
+msgstr "THƯƠNG HIỆU NỔI BẬT"
+
+msgid "MORE DETAIL"
+msgstr "CHI TIẾT"
+
+msgid "Please enter your name"
+msgstr "Vui lòng nhập tên bạn"
+
+msgid "Please enter your phone"
+msgstr "Vui lòng nhập số điện thoại"
+
+msgid "Your phone is a string number"
+msgstr "Số điện thoại là một chuỗi số"
+
+msgid "Thank you for join us"
+msgstr "Cám ơn bạn đã tham gia"
+
+msgid "JOIN US"
+msgstr "THAM GIA"
+
+msgid "Please contact us for <br>detail information"
+msgstr "Vui lòng liên hệ để biết<br>thông tin chi tiết"
+
+msgid "OUR FACILITIES"
+msgstr "CƠ SỞ VẬT CHẤT"
+
+msgid "AMENITIES"
+msgstr "TIỆN NGHI"
+
+msgid "FLOOR PLAN"
+msgstr "KẾ HOẠCH SÀN"
+
+msgid "YOUR NAME"
+msgstr "TÊN CỦA BẠN"
+
+msgid "YOUR PHONE"
+msgstr "SỐ ĐIỆN THOẠI CỦA BẠN"
+
+msgid "REGISTER NOW"
+msgstr "ĐĂNG KÝ NGAY"
+
+msgid "SEARCH"
+msgstr "TÌM KIẾM"
+
+msgid "We collaborate with most well-established brands"
+msgstr "Chúng tôi cộng tác với các các thương hiệu nổi bật"
+
+msgid "SHOPPING MALL"
+msgstr "TRUNG TÂM MUA SẮM"
+
+msgid "FACILITIES"
+msgstr "TIỆN NGHI"
+
+msgid "INTERIOR"
+msgstr "NỘI THẤT"
+
+msgid "SALE EVENTS"
+msgstr "SỰ KIỆN"
+
+msgid "No gallery found..."
+msgstr "Không có hình ảnh nào..."
+
+msgid "INTRODUCTION"
+msgstr "GIỚI THIỆU"
+
+msgid "CONCEPT"
+msgstr "Ý TƯỞNG"
+
+msgid "SALE POLICY"
+msgstr "CHÍNH SÁCH BÁN HÀNG"
+
+msgid "Search Results"
+msgstr "Kết quả tìm kiếm"
+
+msgid "PROMOTION DATE"
+msgstr "NGÀY KHUYẾN MÃI"
+
+msgid "PROMOTION TIME"
+msgstr "GIỜ KHUYẾN MÃI"
+
+msgid "VIEW DETAIL"
+msgstr "XEM CHI TIẾT"
+
+msgid "visit our store"
+msgstr "xem chi tiết"
+
+msgid "VISIT BRAND’S SITE"
+msgstr "XEM TRANG WEB"
+
+msgid "LOCATE STORE"
+msgstr "VỊ TRÍ"
+
+msgid "BACK TO BRANDS LIST"
+msgstr "QUAY VỀ DANH SÁCH"
+
+msgid "INDUSTRY"
+msgstr "NGÀNH CÔNG NGHIỆP"
+
+msgid "LOCATION"
+msgstr "ĐỊA ĐIỂM"
+
+msgid "Find out what we have to offer"
+msgstr "Tìm hiểu những gì chúng tôi cung cấp"
+
+msgid "LAST UPDATE"
+msgstr "Cập nhật"
+
+msgid "services"
+msgstr "Dịch vụ"
+
+msgid "BACK TO FITNESS"
+msgstr "QUAY LẠI FITNESS"
+
+msgid "Contact to hire ground"
+msgstr "Liên hệ thuê mặt bằng"

@@ -1,0 +1,41 @@
+<?php
+	$siteMeta = $this->layout()->siteMeta;
+	$dataShare = $this->layout()->dataShare;
+	if($dataShare){
+	    $siteName = $dataShare['title'] ? $dataShare['title'] : $siteMeta['title'];
+	    $srcImage =	$dataShare['image'] ? $dataShare['image'] : BASE_URL_SKIN_IMAGE.'/social-share.png';
+	    $title = $dataShare['title'] ? $dataShare['title'] : $siteMeta['title'];
+	    $description = $dataShare['description'] ? $dataShare['description'] : $siteMeta['description'];
+	    $urlShare = $dataShare['url'] ? $dataShare['url'] : BASE_URL;
+	}else{
+	    $siteName = $siteMeta['title'];
+	    $srcImage = BASE_URL_SKIN_IMAGE.'/social-share.png';
+	    $title = $siteMeta['title'];
+	    $description = $siteMeta['description'];
+	    $urlShare = BASE_URL;
+	}
+?>
+
+<link rel="image_src" type="image/png" href="<?php echo $srcImage; ?>" />
+<meta name="robots" content="index, follow" />
+<meta name="revisit-after" content="3 days" />
+<meta name="rating" content="general" />
+<meta name="resource-type" content="document" />
+<meta name="distribution" content="global" />  
+
+<meta property="fb:app_id" content="<?php echo FB_APP_ID; ?>"/>
+<meta property="og:title" content="<?php echo $title; ?>" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="<?php echo $srcImage; ?>" />
+<meta property="og:url" content="<?php echo $urlShare; ?>" />
+<meta property="og:site_name" content="<?php echo $siteName; ?>" />
+<meta property="og:description" content="<?php echo $description; ?>" />   
+
+<meta name="twitter:title" content="<?php echo $title; ?>">
+<meta name="twitter:description" content="<?php echo $description; ?>">
+<meta name="twitter:image:src" content="<?php echo $srcImage; ?>">
+<meta name="twitter:url" content="<?php echo $urlShare; ?>">
+
+<meta itemprop="name" content="<?php echo $title; ?>">
+<meta itemprop="description" content="<?php echo $description; ?>">
+<meta itemprop="image" content="<?php echo $srcImage; ?>">

@@ -1,0 +1,11 @@
+<div class="actions pull-right">
+    <button class="btn btn-primary" onclick="App.submitForm('apply')" ><i class="fa fa-apply"></i>&nbsp;Apply</button> &nbsp;&nbsp;
+    <button class="btn btn-success" onclick="App.submitForm('save')"><i class="fa fa-savelist"></i>&nbsp;<?php echo 'Save and list' ?></button> &nbsp;&nbsp;
+    <button style="display:none;" class="btn btn-info" onclick="App.submitForm('save2new')" ><i class="fa fa-savenew"></i>&nbsp;<?php echo 'Save and new' ?></button>
+    <?php if ($this->id): ?>
+        <button style="display:none;" class="btn btn-info" onclick="App.gotoURL(baseurl + '/admin/contenttype/deleteitem/<?php echo $this->id; ?>')"><i class="fa fa-deleteitem"></i>&nbsp;<?php echo 'Delete' ?></button>
+    <?php endif; ?>
+    <button class="btn btn-danger" onclick="App.gotoURL(baseurl + '/admin/contenttype')"><i class="fa fa-cancel"></i>&nbsp;<?php echo 'Cancel' ?></button> &nbsp;&nbsp;
+</div>
+<div class="clearfix"></div>
+<p>&nbsp;</p>

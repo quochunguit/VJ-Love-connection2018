@@ -1,0 +1,40 @@
+<?php
+  if($facilities){
+?>
+  <section class="module mod-our-facilities" data-module="ourFacilities">
+    <div class="container">
+      <h2 class="h1 text-center line"><?php echo $this->translate('OUR FACILITIES'); ?></h2>
+      <div class="box-facilities-slider">
+        <div class="facilities-slider">
+          <?php
+          foreach ($facilities as $kF => $vF) {
+            $fImage = BASE_URL_MEDIA_IMAGE.'/'.$vF['image'];
+            $fTitleDefine = $vF['subtitle'];
+            $fTitle = $vF['title'];
+            $fIntro = $vF['intro'];
+           ?>
+            <div class="facilities-item">
+              <div class="facilities-box">
+                <div class="facilities-image" style="background-image: url(<?php echo $fImage; ?>)"></div>
+                <div class="facilities-text">
+                  <h5><?php echo $fTitleDefine; ?></h5>
+                  <div class="box-facilities-text">
+                    <h2><?php echo $fTitle; ?></h2>
+                    <p><?php echo $fIntro; ?></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php }
+          ?>
+        </div>
+        <div class="group-box">
+          <div class="stt">
+            <p class="stt-box">1</p>
+          </div>
+          <div class="group-arraws"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+<?php } ?>

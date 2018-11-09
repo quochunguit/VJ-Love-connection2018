@@ -1,0 +1,60 @@
+<?php
+$template = 'post';
+$type = $_GET['type'];
+if ($type) {
+    $factory = $this->factory();
+    $contentType = $factory->getContentTypeByType($type);
+    $titleForm = $contentType['title'];
+} else {
+    $titleForm = 'Content';
+}
+
+$this->layout()->setVariable('heading', $titleForm);
+?>
+
+ <?php 
+ if (file_exists(__DIR__ ."/".$template. '/partial/indextoolbar_'.$type.'.phtml')) {
+        include_once(__DIR__ ."/".$template. '/partial/indextoolbar_'.$type.'.phtml');
+    } elseif (file_exists(__DIR__ . "/".$template."/partial/indextoolbar.phtml")) {
+        include_once(__DIR__ ."/".$template. '/partial/indextoolbar.phtml');
+    }
+ ?>
+
+<?php echo $this->flashMessenger(); ?>
+<div class="clear"></div>
+
+<div id="view-content">
+    <div class="col-sm-12">
+    <form method="post" action="">
+        <?php 
+         if (file_exists(__DIR__ ."/".$template. '/partial/filter_'.$type.'.phtml')) {
+                include_once(__DIR__ ."/".$template. '/partial/filter_'.$type.'.phtml');
+            } elseif (file_exists(__DIR__ . "/".$template."/partial/filter.phtml")) {
+                include_once(__DIR__ ."/".$template. '/partial/filter.phtml');
+            }
+         ?>
+        <div class="clearfix">&nbsp;</div>
+        <div class="table-primary">
+        <?php
+            if (file_exists(__DIR__ . "/".$template."/".$type."_index.phtml")) {
+                include_once(__DIR__ . "/".$template."/".$type."_index.phtml");
+            } elseif (file_exists(__DIR__ . "/".$template."/default_index.phtml")) {
+                include_once(__DIR__ . "/".$template."/default_index.phtml");
+            }
+        ?>
+        </div>    
+        <div class="pagination-container">
+            <?php
+            echo $paging->getPagingLink();
+            echo $paging->getPagingInfo();
+            ?>
+        </div>
+        <input type="hidden" name="callaction" id="callaction" value=""/>
+        <input type="hidden" name="choose[]" value=""/>
+        <input type="hidden" name="filter_order" id="filter_order" value="<?php echo $filter_order; ?>"/>
+        <input type="hidden" name="filter_order_Dir" id="filter_order_Dir" value="<?php echo $filter_order_Dir; ?>"/>
+    </form>
+  </div>
+</div>
+<div class="clear"></div>
+<?php include(__DIR__ ."/".$template.'/partial/indextoolbar.phtml'); ?>

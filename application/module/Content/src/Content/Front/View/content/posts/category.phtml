@@ -1,0 +1,37 @@
+<h1 class="page-header">Category: <?php echo $this->escapeHtml($this->category['title']); ?></h1>
+<div class="posts">
+<?php if (count($items) > 0): ?>
+    <ul class="media-list">
+        <?php
+        foreach ($items as $post):
+            $url = $this->url('newsdetail', array('id' => $post['id'], 'slug' => $post['slug']));
+            ?>
+            <li class="media">
+                <?php if ($post['image']): ?>
+                    <a class="pull-left" href="<?php echo $url; ?>">
+                        <img  class="media-object"  src="<?php echo $post['image']; ?>"/>
+                    </a>
+                <?php endif; ?>
+                <div class="media-body">
+                    <h2 class="media-heading"><a href="<?php echo $url; ?>"><?php echo $this->escapeHtml($post['title']); ?></a></h2>
+                    <div class="postdate"><?php echo $this->layoutHelper()->dateString($post['created']) ?></div>
+                    <div class="postsumary"><?php echo $this->escapeHtml($post['intro']); ?></div>
+                    <div class="postmeta"><a href="<?php echo $url; ?>" title="Read more">Read more</a></div>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    <div class="pagination-container">
+    <?php
+    echo $paging->getPagingLink();
+    echo $paging->getPagingInfo();
+    ?>
+    </div>
+<?php else: ?>
+    <div class="no-item">
+        There is no item.
+    </div>
+<?php endif; ?>
+</div>
+
+

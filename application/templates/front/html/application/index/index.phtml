@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"><h4>BÀI TIÊU BIỂU</h4></div>
+        <div class="col-md-10"><hr/></div>
+    </div>
+    <div class="row">
+    <?php
+    foreach($bestContest as $item){
+        ?>
+        <div class="col-md-4">
+            <div class="item-media">
+                <?php
+                //if media is image
+                if($item['type'] == 'images'){
+                    $images = explode(',', $item['images']);
+                    ?>
+                    <img alt="" class="media-object" src="<?php echo BASE_URL . '/media/images/' . $images[0]; ?>"/>
+                    <?php
+                }else if($item['type'] == 'video'){
+                    if($item['video'] != ''){
+                        ?>
+                        <video width="320" controls>
+                            <source src="<?php echo BASE_URL . '/media/videos/' . $item['video']; ?>">
+                        </video>
+                        <?php
+                    }
+                }
+                ?>
+            </div>
+            <div class="item-des">
+                <h3><a href="<?php echo $url; ?>"><?php echo $this->escapeHtml($item['title']); ?></a></h3>
+                <p>Author: <?php echo $this->escapeHtml($item['name']); ?></p>
+            </div>
+        </div>
+        <?php
+    }
+    ?>
+    </div>
+    <br/><br/>
+    <div class="row">
+        <div class="col-md-2"><h4>BÀI MỚI</h4></div>
+        <div class="col-md-10"><hr/></div>
+    </div>
+    <div class="row">
+        <?php
+        foreach($newestContest as $item){
+            ?>
+            <div class="col-md-4">
+                <div class="item-media">
+                    <?php
+                    //if media is image
+                    if($item['type'] == 'images'){
+                        $images = explode(',', $item['images']);
+                        ?>
+                        <img alt="" class="media-object" src="<?php echo BASE_URL . '/media/images/' . $images[0]; ?>"/>
+                        <?php
+                    }else if($item['type'] == 'video'){
+                        if($item['video'] != ''){
+                            ?>
+                            <video width="320" controls>
+                                <source src="<?php echo BASE_URL . '/media/videos/' . $item['video']; ?>">
+                            </video>
+                            <?php
+                        }
+                    }
+                    ?>
+                </div>
+                <div class="item-des">
+                    <h3><a href="<?php echo $url; ?>"><?php echo $this->escapeHtml($item['title']); ?></a></h3>
+                    <p>Author: <?php echo $this->escapeHtml($item['name']); ?></p>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
+        <div class="col-md-12 text-center">
+            <ul class="pagination">
+                <?php //echo $paging->getPagingLinkFront(); ?>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,199 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_US\n"
+"X-Generator: Poedit 1.8.6\n"
+
+# ************--TRANSLATE--*************------
+msgid "Home"
+msgstr "Home"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Thank you for subscribed"
+msgstr "Thank you for subscribed"
+
+msgid "Email is invalid"
+msgstr "Email is invalid"
+
+msgid "Please enter email"
+msgstr "Please enter your email"
+
+msgid "ENTER YOUR EMAIL"
+msgstr "ENTER YOUR EMAIL"
+
+msgid "Subscribe to our newsletter"
+msgstr "Subscribe to our newsletter"
+
+msgid "Artemis All rights reserved."
+msgstr "Artemis All rights reserved."
+
+msgid "Developed by Jodric"
+msgstr "Developed by Jodric"
+
+msgid "RETAIL"
+msgstr "RETAIL"
+
+msgid "PROMOTION"
+msgstr "PROMOTION"
+
+msgid "FLOORPLAN"
+msgstr "FLOORPLAN"
+
+msgid "EVENTS"
+msgstr "EVENTS"
+
+msgid "SOCIAL MEDIA"
+msgstr "SOCIAL MEDIA"
+
+msgid "BRANDS"
+msgstr "BRANDS"
+
+msgid "RESIDENTIAL"
+msgstr "RESIDENTIAL"
+
+msgid "VIRTUAL TOUR & GALLERY"
+msgstr "VIRTUAL TOUR & GALLERY"
+
+msgid "OVERVIEW"
+msgstr "OVERVIEW"
+
+msgid "FLOORPLANS"
+msgstr "FLOORPLANS"
+
+msgid "FITNESS"
+msgstr "FITNESS"
+
+msgid "GALLERY"
+msgstr "GALLERY"
+
+msgid "PACKAGE"
+msgstr "PACKAGE"
+
+msgid "GALLERY | SOCIAL MEDIA"
+msgstr "GALLERY | SOCIAL MEDIA"
+
+msgid "BRAND HIGHLIGHTS"
+msgstr "BRAND HIGHLIGHTS"
+
+msgid "MORE DETAIL"
+msgstr "MORE DETAIL"
+
+msgid "Please enter your name"
+msgstr "Please enter your name"
+
+msgid "Please enter your phone"
+msgstr "Please enter your phone"
+
+msgid "Your phone is a string number"
+msgstr "Your phone is a string number"
+
+msgid "Thank you for join us"
+msgstr "Thank you for join us"
+
+msgid "JOIN US"
+msgstr "JOIN US"
+
+msgid "Please contact us for <br>detail information"
+msgstr "Please contact us for <br>detail information"
+
+msgid "OUR FACILITIES"
+msgstr "OUR FACILITIES"
+
+msgid "AMENITIES"
+msgstr "AMENITIES"
+
+msgid "FLOOR PLAN"
+msgstr "FLOOR PLAN"
+
+msgid "YOUR NAME"
+msgstr "YOUR NAME"
+
+msgid "YOUR PHONE"
+msgstr "YOUR PHONE"
+
+msgid "REGISTER NOW"
+msgstr "REGISTER NOW"
+
+msgid "SEARCH"
+msgstr "SEARCH"
+
+msgid "We collaborate with most well-established brands"
+msgstr "We collaborate with most well-established brands"
+
+msgid "SHOPPING MALL"
+msgstr "SHOPPING MALL"
+
+msgid "FACILITIES"
+msgstr "FACILITIES"
+
+msgid "INTERIOR"
+msgstr "INTERIOR"
+
+msgid "SALE EVENTS"
+msgstr "SALE EVENTS"
+
+msgid "No gallery found..."
+msgstr "No gallery found..."
+
+msgid "INTRODUCTION"
+msgstr "INTRODUCTION"
+
+msgid "CONCEPT"
+msgstr "CONCEPT"
+
+msgid "SALE POLICY"
+msgstr "SALE POLICY"
+
+msgid "Search Results"
+msgstr "Search Results"
+
+msgid "PROMOTION DATE"
+msgstr "PROMOTION DATE"
+
+msgid "PROMOTION TIME"
+msgstr "PROMOTION TIME"
+
+msgid "VIEW DETAIL"
+msgstr "DETAIL"
+
+msgid "visit our store"
+msgstr "visit our store"
+
+msgid "VISIT BRAND’S SITE"
+msgstr "VISIT BRAND’S SITE"
+
+msgid "LOCATE STORE"
+msgstr "LOCATE STORE"
+
+msgid "BACK TO BRANDS LIST"
+msgstr "BACK TO BRANDS LIST"
+
+msgid "INDUSTRY"
+msgstr "INDUSTRY"
+
+msgid "LOCATION"
+msgstr "LOCATION"
+
+msgid "Find out what we have to offer"
+msgstr "Find out what we have to offer"
+
+msgid "LAST UPDATE"
+msgstr "LAST UPDATE"
+
+msgid "services"
+msgstr "services"
+
+msgid "BACK TO FITNESS"
+msgstr "BACK TO FITNESS"
+
+msgid "Contact to hire ground"
+msgstr "Contact to hire ground"

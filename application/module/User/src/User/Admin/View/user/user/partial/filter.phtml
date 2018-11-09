@@ -1,0 +1,19 @@
+<div id="filter_form" class="filter form-inline" > 
+    <label><?php echo ('Keyword:'); ?></label>
+    <input type="text" class="form-control" name="filter_search" id="filter_search" placeholder="" value="<?php print $state->get("filter.search") ?>"/>&nbsp;
+
+    <label ><?php echo 'Group'; ?></label>
+    <select class="form-control filter_change" name="filter_group" id="filter_group"  >
+        <option value="">-- all --</option>
+        <?php echo $this->layoutHelper()->getGroupOption($state->get('filter.group')); ?>
+    </select>&nbsp;
+    
+    <label ><?php echo ('Status'); ?></label>
+    <select class="form-control filter_change" name="filter_status" id="filter_status" class="filter_change">
+        <?php echo App\AppView::statusOptions($state->get('filter.status')); ?>
+    </select>&nbsp;
+    
+    <input type="button" value="<?php echo ('Filter'); ?>" id="filter" class="btn btn-primary"/>
+    <input type="button" value="<?php echo ('Reset'); ?>" id="reset" name="data[reset]" class="btn btn-default" autocomplete="off"/>
+</div>
+    

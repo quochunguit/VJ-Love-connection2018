@@ -1,0 +1,42 @@
+<?php
+$user = $this->user();
+?>
+<table class="table table-hover table-striped table-bordered">
+    <thead>
+        <tr>
+            <th class="tableColumnCheck"><input type="checkbox" value="1" id="checkall" class="checkall"/></th>
+            <th><?php echo $this->layoutHelper()->header('id', $state); ?></th>
+            <th><?php echo $this->layoutHelper()->header('title', $state); ?></th>
+            <th><?php echo $this->layoutHelper()->header('image', $state); ?></th>
+              <th><?php echo $this->layoutHelper()->header('ordering', $state); ?></th>
+            <th><?php echo $this->layoutHelper()->header('created', $state); ?></th>
+            <th><?php echo $this->layoutHelper()->header('status', $state); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($items as $item) :
+            $urlDetail = $this->url('postadmin', array('action' => 'edit', 'id' => $item['id'])) . '?type=' . $type;
+         ?>
+            <tr>
+                <td><input type="checkbox" class="checkitem" name="data[Choose][]"  value="<?php echo $item['id']; ?>"/></td>
+                <td><a href="<?php echo $urlDetail; ?>"><?php echo $item['id']; ?></a></td>
+                <td><a href="<?php echo $urlDetail; ?>"><?php echo $this->escapeHtml($item['title']); ?></a></td>       
+
+                <td>
+                    <a href="<?php echo $urlDetail; ?>">
+                        <?php
+                        if($item['image']){
+                        ?>
+                            <img style="max-width: 120px;" src="<?php echo BASE_URL_MEDIA_IMAGE.'/'.$item['image']; ?>" />
+                        <?php } else{
+                            echo 'View';
+                        } ?>
+                    </a>                        
+                </td>   
+                <td><?php echo $item['ordering']; ?></td>           
+                <td><?php echo $this->layoutHelper()->dateString($item['created']) ?></td>
+                <td><?php echo $this->layoutHelper()->publishString($item['status']); ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

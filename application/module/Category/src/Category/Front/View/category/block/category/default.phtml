@@ -1,0 +1,11 @@
+<div class="right-sidebar">
+    <ul class="nav nav-pills nav-stacked">
+    <li class="nav-header"><?php echo $block->getTitle(); ?></li>
+        <?php
+        foreach ($data as $category):
+            $url = $this->url('news-category', array('id' => $category['id'], 'slug' => $category['title']));
+            ?>
+        <li><a href="<?php echo $url; ?>" ><?php echo $category['title']; ?></a></li>
+    <?php endforeach; ?>
+</ul>
+</div>

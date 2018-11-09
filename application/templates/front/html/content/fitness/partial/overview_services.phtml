@@ -1,0 +1,64 @@
+<?php
+  $myLocaleShort = $this->layout()->myLocaleShort;
+  $factory = $this->factory();
+  if($services){
+?>
+  <section class="module mod-services">
+    <div class="container">
+      <h2 class="h1 text-center line"><?php echo $this->translate('services'); ?></h2>
+      <div class="mod-list-logo">
+        <div class="list-logo slider-gallery" data-module="sliderGallery">
+          <div class="row slider">      
+          <?php
+          foreach ($services as $kS => $vS) {
+            $sUrl = $this->url('fitness-servicedetail', array('lang'=>$myLocaleShort, 'id'=>$vS['id'],'slug'=>$vS['slug']));
+            $sImage = BASE_URL_MEDIA_IMAGE.'/'.$vS['image'];
+            $floorIDs = json_decode($vS['category_multi'], true);
+
+            $multiImage = json_decode($vS['multi_image'], true);
+            if(!$multiImage && $vS['image']){
+              $multiImage[] = array('file'=>$vS['image'],'caption'=>$vS['title']);
+            }
+          ?>      
+            <div class="item-gallery col-sm-6 col-md-4 col-xl-3">
+              <div class="box-gallery">
+                <div class="image-gallery open-popup-gallery">
+
+                  <?php
+                    foreach ($multiImage as $kM => $vM) {
+                      $mActive = $kM == 0 ? 'class="active"':'';
+                      $mImage = BASE_URL_MEDIA_IMAGE.'/'.$vM['file'];
+                      $mImageThumb = BASE_URL_MEDIA_IMAGE.'/thumb/'.$vM['file'];
+                     ?>
+                      <a href="javascript:;" <?php echo $mActive; ?> style="background-image: url(<?php echo $mImageThumb; ?>);" attr-img="<?php echo $mImage; ?>" tabindex="0"></a>
+                    <?php }
+                  ?>
+                </div>
+                <div class="text-gallery">
+                  <span class="box-name">
+                    <?php
+                      if($floorIDs){
+                        $floorStr = '';
+                        foreach ($floorIDs as $kF => $vF) {
+                          $floor = $factory->getPostItem(array('id'=>$vF));
+                          if($floor){
+                            $floorStr .= $floor['title'].', ';
+                          }
+                        }
+                        echo rtrim($floorStr,', ');
+                      }
+                    ?>
+                  </span>
+                  <h4><?php echo $vS['title']; ?></h4>
+                  <a href="<?php echo $sUrl; ?>" class="btn-custom"><?php echo $this->translate('VIEW DETAIL'); ?></a>
+                </div>
+              </div>
+            </div>
+          <?php }
+          ?> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<?php } ?>

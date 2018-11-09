@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="content-promotion ani-bottom">
+    <div class="row">
+      <div class="col-md-7 col-left">
+        <?php
+        $overview = $overviewInfo['overview'];
+        if($overview){
+        ?>
+          <h1><?php echo $overview['title']; ?></h1>
+          <div>
+            <?php echo $overview['body']; ?>
+          </div>
+      <?php } ?>
+      </div>
+      
+      <div class="col-md-5 col-right">
+        <div class="mod-right-promotion-2" data-module="tabpromotion">
+          <div class="common-tab">
+            <ul class="list-unstyled">
+              <li class="active">
+                <a href="javascript:;" class="text-uppercase"><?php echo $this->translate('INTRODUCTION'); ?></a>
+              </li>
+              <li>
+                <a href="javascript:;" class="text-uppercase"><?php echo $this->translate('CONCEPT'); ?></a>
+              </li>
+              <li>
+                <a href="javascript:;" class="text-uppercase"><?php echo $this->translate('SALE POLICY'); ?></a>
+              </li>
+            </ul>
+          </div>
+
+          <?php
+          $introduction = $overviewInfo['introduction'];
+          if($introduction){ ?>
+            <div class="content-tab-promotion active">
+              <?php echo $introduction['body']; ?>
+            </div>
+          <?php }
+          ?>
+
+          <?php
+          $concept = $overviewInfo['concept'];
+          if($concept){ ?>
+            <div class="content-tab-promotion">
+              <?php echo $concept['body']; ?>
+            </div>
+          <?php }
+          ?>
+
+          <?php
+          $salePolicy = $overviewInfo['salePolicy'];
+          if($salePolicy){ ?>
+            <div class="content-tab-promotion">
+              <?php echo $salePolicy['body']; ?>
+            </div>
+          <?php }
+          ?>
+        </div>
+        <!-- <a href="#" class="btn btn-back">BACK TO FITNESS</a> -->
+      </div>
+    </div>
+  </div>
+</div>
+  

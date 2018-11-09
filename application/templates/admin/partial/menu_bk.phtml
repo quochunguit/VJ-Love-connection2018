@@ -1,0 +1,103 @@
+<?php 
+$factory = $this->factory();
+$categories = $factory->getCategory();
+?>
+
+<ul class="navigation">
+    <li>
+	<a href="<?php echo $this->url('admin') ?>"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Dashboard</span></a>
+    </li>
+
+    <li class="mm-dropdown">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-fw"></i>&nbsp;<span><?php echo $this->translate('Configuration') ?></span></a>
+        <ul>
+            <li><a href="<?php echo $this->url('settingadmin'); ?>"><span>Settings</span></a></li>
+            <!-- <li><a href="<?php //echo $this->url('emailsettingadmin'); ?>"><span>Email Template</span></a></li> -->
+            <li><a href="<?php echo $this->url('languageadmin'); ?>"><span>Languages</span></a></li>
+        </ul>
+    </li>
+
+    <li  class="mm-dropdown" style="display: none;">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-pencil fa-fw"></i>&nbsp;<span><?php echo $this->translate('Structure') ?></span></a>
+        <ul>
+            <!-- <li><a href="<?php //echo $this->url('contenttypeadmin'); ?>"><span>Content Type</span></a></li> -->
+            <!-- <li><a href="<?php //echo $this->url('categoryadmin'); ?>"><span>Category</span></a></li> -->
+        </ul>
+    </li>
+
+    <?php
+    $factory = $this->factory();
+    $contenTypeGroup = $factory->contentTypeGroup();
+    foreach ($contenTypeGroup as $keyGroup => $valueGroup) {
+        $contentTypes = $factory->getContentType($valueGroup['id'], true);
+         if ($contentTypes) {
+        ?>
+        <li class="mm-dropdown">          
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book fa-fw"></i>&nbsp;<span><?php echo $valueGroup['title']; ?></span></a>
+            <ul>
+                <?php         
+                    foreach ($contentTypes as $key => $value) {
+                        $titleManager = $value;
+                        ?>
+                        <li><a href="<?php echo $this->url('postadmin', array('action' => 'index')) . '?type=' . $key; ?>"><span title="<?php echo $titleManager . ' (' . $key . ')'; ?>">- <?php echo $titleManager; ?></span></a></li>
+                        <?php
+                    }              
+                ?>
+            </ul>
+        </li>
+    <?php } } ?>
+
+    <li class="mm-dropdown">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book fa-fw"></i>&nbsp;<span>Other</span></a>
+        <ul>
+            <li><a href="<?php echo $this->url('contactadmin').'?type=subscribe'; ?>"><span>Subscribe</span></a></li>
+            <li><a href="<?php echo $this->url('contactadmin').'?type=fitness_join_us'; ?>"><span>Fitness: join us</span></a></li>
+            
+           <!--  <li><a href="<?php //echo $this->url('contactadmin').'?type=normal'; ?>"><span>Contact</span></a></li> -->
+        </ul>
+    </li>
+
+    <li class="mm-dropdown">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i>&nbsp;<span>People</span></a>
+        <ul>
+            <li><a href="<?php echo $this->url('useradmin'); ?>"><span>Admins</span></a></li>
+            
+            <!--<li><a href="<?php //echo $this->url('useradmin').'?group=10'; ?>"><span>Users</span></a></li> -->
+            <!--<li><a href="<?php //echo $this->url('permissionadmin'); ?>"><span>Permission</span></a></li>  -->
+        </ul>
+    </li>
+
+   <!--<li class="mm-dropdown">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book fa-fw"></i>&nbsp;<span>Component</span></a>
+        <ul>
+           <?php
+                // $contentTypes = $factory->getContentType(true);
+                // if ($contentTypes) {
+                //     foreach ($contentTypes as $key => $value) {
+                //         $titleManager = $value;
+                        ?>
+                        <li><a href="<?php //echo $this->url('postadmin', array('action' => 'index')) . '?type=' . $key; ?>"><span title="<?php //echo $titleManager . ' (' . $key . ')'; ?>"><?php //echo 'Manage '. $titleManager; ?></span></a></li>
+                        <?php
+                    //}     
+                //}
+            ?>      
+
+            <li class="divider"></li>
+            <li><a href="<?php //echo $this->url('banneradmin'); ?>"><span>Manage Banner</span></a></li>
+            <li><a href="<?php //echo $this->url('linkadmin'); ?>"><span>Manage Link</span></a></li>
+            <li class="divider"></li>
+            <li><a href="<?php //echo $this->url('subscriptionadmin'); ?>"><span>Manage Subscription</span></a></li>
+            <li class="divider"></li>
+        </ul>
+    </li> 
+  
+        <li><a href="<?php //echo $this->url('commentadmin'); ?>" ><span>Manage Comment</span></a></li>
+        <li><a href="<?php //echo $this->url('groupadmin'); ?>"><span>Manage Group</span></a></li>
+        <li><a href="<?php //echo $this->url('tagadmin'); ?>"><span>Tag</span></a></li>
+        <li><a href="<?php //echo $this->url('templateadmin'); ?>"><span>Template</span></a></li>    
+        <li><a href="<?php //echo $this->url('emailsettingadmin'); ?>"><span>Email Template</span></a></li>
+        <li><a href="<?php //echo $this->url('redirectsettingadmin'); ?>"><span>URL Redirect</span></a></li>
+        <li><a href="<?php //echo $this->url('menuadmin'); ?>"><span>Menu</span></a></li>
+        <li><a href="<?php //echo $this->url('blockadmin'); ?>"><span>Block</span></a></li> 
+    -->
+</ul>

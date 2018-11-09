@@ -1,0 +1,46 @@
+<?php
+$factory = $this->factory();
+echo $this->partial('partial/zhtpassword');
+echo $this->doctype();
+?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <base href="<?php echo BASE_URL; ?>/"/>
+        <link href="<?php echo BASE_URL_SKIN_IMAGE; ?>/favicon.png" rel="shortcut icon">
+        <?php echo $this->headTitle(); ?>
+        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0, user-scalable=no') ?>
+        <?php echo $this->partial('partial/opengraph'); ?>
+        <script>
+            var baseurl = "<?php echo BASE_URL; ?>";
+            var app_id = "<?php echo FB_APP_ID; ?>";
+            var google_app_id = "<?php echo GOOGLE_APP_ID; ?>";
+            var user_id = "<?php echo @$user['id'] ? $user['id'] : 0; ?>";
+            var language = "<?php echo $this->layout()->myLocale; ?>";
+            var languageShort = "<?php echo $this->layout()->myLocaleShort; ?>";
+        </script>
+        <?php echo $this->partial('partial/css'); ?>
+    </head>
+
+    <body class="page-home">
+        <div id="wrapper">
+            <?php echo $this->partial('partial/zheader'); ?>
+            <main id="main-content" role="main">
+                <?php echo $this->content; ?>
+            </main>
+            <?php echo $this->partial('partial/zpopup'); ?>
+            <?php echo $this->partial('partial/zfooter'); ?>
+        </div>
+
+        <?php echo $this->inlineScript(); ?>
+        <?php echo $this->partial('partial/js'); ?>
+        <?php echo $this->partial('partial/ga'); ?>
+
+
+
+        <!-- BEGIN LOADDING -->
+
+        <!-- END LOADDING -->
+    <input type="hidden" name="token" id="token" value="" />
+    </body>
+</html>

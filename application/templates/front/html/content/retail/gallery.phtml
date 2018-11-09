@@ -1,0 +1,31 @@
+<?php
+$factory = $this->factory();
+$myLocale = $this->layout()->myLocale;
+$myLocaleShort = $this->layout()->myLocaleShort;
+?>
+<div class="module mod-gallery" data-module="slideListItem">
+  <div class="common-tab">
+    <div class="container">
+      <ul class="list-unstyled">
+        <?php
+        foreach ($tabList as $kT => $vT) {
+          $tActive = $kT == 0 ? 'class="active"' : '';
+         ?>
+          <li <?php echo $tActive; ?>>
+            <a href="javascript:;" onclick="javascript:App.RetailGallery.loadTab('<?php echo $vT['type']; ?>');" class="text-uppercase"><?php echo $vT['title']; ?></a>
+          </li>
+        <?php }
+        ?>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <?php
+    $item0 = $tabList[0];
+    ?>
+    <div class="list-gallery active" id="retail-gallery-view" style="display: block;">
+      <?php echo $item0['tabContentHtml']; ?>
+    </div>
+  </div>
+</div>

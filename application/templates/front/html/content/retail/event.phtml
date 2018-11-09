@@ -1,0 +1,112 @@
+<!-- module 'Mod Banner V2' -->
+<section class="mod-promotion" data-module="promotion">
+	<?php
+	if($items){
+		foreach ($items as $key => $value) {
+			$indexKey = $value['id'].$value['slug'] ;
+			$iActive = ($indexKey == $paramIndexKey) ? 'active':'';
+
+			$pTitle = $value['title'];
+			$pIntro = $value['intro'];
+			$pBody = $value['body'];
+		  	$pImage = BASE_URL_MEDIA_IMAGE.'/'.$value['image'];
+		  	
+		  	$pDate = $value['subtitle1'];
+		  	$pTime = $value['subtitle2'];
+		  	$bandName = $value['subtitle'];
+		  	$pProducts = json_decode($value['multi_image1'], true);
+		?>
+			<div class="item-promotion" id="<?php echo $indexKey; ?>">
+			    <div class="banner-pr">
+			      	<button class="btn btn-link banner-submit">
+			      	</button>
+			      	<div class="banner-coll bg" style="background-image: url(<?php echo $pImage; ?>);">
+			        <!-- <img src="images/banner.jpg" alt="banner"> -->
+			      	</div>
+			      <!-- module 'Mod Box Banner V2' -->
+					<div class="container">
+					  <section class="module mod-box-banner mod-box-banner-v2 opacity">
+					    <div class="info-box-banner">
+					      <span class="box-name"><?php echo $bandName; ?></span>
+					      <h3><?php echo $pTitle; ?>
+					      </h3>
+					    </div>
+					    <div class="info-bbox-banner row">
+					      <div class="status-left col-9">
+					        <p><?php echo $this->truncate()->truncate($pIntro, 30); ?></p>
+					      </div>
+					      <div class="col-3">
+					        <p>
+					          <a href="javascript:;" class="btn-detail"><?php echo $this->translate('MORE DETAIL'); ?></a>
+					        </p>
+					      </div>
+					    </div>
+					  </section>
+					</div>
+			    </div>
+
+			    <div class="content-promotion-d <?php echo $iActive; ?>" >
+			      	<div class="container">
+				     	<div class="content-promotion ani-bottom">
+						  	<div class="row">
+						  		<div class="col-md-7 col-left">
+					                <span class="box-name"><?php echo $bandName; ?></span>
+					                <h1><?php echo $pTitle; ?></h1>
+					                <div class="pro-time">
+					                  <div class="pro-date">
+					                    <span class="text-date"><?php echo $this->translate('PROMOTION DATE'); ?></span>
+					                    <span><?php echo $pDate; ?></span>
+					                  </div>
+					                  <div class="pro-address">
+					                    <span class="text-date"><?php echo $this->translate('PROMOTION TIME'); ?></span>
+					                    <span><?php echo $pTime; ?></span>
+					                  </div>
+					                </div>
+				              	</div>
+							    
+							    <div class="col-md-5 col-right">
+					                <div class="mod-right-promotion">
+										<?php echo $pBody; ?>
+									</div>
+									<!-- <a href="#" class="btn btn-back">BACK TO FITNESS</a> -->
+				              	</div>
+							    
+						 	</div>
+						</div>
+
+						<?php
+			          	if($pProducts){ ?>
+		          			<div class="product-promotion" data-module="sliderGallery">
+					            <div class="slider">
+					              	<?php
+					              	foreach ($pProducts as $kI => $vI) {
+			          					$imageUrl = BASE_URL_MEDIA_IMAGE.'/'.$vI['file'];
+			          					$imageThumbUrl = BASE_URL_MEDIA_IMAGE.'/thumb/'.$vI['file'];
+					              	?>
+								    	<div class="item-product item-gallery">
+									      	<div class="box-gallery">
+										        <div class="image-gallery open-popup-gallery">
+										          <a href="javascript:;" class="active" style="background-image: url(<?php echo $imageThumbUrl; ?>);" attr-img="<?php echo $imageUrl; ?>" tabindex="0"></a>
+										        </div>
+									      	</div>
+									    </div>
+					              	<?php } ?>
+					            </div>
+				          	</div>
+		          		<?php } ?>
+
+			      	</div>
+			    </div>
+		  	</div>
+		<?php }
+	}
+	?>
+</section>
+
+<?php
+if($paramIndexKey){ ?>
+	<script type="text/javascript">
+		var retailPromotionEventItemScroll = '<?php echo $paramIndexKey; ?>';
+	</script>
+<?php }
+?>

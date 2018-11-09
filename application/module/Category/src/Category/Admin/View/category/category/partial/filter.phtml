@@ -1,0 +1,32 @@
+<?php
+$factory = $this->factory();
+?>
+
+<div id="filter_form" class="filter form-inline">
+
+    <?php
+    $languages = $factory->getLanguage(true, array('status'=>1));
+    if($languages){
+    ?>
+        <label ><?php echo 'Language'; ?></label>
+        <select class="form-control  filter_change" name="filter_language" id="filter_language"  >
+            <option value="">-- all -- </option>
+            <?php echo App\AppView::makeOption($state->get('filter.language'), $languages); ?>
+        </select>
+    <?php } ?>
+
+    <label ><?php echo ('Type'); ?></label>
+    <select class="form-control  filter_change" name="filter_type" id="filter_type" class="filter_change">
+        <option value="">-- all -- </option>
+        <?php echo App\AppView::makeOption($state->get('filter.type'), $factory->getContentType('content',true)); ?>
+    </select> 
+    
+    <label ><?php echo ('Status'); ?></label>
+    <select class="form-control  filter_change" name="filter_status" id="filter_status" class="filter_change">
+        <?php echo App\AppView::statusOptions($state->get('filter.status')); ?>
+    </select> 
+
+    <input type="button" value="<?php echo ('Filter'); ?>" id="filter" class="btn btn-primary"/>
+    <input type="button" value="<?php echo ('Reset'); ?>" id="reset" name="data[reset]" class="btn btn-default" autocomplete="off"/>
+</div>
+    

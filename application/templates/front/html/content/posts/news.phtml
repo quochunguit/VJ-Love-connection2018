@@ -1,0 +1,78 @@
+ <?php $myLocale = $this->layout()->myLocale; 
+if($_SESSION['newsFilterOption'])
+{
+	if($_SESSION['newsFilterOption']=='desc'){
+		$seletedDesc = 'selected';
+		$seletedAsc = '';
+	}elseif($_SESSION['newsFilterOption']=='asc'){
+		$seletedDesc = '';
+		$seletedAsc = 'selected';
+	}
+}else{
+	if($_POST['filterOption']=='desc'){
+		$seletedDesc = 'selected';
+		$seletedAsc = '';
+	}elseif($_POST['filterOption']=='asc'){
+		$seletedDesc = '';
+		$seletedAsc = 'selected';
+	}
+}
+ ?>
+ <div id="mod-news">
+	<?php 
+		$bannerPageText = $this->translate('Tin tuc');
+		include_once(__DIR__ . '/partial/news_banner.phtml'); //TODO: partial banner
+	?>
+	<div class="content-list">
+		<div class="container">
+			<div class="list-select">
+				<?php 
+					include_once(__DIR__ . '/partial/news_menu.phtml'); //TODO: partial menu
+				?>
+				<div class="bg-search">
+					<form method="post" action="" class="form_filter">
+						<select class="selectbox filterOption" name="filterOption" id="ddlUploadType">
+				        <option value="desc" <?php echo $seletedDesc; ?>><?php echo $this->translate('Tin tuc moi nhat'); ?></option>
+						<option value="asc"  <?php echo $seletedAsc; ?>><?php echo $this->translate('Tin tuc cu nhat'); ?></option>
+				        </select>
+			        </form>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="row">
+
+			<?php 
+			foreach($news as $new): ?>
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<div class="item">
+						<div class="img">
+							<img src="<?php echo BASE_URL_MEDIA_IMAGE.'/thumb/'.$new['image']; ?>" class="img-responsive" alt="">
+						</div>
+						<div class="desc">
+							<p class="day"><?php echo date('d/m/Y',strtotime($new['created'])); ?></p>
+							<h3><?php echo $this->truncate()->truncate($new['title'],16) ?></h3>
+							<p class="text"><?php echo $this->truncate()->truncate($new['intro'],29); ?></p>
+						</div>
+						<div class="more">
+							<a href="<?php echo $this->url('news-detail-'.$myLocale,array('id'=>$new['id'],'slug'=>$new['slug'])) ?>" title="Xem chi tiết"><?php echo $this->translate('Xem chi tiet'); ?></a>
+						</div>
+					</div>
+				</div>
+				
+		<?php endforeach; ?>
+
+				<div class="clearfix"></div>
+			</div>
+
+			<?php 
+				if($paging){
+			?>
+				<div id="mod-paging">
+					<ul>
+						<?php echo $paging->getPagingLinkFront(); ?>
+					</ul>
+				</div>
+			<?php } ?>
+		</div>
+	</div>
+</div>

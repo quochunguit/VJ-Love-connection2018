@@ -1,0 +1,44 @@
+<?php
+  $myLocaleShort = $this->layout()->myLocaleShort;
+  $factory = $this->factory();
+  if($promotions){
+?>
+  <!-- module 'Mod Banner' -->
+  <section class="mod-banner animation" data-module="bannervideo"> 
+    <div class="content-banner">
+      <div class="slider2">
+        <?php
+        foreach ($promotions as $kP => $vP) {
+          $imgDefault = $vP['large_image'] ? $vP['large_image'] : $vP['image'];
+          $pImage = $imgDefault ? BASE_URL_MEDIA_IMAGE.'/'.$imgDefault : BASE_URL_SKIN_IMAGE.'/banner.jpg';
+          $pUrl = $this->url('fitness-promotiondetail', array('lang'=>$myLocaleShort,'id'=>$vP['id'],'slug'=>$vP['slug']));
+
+          $pTitle = $this->truncate()->truncate($vP['title'], 5);
+          $pIntro = $this->truncate()->truncate($vP['intro'], 25);
+         ?>
+          <div class="card-header banner-pr">
+            <div class="banner-coll" style="background-image: url(<?php echo $pImage; ?>);" attr-name="<?php echo $pTitle; ?>" attr-title="<?php echo $pIntro; ?>" attr-href="<?php echo $pUrl; ?>">
+              <!-- <img src="images/banner.jpg" alt="banner"> -->
+            </div>
+          </div>
+        <?php }
+        ?>
+      </div>
+    </div>
+    <!-- module 'Mod Box Banner' -->
+    <div class="container opacity">
+      <section class="module mod-box-banner">
+        <span class="box-name"></span>
+        <a href="">
+          <h3></h3>
+        </a>
+        <div class="group-box">
+          <div class="stt">
+            <p class="stt-box">1</p>
+          </div>
+          <div class="group-arraws"></div>
+        </div>
+      </section>
+    </div>
+  </section>
+<?php } ?>

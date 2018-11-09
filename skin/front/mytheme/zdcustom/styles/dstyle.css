@@ -1,0 +1,21 @@
+.form_filter{height: 38px;}
+#pop-hoso .bg-txtarea {height: 80px;}
+
+/*Top header*/
+.top-header{padding: 10px 0;}
+
+/*Index Page*/
+.item-media{height: 180px; overflow: hidden; margin-top: 40px;}
+.item-media img{width: 100%;}
+.item-des{margin-top: 10px;}
+.pagination a{position: relative;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;}
+.pagination .active a{z-index: 1;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;}

@@ -1,0 +1,29 @@
+#mediaModal .modal-dialog{
+    width: 80%;
+}
+.asterisk{
+    color: red;
+}
+
+.files .file-row{
+    padding: 10px;
+}
+.files .btn-delete-file{
+    margin-left: 20px;
+}
+.files .file-preview-image{
+    max-width: 50px;
+    max-height: 50px;
+}
+table th a, table th a:hover{
+    color: #fff;
+}
+.widget-messages .message .date{
+    width: 150px;
+}
+.table-primary {overflow: scroll;}
+.pagination-container {
+    text-align: center;
+    padding-bottom: 20px;
+    font-weight: bold;
+}

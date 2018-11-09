@@ -1,0 +1,93 @@
+<?php
+  $parentPage = $this->layout()->parent_page;
+  $page = $this->layout()->page;
+
+  $factory = $this->factory();
+  $user = $this->user();
+  $myLocale = $this->layout()->myLocale;
+  $myLocaleShort = $this->layout()->myLocaleShort;
+  $languageList = $factory->getLanguageList();
+?>
+
+<div class="container">
+    <div class="row top-header">
+        <div class="col-md-3">Logo Vietjet Air</div>
+        <div class="col-md-3">Logo Đồng Hành</div>
+        <div class="col-md-4">
+            <div class="col-md-6"><a href="#">Book Ngay</a></div>
+            <?php if($user && $user['phone'] !='' && $user['status']==0): ?>
+                <div class="col-md-6"><a href="javascript:$('#resend-code-modal').modal('show');" onclick="">Chia sẽ cảm nhận</a></div>
+            <?php elseif($user && $user['phone']==''): ?>
+                <div class="col-md-6"><a href="javascript:$('#phone-active-modal').modal('show');" onclick="">Chia sẽ cảm nhận</a></div>
+            <?php else: ?>
+                <div class="col-md-6"><a href="<?php echo $this->url('contest-submit', array('lang'=>$myLocaleShort)) ?>">Chia sẽ cảm nhận</a></div>
+            <?php endif; ?>
+
+
+        </div>
+        <div class="col-md-2">
+            <?php
+            if($languageList){ ?>
+                <ul class="header-language list-unstyled">
+                    <?php
+                    foreach ($languageList as $kL => $vL) {
+                        $classActive = $vL['lang_code'] == $myLocale ? 'class="active"':'';
+                        $switchedUrl = $this->url('language-switched', array('code'=>$vL['lang_code']));
+                        ?>
+
+                            <a href="<?php echo $switchedUrl; ?>" <?php echo $classActive; ?>><?php echo $vL['title_short']; ?></a>
+                         <?php if($kL < (count($languageList)-1)) echo '|'; ?>
+                    <?php } ?>
+                </ul>
+            <?php }
+            ?>
+        </div>
+    </div>
+</div>
+<div class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <!--div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Đóng/mở menu</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><?php echo $this->setting('core.sitename') ?></a>
+    </div-->
+
+    <div class="navbar-collapse collapse">
+        <div class="col-md-9">
+          <ul class="nav navbar-nav">
+            <li><a href=""><?php echo $this->translate('Home') ?></a></li>
+            <li><a href="<?php echo $this->url('contest', array('lang'=>$myLocaleShort)) ?>">Thư Viện Hình Ảnh</a></li>
+            <li><a href="javascript:;">Danh Sách Trúng Giải</a></li>
+            <li><a href="javascript:;">Vòng Xoay May Mắn</a></li>
+            <li><a href="javascript:;">Thông Tin Chuyến Bay</a></li>
+
+            <?php /*if (@$user && @$user['id']): ?>
+              <!--li  class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" title="""><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="javascript:;">Trang cá nhân</a></li>
+                  <li><a href="javascript:;">Thoát</a></li>
+                </ul>
+              </li-->
+            <?php else: ?>
+
+            <?php endif; */?>
+          </ul>
+        </div>
+        <div class="col-md-3 text-right">
+            <?php if (@$user && @$user['id']):?>
+                <br/>Xin chào, <b><?php echo $user['name']; ?></b> <button id="site-logout" onclick="App.Site.userLogout(<?php echo $user['id']; ?>);">Thoát</button>
+            <?php else: ?>
+                <br/>
+                <a href="<?php echo $this->url('register', array('lang'=>$myLocaleShort)) ?>">Đăng Ký</a>
+                /
+                <a href="<?php echo $this->url('login', array('lang'=>$myLocaleShort)) ?>">Đăng Nhập</a>
+            <?php endif; ?>
+        </div>
+    </div>
+  </div>
+</div>

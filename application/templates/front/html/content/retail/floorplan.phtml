@@ -1,0 +1,88 @@
+<?php
+$factory = $this->factory();
+$myLocale = $this->layout()->myLocale;
+?>
+<!-- module 'Mod Floorplan' -->
+<section class="module mod-floorplan animation">
+  	<div class="container ani-bottom">
+  		<?php
+  		if(count($items)){
+  			$lastUpdated = $items[count($items)-1]['modified'];
+  			$formatUpdated = $myLocale == 'en_US' ? 'F j, Y' : 'd/m/Y';
+  			$lastUpdatedText = $this->layoutHelper()->dateString($lastUpdated, $formatUpdated); 
+  		 ?>
+  			<div class="name-floorplan">
+		    	<span class="box-name"><?php echo $this->translate('LAST UPDATE') .' '. $lastUpdatedText; ?> </span>
+		    	<h3><?php echo $this->translate('Find out what we have to offer'); ?></h3>
+		    </div>
+		    
+		    <!-- module 'Mod Map Floorplan' -->
+			<section class="module mod-map-floorplan" data-module="floor">
+			  	<div class="row info-map-floor">
+				    <div class="col-md-3 box-left-floor scroll-custom">
+				    	<?php
+				    	foreach ($items as $key => $value) {
+				    		$vActive = $key==0 ? 'active':'';
+				    	?>
+			    			<div class="info-left-floor <?php echo $vActive; ?>">
+						        <span class="box-name"><?php echo $value['title']; ?></span>
+						        <p><?php echo $value['intro']; ?></p>
+						        <a href="javascript:void(0)" class="link"></a>
+						      </div>
+				    	<?php }
+				    	?>
+				    </div>
+				    <div class="col-md-7 box-map-floor">
+				    	<?php
+				    	foreach ($items as $key => $value) {
+				    		$vActive = $key == 0 ? 'active':'';
+				    		$vImage = BASE_URL_MEDIA_IMAGE.'/'.$value['image'];
+				    	?>
+			    			<div class="img-map <?php echo $vActive; ?>">
+						        <img src="<?php echo $vImage ; ?>" alt="map">
+					      	</div>
+				    	<?php }
+				    	?>
+				    </div>
+				    <div class="col-md-2 box-right-floor scroll-custom">
+				    	<?php
+				    	foreach ($items as $key => $value) {
+				    		$vActive = $key == 0 ? 'active':'';
+				    		$vImage = BASE_URL_MEDIA_IMAGE.'/'.$value['image'];
+				    		$brandCateList = $value['brandCateList'];
+				    	?>
+		    				<div class="right-map <?php echo $vActive; ?>">
+		    					<?php
+		    					if($brandCateList){
+		    						foreach ($brandCateList as $kC => $vC) {
+		    							$cate = $factory->getPostItem(array('id'=>$kC));
+		    							$brandList = $vC;
+		    						 ?>
+	    							  	<div class="item-right-floor">
+								          	<span class="box-name"><?php echo $cate['title']; ?></span>
+
+								          	<?php
+								          	if($brandList){
+								          	?>
+									          	<ul class="product-floor">
+										            <?php
+														foreach ($brandList as $kB => $vB) { ?>
+															 <li><?php echo $vB['title'];?></li>
+														<?php }
+										            ?>
+									          	</ul>
+									          <?php } ?>
+								        </div>
+		    						<?php }
+		    					?>
+							    <?php } ?>
+					      	</div>
+				    	<?php }
+				    	?>
+			      	</div>
+			    </div>
+			</section>
+  		<?php }
+  		?>
+  	</div>
+</section>

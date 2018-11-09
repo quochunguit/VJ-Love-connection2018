@@ -1,0 +1,9 @@
+<h1 class="page-header">News</h1>
+<div class="post-detail">
+    <h1><?php echo $post['title']; ?></h1>
+    <div class="postdate"><?php echo $this->layoutHelper()->dateString($post['created']) ?></div>
+    <div class="postcontent">
+       <?php echo $post['body']; ?>
+    </div>
+    <div class="postmeta"></div>
+</div>

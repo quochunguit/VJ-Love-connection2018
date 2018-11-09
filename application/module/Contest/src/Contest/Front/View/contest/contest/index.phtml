@@ -1,0 +1,59 @@
+<?php  $myLocaleShort = $this->layout()->myLocaleShort;?>
+<h1 class="page-header">List Album</h1>
+<div class="list-album">
+    <?php if ($posts): ?>
+        <ul class="media-list">
+            <?php
+            foreach ($posts as $item):
+                $url = $this->url('contest-detail', array('id' => $item['id'],'slug'=>$item['slug'],'lang'=>$myLocaleShort));
+                $titleSharing = str_replace("'","",$item['title']);
+                $desSharing = str_replace("'","",$item['descriptions']);
+
+                //print_r($item);
+            ?>
+                <li class="media">
+                    <div class="col-md-3">
+                        <a class="pull-left" href="<?php echo $url; ?>">
+                            <?php
+                            //if media is image
+                            if($item['type'] == 'images'){
+                                $images = explode(',', $item['images']);
+                                foreach($images as $key => $image){
+                                ?>
+                                <img alt="" class="col-md-6 media-object" src="<?php echo BASE_URL . '/media/images/' . $image; ?>"/>
+                                <?php
+                                }
+                            }else if($item['type'] == 'video'){
+                                if($item['video'] != ''){
+                                    ?>
+                                    <video width="320" controls>
+                                        <source src="<?php echo BASE_URL . '/media/videos/' . $item['video']; ?>">
+                                    </video>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </a>
+                    </div>
+                    <div class="media-body col-md-9">
+                        <h2 class="media-heading"><a href="<?php echo $url; ?>"><?php echo $this->escapeHtml($item['title']); ?></a></h2>
+                        <p>Author: <?php echo $this->escapeHtml($item['name']); ?></p>
+                        <p>Created on: <?php echo $this->layoutHelper()->dateString($item['created']); ?></p>
+                        <p>Votes: <span class="num_vote_<?php echo $item['id']; ?>"><?php echo intval($item['votes']); ?></span></p>
+                        <p>Description: <?php echo $this->escapeHtml($item['descriptions']); ?></p>
+                        <button class="btn btn-info vote-button vote-button-<?php echo $item['id']; ?>" data-object-id="<?php echo $item['id']; ?>">Vote</button>
+                        <a class="btn btn-info fb-share" href="javascript:void(0)" onclick="App.VoteShare.share(<?php echo $item['id']  ?>,'<?php echo $titleSharing ?>','https://google.com','<?php echo $images[0] ?>','<?php echo $desSharing ?>','VietJet Campaign')" >Share fb</a>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <div id="paging">
+            <ul class="list-unstyled list-inline">
+                <?php echo $paging->getPagingLinkFront(); ?>
+            </ul>
+        </div>
+
+    <?php else: ?>
+        <div>No album</div>
+    <?php endif; ?>
+</div>

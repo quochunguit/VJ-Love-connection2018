@@ -1,0 +1,147 @@
+<?php
+  $parentPage = $this->layout()->parent_page;
+  $page = $this->layout()->page;
+  
+  $factory = $this->factory();
+  $myLocale = $this->layout()->myLocale;
+  $myLocaleShort = $this->layout()->myLocaleShort;
+  $headerAddress = $factory->getPostByOptions('static_content_headeraddress', 1, $myLocale);
+  $footerAddress = $factory->getPostByOptions('static_content_footeraddress', 1, $myLocale);
+  $socialLinks = $factory->getPostByOptions('static_content_footersociallink', 0, $myLocale);
+  $footerLicense = $factory->getPostByOptions('static_content_footerlicense', 1, $myLocale);
+?>
+
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="footer-col footer-left col-lg-6">
+        <div class="row">
+          <div class="footer-logo">
+            <div class="top">
+              <a href="<?php echo $this->url('home', array('lang'=>$myLocaleShort)); ?>" id="logo-footer"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/logo-footer.svg" alt="Artemis"></a>
+
+              <?php
+              if($footerAddress){
+              ?>
+                <div class="footer-infor text-center text-uppercase">
+                  <?php echo $footerAddress['body']; ?>
+                </div>
+              <?php } ?>
+            </div>
+
+             <?php
+            if($headerAddress){
+            ?>
+              <div class="bottom text-center d-md-none">
+                <p><?php echo $headerAddress['body']; ?></p>
+              </div>
+            <?php } ?>
+           
+          </div>
+          <div class="footer-form">
+            <h4><?php echo $this->translate('Subscribe to our newsletter'); ?></h4>
+            <div class="footer-subscribe-form">
+              <form id="subscribe_form">
+                <div class="form-group ">
+                  <div class="msg-input ">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo $this->translate('ENTER YOUR EMAIL'); ?>">
+                    <div class="messages-error " >
+                      <div id="subscribe-error-msg"></div>
+                    </div>
+                  </div>
+                  <div style="text-align:center; height: 0px;">
+                        <img id="subscribe-ajax-loading" style="display:none;" src="<?php echo BASE_URL_SKIN_IMAGE.'/d-ajax-loader.gif'; ?>" />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <?php
+            if($socialLinks){
+            ?>
+              <ul class="social">
+                <?php
+                foreach ($socialLinks as $key => $value) { ?>
+                  <li>
+                    <a rel="noopener" target="_blank" href="<?php echo $value['subtitle']; ?>" title="<?php echo $value['title']; ?>">
+                      <i class="icomoon <?php echo $value['subtitle1']; ?>" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                <?php }
+                ?>
+              </ul>
+              <?php } ?>
+          </div>
+        </div>
+      </div>
+      <div class="footer-col footer-right col-lg-6">
+        <div class="footer-menu">
+          <div class="row">
+            <div class="footer-item-col col-md-4">
+              <h6>
+                <a href="javascript:;"><?php echo $this->translate('RETAIL'); ?></a>
+              </h6>
+              <ul class="list-unstyled col-two">
+                <li <?php if($page == 'retail_promotion') echo 'class="active"'; ?>>
+                  <a href="<?php echo $this->url('retail-promotion', array('lang'=>$myLocaleShort)); ?>"><?php echo $this->translate('PROMOTION'); ?></a>
+                </li>
+                <li <?php if($page == 'retail_event') echo 'class="active"'; ?>>
+                  <a href="<?php echo $this->url('retail-event', array('lang'=>$myLocaleShort)); ?>"><?php echo $this->translate('EVENTS'); ?></a>
+                </li>
+                <li <?php if($page == 'retail_brand') echo 'class="active"'; ?>> 
+                  <a href="<?php echo $this->url('retail-brand', array('lang'=>$myLocaleShort)); ?>"><?php echo $this->translate('BRANDS'); ?></a>
+                </li>
+                <li <?php if($page == 'retail_floorplan') echo 'class="active"'; ?>>
+                  <a href="<?php echo $this->url('retail-floorplan', array('lang'=>$myLocaleShort)); ?>"><?php echo $this->translate('FLOORPLAN'); ?></a>
+                </li>
+                <li <?php if($page == 'retail_gallery') echo 'class="active"'; ?>>
+                  <a href="<?php echo $this->url('retail-gallery', array('lang'=>$myLocaleShort)); ?>"><?php echo $this->translate('GALLERY | SOCIAL MEDIA'); ?></a>
+                </li>
+              </ul>
+            </div>
+            <div class="footer-item-col col-md-4">
+              <h6>
+                <a href="javascript:;"><?php echo $this->translate('RESIDENTIAL'); ?></a>
+              </h6>
+              <ul class="list-unstyled footer-menu">
+                <li <?php if($page == 'residential_overview') echo 'class="active"'; ?>>
+                  <a href="<?php echo $this->url('residential-overview', array('lang'=>$myLocaleShort)); ?>"><?php echo $this->translate('OVERVIEW'); ?></a>
+                </li>
+                <li <?php if($page == 'residential_gallery') echo 'class="active"'; ?> >
+                  <a href="<?php echo $this->url('residential-gallery', array('lang'=>$myLocaleShort)); ?>"><?php echo $this->translate('GALLERY'); ?></a>
+                </li>
+              </ul>
+            </div>
+            <div class="footer-item-col col-md-4">
+              <h6>
+                <a href="javascript:;"><?php echo $this->translate('FITNESS'); ?></a>
+              </h6>
+              <ul class="list-unstyled footer-menu">
+                <li <?php if($page == 'fitness_overview') echo 'class="active"'; ?>>
+                  <a href="<?php echo $this->url('fitness-overview', array('lang'=>$myLocaleShort)); ?>"><?php echo $this->translate('OVERVIEW'); ?></a>
+                </li>
+                <li <?php if($page == 'fitness_gallery') echo 'class="active"'; ?>>
+                  <a href="javascript:;"><?php echo $this->translate('GALLERY'); ?></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright d-sm-flex justify-content-sm-between col-md-6 offset-md-6">
+      <p>
+        <?php echo '© '.date('Y').' '. $this->translate('Artemis All rights reserved.'); ?>
+      </p>
+      <p><?php echo $this->translate('Developed by Jodric'); ?></p>
+    </div>
+
+    <?php
+    if($footerLicense){
+    ?>
+      <div class="infor-address">
+        <p><?php echo $footerLicense['intro'];?></p>
+      </div>
+  <?php } ?>
+  </div>
+</footer>

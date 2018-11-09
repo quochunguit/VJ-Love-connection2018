@@ -1,0 +1,109 @@
+<?php
+$factory = $this->factory();
+$myLocale = $this->layout()->myLocale;
+$myLocaleShort = $this->layout()->myLocaleShort;
+
+$bannerDetail = $item['large_image'] ? BASE_URL_MEDIA_IMAGE.'/'.$item['large_image'] : BASE_URL_SKIN_IMAGE.'/banner.jpg';
+$itemUrl = $this->url('retail-branddetail', array('lang'=>$myLocaleShort, 'id'=>$item['id'],'slug'=>$item['slug']));
+?>
+<!-- module 'Mod Banner' -->
+<section class="mod-banner animation" data-module="bannervideo">
+    <div class="card-header banner-pr ani-bottom">
+      <div class="banner-coll bg" style="background-image: url(<?php echo $bannerDetail; ?>);">
+      </div>
+    </div>
+</section>
+
+<div class="container" id="branddetail-tab-<?php echo $tab; ?>"> 
+  <div class="content-promotion">
+    <div class="row">
+      <div class="col-md-7 col-left">
+        <h1><?php echo $item['title']; ?></h1>
+        <div class="pro-time">
+          <div class="pro-date">
+            <span class="text-date"><?php echo $this->translate('INDUSTRY'); ?></span>
+            <span><?php echo $item['subtitle']; ?></span>
+          </div>
+          <div class="pro-address">
+            <span class="text-date"><?php echo $this->translate('LOCATION'); ?></span>
+            <span>
+              <?php
+                $floorIDs = json_decode($item['category_multi'], true);
+                if($floorIDs){
+                  $floorStr = '';
+                  foreach ($floorIDs as $kF => $vF) {
+                    $floor = $factory->getPostItem(array('id'=>$vF));
+                    if($floor){
+                      $floorStr .= $floor['title'].', ';
+                    }
+                  }
+                  echo rtrim($floorStr,', ');
+                }
+              ?>
+            </span>
+          </div>
+        </div>
+        
+        <div class="pro-locate">
+          <a href="javascript:;" class="btn btn-locate"><?php echo $this->translate('LOCATE STORE'); ?></a>
+
+          <?php
+          $siteUrl = $item['subtitle2'];
+          if($siteUrl){
+          ?>
+            <a target="_blank" href="<?php echo $siteUrl; ?>" class="btn btn-visit"><?php echo $this->translate('VISIT BRAND’S SITE'); ?></a>
+          <?php } ?>
+        </div> 
+      </div>
+      
+      <div class="col-md-5 col-right">
+        <div class="mod-right-promotion-2" data-module="tabpromotion">
+          <div class="common-tab">
+              <ul class="list-unstyled">
+                <?php
+                if($item){
+                ?>
+                  <li class="active" >
+                    <a href="javascript:;" class="text-uppercase"><?php echo $this->translate('INTRODUCTION'); ?></a>
+                  </li>
+                <?php } ?>
+
+                <?php
+                if($promotion){
+                ?>
+                  <li>
+                    <a href="javascript:;" class="text-uppercase"><?php echo $this->translate('PROMOTION'); ?></a>
+                  </li>
+                <?php } ?>
+              </ul>
+          </div>
+
+          <?php
+          if($item){
+          ?>
+            <div class="content-tab-promotion active">
+              <?php echo $item['body']; ?>
+            </div>
+          <?php } ?>
+
+          <?php
+          if($promotion){
+          ?>
+            <div class="content-tab-promotion">
+              <?php echo $promotion['body']; ?>
+            </div>
+          <?php } ?>
+        </div>
+        <a href="<?php echo $this->url('retail-brand', array('lang'=>$myLocaleShort));?>" class="btn btn-back"><?php echo $this->translate('BACK TO BRANDS LIST'); ?></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php
+if($tab){ ?>
+  <script type="text/javascript">
+    var brandDetailTab = '<?php echo $tab; ?>';
+  </script>
+<?php }
+?>

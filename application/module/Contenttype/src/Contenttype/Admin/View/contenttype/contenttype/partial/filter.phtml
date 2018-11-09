@@ -1,0 +1,23 @@
+<div id="filter_form" class="filter form-inline">
+    
+    <label><?php echo ('Keyword:'); ?></label>
+    <input type="text" class=" form-control " name="filter_search" id="filter_search" value="<?php print $state->get("filter.search") ?>" />
+    &nbsp;
+    
+    <?php
+    $factory = $this->factory();
+    $contentTypeGroup = $factory->contentTypeGroupKeyVal();
+    if($contentTypeGroup){
+    ?>
+        <label ><?php echo 'Menu Group'; ?></label>
+        <select class="form-control  filter_change" name="filter_group" id="filter_group"  >
+            <option value="">-- all -- </option>
+            <?php echo App\AppView::makeOption($state->get('filter.group'), $contentTypeGroup); ?>
+        </select>
+    <?php } ?>
+    &nbsp;
+
+    <input type="button" value="<?php echo ('Filter'); ?>" id="filter" class="btn btn-primary"/>
+    <input type="button" value="<?php echo ('Reset'); ?>" id="reset" name="data[reset]" class="btn btn-default" autocomplete="off"/>
+</div>
+    
