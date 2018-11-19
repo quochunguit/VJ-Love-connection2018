@@ -1,0 +1,69 @@
+<?php
+  $parentPage = $this->layout()->parent_page;
+  $page = $this->layout()->page;
+  
+  $factory = $this->factory();
+  $myLocale = $this->layout()->myLocale;
+  $myLocaleShort = $this->layout()->myLocaleShort;
+
+?>
+
+<footer id="footer" class="module">
+  <div class="footer-top">
+    <div class="container text-center">
+      <h2 class="h1"> <?php echo $this->translate('Book_now'); ?></h2>
+      <p><?php echo $this->translate('Promotion'); ?></p>
+      <div class="footer-infor text-left">
+        <div class="row">
+          <div class="col-md-6 footer-online">
+            <p><?php echo $this->translate('Online_Booking'); ?></p>
+            <a href="https://vietjetair.com" target="_blank" class="btn btn-primary"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/icon-fly.png" alt="icon-fly"><?php echo $this->translate('Find_flight'); ?></a>
+          </div>
+          <div class="col-md-6 footer-call">
+            <p><?php echo $this->translate('Online_Booking'); ?></p>
+            <?php if($myLocaleShort=='vi'): ?>
+            <p>Gọi ngay:<a href="tel: 1900 1886"> (+84) 1900 1886</a> để đặt chỗ</p>
+            <?php else: ?>
+                <p>Hotline: <a href='tel: 1900 1886'>1900 1886</a> to book now</p>
+            <?php endif; ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container text-center text-md-left">
+      <div class="box-footer-bottom">
+        <div class="row">
+          <div class="col-md-6 footer-left align-self-center">
+            <p class="footer-copyright">
+              <?php echo $this->translate('coppyright'); ?>
+            </p>
+          </div>
+          <div class="col-md-6 footer-right align-self-center text-md-right">
+            <span>Connect with us:</span>
+            <div class="social">
+              <ul>
+                <li>
+                  <a rel="noopener" target="_blank" href="https://www.facebook.com/vietjetvietnam/">
+                    <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/icon-fb.svg" alt="">
+                  </a>
+                </li>
+                <li>
+                  <a rel="noopener" target="_blank" href="https://www.youtube.com/user/VietJetAir">
+                    <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/icon-youtube.svg" alt="">
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="bg-right-footer">
+    <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/bg-right-footer.png" alt="">
+  </div>
+</footer>

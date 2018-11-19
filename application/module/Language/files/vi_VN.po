@@ -1,0 +1,383 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi_VN\n"
+"X-Generator: Poedit 1.8.6\n"
+
+# ************--TRANSLATE--*************------
+msgid "Home"
+msgstr "Trang chủ"
+
+msgid "About"
+msgstr "Giới thiệu"
+
+msgid "Submitions"
+msgstr "Gửi chia sẻ"
+
+msgid "Gallery"
+msgstr "Thư viện ảnh"
+
+msgid "Flight_Information"
+msgstr "Hành trình bay"
+
+msgid "Winners_List"
+msgstr "Danh sách trúng giải"
+
+msgid "Sign_Up_Login"
+msgstr "Đăng kí / Đăng nhập"
+
+msgid "Slogan"
+msgstr "Cùng Vietjet Air, kết nối yêu thương, yêu là phải tới!"
+
+msgid "Share_story"
+msgstr "Chia sẻ câu chuyện của bạn để nhận vé bay khứ hồi miễn phí khắp Châu Á lên đến 185 chuyến bay miễn phí."
+
+msgid "Submit_now"
+msgstr "Chia sẻ ngay"
+
+msgid "Intro_text"
+msgstr "Bạn yêu Nhật Bản? Mê trà sữa? Thích ngắm các Oppa? Đã yêu ngại gì, yêu là phải tới! Tham gia chia sẻ câu chuyện tình yêu về con người, ẩm thực, văn hóa các nước Châu Á… để có cơ hội trúng ngay vé máy bay khứ hồi, chạm đến tình yêu của bạn. Cùng Vietjet, kết nối yêu thương, yêu là phải tới!"
+
+msgid "Hot_submissions"
+msgstr "Bài dự thi hot"
+
+msgid "Book_now"
+msgstr "Book vé bay ngay Vietjet!"
+
+msgid "Promotion"
+msgstr "Chương trình giờ vàng khuyến mãi hàng triệu vé 0 đồng luôn chào đón bạn từ 12h - 14h mỗi ngày tại www.vietjetair.com!"
+
+msgid "Online_Booking"
+msgstr "Đặt vé trực tuyến"
+
+msgid "coppyright"
+msgstr "© 2018 Bản quyền thuộc về Vietjet Air"
+
+msgid "View_all"
+msgstr "Xem tất cả"
+
+msgid "View_more"
+msgstr "Xem thêm"
+
+msgid "Share"
+msgstr "Gửi Chia Sẻ"
+
+msgid "Target"
+msgstr "Lựa chọn điểm đến"
+
+msgid "List_target"
+msgstr "Danh sách điểm đến (Chọn 1)"
+
+msgid "Upload_maximum"
+msgstr "Upload tối đa 5 hình ảnh về cảm nhận của bạn"
+
+msgid "Max_Capacity"
+msgstr "Dung lượng tối đa 5Mb"
+
+msgid "Uploadfile"
+msgstr "Upload Ảnh"
+
+msgid "Subject"
+msgstr "Tiêu đề"
+
+msgid "Messages"
+msgstr "Thông điệp"
+
+msgid "Max_world"
+msgstr "Tối đa 1000 chữ"
+
+msgid "Review"
+msgstr "Xem lại bài viết"
+
+msgid "Gold_hour"
+msgstr "Trong lúc chờ đợi bài được duyệt, tìm hiểu ngay chương trình giờ vàng khuyến mãi hàng triệu vé 0 đồng của Vietjet ngay để bay khắp Việt Nam & 10 nước Châu Á cùng Vietjet nhé."
+
+msgid "Find_flight"
+msgstr "TÌM CHUYẾN BAY NGAY"
+
+msgid "Image"
+msgstr "Hình Ảnh"
+
+msgid "Delete_photo"
+msgstr "Xoá hình"
+
+msgid "Insert_photo"
+msgstr "Thêm hình"
+
+msgid "Image_upload_missing"
+msgstr "Vui lòng upload hình ảnh về cảm nhận của bạn"
+
+msgid "Title_missing"
+msgstr "Vui lòng điền tiêu đề"
+
+msgid "InsertComment"
+msgstr "Nhập thông điệp của bạn"
+
+msgid "Gallery_details"
+msgstr "Chi tiết bài dự thi"
+
+msgid "Experience_vietjet"
+msgstr "Trải nghiệm thú vị cùng Vietjet"
+
+msgid "New_submissions"
+msgstr "Bài dự thi mới"
+
+msgid "Share_comments"
+msgstr "Chia sẻ cảm nhận"
+
+msgid "Signup"
+msgstr "Đăng ký"
+
+msgid "Fullname"
+msgstr "Họ tên"
+
+msgid "Phonenumber"
+msgstr "Số điện thoại"
+
+msgid "Address"
+msgstr "Nơi sinh sống:"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Password"
+msgstr "Mật khẩu:"
+
+msgid "Repassword"
+msgstr "Nhập lại mật khẩu"
+
+msgid "Verified_organizer"
+msgstr "Bạn vui lòng cung cấp thông tin chính xác để Ban giám khảo có thể liên lạc và trao giải thưởng"
+
+msgid "Forgetpassword"
+msgstr "Quên mật khẩu"
+
+msgid "Loveconnection_campaign"
+msgstr "Giới thiệu chương trình"
+
+msgid "Terms_conditions"
+msgstr "Thể lệ cuộc thi & Giải thưởng"
+
+msgid "Bookflight"
+msgstr "Tìm chuyến bay"
+
+msgid "Hotlinebooknow"
+msgstr "Gọi ngay:<a href='tel: 1900 1886'> (+84) 1900 1886</a> để đặt chỗ"
+
+msgid "Onlinebooking"
+msgstr "Đặt vé trực tuyến"
+
+msgid "Booknowtofly"
+msgstr "Book vé bay ngay Vietjet"
+
+msgid "Continue"
+msgstr "Tiếp tục"
+
+msgid "t&c"
+msgstr "Thể lệ"
+
+msgid "logout"
+msgstr "Đăng xuất"
+
+msgid "CannotverifySMS"
+msgstr "Cuộc Thi “KẾT NỐI YÊU THƯƠNG, YÊU LÀ PHẢI TỚI” không thể kích hoạt tài khoản của bạn qua SMS. Bạn vui lòng kiểm tra lại thông tin và cung cấp lại cho chương trình để tham gia ngay nhé."
+
+msgid "ContestPublished"
+msgstr "Bạn đã có bài chia sẻ được đăng"
+
+msgid "UserContestExist"
+msgstr "Xin lỗi, bạn chỉ được tham gia một bài dự thi duy nhất, nếu như bạn đã gửi bài trước đó, hãy chờ bài được duyệt đăng nhé (trong vòng 24h)."
+
+msgid "UploadImageError"
+msgstr "Tải lên không thành công, vui lòng thử lại!"
+
+msgid "ImageFormatError"
+msgstr "Chỉ cho phép tải lên tệp hình ảnh định dạng JPG, PNG"
+
+msgid "SaveContestSuccessful"
+msgstr "Vietjet cám ơn bạn đã tham dự cuộc thi <br/>'KẾT NỐI YÊU THƯƠNG, YÊU LÀ PHẢI TỚI'. "
+
+msgid "SaveContestSuccessful_waiting"
+msgstr "Bài dự thi của bạn đang được admin kiểm duyệt trong thời gian nhanh nhất có thể. Bạn sẽ nhận được thông báo của Vietjet trong vòng 24h tới."
+
+msgid "BookYourFlightNow"
+msgstr "TÌM CHUYẾN BAY NGAY"
+
+msgid "CommentMoreThan1000"
+msgstr "Thông điệp không được quá 1,000 chữ."
+
+msgid "StoryOf"
+msgstr "Bài viết của"
+
+msgid "Login"
+msgstr "Đăng Nhập"
+
+msgid "Or"
+msgstr "Hoặc"
+
+msgid "Updatephonenumber"
+msgstr "Cập nhật số điện thoại"
+
+msgid "Update"
+msgstr "Cập nhật"
+
+msgid "Sendactivationcode"
+msgstr "Gửi Mã kích hoạt"
+
+msgid "Send"
+msgstr "Gửi"
+
+msgid "Activeaccount"
+msgstr "Kích hoạt tài khoản"
+
+msgid "Activationcode"
+msgstr "Mã Kích Hoạt"
+
+msgid "Active"
+msgstr "Kích Hoạt"
+
+msgid "Recoverpassword"
+msgstr "Khôi phục mật khẩu"
+
+msgid "Fieldregisteremail"
+msgstr "Điền email đăng ký"
+
+msgid "Close"
+msgstr "Đóng"
+
+msgid "Createnewpassword"
+msgstr "Tạo mật khẩu mới"
+
+msgid "Newpassword"
+msgstr "Mật khẩu mới"
+
+msgid "Renewpassword"
+msgstr "Nhập lại mật khẩu mới"
+
+msgid "Validatename"
+msgstr "Vui lòng điền tên"
+
+msgid "Validatephone"
+msgstr "Vui lòng điền số điện thoại"
+
+msgid "Validatecharacter5"
+msgstr "Ít nhất 5 ký tự"
+
+msgid "Validatevalidemail"
+msgstr "Vui lòng điền email hợp lệ"
+
+msgid "Validatepassword"
+msgstr "Vui lòng điền mật khẩu"
+
+msgid "Validatenotmatched"
+msgstr "Mật khẩu không trùng khớp"
+
+msgid "Validatecharacter6"
+msgstr "Ít nhất 6 ký tự"
+
+msgid "Validateactivationcode"
+msgstr "Điền mã kích hoạt"
+
+msgid "Activationcodesendtophonenumber"
+msgstr "Mã kích hoạt đã được gửi đến số điện thoại"
+
+msgid "LoginFailed"
+msgstr "Email hoặc mật khẩu không đúng!"
+
+msgid "Existphone"
+msgstr "Số điện thoại đã được sử dụng"
+
+msgid "Invalidactivationcode"
+msgstr "Mã kích hoạt không hợp lệ"
+
+msgid "Activationcodesuccess"
+msgstr "Chúc mừng! Kích hoạt tài khoản thành công."
+
+msgid "Accounthasactived"
+msgstr "Tài khoản của bạn đã được kích hoạt."
+
+msgid "Unableactive"
+msgstr "Bạn không thể kích hoạt tài khoản này."
+
+msgid "WinnerListEmpty"
+msgstr "Hiện chưa có danh sách."
+
+# ************--COUNTRY TRANSLATE--*************------
+msgid "vn_84"
+msgstr "Việt Nam"
+
+msgid "kr_82"
+msgstr "Hàn Quốc"
+
+msgid "tw_886"
+msgstr "Đài Loan"
+
+msgid "jp_81"
+msgstr "Nhật Bản"
+
+msgid "sg_65"
+msgstr "Singapore"
+
+msgid "my_60"
+msgstr "Malaysia"
+
+msgid "kh_855"
+msgstr "Campuchia"
+
+msgid "th_66"
+msgstr "Thái Lan"
+
+msgid "Trungquoc"
+msgstr "Trung Quốc"
+
+msgid "Hongkong"
+msgstr "Hồng Kông"
+
+msgid "RegisterSuccess"
+msgstr "Chúc mừng bạn đã đăng ký thành công, Một mã số đã được gửi tới điện thoại, hãy xác minh để tiếp tục."
+
+msgid "Email_exist"
+msgstr "Email đã được đăng ký"
+
+msgid "Phone_exist"
+msgstr "Số điện thoại đã được đăng ký"
+
+msgid "slogan_about"
+msgstr "Bay là Thích ngay! Bay khắp Việt Nam & Quốc tế"
+
+msgid "Time_reg_text"
+msgstr "Thời gian đăng ký"
+
+msgid "Time_reg"
+msgstr "Từ nay đến 27/12/2018"
+
+msgid "Detail_info"
+msgstr "Thông tin chi tiết:"
+
+msgid "Buy_location"
+msgstr "Mua ở đâu:"
+
+msgid "PaymentInfo"
+msgstr "Thanh toán ngay bằng các loại thẻ Visa/Master/AMEX/JCB/thẻ ATM của 29 ngân hàng lớn tại Việt Nam"
+
+msgid "about_text"
+msgstr "mục: 'Đặt vé' "
+
+msgid "author"
+msgstr "Bài dự thi của"
+
+msgid "About2"
+msgstr "Giới Thiệu Chương Trình"
+
+
+
+
+
+

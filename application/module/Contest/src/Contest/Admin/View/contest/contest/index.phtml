@@ -1,0 +1,165 @@
+<?php
+    $this->layout()->setVariable('heading', 'Contest List');
+    include(__DIR__ . '/partial/indextoolbar.phtml');
+?>
+<?php echo $this->flashMessenger(); ?>
+<div class="clear"></div>
+<div id="view-content">
+    <form method="post" action="">
+        <?php include_once(__DIR__ . '/partial/filter.phtml'); ?>
+        <div class="clear"></div>
+        <div class="table-primary" style="margin-top: 15px;">
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th class="tableColumnCheck"><input type="checkbox" value="1" id="checkall" class="checkall"/></th>
+                        <th><?php echo $this->layoutHelper()->header('bz1_contests.user_id', $state ,'User'); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('bz1_contests.id', $state,'Id'); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('bz1_contests.image', $state,'Image'); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('bz1_contests.votes', $state,'Votes'); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('bz1_contests.shares', $state,'Shares'); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('bz1_contests.submit_date', $state,'SubmitDate'); ?></th>
+                        <th>Winner</th>
+                        <th><?php echo $this->layoutHelper()->header('bz1_contests.status', $state,'Status'); ?></th>
+                        <th>Reject</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($items as $item) : ?>
+                        <tr>
+                            <td><input type="checkbox" class="checkitem" name="data[Choose][]"  value="<?php echo $item['id']; ?>"/></td>
+                            
+                            <td><a target="_blank" href="<?php echo $this->url('useradmin', array('action' => 'edit', 'id' => $item['user_id'])); ?>"><?php echo $item['user_id'] .' - '. $item['user_name']; ?></a></td>
+
+                            <td><a href="<?php echo $this->url('contest-admin', array('action' => 'edit', 'id' => $item['id']));?>"><?php echo $item['id']; ?></a></td>
+                            <td>
+                                <a href="<?php echo $this->url('contest-admin', array('action' => 'edit', 'id' => $item['id'])); ?>">
+                                    <?php 
+                                        $img =  $item['image'] ? BASE_URL_MEDIA.'/images/'.$item['image'] : '';
+                                        $realImg = WEB_ROOT.DS.'media'.DS.'images'.DS.$item['image'];
+                                        if($img && file_exists($realImg)){ ?>
+                                            <img src="<?php echo  $img; ?>" style="max-width: 150px;" />
+                                        <?php }else{
+                                            echo 'View detail';
+                                        }
+                                    ?>
+                                </a>
+                            </td>   
+                            <td><?php echo $item['votes'] ?></td>
+                            <td><?php echo $item['shares'] ?></td>           
+                            <td><?php echo $this->layoutHelper()->dateString($item['submit_date']) ?></td>
+                           
+                            <td style="width:150px;">
+                                <div>- Tuần:
+                                    <a id="btn_week_<?php echo $item['id'];?>" href="javascript:;" onclick="javascript:setWin('week','<?php echo $item['id']; ?>');">
+                                     <?php
+                                        echo $item['is_win_week'] == 0 ? '<span style="color:Red; font-weight:bold">No</span>' : '<span style="color:Green; font-weight:bold">Yes</span>';
+                                    ?>
+                                    </a> 
+                                </div>
+                                <div>- Chung cuộc:   
+                                    <a id="btn_final_<?php echo $item['id'];?>" href="javascript:;" onclick="javascript:setWin('final','<?php echo $item['id']; ?>');">
+                                     <?php
+                                        echo $item['is_win_final'] == 0 ? '<span style="color:Red; font-weight:bold">No</span>' : '<span style="color:Green; font-weight:bold">Yes</span>';
+                                    ?>
+                                    </a> 
+                                </div>
+                                
+                            </td>
+                            <td><?php echo $this->layoutHelper()->publishString($item['status']); ?></td>
+                            <td>
+                                <?php
+                                    switch ($item['status']) {
+                                        case 1:
+                                            echo '---';
+                                            break;
+                                        case 0:
+                                            echo '<a id="btn_reject_'. $item['id'].'" href="javascript:;" onclick="javascript:reject(\''.$item['id'].'\');"><span style="color:Black; font-weight:bold">Reject</span>';
+                                            break;
+                                        case 2:
+                                            echo '<span style="color:Red; font-weight:bold">Rejected</span>';
+                                            break;
+                                    }
+                                ?>
+                                </a> 
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-container">
+            <?php
+            echo $paging->getPagingLink();
+            echo $paging->getPagingInfo();
+            ?>
+        </div>
+        <input type="hidden" name="callaction" id="callaction" value=""/>
+        <input type="hidden" name="choose[]" value=""/>
+        <input type="hidden" name="filter_order" id="filter_order" value="<?php echo $filter_order; ?>"/>
+        <input type="hidden" name="filter_order_Dir" id="filter_order_Dir" value="<?php echo $filter_order_Dir; ?>"/>
+    </form>
+</div>
+<div class="clear"></div>
+<?php include(__DIR__ . '/partial/indextoolbar.phtml'); ?>
+
+<script>
+    var clickReject = true;
+    var reject = function (id) {
+        if(confirm('Bạn có chắc chắn từ chối bài thi này không?')){
+            if (clickReject) {
+                clickReject = false;   
+                $.ajax({
+                    url: baseurl + "/admin/contest/reject",
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        id: id,
+                    },
+                    success: function (res) {
+                        clickReject = true;
+                        if (res.status) { 
+                            var $btn = $('#btn_reject_'+id);
+                            if($btn.length > 0){
+                              $btn.html('<span style="color:Red; font-weight:bold">Rejected</span>');
+                            }
+                            alert(res.message);
+                        } else {
+                            alert(res.message);
+                        }
+                    }
+                });
+            }
+        }
+    };
+
+    var clickSubmit = true;
+    var setWin = function (winType, postId) {
+        if(confirm('Bạn có chắc không?')){
+            if (clickSubmit) {
+                clickSubmit = false;   
+                $.ajax({
+                    url: baseurl + "/admin/contest/setwin",
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        win_type: winType,
+                        post_id: postId
+                    },
+                    success: function (res) {
+                        clickSubmit = true;
+                        if (res.status) {  
+                            var $btn = $('#btn_'+winType+'_'+postId);
+                            if($btn.length > 0){
+                              $btn.html(res.textWinType);  
+                            }
+                            alert(res.message);
+                        } else {
+                            alert(res.message);
+                        }
+                    }
+                });
+            }
+        }
+    };
+</script>

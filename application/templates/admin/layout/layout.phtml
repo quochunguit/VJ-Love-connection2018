@@ -1,0 +1,95 @@
+<?php $user = $this->user(); ?>
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <script> var baseurl = "<?php echo BASE_URL; ?>";</script>
+        <base href="<?php echo BASE_URL; ?>/"/>
+        <?php echo $this->headTitle(' ' . $this->translate('CMS'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+        <?php
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' =>BASE_URL_SKIN_IMAGE . '/favicon.png'))
+                ->appendStylesheet($this->basePath() . '/skin/admin/pixel/stylesheets/bootstrap.min.css')
+                ->appendStylesheet($this->basePath() . '/skin/common/jsoneditor/jsoneditor.css')
+                ->appendStylesheet($this->basePath() . '/skin/common/datepicker/css/datepicker.css')
+                ->appendStylesheet($this->basePath() . '/skin/admin/pixel/stylesheets/pixel-admin.min.css')
+                ->appendStylesheet($this->basePath() . '/skin/admin/pixel/stylesheets/widgets.min.css')
+                ->appendStylesheet($this->basePath() . '/skin/admin/pixel/stylesheets/pages.min.css')
+                ->appendStylesheet($this->basePath() . '/skin/admin/pixel/stylesheets/rtl.min.css')
+                ->appendStylesheet($this->basePath() . '/skin/admin/pixel/stylesheets/themes.min.css')
+                ->appendStylesheet($this->basePath() . '/skin/admin/pixel/stylesheets/style.css')
+                ->appendStylesheet($this->basePath() . '/skin/admin/pixel/stylesheets/dstyle.css')
+        ?>
+
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+
+        <script type="text/javascript" src="<?php echo $this->basePath() ?>/skin/admin/pixel/javascripts/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath() ?>/skin/admin/pixel/javascripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath() ?>/skin/admin/pixel/javascripts/ejs_production.js"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath() ?>/skin/admin/pixel/javascripts/jquery.validate.js"></script>
+        <!--[if lt IE 9]>
+                <script src="<?php echo $this->basePath() ?>/skin/admin/pixel/javascripts/ie.min.js"></script>
+        <![endif]-->
+    </head>
+    <body class="theme-default main-menu-animated">
+        <script>var init = [];</script>
+         <div id="main-wrapper">
+            <?php echo $this->partial('partial/admin/header', array('user'=>$user)); ?>
+            <div id="main-menu" role="navigation">
+                <div id="main-menu-inner">
+                    <div class="menu-content top" id="menu-content-demo">
+                        <div>
+                            <div class="text-bg"><span class="text-slim"></span> <span class="text-semibold" title="<?php echo $user['name']; ?>"><?php echo $user['name_fix']; ?></span></div>
+                            <img src="<?php echo $this->basePath() ?>/skin/admin/pixel/images/avatar.png" alt="" class="">
+                            <div class="btn-group">
+                                <a href="<?php echo $this->url('useradmin', array('action' => 'account')) ?>" class="btn btn-xs btn-primary btn-outline dark" title="Account"><i class="fa fa-user"></i></a>
+                                <a href="<?php echo $this->url('useradmin', array('action' => 'logout')) ?>" class="btn btn-xs btn-danger btn-outline dark" title="Logout"><i class="fa fa-power-off"></i></a>
+                            </div>
+                            <!-- <a href="javascript:;" class="close">&times;</a> -->
+                        </div>
+                    </div>
+                    <?php
+                        echo $this->partial('partial/admin/menu', array('user'=>$user));
+                    ?>
+                </div> 
+            </div>
+            <div id="content-wrapper">
+                <?php if ($this->heading): ?>
+                    <div class="page-header">
+                        <h1><i class="fa fa-th-large page-header-icon page-header-icon"></i>&nbsp;&nbsp;<?php echo $this->heading ?></h1>
+                    </div>
+                <?php endif; ?>
+                <div class="row">
+                    <?php echo $this->content; ?>
+                </div>
+            </div> 
+            <div id="main-menu-bg"></div>
+        </div>
+
+        <script src="<?php echo $this->basePath() ?>/skin/admin/pixel/javascripts/pixel-admin.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath() ?>/skin/admin/pixel/javascripts/jquery.slug.js"></script>
+        <script src="<?php echo $this->basePath() ?>/skin/common/jqueryfileupload/jquery.ui.widget.js"></script>
+        <script src="<?php echo $this->basePath() ?>/skin/common/jqueryfileupload/jquery.iframe-transport.js"></script>
+        <script src="<?php echo $this->basePath() ?>/skin/common/jqueryfileupload/jquery.fileupload.js"></script>
+        <script src="<?php echo $this->basePath() ?>/skin/common/jsoneditor/json2.js"></script>
+        <script src="<?php echo $this->basePath() ?>/skin/common/jsoneditor/jquery.jsoneditor.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath() ?>/skin/admin/pixel/javascripts/jsoneditor.js"></script>
+        <script src="<?php echo $this->basePath() ?>/skin/common/datepicker/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath() ?>/skin/admin/pixel/javascripts/file.js"></script>
+        <script src="<?php echo $this->basePath() ?>/skin/admin/pixel/javascripts/common.js"></script>
+        <script type="text/javascript">
+            init.push(function() {
+                // Javascript code here
+            });
+            window.PixelAdmin.start(init);
+        </script>
+    </body>
+</html>

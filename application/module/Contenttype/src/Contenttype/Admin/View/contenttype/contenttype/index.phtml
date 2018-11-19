@@ -1,0 +1,52 @@
+<?php $this->layout()->setVariable('heading', 'Manage Content Type'); ?>
+<?php
+include_once(__DIR__ . '/partial/indextoolbar.phtml');
+?>
+<div class="clear"></div>
+<?php echo $this->flashMessenger(); ?>
+<div id="view-content">
+    <div class="col-sm-12">
+    <form method="post" action="">
+        <?php include_once(__DIR__ . '/partial/filter.phtml'); ?>
+        <div class="clearfix">&nbsp;</div>
+        <div class="table-primary">
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th class="tableColumnCheck"><input type="checkbox" value="1" id="checkall" class="checkall"/></th>
+                        <th><?php echo $this->layoutHelper()->header('id', $state); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('name', $state); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('type', $state); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('ordering', $state); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('group', $state); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('status', $state); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($items as $item) : ?>
+                        <tr>
+                            <td><input type="checkbox" class="checkitem" name="data[Choose][]"  value="<?php echo $item['id']; ?>"/></td>
+                            <td><a href="<?php echo $this->url('contenttypeadmin', array('action' => 'edit', 'id' => $item['id'])); ?>"><?php echo $item['id']; ?></a></td>
+                            <td><a href="<?php echo $this->url('contenttypeadmin', array('action' => 'edit', 'id' => $item['id'])); ?>"><?php echo $this->escapeHtml(html_entity_decode($item['title'])); ?></a></td>
+                            <td><?php echo $this->escapeHtml($item['type']); ?></td>
+                            <td><?php echo $item['ordering']; ?></td>
+                            <td style="width:200px;"><?php echo $item['group']; ?></td>
+                            <td><?php echo $this->layoutHelper()->publishString($item['status']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>     
+        <div class="pagination-container">
+            <?php
+            echo $paging->getPagingLink();
+            echo $paging->getPagingInfo();
+            ?>
+        </div>
+        <input type="hidden" name="callaction" id="callaction" value=""/>
+        <input type="hidden" name="choose[]" value=""/>
+        <input type="hidden" name="filter_order" id="filter_order" value="<?php echo $filter_order; ?>"/>
+        <input type="hidden" name="filter_order_Dir" id="filter_order_Dir" value="<?php echo $filter_order_Dir; ?>"/>
+    </form>
+  </div>
+</div>

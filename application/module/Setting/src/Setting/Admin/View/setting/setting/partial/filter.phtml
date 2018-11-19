@@ -1,0 +1,7 @@
+<div id="filter_form" class="filter form-inline">
+    <label><?php echo ('Keyword:'); ?></label>
+    <input type="text" class=" form-control " name="filter_search" id="filter_search" value="<?php print $state->get("filter.search") ?>"/>
+    &nbsp;
+    <input type="button" value="<?php echo ('Filter'); ?>" id="filter" class="btn btn-primary"/>
+    <input type="button" value="<?php echo ('Reset'); ?>" id="reset" name="data[reset]" class="btn btn-default" autocomplete="off"/>
+</div>

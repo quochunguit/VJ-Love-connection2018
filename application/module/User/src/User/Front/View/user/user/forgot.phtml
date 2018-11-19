@@ -1,0 +1,24 @@
+<h1 class="page-header">Forgot your password</h1>
+<div class="forgot">
+    <?php
+    $form = $this->form;
+    $form->prepare();
+     echo $this->formMessenger()->showMessage($form);
+    echo $this->form()->openTag($form);
+    ?>
+    <ul class="form forgot">
+        <li class="forgot_intro">
+            Please enter your email address, we will send to you instruction to this email
+        </li>
+        <li>
+            <label for="email">Email:</label>
+            <?php echo $this->formInput($form->get('email')); ?>
+        </li>
+        <li class="action">
+            <input type="submit" id="submit" value="Submit" class="btn btn-primary"/>
+
+        </li>
+    </ul>
+    <?php echo $this->form()->closeTag(); ?>
+
+</div>

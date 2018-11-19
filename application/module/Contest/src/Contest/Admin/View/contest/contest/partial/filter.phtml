@@ -1,0 +1,34 @@
+<div id="filter_form" class="filter form-inline" style="text-align: center;">  
+    <label><?php echo ('Keyword:'); ?></label>
+    <input type="text" class=" form-control " name="filter_search" id="filter_search" value="<?php print $state->get("filter.search") ?>"/>
+    &nbsp;
+
+    <label ><?php echo ('From submit date'); ?></label>
+    <input type="input" class=" form-control " name="filter_from_submit_date" id="filter_from_submit_date" value="<?php print $state->get("filter.from_submit_date") ?>">
+    &nbsp;
+
+    <label ><?php echo ('To submit date'); ?></label>
+    <input type="input" class=" form-control " name="filter_to_submit_date" id="filter_to_submit_date" value="<?php print $state->get("filter.to_submit_date") ?>" >
+    &nbsp;
+    <br><br>
+
+    <label><?php echo ('Is win week:'); ?></label>
+    <select class="form-control  filter_change" name="filter_is_win_week" id="filter_is_win_week" >
+        <option value="">-- all -- </option>
+        <?php echo App\AppView::makeOption($state->get('filter.is_win_week'), array('1'=>'Yes','0'=>'No')); ?>
+    </select>
+
+    <label><?php echo ('Is win final:'); ?></label>
+    <select class="form-control  filter_change" name="filter_is_win_final" id="filter_is_win_final" >
+        <option value="">-- all -- </option>
+        <?php echo App\AppView::makeOption($state->get('filter.is_win_final'), array('1'=>'Yes','0'=>'No')); ?>
+    </select>
+      
+    <label ><?php echo ('Status'); ?></label>
+    <select class="form-control  filter_change" name="filter_status" id="filter_status" class="filter_change">
+        <?php echo App\AppView::statusContestOptions($state->get('filter.status')); ?>
+    </select>
+    
+    <input type="button" value="<?php echo ('Filter'); ?>" id="filter" class="btn btn-primary"/>
+    <input type="button" value="<?php echo ('Reset'); ?>" id="reset" name="data[reset]" class="btn btn-default" autocomplete="off"/>
+</div>

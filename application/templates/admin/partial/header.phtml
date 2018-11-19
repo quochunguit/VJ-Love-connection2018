@@ -1,0 +1,84 @@
+<?php
+$factory = $this->factory();
+$languages = $factory->getLanguageList();
+?>
+<div id="main-navbar" class="navbar navbar-inverse " role="navigation" style="position: fixed;">
+    <!-- Main menu toggle -->
+    <button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+    <div class="navbar-inner">
+        <div class="navbar-header" style="width: 50%">
+            <a href="<?php echo $this->url('admin') ?>" class="navbar-brand">
+                <div>
+                    <img alt="" src="<?php echo $this->basePath() ?>/skin/admin/pixel/images/logo.png">
+                </div>
+                <?php echo $this->setting('core.sitename') ?>
+            </a>
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon fa fa-bars"></i></button>
+        </div> 
+
+        <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+            <div>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class="hidden"></a>
+                    </li>
+                </ul> 
+                <div class="right clearfix">
+                    <ul class="nav navbar-nav pull-right right-navbar-nav">
+                        <li>  
+                            <?php
+                            $curLang = $factory->getLanguageByCode();
+                            ?>
+                            <a>Viewing data by language: <strong><span style="color: blue;"><?php echo $curLang['title']; ?></span></strong></a>
+                        </li>
+
+                        <?php
+                        if($languages){
+                        ?>
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle user-menu" data-toggle="dropdown">
+                                    <span title="Languages for content">Languages</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <?php
+                                    foreach ($languages as $key => $value) {
+                                        $urlSetLang = $this->url('languageadmin', array('action'=>'switched')).'?code='.$value['lang_code'];
+                                     ?>
+                                       <li><a href="<?php echo $urlSetLang; ?>"><?php echo $value['title'];?></a></li>
+                                    <?php }
+                                    ?>
+                                </ul>
+                            </li>   
+                        <?php } ?>
+
+                        <li>  
+                            <?php
+                                $linkView = BASE_URL ? BASE_URL: $this->basePath();
+                                if(strpos($linkView,'/api/')!==FALSE){
+                                    $linkView = str_replace('/api/', '/', $linkView);
+                                }
+                                if(strpos($linkView,'/api')!==FALSE){
+                                    $linkView = str_replace('/api', '', $linkView);
+                                }
+                            ?>
+                            <a target="_blank" href="<?php echo $linkView; ?>">
+                            <i class="fa fa-external-link"></i>&nbsp;View Site</a>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+                                <img src="<?php echo $this->basePath() ?>/skin/admin/pixel/images/avatar.png" alt="">
+                                <span title="<?php echo @$user['name']; ?>"><?php echo @$user['name_fix']; ?></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<?php echo $this->url('useradmin', array('action' => 'account')) ?>">My Account</a></li>
+                                <li><a href="<?php echo $this->url('useradmin', array('action' => 'logout')) ?>"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Logout</a></li>
+                            </ul>
+                        </li>                       
+                    </ul> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

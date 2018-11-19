@@ -1,0 +1,44 @@
+
+<?php
+$factory = $this->factory();
+$this->layout()->setVariable('heading','Edit Category');
+include_once(__DIR__ . '/partial/edittoolbar.phtml');
+?>
+<?php echo $this->flashMessenger(); ?>
+<div class="clear">&nbsp;</div>
+<div id="view-content">
+    <div class="col-sm-12">
+        <?php
+        $form = $this->form;
+
+        $form->prepare();
+        echo $this->form()->openTag($form);
+        echo $this->formMessenger()->showMessage($form);
+        ?>
+
+        <div class="panel-body">
+            <?php 
+            $linkAddLang = $factory->checkAddLanguage($data,'category');
+            if($linkAddLang != '---'){
+             ?>
+                <div style="text-align: center; padding: 10px 0 30px; color: blue; font-weight: bold; border-bottom: 1px solid #ccc;">
+                   [ Other language for this content: <?php echo $linkAddLang; ?> ]
+                </div>
+            <?php } ?>
+            <br>
+            <?php
+               if(file_exists(__DIR__ . "/partial/form_full.phtml")) {
+                    include_once(__DIR__ . "/partial/form_full.phtml");
+                }
+             ?>
+        </div>
+        <input type="hidden" name="callaction" id="callaction" value=""/>
+
+        <?php echo $this->formHidden($form->get('lang_group')); ?>
+        <?php echo $this->formHidden($form->get('id')); ?>
+        <?php echo $this->form()->closeTag(); ?>
+    </div>
+</div>
+<?php
+echo $this->ckeditor()->editor();
+?>

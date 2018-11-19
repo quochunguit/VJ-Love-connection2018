@@ -1,0 +1,23 @@
+<?php
+$factory = $this->factory();
+?>
+
+<div id="filter_form" class="filter form-inline">
+    <label><?php echo ('Keyword:'); ?></label>
+    <input type="text" class=" form-control " name="filter_search" id="filter_search" value="<?php print $state->get("filter.search") ?>"/>
+    &nbsp;
+
+    <label><?php echo ('Overview Type'); ?></label>
+    <select class="form-control  filter_change" name="filter_identity" id="filter_identity" class="filter_change">
+    	<option value="">-- select --</option>
+    	<?php echo App\AppView::makeOption($state->get('filter.identity'), $factory->residentialOverviewInfoTypeKeyVal()); ?>
+    </select>
+
+    <label ><?php echo ('Status'); ?></label>
+    <select class="form-control  filter_change" name="filter_status" id="filter_status" class="filter_change">
+        <?php echo App\AppView::statusOptions($state->get('filter.status')); ?>
+    </select>
+
+    <input type="button" value="<?php echo ('Filter'); ?>" id="filter" class="btn btn-primary"/>
+    <input type="button" value="<?php echo ('Reset'); ?>" id="reset" name="data[reset]" class="btn btn-default" autocomplete="off"/>
+</div>

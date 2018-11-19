@@ -1,0 +1,14 @@
+<?php
+if ($type) {
+    $onclickCancel = 'onclick="App.gotoURL(baseurl + \'/admin/contest?type=' . $type . '\')"';
+} else {
+    $onclickCancel = 'onclick="App.gotoURL(baseurl + \'/admin/contest\')"';
+}
+?>
+
+<div class="actions pull-right">
+    <button class="btn btn-primary" onclick="App.submitForm('apply')" ><i class="fa fa-apply"></i>&nbsp;Apply</button> &nbsp;&nbsp;
+    <button class="btn btn-success" onclick="App.submitForm('save')"><i class="fa fa-savelist"></i>&nbsp;<?php echo 'Save and list' ?></button> &nbsp;&nbsp;
+    <button class="btn btn-danger" <?php echo $onclickCancel; ?>><i class="fa fa-cancel"></i>&nbsp;<?php echo 'Cancel' ?></button> &nbsp;&nbsp;
+</div>
+<div class="clearfix"></div>

@@ -1,0 +1,70 @@
+<?php
+$factory = $this->factory();
+$this->layout()->setVariable('heading', 'List Category');
+include_once(__DIR__ . '/partial/indextoolbar.phtml');
+?>
+<div class="clear"></div>
+<?php echo $this->flashMessenger(); ?>
+<div id="view-content">
+    <div class="col-sm-12">
+    <form method="post" action="">
+        <?php include_once(__DIR__ . '/partial/filter.phtml');   ?>
+         <div class="clearfix">&nbsp;</div>
+        <div class="table-primary">
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th class="tableColumnCheck"><input type="checkbox" value="1" id="checkall" class="checkall"/></th>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Ordering</th>
+                        <th>Type</th>
+                        <th>Language [lang_group]</th>
+                        <th>Status</th>
+                        <th>AddByLang</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($this->tree as $item) :
+                        ?>
+                        <tr>
+                            <td><input type="checkbox" class="checkitem" name="data[Choose][]"  value="<?php echo $item['id']; ?>"/></td>
+                            <td><a href="<?php echo $this->url('categoryadmin', array('action' => 'edit', 'id' => $item['id'])); ?>"><?php echo $item['id']; ?></a></td>
+                             <td><a href="<?php echo $this->url('categoryadmin', array('action' => 'edit', 'id' => $item['id'])); ?>"><?php echo $this->escapeHtml($item['title']); ?></a></td>
+
+                            <td><?php echo $this->escapeHtml($item['ordering']); ?></td>
+                            <td><?php echo $item['type']; ?></td>
+                            <td><?php echo $this->layoutHelper()->langString($item['language']).' [ '.$item['lang_group'].' ]'; ?></td>
+                            <td><?php echo $this->layoutHelper()->publishString($item['status']); ?></td>
+                            <td><?php echo $factory->checkAddLanguage($item,'category'); ?></td>
+                        </tr>
+                        <?php
+                        $childs = $item['child'];
+                        foreach ($childs as $child):
+                            ?>
+                            <tr>
+                                <td><input type="checkbox" class="checkitem" name="data[Choose][]"  value="<?php echo $child['id']; ?>"/></td>
+                                <td><a href="<?php echo $this->url('categoryadmin', array('action' => 'edit', 'id' => $child['id'])); ?>"><?php echo $child['id']; ?></a></td>
+
+                                 <td>&nbsp;&nbsp; <a href="<?php echo $this->url('categoryadmin', array('action' => 'edit', 'id' => $child['id'])); ?>"><?php echo $this->escapeHtml($child['title']); ?></a></td>
+
+                                <td>__<?php echo $this->escapeHtml($child['ordering']); ?></td>
+                                 <td><?php echo $item['type']; ?></td>
+                                <td><?php echo $this->layoutHelper()->langString($child['language']).' [ '.$child['lang_group'].' ]'; ?></td>
+                                <td><?php echo $this->layoutHelper()->publishString($child['status']); ?></td>
+                                <td><?php echo $factory->checkAddLanguage($child,'category'); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>    
+
+        <input type="hidden" name="callaction" id="callaction" value=""/>
+        <input type="hidden" name="choose[]" value=""/>
+        <input type="hidden" name="filter_order" id="filter_order" value="<?php echo @$filter_order; ?>"/>
+        <input type="hidden" name="filter_order_Dir" id="filter_order_Dir" value="<?php echo @$filter_order_Dir; ?>"/>
+    </form>
+</div>
+</div>

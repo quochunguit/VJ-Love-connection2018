@@ -1,0 +1,426 @@
+<?php
+$myLocaleShort = $this->layout()->myLocaleShort;
+?>
+<div id="pop-register" class="mfp-control bzPopup mfp-hide">
+    <?php if($myLocaleShort=='vi'): ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title"> <?php else: ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy-en.png" alt="" class="img-title"> <?php endif; ?>
+    <div class="form">
+        <h2 class="h1 text-uppercase text-center">
+            <?php echo $this->translate('Signup'); ?>
+        </h2>
+        <div class="line"></div>
+
+        <form action="" name="register-form">
+            <div class="form-group row">
+
+                <label for="name" class="col-sm-5" ><?php echo $this->translate('Fullname'); ?></label>
+
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <input type="text" class="form-control" id="reg-name" name="regname" placeholder="">
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row ">
+
+                <label for="phone" class="col-sm-5" ><?php echo $this->translate('Phonenumber'); ?></label>
+
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <input type="tel" class="form-control" id="reg-phone" name="regphone" placeholder="">
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row ">
+
+                <label for="address" class="col-sm-5"><?php echo $this->translate('Address'); ?></label>
+
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <select class="selectbox form-control selectpicker" id="reg-location" name="reg-location">
+                            <option value="vn_84"><?php echo $this->translate('vn_84'); ?></option>
+                            <option value="kr_82"><?php echo $this->translate('kr_82'); ?></option>
+                            <option value="tw_886"><?php echo $this->translate('tw_886'); ?></option>
+                            <option value="jp_81"><?php echo $this->translate('jp_81'); ?></option>
+                            <option value="sg_65"><?php echo $this->translate('sg_65'); ?></option>
+                            <option value="kh_855"><?php echo $this->translate('kh_855'); ?></option>
+                            <option value="th_66"><?php echo $this->translate('th_66'); ?></option>
+                        </select>
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row ">
+
+                <label for="email" class="col-sm-5" ><?php echo $this->translate('Email'); ?></label>
+
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <input type="text" class="form-control" id="reg-email" name="regemail" placeholder="">
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row ">
+
+                <label for="password" class="col-sm-5"><?php echo $this->translate('Password'); ?></label>
+
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <input type="password" class="form-control" id="reg-password" name="regpassword" placeholder="">
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row ">
+
+                <label for="respassword" class="col-sm-5" ><?php echo $this->translate('Repassword'); ?></label>
+
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <input type="password" class="form-control" id="reg-repassword" name="regrepassword" placeholder="">
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="note"><span>*</span> <?php echo $this->translate('Verified_organizer'); ?></p>
+            <div class="button text-right">
+                <button id="reg-account-btn" class="btn btn-primary"><?php echo $this->translate('Signup'); ?></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="pop-login" class="mfp-control mfp-hide bzPopup">
+    <?php if($myLocaleShort=='vi'): ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title"> <?php else: ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy-en.png" alt="" class="img-title"> <?php endif; ?>
+    <div class="form">
+        <h2 class="h1 text-uppercase text-center">
+            <?php echo $this->translate('Login'); ?>
+        </h2>
+        <div class="line"></div>
+        <div class="login-app d-flex justify-content-between">
+            <a href="javascript:void(0);">
+                <img style="max-width: 233px" id="my-signin2" src="<?php echo BASE_URL_SKIN_IMAGE; ?>/login-g.png" alt="login-g">
+            </a>
+            <a href="javascript:void(0)" class="btn-login-facebook">
+                <img style="max-width: 233px" src="<?php echo BASE_URL_SKIN_IMAGE; ?>/login-fb.png" alt="login-g">
+            </a>
+        </div>
+        <div class="or text-center text-uppercase">
+            <span><?php echo $this->translate('Or'); ?></span>
+        </div>
+
+        <div class="text-center">
+            <div style="color: #e41f1f;" id="login-error">
+
+            </div>
+        </div>
+
+        <form action="" name="login-form">
+            <div class="form-group row ">
+
+                <label for="lgemail" class="col-sm-5" ><?php echo $this->translate('Email'); ?></label>
+
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <input type="text" class="form-control" id="login-email" name="loginemail" placeholder="">
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row ">
+
+                <label for="lgpassword" class="col-sm-5" ><?php echo $this->translate('Password'); ?></label>
+
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <input type="password" class="form-control" id="login-password" name="loginpassword" placeholder="">
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-5 d-none d-sm-block opacity"><?php echo $this->translate('Forgetpassword'); ?></label>
+                <div class="col-input col-sm-7">
+                    <a href="javascript:void(0);" onclick="App.Popup.openForgotpass()" class="note"><span>*</span> <?php echo $this->translate('Forgetpassword'); ?></a>
+                </div>
+            </div>
+            <div class="button text-right">
+                <a href="javascript:void(0);" onclick="App.Popup.openRegister();" class="btn btn-default"><?php echo $this->translate('Signup'); ?></a>
+                <button id="login-btn" class="btn btn-primary"><?php echo $this->translate('Login'); ?></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="pop-updatephone" class="mfp-control mfp-hide bzPopup">
+    <?php if($myLocaleShort=='vi'): ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title"> <?php else: ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy-en.png" alt="" class="img-title"> <?php endif; ?>
+    <div class="form">
+        <h2 class="h1 text-uppercase text-center">
+            <?php echo $this->translate('Updatephonenumber'); ?>
+        </h2>
+
+        <form action="" name="updatephone-form">
+            <div class="form-group row ">
+
+                <label for="address" class="col-sm-5"><?php echo $this->translate('Address'); ?></label>
+
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <select class="selectbox form-control selectpicker" id="location" name="location">
+                            <option value="vn_84"><?php echo $this->translate('vn_84'); ?></option>
+                            <option value="kr_82"><?php echo $this->translate('kr_82'); ?></option>
+                            <option value="tw_886"><?php echo $this->translate('tw_886'); ?></option>
+                            <option value="jp_81"><?php echo $this->translate('jp_81'); ?></option>
+                            <option value="sg_65"><?php echo $this->translate('sg_65'); ?></option>
+                            <option value="kh_855"><?php echo $this->translate('kh_855'); ?></option>
+                            <option value="th_66"><?php echo $this->translate('th_66'); ?></option>
+                        </select>
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row ">
+
+                <label for="phone" class="col-sm-5" ><?php echo $this->translate('Phonenumber'); ?></label>
+
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <input type="tel" class="form-control" id="phone-number" name="phonenumber" placeholder="">
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="button text-right">
+                <button id="activation-code-send-btn" class="btn btn-primary"><?php echo $this->translate('Update'); ?></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="pop-resendcode" class="mfp-control mfp-hide bzPopup">
+    <?php if($myLocaleShort=='vi'): ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title"> <?php else: ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy-en.png" alt="" class="img-title"> <?php endif; ?>
+    <div class="form">
+        <h2 class="h1 text-uppercase text-center">
+            <?php echo $this->translate('Sendactivationcode'); ?>
+        </h2>
+
+        <form action="" name="resendcode-form">
+            <div class="form-group row ">
+
+                <label for="address" class="col-sm-5"><?php echo $this->translate('Address'); ?></label>
+
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <select class="selectbox form-control selectpicker" id="resend-country" name="location">
+                            <option value="vn_84"><?php echo $this->translate('vn_84'); ?></option>
+                            <option value="kr_82"><?php echo $this->translate('kr_82'); ?></option>
+                            <option value="tw_886"><?php echo $this->translate('tw_886'); ?></option>
+                            <option value="jp_81"><?php echo $this->translate('jp_81'); ?></option>
+                            <option value="sg_65"><?php echo $this->translate('sg_65'); ?></option>
+                            <option value="kh_855"><?php echo $this->translate('kh_855'); ?></option>
+                            <option value="th_66"><?php echo $this->translate('th_66'); ?></option>
+                        </select>
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row ">
+
+                <label for="phone" class="col-sm-5" ><?php echo $this->translate('Phonenumber'); ?></label>
+
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <input type="tel" class="form-control" id="resend-phone" name="phonenumber" placeholder="">
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="button text-right">
+                <button id="resend-btn" class="btn btn-primary"><?php echo $this->translate('Send'); ?></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="pop-activecode" class="mfp-control mfp-hide bzPopup">
+    <?php if($myLocaleShort=='vi'): ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title"> <?php else: ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy-en.png" alt="" class="img-title"> <?php endif; ?>
+    <div class="form">
+        <h2 class="h1 text-uppercase text-center">
+            <?php echo $this->translate('Activeaccount'); ?>
+        </h2>
+
+        <form action="" name="activecode-form">
+            <div class="form-group row ">
+
+                <label for="phone" class="col-sm-5" ><?php echo $this->translate('Activationcode'); ?></label>
+
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <input type="text" class="form-control" id="receive-code-number" name="receivecodenumber" placeholder="">
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="note"></p>
+            <div class="button text-right">
+                <button id="active-btn" class="btn btn-primary"><?php echo $this->translate('Active'); ?></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="pop-forgotpass" class="mfp-control mfp-hide bzPopup">
+    <?php if($myLocaleShort=='vi'): ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title"> <?php else: ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy-en.png" alt="" class="img-title"> <?php endif; ?>
+    <div class="form">
+        <h2 class="h1 text-uppercase text-center">
+            <?php echo $this->translate('Recoverpassword'); ?>
+        </h2>
+
+        <div class="or text-center text-uppercase">
+            <span><?php echo $this->translate('Fieldregisteremail'); ?></span>
+        </div>
+        <form action="">
+
+            <div class="form-group row ">
+
+                <label for="lgemail" class="col-sm-5" ><?php echo $this->translate('Email'); ?></label>
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <input type="text" class="form-control" id="fgemail" name="fgemail" placeholder="">
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button text-right">
+                <a href="javascript:void(0)" onclick="window.closePopup();" class="btn btn-primary btn-forgotpass"><?php echo $this->translate('Send'); ?></a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="pop-alert" class="mfp-control mfp-hide bzPopup">
+    <?php if($myLocaleShort=='vi'): ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title"> <?php else: ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy-en.png" alt="" class="img-title"> <?php endif; ?>
+    <div class="pop-content text-center">
+        <p><?php echo $this->translate('CannotverifySMS'); ?></p>
+        <div class="button text-center">
+            <button onclick="helperJs.bzClosePopup();" class="btn btn-primary btn-close change-text-pop"><?php echo $this->translate('Close'); ?></button>
+        </div>
+    </div>
+</div>
+
+<div id="pop-contestSuccess" class="mfp-control mfp-hide bzPopup">
+    <?php if($myLocaleShort=='vi'): ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title"> <?php else: ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy-en.png" alt="" class="img-title"> <?php endif; ?>
+    <div class="pop-content text-center">
+        <p style="color: #048d3d; padding: 0 20px;"><?php echo $this->translate('SaveContestSuccessful'); ?></p>
+        <div class="line"></div>
+        <p><?php echo $this->translate('SaveContestSuccessful_waiting'); ?></p>
+        <p><?php echo $this->translate('Gold_hour'); ?></p>
+        <div class="button text-center">
+            <a target="_blank" href="https://vietjetair.com" class="btn btn-primary btn-close change-text-pop"><?php echo $this->translate('Book_now'); ?></a>
+        </div>
+    </div>
+</div>
+
+
+<div id="pop-recover" class="mfp-control mfp-hide bzPopup">
+    <?php if($myLocaleShort=='vi'): ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title"> <?php else: ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy-en.png" alt="" class="img-title"> <?php endif; ?>
+    <div class="form">
+        <h2 class="h1 text-uppercase text-center">
+            <?php echo $this->translate('Createnewpassword'); ?>
+        </h2>
+
+
+        <form action="">
+
+            <div class="form-group row ">
+
+                <label for="rcvpass" class="col-sm-5" ><?php echo $this->translate('Newpassword'); ?></label>
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <input type="password" class="form-control" id="rcvpass" name="rcvpass" placeholder="">
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row ">
+
+                <label for="re-rcvpass" class="col-sm-5" ><?php echo $this->translate('Renewpassword'); ?></label>
+                <div class="col-input col-sm-7">
+                    <div class="msg-input ">
+                        <input type="password" class="form-control" id="re-rcvpass" name="re-rcvpass" placeholder="">
+                        <div class="messages-error">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button text-right">
+                <a href="javascript:void(0);" class="btn btn-primary btn-recovertpass"><?php echo $this->translate('Send'); ?></a>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    var trans_Validatename = "<?php echo $this->translate('Validatename'); ?>";
+    var trans_Validatephone = "<?php echo $this->translate('Validatephone'); ?>";
+    var trans_Validatecharacter5 = "<?php echo $this->translate('Validatecharacter5'); ?>";
+    var trans_Validatevalidemail = "<?php echo $this->translate('Validatevalidemail'); ?>";
+    var trans_Validatepassword = "<?php echo $this->translate('Validatepassword'); ?>";
+    var trans_Validatenotmatched = "<?php echo $this->translate('Validatenotmatched'); ?>";
+    var trans_Validatecharacter6 = "<?php echo $this->translate('Validatecharacter6'); ?>";
+    var trans_Validateactivationcode = "<?php echo $this->translate('Validateactivationcode'); ?>";
+    var trans_Activationcodesendtophonenumber= "<?php echo $this->translate('Activationcodesendtophonenumber'); ?>";
+    var trans_LoginFailed= "<?php echo $this->translate('LoginFailed'); ?>";
+    var trans_WinnerListEmpty= "<?php echo $this->translate('WinnerListEmpty'); ?>";
+</script>

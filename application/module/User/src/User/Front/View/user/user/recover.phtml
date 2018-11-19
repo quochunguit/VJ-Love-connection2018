@@ -1,0 +1,27 @@
+<h1 class="page-header">New Password</h1>
+<?php
+$form = $this->form;
+$form->prepare();
+?>
+<?php echo $this->formMessenger()->showMessage($form);?>
+<div class="join">
+    <?php echo $this->form()->openTag($form); ?>
+    <ul class="form register">
+       
+        <li>
+            <label>New Password</label>
+            <?php echo $this->formInput($form->get('password')); ?>
+        </li>
+        <li>
+            <label>Confirm Password</label>
+            <?php echo $this->formInput($form->get('cfpassword')); ?>
+        </li>
+        <li class="action">
+            <?php echo $this->formInput($form->get('code')); ?>
+            <?php echo $this->formRow($form->get('submit')); ?>
+        </li>
+    </ul>
+    <?php echo $this->form()->closeTag(); ?>
+
+
+</div>

@@ -1,0 +1,6 @@
+local.php
+env.php
+database.php
+*.local.php
+*.development.php
+*.production.php

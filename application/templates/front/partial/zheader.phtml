@@ -1,0 +1,100 @@
+<?php
+  $parentPage = $this->layout()->parent_page;
+  $page = $this->layout()->page;
+
+  $factory = $this->factory();
+  $user = $this->user();
+  $myLocale = $this->layout()->myLocale;
+  $myLocaleShort = $this->layout()->myLocaleShort;
+  $languageList = $factory->getLanguageList();
+?>
+<header id="header" class="module" data-module="header">
+    <nav class="container navbar navbar-expand-lg" role="navigation">
+        <div class="header-mobile">
+            <div class="col-mb-8">
+                <a id="header-logo" class="navbar-brand" title="index" href="<?php echo $this->url('home',array('lang'=>$myLocaleShort)); ?>">
+                    <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/logo.png" alt="index">
+                </a>
+            </div>
+            <div class="col-mb-4">
+                <button class="navbar-toggler hamburger-menu" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icomoon icon-close-menu d-none"></span>
+                </button>
+            </div>
+        </div>
+        <div class="navbar-collapse" id="main-menu" data-module="menu">
+            <ul class="ml-auto main-menu-ul navbar-nav">
+                <li style="min-width: 100px;" class="<?php if($page=='about'){echo 'active';} ?> has-sub">
+                    <a href="javascript:void(0)"><?php echo $this->translate('About'); ?></a>
+                    <div class="nav-item-arrows d-lg-none">
+                        <i class="icomoon icon-chevron-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="dropdown-menu main-menu-dropdown">
+                        <ul>
+                            <li>
+                                <a style="padding: 12px 13px;" href="<?php echo $this->url('about',array('lang'=>$myLocaleShort)); ?>"><?php echo $this->translate('About2'); ?></a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url('rules',array('lang'=>$myLocaleShort)) ?>"><?php echo $this->translate('t&c'); ?></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </li>
+                <li  class="send-contest <?php if($page=='submit'){echo 'active';}; ?>">
+                    <?php if (@$user && @$user['id']): ?>
+                        <a href="javascript:void(0);" onclick="App.Site.goToContestSubmit(<?php echo @$user['id']; ?>);"><?php echo $this->translate('Submitions'); ?></a>
+                    <?php else: ?>
+                        <a href="javascript:void(0);" onclick="App.Popup.openLogin();"><?php echo $this->translate('Submitions'); ?></a>
+                    <?php endif; ?>
+                </li>
+                <li class="<?php if($page=='contest' || $page=='detail'){echo 'active';} ?>">
+                    <a href="<?php echo $this->url('contest', array('lang'=>$myLocaleShort)) ?>"><?php echo $this->translate('Gallery'); ?></a>
+                </li>
+                <li class="<?php if($page=='flight'){echo 'active';} ?>" >
+                    <a href="<?php echo $this->url('flightInformation',array('lang'=>$myLocaleShort)) ?>"><?php echo $this->translate('Flight_Information'); ?></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="App.Site.showWinnerList();"><?php echo $this->translate('Winners_List'); ?></a>
+                </li>
+                <li class="language">
+      <span>
+        <?php
+        foreach ($languageList as $kL => $vL) {
+            $classActive = $vL['lang_code'] == $myLocale ? 'class="active"':'';
+            $switchedUrl = $this->url('language-switched', array('code'=>$vL['lang_code']));
+            ?>
+
+            <a href="<?php echo $switchedUrl; ?>" <?php echo $classActive; ?>><?php echo $vL['title_short']; ?></a>
+            <?php if($kL < (count($languageList)-1)) echo '/'; ?>
+        <?php } ?>
+
+
+      </span>
+                </li>
+                <li class="login <?php if (@$user && @$user['id']){echo 'has-sub';} ?> ">
+                    <?php if (@$user && @$user['id']): ?>
+                    <a href="javascript:void(0);"   data-htmlclass="html-popup-content"><i class="icomoon icon-login" aria-hidden="true"></i> <?php echo @$user['name']; ?></a>
+                        <div class="nav-item-arrows d-lg-none">
+                            <i class="icomoon icon-chevron-down" aria-hidden="true"></i>
+                        </div>
+                        <div class="dropdown-menu main-menu-dropdown">
+                            <ul>
+                                <li>
+                                    <a href="javascript:voifd(0)" onclick="App.Site.userLogout(<?php echo @$user['id']; ?>);" ><?php echo $this->translate('logout'); ?></a>
+                                </li>
+                            </ul>
+                        </div>
+                    <?php else: ?>
+                        <a href="javascript:void(0);" onclick="helperJs.bzOpenPopup({items: { src: '#pop-login' }, afterClose() { console.log(1) }})"><i class="icomoon icon-login" aria-hidden="true"></i><?php echo $this->translate('Sign_Up_Login'); ?></a>
+                    <?php endif; ?>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+</header>

@@ -1,0 +1,8 @@
+
+<?php
+//include_once(__DIR__ . '/layout.phtml');
+if(!$data){
+    $data = new ArrayObject();
+}
+$this->layout()->event->trigger('onContentPannel', null, $data);
+?>

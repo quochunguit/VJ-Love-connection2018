@@ -1,0 +1,25 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script> var baseurl = "<?php echo BASE_URL; ?>";</script>
+        <?php echo $this->headTitle(' ' . $this->translate('CMS'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+        <!-- Le styles -->
+        <?php
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/images/favicon.ico'))
+                ->prependStylesheet($this->basePath() . '/skin/admin/pixel/stylesheets/login.css')
+                ->prependStylesheet($this->basePath() . '/skin/admin/pixel/stylesheets/font-awesome.min.css')
+                ->appendStylesheet($this->basePath() . '/skin/admin/pixel/stylesheets/bootstrap.min.css')
+        ?>        
+    </head>
+    <body role="document">
+        <div class="container">
+            <?php echo $this->content; ?>
+        </div> <!-- /container -->
+        <?php echo $this->inlineScript() ?>
+        <script type="text/javascript" src="<?php echo $this->basePath() ?>/skin/admin/pixel/javascripts/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath() ?>/skin/admin/pixel/javascripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath() ?>/skin/admin/pixel/javascripts/login.js"></script>
+    </body>
+</html>

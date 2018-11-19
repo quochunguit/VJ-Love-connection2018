@@ -1,0 +1,31 @@
+<?php $this->layout()->setVariable('heading', 'My Account'); ?>
+<div class="actions pull-right">
+    <button class="btn btn-primary" onclick="App.submitForm('apply')" ><i class="fa fa-apply"></i>&nbsp;Save</button> &nbsp;&nbsp;
+</div>
+<div class="clearfix"></div>
+<p>&nbsp;</p>
+<?php echo $this->flashMessenger(); ?>
+<div class="clear">&nbsp;</div>
+<div id="view-content">
+    <div class="col-sm-12">
+        <?php
+        $form = $this->form;
+
+        $form->prepare();
+        echo $this->form()->openTag($form);
+        echo $this->formMessenger()->showMessage($form);
+        ?>
+
+       <div class="panel-body">
+            <?php
+               if(file_exists(__DIR__ . "/partial/form_full.phtml")) {
+                    include_once(__DIR__ . "/partial/form_full.phtml");
+                }
+            ?>
+        </div>
+        
+        <?php echo $this->formHidden($form->get('id')); ?>
+        <input type="hidden" name="callaction" id="callaction" value=""/>
+        <?php echo $this->form()->closeTag(); ?>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<?php 
+$factory = $this->factory();
+//$categories = $factory->getCategory();
+?>
+<ul class="navigation">
+    <li>
+	<a href="<?php echo $this->url('admin') ?>"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Dashboard</span></a>
+    </li>
+
+    <li class="mm-dropdown">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-fw"></i>&nbsp;<span><?php echo $this->translate('Configuration') ?></span></a>
+        <ul>
+            <li><a href="<?php echo $this->url('settingadmin'); ?>"><span>Settings</span></a></li>
+            <li><a href="<?php echo $this->url('languageadmin'); ?>"><span>Languages</span></a></li>
+        </ul>
+    </li>
+    <li  class="mm-dropdown">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-pencil fa-fw"></i>&nbsp;<span><?php echo $this->translate('Structure') ?></span></a>
+        <ul>
+            <li><a href="<?php echo $this->url('contenttypeadmin'); ?>"><span>Content Type</span></a></li>
+            <li><a href="<?php echo $this->url('categoryadmin'); ?>"><span>Category</span></a></li>
+        </ul>
+    </li>
+    <?php
+    $factory = $this->factory();
+    $contenTypeGroup = $factory->contentTypeGroup();//print_r($contenTypeGroup);die;
+    foreach ($contenTypeGroup as $keyGroup => $valueGroup) {
+        $contentTypes = $factory->getContentType($valueGroup['id'], true);
+        if ($contentTypes) {
+            ?>
+            <li class="mm-dropdown">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book fa-fw"></i>&nbsp;<span><?php echo $valueGroup['title']; ?></span></a>
+                <ul>
+                    <?php
+                    foreach ($contentTypes as $key => $value) {
+                        $titleManager = $value;
+                        ?>
+                        <li><a href="<?php echo $this->url('postadmin', array('action' => 'index')) . '?type=' . $key; ?>"><span title="<?php echo $titleManager . ' (' . $key . ')'; ?>">- <?php echo $titleManager; ?></span></a></li>
+                        <?php
+                    }
+                    ?>
+                </ul>
+            </li>
+        <?php } } ?>
+
+    <li class="mm-dropdown">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book fa-fw"></i>&nbsp;<span>Contest</span></a>
+        <ul>
+            <li><a href="<?php echo $this->url('contest-admin'); ?>"><span>Contest Listing</span></a></li>
+
+        </ul>
+    </li>
+
+
+    <li class="mm-dropdown">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i>&nbsp;<span>People</span></a>
+        <ul>
+            <li><a href="<?php echo $this->url('useradmin'); ?>"><span>Admins</span></a></li>
+        </ul>
+    </li>
+</ul>

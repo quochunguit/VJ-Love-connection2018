@@ -1,0 +1,50 @@
+<?php $this->layout()->setVariable('heading', 'Manage Permission'); ?>
+<?php
+include(__DIR__ . '/partial/indextoolbar.phtml');
+//print_r($this->data);
+?>
+<?php echo $this->flashMessenger(); ?>
+<div class="clear"></div>
+<div id="view-content">
+    <div class="col-sm-12">
+    <div class="table-primary">
+    <form method="post" action="">
+        <table class="table table-hover table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>PERMISSION</th>
+                    <?php foreach ($this->group as $group): ?>
+                        <th><?php echo $group['title'] ?></th>
+                    <?php endforeach; ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->data as $row): ?>
+                    <tr>
+                        <td colspan="<?php echo count($this->group) + 1 ?>"><strong><?php echo $row['module']; ?></strong></td>
+                    </tr>
+                    <?php foreach ($row['controller'] as $controller): ?>
+                        <tr>
+                            <td  colspan="<?php echo count($this->group) + 1 ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <?php echo $controller['controller']; ?></td>
+                        </tr>
+                        <?php foreach ($controller['action'] as $action): ?>
+                            <tr>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <?php echo $action['action']; ?></td>
+                                <?php foreach ($this->group as $group): ?>
+                                    <td><input type="checkbox" value="1" class="group_<?php echo $group['id']; ?>" <?php echo ($action['group'][$group['id']] == 1) ? 'checked' : ''; ?> name="perm[<?php echo $row['module'] ?>-<?php echo $controller['controller'] ?>-<?php echo $action['action'] ?>-<?php echo $group['id'] ?>]"/></td>
+                                    <?php endforeach; ?>
+                            </tr>
+
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+    </form>
+  </div>
+</div>
+</div>
+<div class="clear"></div>
+<?php include(__DIR__ . '/partial/indextoolbar.phtml'); ?>

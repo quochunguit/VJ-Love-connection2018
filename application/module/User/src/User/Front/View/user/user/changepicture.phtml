@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-8">
+        <h1 class="page-header">Change your picture</h1>
+        <?php echo $this->flashMessenger(); ?>
+        <form id="changepicture" method="post">
+            <?php
+            $avatar = $this->user['avatar'];
+            if (!$avatar):
+                $avatar = 'avatar.jpg';
+                ?>
+            <?php endif; ?>
+            <img class="media-object" id="media-avatar" src="media/user/avatar/<?php echo $avatar; ?>" alt="" style="max-height: 134px; max-width: 134px;">
+            <div class="clear">&nbsp;</div>
+            <div class="changepicture-bar">
+                <div id="fileupload-container" >
+                    <span class="btn btn-success fileinput-button">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <span>Change Picture</span>
+                        <input id="fileupload" type="file" name="fileupload">
+                        <input type="hidden" name="avatar" id="avatar"/>
+                    </span>
+                </div>   
+                <div id="changepicture-action" class="hidden">
+                    <button class="btn btn-primary" id="save-avatar">Save</button>
+<!--                    <button class="btn btn-default">Cancel</button>-->
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-md-4">
+        <?php include_once __DIR__ . '/user_menu.phtml'; ?>
+    </div>
+</div>

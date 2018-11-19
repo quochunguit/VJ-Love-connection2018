@@ -1,0 +1,29 @@
+<?php $this->layout()->setVariable('heading', 'Edit Content Type'); ?>
+<?php
+include_once(__DIR__ . '/partial/edittoolbar.phtml');
+?>
+<div class="clear">&nbsp;</div>
+<?php echo $this->flashMessenger(); ?>
+<div id="view-content">
+    <div class="col-sm-12">
+        <?php
+        $form = $this->form;
+
+        $form->prepare();
+        echo $this->form()->openTag($form);
+        echo $this->formMessenger()->showMessage($form);
+        ?>
+
+        <div class="panel-body">
+            <?php
+            if (file_exists(__DIR__ . "/partial/form_full.phtml")) {
+                include_once(__DIR__ . "/partial/form_full.phtml");
+            }
+            ?>
+        </div>
+
+        <input type="hidden" name="callaction" id="callaction" value=""/>
+        <?php echo $this->formHidden($form->get('id')); ?>
+        <?php echo $this->form()->closeTag(); ?>
+    </div>
+</div>

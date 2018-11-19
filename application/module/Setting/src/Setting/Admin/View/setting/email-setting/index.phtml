@@ -1,0 +1,59 @@
+<?php $this->layout()->setVariable('heading','Email Settings');?>
+<script>var filemanUrl = '<?php echo $_SERVER['REQUEST_URI'] ?>fileman';</script>
+<script type="text/javascript" src="<?php echo $this->basePath() ?>/skin/admin/pixel/javascripts/fileman.js"></script>
+<div class="clear"></div>
+<?php echo $this->flashMessenger(); ?>
+<div id="view-content">
+    <div class="col-sm-12">
+        <?php foreach ($items as $fileInfo): ?>
+            <?php
+            if ($fileInfo->isDot()) {
+                continue;
+            }
+            if ($fileInfo->isFile()) {
+                $totalFiles++;
+                $name = $fileInfo->getBasename('.phtml');
+                $fileName = $fileInfo->getBasename();
+                print "<div><button class='btn btn-success editfile ' data-path='/$fileName' data-a='editfile' style='width: 200px'>$name</div>".'<div class="clearfix">&nbsp;</div>';
+            }
+            ?>
+        <?php endforeach; ?>
+   </div>
+
+</div>
+<!-- begin modal -->
+<div class="modal fade"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Result</h4>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary hidden"  id="modalactionbtn">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade large"  id="editFileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Email Template</h4>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="savefilebtn">Save Change</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

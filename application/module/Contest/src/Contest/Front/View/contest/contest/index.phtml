@@ -1,0 +1,105 @@
+<!-- module 'Mod Banner Internal' -->
+<?php
+    $myLocaleShort = $this->layout()->myLocaleShort;
+?>
+
+<?php if($myLocaleShort=='vi'): ?>
+    <section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal.png)"></section>
+<?php else: ?>
+    <section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal-en.png)"></section>
+<?php endif; ?>
+
+</section>
+
+<div class="bg-sendshare bg" style="padding-bottom: 100px;">
+
+    <section class="module mod-list-articel">
+        <div class="container">
+            <div class="list-item-v1">
+                <div class="title-red">
+                    <h1><?php echo $this->translate('Hot_submissions') ?></h1>
+                </div>
+                <div class="mod-list-item" data-module="slide-list-av">
+                    <div class="list-slide">
+                        <?php if ($bestContent): ?>
+                            <?php foreach ($bestContent as $item): ?>
+                            <?php $images = explode(',', $item['images']); $image = $images[0];?>
+                            <div class="item">
+                                <div class="item-image">
+                                    <div class="mark-image">
+                                        <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/mask.png" alt="mask">
+                                    </div>
+                                    <div class="item-avatar" style='background-image: url("<?php echo BASE_URL . '/media/images/' . $image; ?>");'>
+                                        <a href="<?php echo $this->url('contest-detail', array('lang'=>$this->layout()->myLocaleShort, 'slug'=>$item['slug'], 'id'=>$item['id'])) ?>" class="center-mask"></a>
+                                    </div>
+                                </div>
+                                <div class="content-item">
+                                    <h4><a href=""><?php echo $this->translate($item['destination']); ?></a> </h4>
+                                    <p><?php echo $item['title']; ?></p>
+                                    <div class="status-item">
+                                        <span class="author"><?php echo $item['name']; ?></span>
+                                        <span class="like">Like: <span><?php echo $item['votes']; ?></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="list-item-v2">
+
+                <div class="title-red">
+                    <h1><?php echo $this->translate('New_submissions') ?></h1>
+                </div>
+                <div class="mod-list-item mod-list-item-v2">
+                    <div class="list-slide row">
+                        <?php if ($newestContest): ?>
+                            <?php foreach ($newestContest as $item): ?>
+                                <?php $images = explode(',', $item['images']); $image = $images[0];?>
+                                <div class="item col-lg-4 col-sm-6">
+                                    <div class="item-image">
+                                        <div class="mark-image">
+                                            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/mask.png" alt="mask">
+                                        </div>
+                                        <div class="item-avatar" style='background-image: url("<?php echo BASE_URL . '/media/images/' . $image; ?>");'>
+                                            <a href="<?php echo $this->url('contest-detail', array('lang'=>$this->layout()->myLocaleShort, 'slug'=>$item['slug'], 'id'=>$item['id'])) ?>" class="center-mask"></a>
+                                        </div>
+                                    </div>
+                                    <div class="content-item">
+                                        <h4><a href="<?php echo $this->url('contest-detail', array('lang'=>$this->layout()->myLocaleShort, 'slug'=>$item['slug'], 'id'=>$item['id'])) ?>"><?php echo $destination_translate[$item['destination']]; ?></a> </h4>
+                                        <p><?php echo $item['title']; ?></p>
+                                        <div class="status-item">
+                                            <span class="author"><?php echo $item['name']; ?></span>
+                                            <span class="like">Like: <span><?php echo $item['votes']; ?></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <nav aria-label="Page navigation" class="nav-paginaion">
+
+                <?php echo $paging->getPagingLinkFront(); ?>
+
+        </nav>
+
+
+        <?php if ($userLogin && $userLogin['id']): ?>
+            <p class="text-center"><a href="javascript:void(0);" class="btn btn-yellow" onclick="App.Site.goToContestSubmit(<?php echo $userLogin['id']; ?>);"><?php echo $this->translate('Share_comments'); ?></a></p>
+        <?php else: ?>
+            <p class="text-center"><a href="javascript:void(0);" class="btn btn-yellow" onclick="App.Popup.openLogin();"><?php echo $this->translate('Share_comments'); ?></a></p>
+        <?php endif; ?>
+    </div>
+</div>

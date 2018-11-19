@@ -1,0 +1,43 @@
+<div id="filter_form" class="filter form-inline">
+  
+    <label><?php echo ('ContestId:'); ?></label>
+    <input type="text" class=" form-control " name="filter_contest_id" id="filter_contest_id" value="<?php print $state->get("filter.contest_id") ?>"/>
+    &nbsp;  
+      <label><?php echo ('Keyword:'); ?></label>
+    <input type="text" class=" form-control " name="filter_search" id="filter_search" value="<?php print $state->get("filter.search") ?>"/>
+    &nbsp;
+
+    <label ><?php echo ('From date'); ?></label>
+    <input type="input" class=" form-control " name="filter_fromdate" id="filter_fromdate" value="<?php print $state->get("filter.fromdate") ?>">
+    &nbsp;
+
+    <label ><?php echo ('To date'); ?></label>
+    <input type="input" class=" form-control " name="filter_todate" id="filter_todate" value="<?php print $state->get("filter.todate") ?>" >
+    &nbsp;
+
+    <label ><?php echo ('Type'); ?></label>
+    <select class="form-control  filter_change" name="filter_type" id="filter_type" class="filter_change">
+        <option value="">--All--</option>
+        <?php echo App\AppView::makeOption($state->get('filter.type'), array('votes'=>'Vote','shares'=>'Share')); ?>
+    </select>
+
+    <label ><?php echo ('Status'); ?></label>
+    <select class="form-control  filter_change" name="filter_status" id="filter_status" class="filter_change">
+        <?php echo App\AppView::statusOptions($state->get('filter.status')); ?>
+    </select>
+
+    <input type="button" value="<?php echo ('Filter'); ?>" id="filter" class="btn btn-primary"/>
+    <input type="button" value="<?php echo ('Reset'); ?>" id="reset" name="data[reset]" class="btn btn-default" autocomplete="off"/>
+
+</div>
+
+<script>
+    $(function(){
+        $('#filter_fromdate, #filter_todate').datepicker({
+            format: 'yyyy-mm-dd',
+            startDate: '-3d',
+            endDate: 'today',
+            autoclose: true
+        });
+    });
+</script>  

@@ -1,0 +1,21 @@
+<?php
+$myLocaleShort = $this->layout()->myLocaleShort;
+?>
+<?php if($myLocaleShort=='vi'): ?>
+    <section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal.png)"></section>
+<?php else: ?>
+    <section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal-en.png)"></section>
+<?php endif; ?>
+
+<div class="bg-sendshare bg">
+    <!-- module 'Mod Content Conection' -->
+    <section class="module mod-content-conection">
+        <div class="container">
+            <article>
+                    <?php echo $rule['body']; ?>
+                </div>
+            </article>
+        </div>
+    </section>
+
+</div>

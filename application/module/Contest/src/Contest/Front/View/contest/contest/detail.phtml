@@ -1,0 +1,115 @@
+<?php
+$user = $this->user();
+$destination_translate = array('vn_84'=>'Việt Nam', 'kr_82'=>'Hàn Quốc', 'tw_886'=>'Đài Loan', 'jp_81'=>'Nhật Bản', 'sg_65'=>'Singapore', 'my_60'=>'Malaysia', 'kh_855'=>'Campuchia', 'th_66'=>'Thái Lan');
+$images = explode(',', $contest_infos['images']);
+$myLocaleShort = $this->layout()->myLocaleShort;
+?>
+<!-- module 'Mod Banner Internal' -->
+<?php if($myLocaleShort=='vi'): ?>
+    <section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal.png)"></section>
+<?php else: ?>
+    <section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal-en.png)"></section>
+<?php endif; ?>
+
+<!-- module 'Mod Heading Share' -->
+<section class="module mod-heading-share">
+    <div class="container">
+        <div class="content-slide">
+            <div class="heading-slide">
+                <h1><?php echo $contest_infos['title'];?></h1>
+                <div class="author">
+                    <span><?php echo $this->translate('author') ?> :</span> <a href="javascript:void(0)">@ <?php echo $userName; ?></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="mod-bg-icloud bg-icloud-2">
+<!-- module 'Mod Slide Detail' -->
+<section class="module mod-slide-detail" data-module="slide-share">
+    <div class="container">
+        <article class="content-slide">
+            <div class="list-slide">
+                <?php
+
+                    foreach($images as $key => $image){
+                        ?>
+                        <div class="item-img">
+                            <img src="<?php echo BASE_URL . '/media/images/' . $image; ?>" alt="img">
+                        </div>
+                        <?php
+                    }
+                ?>
+            </div>
+            <div class="group-arrows">
+            </div>
+            <div class="status-detail">
+                <p><?php echo $contest_infos['descriptions'];?></p>
+            </div>
+            <div class="box-share-detail">
+                <div class="social-share">
+                    <span class="share">SHARE :</span> <div class="social">
+                        <ul>
+                            <li>
+                                <a rel="noopener" target="_blank" href="javascript:void(0)" onclick="App.VoteShare.shareFB('<?php echo $titleShare ?>','<?php echo $urlshare; ?>','<?php echo $urlImage; ?>','<?php echo $desShare; ?>')">
+                                    <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/icon-fb.svg" alt="">
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="like-post">
+                    <span class="like">Like :</span> <span class="count-like"><?php echo $contest_infos['votes'];?></span> <a href="javascript:void(0);" id="contest-vote" onclick="App.VoteShare.vote(<?php echo $contest_infos['id']; ?>,false,'');" class="btn btn-green">Like</a>
+                </div>
+            </div>
+            <div class="text-center">
+                <?php if (@$user && @$user['id']): ?>
+                    <a class="btn btn-primary" href="javascript:void(0);" onclick="App.Site.goToContestSubmit(<?php echo @$user['id']; ?>);">Chia sẻ cảm nhận</a>
+                <?php else: ?>
+                    <a class="btn btn-primary" href="javascript:void(0);" onclick="App.Popup.openLogin();">Chia sẻ cảm nhận</a>
+                <?php endif; ?>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section class="module mod-list-articel">
+    <div class="container">
+        <div class="list-item-v1">
+            <div class="title-red">
+                <h1><?php $this->translate('Hot_submissions') ?></h1>
+            </div>
+            <div class="mod-list-item" data-module="slide-list-av">
+                <div class="list-slide">
+                    <?php if ($bestContent): ?>
+                        <?php foreach ($bestContent as $item): ?>
+                            <?php $images = explode(',', $item['images']); $image = $images[0];?>
+                            <div class="item">
+                                <div class="item-image">
+                                    <div class="mark-image">
+                                        <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/mask.png" alt="mask">
+                                    </div>
+                                    <div class="item-avatar" style='background-image: url("<?php echo BASE_URL . '/media/images/' . $image; ?>");'>
+                                        <a href="<?php echo $this->url('contest-detail', array('lang'=>$this->layout()->myLocaleShort, 'slug'=>$item['slug'], 'id'=>$item['id'])) ?>" class="center-mask"></a>
+                                    </div>
+                                </div>
+                                <div class="content-item">
+                                    <h4><a href=""><?php echo $destination_translate[$item['destination']]; ?></a> </h4>
+                                    <p><?php echo $item['title']; ?></p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="list-item-v2">
+
+        </div>
+    </div>
+</section>
+
+</div>

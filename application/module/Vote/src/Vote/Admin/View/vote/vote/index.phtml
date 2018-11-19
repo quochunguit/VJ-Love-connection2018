@@ -1,0 +1,75 @@
+<?php 
+$this->layout()->setVariable('heading', 'Manage Vote');
+$factory = $this->factory();
+
+include_once(__DIR__ . '/partial/indextoolbar.phtml');
+?>
+<?php echo $this->flashMessenger(); ?>
+<div class="clear"></div>
+<div id="view-content">
+    <div class="col-sm-12">
+    <div class="table-primary">
+        <form method="post" action="" role="form">
+            <?php include_once(__DIR__ . '/partial/filter.phtml'); ?>
+            <div class="clearfix">&nbsp;</div>
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" value="1" id="checkall" class="checkall"/></th>
+                        <th><?php echo $this->layoutHelper()->header('type', $state); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('id', $state); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('title', $state); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('object_id', $state,'Contest'); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('user_id', $state,'UserId'); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('user_id', $state,'Name'); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('user_id', $state,'Email'); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('user_id', $state,'Phone'); ?></th>
+                        <th><?php echo $this->layoutHelper()->header('user_id', $state,'FacebookId'); ?></th>
+                       
+                        <th><?php echo $this->layoutHelper()->header('created', $state); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                <?php foreach($items as $item):
+                    $user = $factory->getUser($item['user_id']);
+                 ?>
+                    <tr>
+                        <td><input type="checkbox" class="checkitem" name="data[Choose][]"  value="<?php echo $item['id']; ?>"/></td>
+                        <td><?php echo $item['type']; ?></td>
+                        <td><?php echo $item['id']; ?></td>
+                        <td><?php echo $item['title']? $this->escapeHtml($item['title']):'---'; ?></td>
+                        <td>
+                            <?php 
+                                $urlContest = $this->url('contest-admin', array('action' => 'edit', 'id' => $item['object_id'])); ?>
+                             <a target="_blank" href="<?php echo $urlContest; ?>"><?php echo $item['object_id']; ?></a>
+                        </td>
+                        <td><?php echo $this->escapeHtml($item['user_id']); ?></td>
+                        <td><?php echo $this->escapeHtml($user['name']); ?></td>
+                        <td><?php echo $this->escapeHtml($user['email']); ?></td>
+                        <td><?php echo $this->escapeHtml($user['phone']); ?></td>
+                        <td>   
+                            <?php
+                                if($user['social_id']){
+                                ?>
+                                    <a target = "_blank" href="https://www.facebook.com/<?php echo $user['social_id']; ?>"><?php echo $user['social_id']; ?></a> 
+                                    <?php }else{
+                                echo '---';
+                            } ?>
+                        </td>                  
+                        <td><?php echo $item['created']; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+
+            <div class="pagination-container">
+                <?php
+                echo $paging->getPagingLink();
+                echo $paging->getPagingInfo();
+                ?>
+            </div>     
+        </form>
+    </div>
+</div>
+</div>

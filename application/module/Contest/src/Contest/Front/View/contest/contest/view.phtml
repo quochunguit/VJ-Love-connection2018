@@ -1,0 +1,17 @@
+<h1 class="page-header"><?php echo $this->escapeHtml($this->item['title']); ?></h1>
+<div class="detail-album">
+    <div class="item_image">
+        <img src="<?php echo $this->basePath() . '/media/contest/' . $item['id'] . '/' . $this->item['files']; ?>" style="max-width: 800px; max-height: 800px;"/>
+    </div>
+    <div class="item_info">
+        
+        <p>Created on: <?php echo $this->item['created']; ?></p>
+        <p>Votes: <span class="current-vote"><?php echo $this->item['votes']; ?></span></p>
+        <p>Description: <?php echo $this->escapeHtml($this->item['description']); ?></p>
+    </div>
+    <?php
+    $this->layout()->event->trigger('onAfterRenderContent', null, $this->item);
+    ?>
+    <div class="clear"></div>
+    <div id="comments" style="margin-top: 30px" data-object="<?php echo $item['id']; ?>" data-type="Album"></div>
+</div>

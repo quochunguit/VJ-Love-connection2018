@@ -1,0 +1,137 @@
+<?php
+$myLocale = $this->layout()->myLocale;
+$myLocaleShort = $this->layout()->myLocaleShort;
+$user = $this->user();
+$flyJourneys = array(0=>array('image'=>'Han Quoc.jpg','name'=>$this->translate('kr_82')),1=>array('image'=>'Campuchia.jpg','name'=>$this->translate('kh_855')),2=>array('image'=>'Hong Kong.jpg','name'=>$this->translate('Hongkong')),3=>array('image'=>'Malaysia.jpg','name'=>$this->translate('my_60'))
+,4=>array('image'=>'Nhat.jpg','name'=>$this->translate('jp_81')),5=>array('image'=>'Taiwan.jpg','name'=>$this->translate('tw_886')),6=>array('image'=>'Singapore.jpg','name'=>$this->translate('sg_65')),7=>array('image'=>'Thai.jpg','name'=>$this->translate('th_66')),8=>array('image'=>'Trung Quoc.jpg','name'=>$this->translate('Trungquoc')));
+?>
+<?php if($myLocaleShort=='vi'): ?>
+<section class="module mod-banner-home bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home.jpg)">
+    <div class="arrow-bottom" onclick="helperJs.scrollToElement($('.mod-journey'), 500)">
+        <span class="icomoon icon-chevron-left"></span>
+    </div>
+</section>
+<?php else: ?>
+    <section class="module mod-banner-home bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home-eng.png)">
+
+            <div class="arrow-bottom" onclick="helperJs.scrollToElement($('.mod-journey'), 500)">
+                <span class="icomoon icon-chevron-left"></span>
+            </div>
+
+    </section>
+<?php endif; ?>
+    <section class="module mod-state-content bg">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-5 state-content-left">
+                    <div class="state-img">
+                        <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-person.png" alt="images">
+                        <div class="play-icon">
+                            <a href="#"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/icon-play.png" alt="play"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 state-content-right">
+                    <h1><?php echo $this->translate('Slogan'); ?></h1>
+                    <p><?php echo $this->translate('Share_story'); ?></p>
+                    <div class="list-button">
+                        <?php if (@$user && @$user['id']): ?>
+                            <a class="btn btn-white" href="javascript:void(0);" onclick="App.Site.goToContestSubmit(<?php echo @$user['id']; ?>);"><?php echo $this->translate('Submit_now'); ?></a>
+                        <?php else: ?>
+                            <a class="btn btn-white" href="javascript:void(0);" onclick="App.Popup.openLogin();"><?php echo $this->translate('Submit_now'); ?></a>
+                        <?php endif; ?>
+                        <a href="<?php echo $this->url('flightInformation',array('lang'=>$myLocaleShort)) ?>" class="btn btn-out-white"><?php echo $this->translate('Flight_Information'); ?></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="mod-bg-icloud">
+        <section class="mod mod-journey">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 journey-left">
+                        <div class="title-red">
+                            <h1><?php echo $this->translate('Flight_Information'); ?></h1>
+                        </div>
+                        <p style="text-align: justify;"><?php echo $this->translate('Intro_text'); ?></p>
+                        <?php if (@$user && @$user['id']): ?>
+                            <a class="btn btn-primary" href="javascript:void(0);" onclick="App.Site.goToContestSubmit(<?php echo @$user['id']; ?>);"><?php echo $this->translate('Submitions'); ?></a>
+                        <?php else: ?>
+                            <a class="btn btn-primary" href="javascript:void(0);" onclick="App.Popup.openLogin();"><?php echo $this->translate('Submitions'); ?></a>
+                        <?php endif; ?>
+
+                    </div>
+                    <div class="col-lg-8 journey-right">
+                        <div class="mod-list-item" data-module="slide-list-av">
+                            <div class="list-slide">
+                                <?php if ($flyJourneys): ?>
+                                    <?php foreach ($flyJourneys as $item): ?>
+
+                                        <div class="item">
+                                            <div class="item-image">
+                                                <div class="mark-image">
+                                                    <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/mask.png" alt="mask">
+                                                </div>
+                                                <div class="item-avatar" style='background-image: url("<?php echo BASE_URL_SKIN_IMAGE . '/' . $item['image']; ?>");'>
+                                                    <a href="javascript:void(0)" onclick="$.magnificPopup.open({items: { src: '<?php echo BASE_URL_SKIN_IMAGE . '/' . $item['image']; ?>' },type: 'image' });" class="center-mask"></a>
+                                                </div>
+                                                <div class="img-air">
+                                                    <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/air.png" alt="air">
+                                                </div>
+                                            </div>
+                                            <div class="content-item">
+                                                <h4><?php echo $item['name']; ?></h4>
+
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="module mod-list-articel">
+            <div class="container">
+                <div class="title-red">
+                    <h1><?php echo $this->translate('Hot_submissions'); ?></h1>
+                </div>
+                <div class="mod-list-item" data-module="slide-list-av">
+                    <div class="list-slide">
+                        <?php if ($bestContest): ?>
+                            <?php foreach ($bestContest as $item): ?>
+                                <?php $images = explode(',', $item['images']); $image = $images[0];?>
+                                <div class="item">
+                                    <div class="item-image">
+                                        <div class="mark-image">
+                                            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/mask.png" alt="mask">
+                                        </div>
+                                        <div class="item-avatar" style='background-image: url("<?php echo BASE_URL . '/media/images/' . $image; ?>");'>
+
+                                            <a  href="<?php echo $this->url('contest-detail', array('lang'=>$this->layout()->myLocaleShort, 'slug'=>$item['slug'], 'id'=>$item['id'])) ?>" class="center-mask"></a>
+                                        </div>
+                                    </div>
+                                    <div class="content-item">
+                                        <h4><a href=""><?php echo $this->translate($item['destination']); ?></a> </h4>
+                                        <p><?php echo $item['title']; ?></p>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+    <?php if( $_SESSION['show-fg']): ?>
+        <input type="hidden" id="show-fg" value="<?php echo $_SESSION['show-fg'];  ?>">
+    <?php endif; ?>

@@ -1,0 +1,73 @@
+<?php
+$factory = $this->factory();
+echo $this->partial('partial/zhtpassword');
+echo $this->doctype();
+?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <base href="<?php echo BASE_URL; ?>/"/>
+        <link href="https://www.vietjetair.com/userfiles/favicon.ico" rel="shortcut icon" />
+        <?php echo $this->headTitle(); ?>
+        <meta name="description" content="<?php echo $this->translate('Share_story'); ?>">
+        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0, user-scalable=no') ?>
+        <?php echo $this->partial('partial/opengraph'); ?>
+        <script>
+            var baseurl = "<?php echo BASE_URL; ?>";
+            var baseurlskinimage = "<?php echo BASE_URL_SKIN_IMAGE; ?>";
+            var app_id = "<?php echo FB_APP_ID; ?>";
+            var google_app_id = "<?php echo GOOGLE_APP_ID; ?>";
+            var user_id = "<?php echo @$user['id'] ? $user['id'] : 0; ?>";
+            var language = "<?php echo $this->layout()->myLocale; ?>";
+            var languageShort = "<?php echo $this->layout()->myLocaleShort; ?>";
+            var trans_Continue  = "<?php echo $this->translate('Continue'); ?>";
+        </script>
+        <?php echo $this->partial('partial/css'); ?>
+
+    </head>
+    <?php
+        $classCustom ='';
+        switch ($page) {
+            case 'home':
+                $classCustom = '';
+                break;
+            case 'submit':
+                $classCustom = 'gui-chia-se';
+                break;
+            case 'contest':
+                $classCustom = 'gallery';
+                break;
+            case 'rule':
+                $classCustom = 'dieu-kien';
+                break;
+            case 'flight':
+                $classCustom = 'hanh-trinh';
+                break;
+            case 'detail':
+                $classCustom = 'detail-share';
+                break;
+        }
+    ?>
+
+    <body class="<?php if($page=='home'){echo 'page-home';}else{echo 'page-internal';} ; ?> <?php echo $classCustom; ?>">
+        <div id="wrapper">
+            <?php echo $this->partial('partial/zheader'); ?>
+            <main id="main-content" role="main">
+                <?php echo $this->content; ?>
+            </main>
+            <?php echo $this->partial('partial/zpopup'); ?>
+            <?php echo $this->partial('partial/zfooter'); ?>
+        </div>
+
+        <?php echo $this->inlineScript(); ?>
+        <?php echo $this->partial('partial/js'); ?>
+        <?php echo $this->partial('partial/ga'); ?>
+
+
+
+        <!-- BEGIN LOADDING -->
+
+        <!-- END LOADDING -->
+    <input type="hidden" name="token" id="token" value="" />
+    </body>
+</html>
