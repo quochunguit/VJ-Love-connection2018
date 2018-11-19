@@ -16,16 +16,13 @@ class User extends FrontAppModel {
         $activeCode = HashUtil::createRandomKey();
         $hashPassword = HashUtil::createPasswordWithSalt($data['password']);
         $data['password'] = $hashPassword;
-        $data['activation_code'] = $activeCode;
         // $data['status'] = 0;
 
         $data['created'] = $data['modified'] = date('Y-m-d H:i:s');
         $data['role'] = 10;
 
         $return = parent::save($data, $id);
-        if ($return['status']) {
-            $return['activation_code'] = $activeCode;
-        }
+
         return $return;
     }
 

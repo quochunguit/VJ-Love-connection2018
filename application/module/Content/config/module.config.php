@@ -18,251 +18,41 @@ return array(
 
             //--********** Block Front ***************
 
-             /*** ====fitness==== **/
-            'fitness-overview' => array(
+
+
+            'rules' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/[:lang]/fitness/overview[/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                    ),
+                    'route'    => '/[:lang]/terms&conditions[/]',
                     'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Fitness',
-                        'action'     => 'overview',
+                        'controller' => 'Content\Front\Controller\Posts',
+                        'action'     => 'rule',
                     ),
                 ),
             ),
 
-            'fitness-gallery' => array(
+            'about' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/[:lang]/fitness/gallery[/:tab][/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'tab' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                    ),
+                    'route'    => '/[:lang]/about[/]',
                     'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Fitness',
-                        'action'     => 'gallery',
+                        'controller' => 'Content\Front\Controller\Posts',
+                        'action'     => 'about',
                     ),
                 ),
             ),
 
-            'fitness-servicedetail' => array(
+            'flightInformation' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/[:lang]/fitness/service/[:slug]-[:id][/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'slug' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
-                    ),
+                    'route'    => '/[:lang]/flight-information[/]',
                     'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Fitness',
-                        'action'     => 'servicedetail',
+                        'controller' => 'Content\Front\Controller\Posts',
+                        'action'     => 'flightinformation',
                     ),
                 ),
             ),
 
-            'fitness-promotiondetail' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/[:lang]/fitness/promotion/[:slug]-[:id][/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'slug' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Fitness',
-                        'action'     => 'promotiondetail',
-                    ),
-                ),
-            ),
-            /*** ====End fitness ==== **/
-
-            /*** ====residential==== **/
-            'residential-overview' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/[:lang]/residential/overview[/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Residential',
-                        'action'     => 'overview',
-                    ),
-                ),
-            ),
-
-            'residential-gallery' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/[:lang]/residential/gallery[/:tab][/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'tab' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Residential',
-                        'action'     => 'gallery',
-                    ),
-                ),
-            ),
-
-            'residential-action' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/[:lang]/residential-action[/:action][/:id][/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Residential',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),   
-            /*** ====End residential==== **/
-
-            /*** ====Retail==== **/
-            'retail-promotion' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/[:lang]/retail/promotion[/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Retail',
-                        'action'     => 'promotion',
-                    ),
-                ),
-            ),
-            'retail-promotiondetail' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/[:lang]/retail/promotion/[:slug]-[:id][/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'slug' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Retail',
-                        'action'     => 'promotion',
-                    ),
-                ),
-            ),
-
-            'retail-event' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/[:lang]/retail/event[/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Retail',
-                        'action'     => 'event',
-                    ),
-                ),
-            ),
-
-            'retail-eventdetail' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/[:lang]/retail/event/[:slug]-[:id][/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'slug' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Retail',
-                        'action'     => 'event',
-                    ),
-                ),
-            ),
-
-            'retail-brand' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/[:lang]/retail/brand[/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Retail',
-                        'action'     => 'brand',
-                    ),
-                ),
-            ),
-
-            'retail-branddetail' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/[:lang]/retail/brand/[:slug]-[:id][/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'slug' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Retail',
-                        'action'     => 'branddetail',
-                    ),
-                ),
-            ),
-
-            'retail-floorplan' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/[:lang]/retail/floorplan[/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Retail',
-                        'action'     => 'floorplan',
-                    ),
-                ),
-            ),
-
-            'retail-gallery' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/[:lang]/retail/gallery[/:tab][/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'tab' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Retail',
-                        'action'     => 'gallery',
-                    ),
-                ),
-            ),
-
-            'retail-action' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/[:lang]/retail-action[/:action][/:id][/]',
-                    'constraints' => array(
-                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Content\Front\Controller\Retail',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),   
-            /*** ====End Retail==== **/
 
             'content' => array(
                 'type'    => 'segment',

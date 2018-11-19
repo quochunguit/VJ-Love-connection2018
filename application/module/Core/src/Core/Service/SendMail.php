@@ -5,7 +5,7 @@ use Zend\Mail;
 use Zend\Mime\Message as MimeMessage;
 use Zend\Mime\Part as MimePart;
 use Zend\Mime\Mime;
-require_once VENDOR_INCLUDE_DIR . '/mailgun-php-master/vendor/autoload.php'; /*At folder "mailgun-php-master" need run: composer update*/
+//require_once VENDOR_INCLUDE_DIR . '/mailgun-php-master/vendor/autoload.php'; /*At folder "mailgun-php-master" need run: composer update*/
 use Mailgun\Mailgun;
 
 class SendMail {
@@ -19,6 +19,7 @@ class SendMail {
     /*Send email by ZendMail*/
     function send($info = array(), $emailsCC = array()) {
          try {
+
             $template = $info['template'];
             $subject = $info['subject'];
             $fromName = $info['from']['name'];
@@ -29,8 +30,8 @@ class SendMail {
             $data = $info['data'];
 
             $this->renderer = $this->getServiceLocator()->get('ViewRenderer');
-            $htmlBody = $this->renderer->render($template, $data);  
-        
+            $htmlBody = $this->renderer->render($template, $data);
+
             $htmlPart = new MimePart($htmlBody);
             $htmlPart->charset = 'utf-8';
             $htmlPart->type = "text/html";
@@ -49,20 +50,23 @@ class SendMail {
                     $message->addCc($value);
                 }  
             }
+
             $message->setSubject($subject);
 
             $message->setEncoding("UTF-8");
             $message->setBody($body);
             $message->getHeaders()->get('content-type')->setType('multipart/alternative');
-
             $transport = $this->getServiceLocator()->get('MailTransport');
+
 
             $transport->send($message);
 
         } catch(\Zend\Mail\Exception $e) {
-            return -1;
+             echo $e->getMessage();die;
+             return -1;
         }
         catch(\Exception $ex) {
+            echo $ex->getMessage();die;
             return -1;
         }     
     }

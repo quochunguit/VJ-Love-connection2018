@@ -8,192 +8,368 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en_US\n"
+"Language: vi_VN\n"
 "X-Generator: Poedit 1.8.6\n"
 
 # ************--TRANSLATE--*************------
 msgid "Home"
 msgstr "Home"
 
-msgid "Contact"
-msgstr "Contact"
+msgid "About"
+msgstr "     About      "
 
-msgid "Thank you for subscribed"
-msgstr "Thank you for subscribed"
+msgid "Submitions"
+msgstr "Share your story"
 
-msgid "Email is invalid"
-msgstr "Email is invalid"
+msgid "Gallery"
+msgstr "Gallery"
 
-msgid "Please enter email"
-msgstr "Please enter your email"
+msgid "Flight_Information"
+msgstr "Flight Information"
 
-msgid "ENTER YOUR EMAIL"
-msgstr "ENTER YOUR EMAIL"
+msgid "Winners_List"
+msgstr "Winners List"
 
-msgid "Subscribe to our newsletter"
-msgstr "Subscribe to our newsletter"
+msgid "Sign_Up_Login"
+msgstr "Sign Up/Log In"
 
-msgid "Artemis All rights reserved."
-msgstr "Artemis All rights reserved."
+msgid "Slogan"
+msgstr "Love Connection, Love Is Real Touch with Vietjet"
 
-msgid "Developed by Jodric"
-msgstr "Developed by Jodric"
+msgid "Share_story"
+msgstr "Share your story to receive free return tickets in Asia with 185 free flights."
 
-msgid "RETAIL"
-msgstr "RETAIL"
+msgid "Submit_now"
+msgstr "Submit now"
 
-msgid "PROMOTION"
-msgstr "PROMOTION"
+msgid "Intro_text"
+msgstr "Dreaming of visiting Ha Noi & Hoi An acient cities? Craving for modern life of Ho Chi Minh city? Or fantasizing about Da Nang beautiful beaches? Tell us a story that shows how much you love Vietnam and its cultures, people, cuisines, or anything you love! - to have a chance to win return flight tickets from Vietjet. Take your love of Asia to new heights with Love Connection! If you love it, go for it!"
 
-msgid "FLOORPLAN"
-msgstr "FLOORPLAN"
+msgid "Hot_submissions"
+msgstr "Hot submissions"
 
-msgid "EVENTS"
-msgstr "EVENTS"
+msgid "Book_now"
+msgstr "Book now to fly with Vietjet"
 
-msgid "SOCIAL MEDIA"
-msgstr "SOCIAL MEDIA"
+msgid "Promotion"
+msgstr "The promotion program from just USD 0 tickets await you from 12PM - 2PM (Vietnamese time)  every day at www.vietjetair.com"
 
-msgid "BRANDS"
-msgstr "BRANDS"
+msgid "Online_Booking"
+msgstr "Online Booking"
 
-msgid "RESIDENTIAL"
-msgstr "RESIDENTIAL"
+msgid "coppyright"
+msgstr "© 2018 Vietjet Copy Right. All Rights Reserved."
 
-msgid "VIRTUAL TOUR & GALLERY"
-msgstr "VIRTUAL TOUR & GALLERY"
+msgid "View_all"
+msgstr "View all"
 
-msgid "OVERVIEW"
-msgstr "OVERVIEW"
+msgid "View_more"
+msgstr "View more"
 
-msgid "FLOORPLANS"
-msgstr "FLOORPLANS"
+msgid "Share"
+msgstr "Share your story"
 
-msgid "FITNESS"
-msgstr "FITNESS"
+msgid "Target"
+msgstr "Select your flight"
 
-msgid "GALLERY"
-msgstr "GALLERY"
+msgid "List_target"
+msgstr "Flight Schedule (Select 1)"
 
-msgid "PACKAGE"
-msgstr "PACKAGE"
+msgid "Upload_maximum"
+msgstr "Upload maximum 5 photos for your submission"
 
-msgid "GALLERY | SOCIAL MEDIA"
-msgstr "GALLERY | SOCIAL MEDIA"
+msgid "Max_Capacity"
+msgstr "Maximum capacity is 5Mb"
 
-msgid "BRAND HIGHLIGHTS"
-msgstr "BRAND HIGHLIGHTS"
+msgid "Uploadfile"
+msgstr "Upload File"
 
-msgid "MORE DETAIL"
-msgstr "MORE DETAIL"
+msgid "Subject"
+msgstr "Subject"
 
-msgid "Please enter your name"
+msgid "Messages"
+msgstr "Messages"
+
+msgid "Max_world"
+msgstr "Maximum 1,000 words"
+
+msgid "Review"
+msgstr "Review your submission"
+
+msgid "Gold_hour"
+msgstr "While waiting for your submission, check the promotion program from just USD 0 tickets applied to all routes throughout Vietnam & 10 Asian countries. Don't miss out. We look forward to seeing you onboard with Vietjet!"
+
+msgid "Find_flight"
+msgstr "BOOK YOUR FLIGHT NOW"
+
+msgid "Image"
+msgstr "Image"
+
+msgid "Delete_photo"
+msgstr "Delete photo"
+
+msgid "Insert_photo"
+msgstr "Insert photo"
+
+msgid "Image_upload_missing"
+msgstr "Please upload your images"
+
+msgid "Title_missing"
+msgstr "Please field your subject"
+
+msgid "InsertComment"
+msgstr "Insert your messages"
+
+msgid "Gallery_details"
+msgstr "Gallery's Details"
+
+msgid "Experience_vietjet"
+msgstr "Let's experience with Vietjet"
+
+msgid "New_submissions"
+msgstr "New Submissions"
+
+msgid "Share_comments"
+msgstr "Share comments"
+
+msgid "Signup"
+msgstr "Sign up"
+
+msgid "Fullname"
+msgstr "Full Name"
+
+msgid "Phonenumber"
+msgstr "Phone number"
+
+msgid "Address"
+msgstr "Address"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Repassword"
+msgstr "Re-enter password"
+
+msgid "Verified_organizer"
+msgstr "Please inform verified information to convenient for the Organizer to contact and award prize."
+
+msgid "Forgetpassword"
+msgstr "Forget password"
+
+msgid "Loveconnection_campaign"
+msgstr "Love Connection, Love Is Real Touch Campaign"
+
+msgid "Terms_conditions"
+msgstr "Terms and Conditions Rewards"
+
+msgid "Bookflight"
+msgstr "Book your flight now"
+
+msgid "Hotlinebooknow"
+msgstr "Hotline: <a href='tel: 1900 1886'>1900 1886</a> to book now"
+
+msgid "Onlinebooking"
+msgstr "Online Booking"
+
+msgid "Booknowtofly"
+msgstr "Book now to fly with Vietjet"
+
+msgid "Continue"
+msgstr "Continue"
+
+msgid "t&c"
+msgstr "T&C"
+
+msgid "logout"
+msgstr "Logout"
+
+msgid "CannotverifySMS"
+msgstr "We can not activate your account via SMS. Please check and provide your accurate information to submit again."
+
+msgid "ContestPublished"
+msgstr "You had a contest published already."
+
+msgid "UploadImageError"
+msgstr "Upload error, please try again!"
+
+msgid "ImageFormatError"
+msgstr "Only image files format JPG, PNG are allowed"
+
+msgid "SaveContestSuccessful"
+msgstr "Thank you for submiting your story."
+
+msgid "SaveContestSuccessful_waiting"
+msgstr "Your submission content is being checked by admin. You will receive a notification from Vietjet within 24 hours."
+
+msgid "BookYourFlightNow"
+msgstr "BOOK YOUR FLIGHT NOW"
+
+msgid "CommentMoreThan1000"
+msgstr "Your messsage has maximun 1,000 words."
+
+msgid "StoryOf"
+msgstr "Story of"
+
+msgid "Login"
+msgstr "Login"
+
+msgid "Or"
+msgstr "Or"
+
+msgid "Updatephonenumber"
+msgstr "Update Phone Number"
+
+msgid "Update"
+msgstr "Update"
+
+msgid "Sendactivationcode"
+msgstr "Send Activation Code"
+
+msgid "Send"
+msgstr "Send"
+
+msgid "Activeaccount"
+msgstr "Active Account"
+
+msgid "Activationcode"
+msgstr "Activation Code"
+
+msgid "Active"
+msgstr "Active"
+
+msgid "Recoverpassword"
+msgstr "Recover Your Password"
+
+msgid "Fieldregisteremail"
+msgstr "Field registration email"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Createnewpassword"
+msgstr "Create New Password"
+
+msgid "Newpassword"
+msgstr "New password"
+
+msgid "Renewpassword"
+msgstr "Retype new password"
+
+msgid "Validatename"
 msgstr "Please enter your name"
 
-msgid "Please enter your phone"
-msgstr "Please enter your phone"
+msgid "Validatephone"
+msgstr "Please enter your phone number"
 
-msgid "Your phone is a string number"
-msgstr "Your phone is a string number"
+msgid "Validatecharacter5"
+msgstr "Must be at least 5 characters long"
 
-msgid "Thank you for join us"
-msgstr "Thank you for join us"
+msgid "Validatevalidemail"
+msgstr "Please enter a valid email address"
 
-msgid "JOIN US"
-msgstr "JOIN US"
+msgid "Validatepassword"
+msgstr "Please provide a password"
 
-msgid "Please contact us for <br>detail information"
-msgstr "Please contact us for <br>detail information"
+msgid "Validatenotmatched"
+msgstr "Password is not matched"
 
-msgid "OUR FACILITIES"
-msgstr "OUR FACILITIES"
+msgid "Validatecharacter6"
+msgstr "Must be at least 6 characters long"
 
-msgid "AMENITIES"
-msgstr "AMENITIES"
+msgid "Validateactivationcode"
+msgstr "Please enter activation code"
 
-msgid "FLOOR PLAN"
-msgstr "FLOOR PLAN"
+msgid "Activationcodesendtophonenumber"
+msgstr "Your activation code was sent to your phone number"
 
-msgid "YOUR NAME"
-msgstr "YOUR NAME"
+msgid "LoginFailed"
+msgstr "Wrong email or password, please try again"
 
-msgid "YOUR PHONE"
-msgstr "YOUR PHONE"
+msgid "Existphone"
+msgstr "This phone number was used before"
 
-msgid "REGISTER NOW"
-msgstr "REGISTER NOW"
+msgid "Invalidactivationcode"
+msgstr "Invalid activation code"
 
-msgid "SEARCH"
-msgstr "SEARCH"
+msgid "Activationcodesuccess"
+msgstr "Congratulations! Active your account successfully."
 
-msgid "We collaborate with most well-established brands"
-msgstr "We collaborate with most well-established brands"
+msgid "Accounthasactived"
+msgstr "Your account has actived."
 
-msgid "SHOPPING MALL"
-msgstr "SHOPPING MALL"
+msgid "Unableactive"
+msgstr "Can not active your account."
 
-msgid "FACILITIES"
-msgstr "FACILITIES"
+msgid "WinnerListEmpty"
+msgstr "Don't have winner list yet."
 
-msgid "INTERIOR"
-msgstr "INTERIOR"
+# ************--COUNTRY TRANSLATE--*************------
+msgid "vn_84"
+msgstr "Vietnam"
 
-msgid "SALE EVENTS"
-msgstr "SALE EVENTS"
+msgid "kr_82"
+msgstr "Korea"
 
-msgid "No gallery found..."
-msgstr "No gallery found..."
+msgid "tw_886"
+msgstr "Taiwan"
 
-msgid "INTRODUCTION"
-msgstr "INTRODUCTION"
+msgid "jp_81"
+msgstr "Japan"
 
-msgid "CONCEPT"
-msgstr "CONCEPT"
+msgid "sg_65"
+msgstr "Singapore"
 
-msgid "SALE POLICY"
-msgstr "SALE POLICY"
+msgid "my_60"
+msgstr "Malaysia"
 
-msgid "Search Results"
-msgstr "Search Results"
+msgid "kh_855"
+msgstr "Cambodia"
 
-msgid "PROMOTION DATE"
-msgstr "PROMOTION DATE"
+msgid "th_66"
+msgstr "Thailand"
 
-msgid "PROMOTION TIME"
-msgstr "PROMOTION TIME"
+msgid "Trungquoc"
+msgstr "China"
 
-msgid "VIEW DETAIL"
-msgstr "DETAIL"
+msgid "Hongkong"
+msgstr "Hong Kong"
 
-msgid "visit our store"
-msgstr "visit our store"
+msgid "RegisterSuccess"
+msgstr "Registration successful, A code has been sent to your phone, please verify to proceed."
 
-msgid "VISIT BRAND’S SITE"
-msgstr "VISIT BRAND’S SITE"
+msgid "Email_exist"
+msgstr "Email already exist"
 
-msgid "LOCATE STORE"
-msgstr "LOCATE STORE"
+msgid "Phone_exist"
+msgstr "Phone number already exist"
 
-msgid "BACK TO BRANDS LIST"
-msgstr "BACK TO BRANDS LIST"
+msgid "slogan_about"
+msgstr "Enjoy flying all over Vietnam and across Asia"
 
-msgid "INDUSTRY"
-msgstr "INDUSTRY"
+msgid "Time_reg_text"
+msgstr "Entry period:"
 
-msgid "LOCATION"
-msgstr "LOCATION"
+msgid "Time_reg"
+msgstr "From now until 27th of December, 2018"
 
-msgid "Find out what we have to offer"
-msgstr "Find out what we have to offer"
+msgid "Detail_info"
+msgstr "For more information:"
 
-msgid "LAST UPDATE"
-msgstr "LAST UPDATE"
+msgid "Buy_location"
+msgstr "Where to buy the ticket:"
 
-msgid "services"
-msgstr "services"
+msgid "PaymentInfo"
 
-msgid "BACK TO FITNESS"
-msgstr "BACK TO FITNESS"
+msgstr "Payment can be easily made with Debit and Credit cards of Visa/ MasterCard/ AMEX/ JCB/ KCP and any ATM card issued by 29 Vietnamese banks."
 
-msgid "Contact to hire ground"
-msgstr "Contact to hire ground"
+msgid "about_text"
+msgstr "tab: 'booking' "
+
+msgid "author"
+msgstr "Author"
+
+msgid "About2"
+msgstr "Introdution"

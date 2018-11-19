@@ -50,7 +50,6 @@ class UserController extends FrontController {
                 'password' => $params['password'],
                 'phone' => $phone,
                 'location'=> $params['location'],
-                'address' =>$params['address'],
                 'mobile_code'=>$mobileCode,
                 'ip' => $this->getIpClient(),
                 'is_updated_info' => 1,
@@ -68,10 +67,19 @@ class UserController extends FrontController {
 
             $return = $userModel->register($data, $userId);
             if ($return['status']) {
-                $this->sendSMS($phone, $mobileCode); //Send SMS
+                //login
+                $return = $this->auth($data['password'],$data['email']);
+                if($return['status_key']=='inactive'){
+                   $result= $this->sendSMS($phone, $mobileCode); //Send SMS
+                   if($result['status']){
+                       $user = $userModel->getUser($return['id']);
 
-                $user = $userModel->getUser($return['id']);
-                $this->returnJsonAjax(array('status'=>true,'message'=>'Đăng ký thành công', 'data'=>$this->apiProcessUser($user)));
+                       $this->returnJsonAjax(array('status'=>true,'button'=>$this->translate('Continue'),'message'=>$this->translate('RegisterSuccess'), 'data'=>$this->apiProcessUser($user)));
+                   }
+                }
+
+
+
             }else{
                 $this->returnJsonAjax(array('status'=>false,'message'=>'Đã xảy ra lỗi, vui lòng thử lại sau!'));
             }
@@ -107,7 +115,7 @@ class UserController extends FrontController {
                if($curUser['email']!= $email){
                 $isExist = $userModel->isEmailExists($email);
                 if($isExist['status']){
-                    return array('status'=>false, 'message'=>'Email đã tồn tại!');
+                    return array('status'=>false,'element'=>'regemail', 'message'=>$this->translate('Email_exist'));
                 }
             }
         }
@@ -138,7 +146,7 @@ class UserController extends FrontController {
                 //$check = $userModel->isExists('phone', '0' . $this->phoneFix($phone));
                 //$check1 = $userModel->isExists('phone', '84' . $this->phoneFix($phone));
                 if ($check['status']) {
-                    return array('status' => false, 'el' => 'phone', 'message' => 'Số điện thoại đã tồn tại!');
+                    return array('status' => false, 'element' => 'regphone', 'message' => $this->translate('Phone_exist'));
                 }
             }
         }
@@ -165,6 +173,7 @@ class UserController extends FrontController {
 
 public function apiverifysmsAction(){
     $params = $this->getParams(self::METHOD_POST_PARAM);
+    $curLang = $this->getLangCode(true);
     //$token = $params['user_token'];
     $mobileCode = $params['mobile_code'];
 
@@ -185,22 +194,47 @@ public function apiverifysmsAction(){
 
                     $user = $userModel->getUser($userId);
                     unset($_SESSION['need_active']);
-                    $this->returnJsonAjax(array('status'=>true,'message'=>'Kích hoạt tài khoản thành công!','data'=>$this->apiProcessUser($user)));
+                    $mail = $this->getServiceLocator()->get('SendMail');
+                    if($curLang=='vi'){
+                        $mail->send(array(
+                            'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
+                            'to' => array('name' => $user['name'], 'email' => $user['email']),
+                            'subject' => 'VIETJET - CHÀO MỪNG ĐẾN HÀNH TRÌNH  "KẾT NỐI YÊU THƯƠNG, YÊU LÀ PHẢI TỚI',
+                            'template' => 'email/welcome',
+                            'data' => array(
+                                'user_name'=>$user['name'],
+
+                            )
+                        ));
+                    }else{
+                        $mail->send(array(
+                            'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
+                            'to' => array('name' => $user['name'], 'email' => $user['email']),
+                            'subject' => 'VIETJET -  WELCOME TO THE "LOVE CONNECTION - LOVE IS REAL TOUCH" CAMPAIGN OF VIETJET.',
+                            'template' => 'email/welcome_en',
+                            'data' => array(
+                                'user_name'=>$user['name'],
+
+                            )
+                        ));
+                    }
+
+                    $this->returnJsonAjax(array('status'=>true,'message'=>$this->translate('Activationcodesuccess'),'data'=>$this->apiProcessUser($user)));
                 }else{
                     $this->returnJsonAjax($active);
                 }
             }else{
-                $this->returnJsonAjax(array('status' => false, 'message' => 'Mã kích hoạt không hợp lệ!'));
+                $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('Invalidactivationcode')));
             }
         }else{
             if($resultValid['status']){
-                $this->returnJsonAjax(array('status' => false, 'message' => 'Tài khoản của bạn đã được kích hoạt!'));
+                $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('Accounthasactived')));
             }else{
                 $this->returnJsonAjax($resultValid);
             }
         } 
     }else{
-       $this->returnJsonAjax(array('status' => false, 'message' => 'Bạn không thể kích hoạt tài khoản!'));
+       $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('Unableactive')));
    }
 }
 
@@ -271,7 +305,9 @@ public function apiverifyresendsmsAction(){
    }
 
    private function sendSMS($phone, $message){
-    return true;
+       $sms = new Sms();
+       $return = $sms->sendSoap($phone,'Your activation code: '.$message);
+       return $return;
 }
     //--End register
 
@@ -510,43 +546,44 @@ public function fbcomplete($data)
         }
 
         if($email && $password){
-            $data = array('email' => $email, 'password' => $password);
 
-            $auth = $this->getServiceLocator()->get('FrontAuthService');
-            $userModel = $this->getUserModel();
-            $siteAuthAdapter = new Db($userModel);
+            $return = $this->auth($password,$email);
+            $this->returnJsonAjax($return); //Response Data   
+        }
+    }
 
-            $siteAuthAdapter->setCredential($data);
-            $result = $auth->authenticate($siteAuthAdapter);
+    private function auth($password,$email){
+        $data = array('email' => $email, 'password' => $password);
 
-            $return = array();
-            if ($result->isValid()) {
-                $user = $siteAuthAdapter->getIdentity();
-                if ($user) {
-                    //--Check user valid--
-                    $resultValid =  $this->checkUserStatus($user);
-                    if($resultValid['status']){
-                        //-Token login--
-                        $token = $this->createdUserToken($user['id'],$userModel);
-                        if($token){
-                            $user['token'] = $token;
-                        }
-                        //-End Token login--
+        $auth = $this->getServiceLocator()->get('FrontAuthService');
+        $userModel = $this->getUserModel();
+        $siteAuthAdapter = new Db($userModel);
 
-                        $return = array('status' => true, 'message' => "Đăng nhập thành công!", 'data' => $this->apiProcessUser($user));
-                    }else{
-                     $return = $resultValid; 
-                 }
-                    //--End check user valid        
-             } else {
+        $siteAuthAdapter->setCredential($data);
+        $result = $auth->authenticate($siteAuthAdapter);
+
+        $return = array();
+        if ($result->isValid()) {
+            $user = $siteAuthAdapter->getIdentity();
+            if ($user) {
+                //--Check user valid--
+                $resultValid =  $this->checkUserStatus($user);
+                if($resultValid['status']){
+                    $return = array('status' => true, 'message' => "Đăng nhập thành công!", 'data' => $this->apiProcessUser($user));
+                }else{
+                    $return = $resultValid;
+                }
+                return $return;
+                //--End check user valid
+            } else {
                 $return = array('status' => false, 'message' => "Vui lòng đăng nhập lại!", 'data' => "");
+                return $return;
+
             }
         } else {
             $msg = $result->getMessages();
             $return = array('status' => false, 'message' => $msg[0], 'data' => "");
-        }
-
-            $this->returnJsonAjax($return); //Response Data   
+            return $return;
         }
     }
 
@@ -616,10 +653,10 @@ private function createdUserToken($userId, $userModel){
     //Profile--
 public function apiprofileAction(){
     $params = $this->getParams(self::METHOD_POST_PARAM);
-    $token = $params['user_token'];
-    if($params && $token){
+    $userId = $params['user_id'];
+    if($params && $userId){
         $userModel = $this->getUserModel();
-        $user = $userModel->getUserByToken($token);
+        $user = $userModel->getUserByUId($userId);
 
             //--Check user status--
         $checkUser = $this->checkUserStatus($user);
@@ -675,10 +712,9 @@ public function apiupdateprofileAction(){
             //--End Update email, phone if email, phone is null---
 
         $saveResult = $userModel->save($data, $userValid['id']);
-        $sms = new Sms();
-        $sms->vietGuySms($phone,'Your activation code: '.$mobileCode);
 
-        if($saveResult['status']){
+        $smsResult = $this->sendSMS($phone,$mobileCode);
+        if($saveResult['status'] && $smsResult['status']){
             $curUser = $userModel->getUser($userValid['id']);
             unset($_SESSION['need_update']);
             $this->returnJsonAjax(array('status'=>true, 'message'=>'Cập nhật thông tin thành công!','data'=>$curUser));
@@ -754,7 +790,7 @@ private function validateUpdateProfile($params){
             return array('status' => false, 'message' => 'Số điện thoại phải là một chuối số!');
         }
 
-        $minLen = 10;
+        $minLen = 5;
         if (strlen($phone) < $minLen && substr($phone, 0, 1) == '0') {
             return array('status' => false, 'message' => 'Số điện thoại phải ít nhất '.$minLen.' ký tự!');
         }else if(strlen($phone) < $minLen - 1){
@@ -771,7 +807,7 @@ private function validateUpdateProfile($params){
             //$check = $userModel->isExists('phone', '0' . $this->phoneFix($phone));
             //$check1 = $userModel->isExists('phone', '84' . $this->phoneFix($phone));
             if ($check['status']) {
-                return array('status' => false, 'el' => 'phone', 'message' => 'Số điện thoại đã tồn tại!');
+                return array('status' => false, 'el' => 'phone', 'message' => $this->translate('Existphone'));
             }
         }
     }
@@ -785,12 +821,13 @@ public function forgetpassAction(){
     $userModel = $this->getUserModel();
     $params = $this->getParams(self::METHOD_POST_PARAM);
     $email = $params['email'];
+    $curLang = $this->getLangCode(true);
     if($email == ''){
-        $this->returnJsonAjax(array('status'=>false,'message'=>'Vui lòng nhập email'));
+        $this->returnJsonAjax(array('status'=>false,'message'=>$this->translate('Validatevalidemail')));
     }else{
         $validator = new \Zend\Validator\EmailAddress();
         if (!$validator->isValid($email)) {
-            $this->returnJsonAjax(array('status'=>false, 'message'=>'Email không đúng định dạng!'));
+            $this->returnJsonAjax(array('status'=>false, 'message'=>$this->translate('Validatevalidemail')));
         } 
 
         $isExist = $userModel->isExists('email',$email);
@@ -799,43 +836,52 @@ public function forgetpassAction(){
             }else{ //Is valid---
                 $user = $isExist['item'];
                 //--Check user valid--
-                $resultValid =  $this->checkUserStatus($user);
-                if($resultValid['status']){
+
+
                     $userId = $user['id'];
                     if($userId){
                         $forgetPassCode = HashUtil::createRandomKey();
                         $resultSave = $userModel->save(array('forget_pass_code'=>$forgetPassCode), $userId);
                         if($resultSave['status']){
                             $urlRecover = BASE_URL;
-                            if(strpos($urlRecover,'/api/')!==FALSE){
-                                $urlRecover = str_replace('/api/', '/', $urlRecover);
-                            }
-                            if(strpos($urlRecover,'/api')!==FALSE){
-                                $urlRecover = str_replace('/api', '', $urlRecover);
-                            }
-                            $urlRecover = $urlRecover.'/doi-mat-khau?fpc='.$forgetPassCode;
+
+                            $urlRecover = $urlRecover.'/'.$curLang.'/?fpc='.$forgetPassCode;
 
                             //--Send email--
                             $mail = $this->getServiceLocator()->get('SendMail');
-                            $mail->send(array(
-                                'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
-                                'to' => array('name' => $user['name'], 'email' => $user['email']),
-                                'subject' => '[BZ CMS] thông báo',
-                                'template' => 'email/forgetpass',
-                                'data' => array(
-                                    'user_name'=>$user['name'],
-                                    'url_recover'=>$urlRecover,
-                                    'code'=>$forgetPassCode
+
+                            if($curLang=='vi'){
+                                $mail->send(array(
+                                    'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
+                                    'to' => array('name' => $user['name'], 'email' => $user['email']),
+                                    'subject' => 'VIETJET - NHẬN THÔNG BÁO BẠN ĐÃ QUÊN PASSWORD!',
+                                    'template' => 'email/forgotpass',
+                                    'data' => array(
+                                        'user_name'=>$user['name'],
+                                        'url_recover'=>$urlRecover,
+                                        'code'=>$forgetPassCode
                                     )
                                 ));
+                            }else{
+                                $mail->send(array(
+                                    'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
+                                    'to' => array('name' => $user['name'], 'email' => $user['email']),
+                                    'subject' => 'VIETJET - YOUR PASSWORD HAS BEEN RESET!',
+                                    'template' => 'email/forgotpass_en',
+                                    'data' => array(
+                                        'user_name'=>$user['name'],
+                                        'url_recover'=>$urlRecover,
+                                        'code'=>$forgetPassCode
+                                    )
+                                ));
+                            }
+
                             //--End Send email--
 
                             $this->returnJsonAjax(array('status'=>true,'message'=>'Đã gửi email hướng dẫn lấy lại mật khẩu!'));
                         } 
                     }
-                }else{
-                 $this->returnJsonAjax($resultValid); 
-             }
+
                 //--End check user valid
          }
      }
@@ -847,7 +893,8 @@ public function forgetpassAction(){
     $forgetPassCode = $params['forget_pass_code'];
     $newPass = $params['password'];
     $cfNewPass = $params['cfpassword'];
-    $result = $userModel->recover($forgetPassCode, $newPass, $cfNewPass); 
+    $result = $userModel->recover($forgetPassCode, $newPass, $cfNewPass);
+     unset($_SESSION['show-fg']);
     $this->returnJsonAjax($result);
 }
     //--End Forget pass---

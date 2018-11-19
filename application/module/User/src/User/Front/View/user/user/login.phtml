@@ -1,3 +1,13 @@
+<?php
+$parentPage = $this->layout()->parent_page;
+$page = $this->layout()->page;
+
+$factory = $this->factory();
+$user = $this->user();
+$myLocale = $this->layout()->myLocale;
+$myLocaleShort = $this->layout()->myLocaleShort;
+$languageList = $factory->getLanguageList();
+?>
 <div class="col-md-3"></div>
 <div class="col-md-6">
     <h1 class="text-center">Sign in</h1>
@@ -38,6 +48,12 @@
                         <label class="control-label col-sm-2"></label>
                         <div class="col-sm-10">
                             <button id="login-btn">Đăng Nhập</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2"></label>
+                        <div class="col-sm-10">
+                            <a href="<?php echo $this->url('user-forget-pass',array('lang'=>$myLocaleShort)) ?>" id="forget-btn">Quên mật khẩu</a>
                         </div>
                     </div>
                 </div>

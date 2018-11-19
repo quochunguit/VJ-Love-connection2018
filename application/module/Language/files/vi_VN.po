@@ -15,185 +15,366 @@ msgstr ""
 msgid "Home"
 msgstr "Trang chủ"
 
-msgid "Contact"
-msgstr "Liên hệ"
+msgid "About"
+msgstr "Giới thiệu"
 
-msgid "Thank you for subscribed"
-msgstr "Cám ơn bạn đã đăng ký nhận tin"
+msgid "Submitions"
+msgstr "Gửi chia sẻ"
 
-msgid "Email is invalid"
-msgstr "Email sai định dạng"
+msgid "Gallery"
+msgstr "Thư viện ảnh"
 
-msgid "Please enter email"
-msgstr "Vui lòng nhập email"
+msgid "Flight_Information"
+msgstr "Hành trình bay"
 
-msgid "ENTER YOUR EMAIL"
-msgstr "NHẬP EMAIL CỦA BẠN"
+msgid "Winners_List"
+msgstr "Danh sách trúng giải"
 
-msgid "Subscribe to our newsletter"
-msgstr "Theo dõi bản tin"
+msgid "Sign_Up_Login"
+msgstr "Đăng kí / Đăng nhập"
 
-msgid "Artemis All rights reserved."
-msgstr "Artemis Đã đăng ký Bản quyền."
+msgid "Slogan"
+msgstr "Cùng Vietjet Air, kết nối yêu thương, yêu là phải tới!"
 
-msgid "Developed by Jodric"
-msgstr "Phát triển bởi Jodric"
+msgid "Share_story"
+msgstr "Chia sẻ câu chuyện của bạn để nhận vé bay khứ hồi miễn phí khắp Châu Á lên đến 185 chuyến bay miễn phí."
 
-msgid "RETAIL"
-msgstr "TRUNG TÂM THƯƠNG MẠI"
+msgid "Submit_now"
+msgstr "Chia sẻ ngay"
 
-msgid "PROMOTION"
-msgstr "KHUYẾN MÃI"
+msgid "Intro_text"
+msgstr "Bạn yêu Nhật Bản? Mê trà sữa? Thích ngắm các Oppa? Đã yêu ngại gì, yêu là phải tới! Tham gia chia sẻ câu chuyện tình yêu về con người, ẩm thực, văn hóa các nước Châu Á… để có cơ hội trúng ngay vé máy bay khứ hồi, chạm đến tình yêu của bạn. Cùng Vietjet, kết nối yêu thương, yêu là phải tới!"
 
-msgid "FLOORPLAN"
-msgstr "KẾ HOẠCH SÀN"
+msgid "Hot_submissions"
+msgstr "Bài dự thi hot"
 
-msgid "EVENTS"
-msgstr "SỰ KIỆN"
+msgid "Book_now"
+msgstr "Book vé bay ngay Vietjet!"
 
-msgid "SOCIAL MEDIA"
-msgstr "TRUYỀN THÔNG XÃ HỘI"
+msgid "Promotion"
+msgstr "Chương trình giờ vàng khuyến mãi hàng triệu vé 0 đồng luôn chào đón bạn từ 12h - 14h mỗi ngày tại www.vietjetair.com!"
 
-msgid "BRANDS"
-msgstr "THƯƠNG HIỆU"
+msgid "Online_Booking"
+msgstr "Đặt vé trực tuyến"
 
-msgid "RESIDENTIAL"
-msgstr "KHU CĂN HỘ"
+msgid "coppyright"
+msgstr "© 2018 Bản quyền thuộc về Vietjet Air"
 
-msgid "VIRTUAL TOUR & GALLERY"
-msgstr "TOUR & BỘ SƯU TẬP"
+msgid "View_all"
+msgstr "Xem tất cả"
 
-msgid "OVERVIEW"
-msgstr "TỔNG QUAN"
+msgid "View_more"
+msgstr "Xem thêm"
 
-msgid "FLOORPLANS"
-msgstr "KẾ HOẠCH SÀN"
+msgid "Share"
+msgstr "Gửi Chia Sẻ"
 
-msgid "FITNESS"
-msgstr "CLB THỂ THAO"
+msgid "Target"
+msgstr "Lựa chọn điểm đến"
 
-msgid "GALLERY"
-msgstr "HÌNH ẢNH"
+msgid "List_target"
+msgstr "Danh sách điểm đến (Chọn 1)"
 
-msgid "PACKAGE"
-msgstr "GÓI"
+msgid "Upload_maximum"
+msgstr "Upload tối đa 5 hình ảnh về cảm nhận của bạn"
 
-msgid "GALLERY | SOCIAL MEDIA"
-msgstr "HÌNH ẢNH | MẠNG XÃ HỘI"
+msgid "Max_Capacity"
+msgstr "Dung lượng tối đa 5Mb"
 
-msgid "BRAND HIGHLIGHTS"
-msgstr "THƯƠNG HIỆU NỔI BẬT"
+msgid "Uploadfile"
+msgstr "Upload Ảnh"
 
-msgid "MORE DETAIL"
-msgstr "CHI TIẾT"
+msgid "Subject"
+msgstr "Tiêu đề"
 
-msgid "Please enter your name"
-msgstr "Vui lòng nhập tên bạn"
+msgid "Messages"
+msgstr "Thông điệp"
 
-msgid "Please enter your phone"
-msgstr "Vui lòng nhập số điện thoại"
+msgid "Max_world"
+msgstr "Tối đa 1000 chữ"
 
-msgid "Your phone is a string number"
-msgstr "Số điện thoại là một chuỗi số"
+msgid "Review"
+msgstr "Xem lại bài viết"
 
-msgid "Thank you for join us"
-msgstr "Cám ơn bạn đã tham gia"
+msgid "Gold_hour"
+msgstr "Trong lúc chờ đợi bài được duyệt, tìm hiểu ngay chương trình giờ vàng khuyến mãi hàng triệu vé 0 đồng của Vietjet ngay để bay khắp Việt Nam & 10 nước Châu Á cùng Vietjet nhé."
 
-msgid "JOIN US"
-msgstr "THAM GIA"
+msgid "Find_flight"
+msgstr "TÌM CHUYẾN BAY NGAY"
 
-msgid "Please contact us for <br>detail information"
-msgstr "Vui lòng liên hệ để biết<br>thông tin chi tiết"
+msgid "Image"
+msgstr "Hình Ảnh"
 
-msgid "OUR FACILITIES"
-msgstr "CƠ SỞ VẬT CHẤT"
+msgid "Delete_photo"
+msgstr "Xoá hình"
 
-msgid "AMENITIES"
-msgstr "TIỆN NGHI"
+msgid "Insert_photo"
+msgstr "Thêm hình"
 
-msgid "FLOOR PLAN"
-msgstr "KẾ HOẠCH SÀN"
+msgid "Image_upload_missing"
+msgstr "Vui lòng upload hình ảnh về cảm nhận của bạn"
 
-msgid "YOUR NAME"
-msgstr "TÊN CỦA BẠN"
+msgid "Title_missing"
+msgstr "Vui lòng điền tiêu đề"
 
-msgid "YOUR PHONE"
-msgstr "SỐ ĐIỆN THOẠI CỦA BẠN"
+msgid "InsertComment"
+msgstr "Nhập thông điệp của bạn"
 
-msgid "REGISTER NOW"
-msgstr "ĐĂNG KÝ NGAY"
+msgid "Gallery_details"
+msgstr "Chi tiết bài dự thi"
 
-msgid "SEARCH"
-msgstr "TÌM KIẾM"
+msgid "Experience_vietjet"
+msgstr "Trải nghiệm thú vị cùng Vietjet"
 
-msgid "We collaborate with most well-established brands"
-msgstr "Chúng tôi cộng tác với các các thương hiệu nổi bật"
+msgid "New_submissions"
+msgstr "Bài dự thi Mới"
 
-msgid "SHOPPING MALL"
-msgstr "TRUNG TÂM MUA SẮM"
+msgid "Share_comments"
+msgstr "Chia sẻ cảm nhận"
 
-msgid "FACILITIES"
-msgstr "TIỆN NGHI"
+msgid "Signup"
+msgstr "Đăng ký"
 
-msgid "INTERIOR"
-msgstr "NỘI THẤT"
+msgid "Fullname"
+msgstr "Họ tên"
 
-msgid "SALE EVENTS"
-msgstr "SỰ KIỆN"
+msgid "Phonenumber"
+msgstr "Số điện thoại"
 
-msgid "No gallery found..."
-msgstr "Không có hình ảnh nào..."
+msgid "Address"
+msgstr "Nơi sinh sống:"
 
-msgid "INTRODUCTION"
-msgstr "GIỚI THIỆU"
+msgid "Email"
+msgstr "Email"
 
-msgid "CONCEPT"
-msgstr "Ý TƯỞNG"
+msgid "Password"
+msgstr "Mật khẩu:"
 
-msgid "SALE POLICY"
-msgstr "CHÍNH SÁCH BÁN HÀNG"
+msgid "Repassword"
+msgstr "Nhập lại mật khẩu"
 
-msgid "Search Results"
-msgstr "Kết quả tìm kiếm"
+msgid "Verified_organizer"
+msgstr "Bạn vui lòng cung cấp thông tin chính xác để Ban giám khảo có thể liên lạc và trao giải thưởng"
 
-msgid "PROMOTION DATE"
-msgstr "NGÀY KHUYẾN MÃI"
+msgid "Forgetpassword"
+msgstr "Quên mật khẩu"
 
-msgid "PROMOTION TIME"
-msgstr "GIỜ KHUYẾN MÃI"
+msgid "Loveconnection_campaign"
+msgstr "Giới thiệu chương trình"
 
-msgid "VIEW DETAIL"
-msgstr "XEM CHI TIẾT"
+msgid "Terms_conditions"
+msgstr "Thể lệ cuộc thi & Giải thưởng"
 
-msgid "visit our store"
-msgstr "xem chi tiết"
+msgid "Bookflight"
+msgstr "Tìm chuyến bay"
 
-msgid "VISIT BRAND’S SITE"
-msgstr "XEM TRANG WEB"
+msgid "Hotlinebooknow"
+msgstr "Gọi ngay:<a href='tel: 1900 1886'> (+84) 1900 1886</a> để đặt chỗ"
 
-msgid "LOCATE STORE"
-msgstr "VỊ TRÍ"
+msgid "Onlinebooking"
+msgstr "Đặt vé trực tuyến"
 
-msgid "BACK TO BRANDS LIST"
-msgstr "QUAY VỀ DANH SÁCH"
+msgid "Booknowtofly"
+msgstr "Book vé bay ngay Vietjet"
 
-msgid "INDUSTRY"
-msgstr "NGÀNH CÔNG NGHIỆP"
+msgid "Continue"
+msgstr "Tiếp tục"
 
-msgid "LOCATION"
-msgstr "ĐỊA ĐIỂM"
+msgid "t&c"
+msgstr "Thể lệ"
 
-msgid "Find out what we have to offer"
-msgstr "Tìm hiểu những gì chúng tôi cung cấp"
+msgid "logout"
+msgstr "Đăng xuất"
 
-msgid "LAST UPDATE"
+msgid "CannotverifySMS"
+msgstr "Cuộc Thi “KẾT NỐI YÊU THƯƠNG, YÊU LÀ PHẢI TỚI” không thể kích hoạt tài khoản của bạn qua SMS. Bạn vui lòng kiểm tra lại thông tin và cung cấp lại cho chương trình để tham gia ngay nhé."
+
+msgid "ContestPublished"
+msgstr "Bạn đã có bài chia sẻ được đăng"
+
+msgid "UploadImageError"
+msgstr "Tải lên không thành công, vui lòng thử lại!"
+
+msgid "ImageFormatError"
+msgstr "Chỉ cho phép tải lên tệp hình ảnh định dạng JPG, PNG"
+
+msgid "SaveContestSuccessful"
+msgstr "Vietjet cám ơn bạn đã tham dự cuộc thi <br/>'KẾT NỐI YÊU THƯƠNG, YÊU LÀ PHẢI TỚI'. "
+
+msgid "SaveContestSuccessful_waiting"
+msgstr "Bài dự thi của bạn đang được admin kiểm duyệt trong thời gian nhanh nhất có thể. Bạn sẽ nhận được thông báo của Vietjet trong vòng 24h tới."
+
+msgid "BookYourFlightNow"
+msgstr "TÌM CHUYẾN BAY NGAY"
+
+msgid "CommentMoreThan1000"
+msgstr "Thông điệp không được quá 1,000 chữ."
+
+msgid "StoryOf"
+msgstr "Bài viết của"
+
+msgid "Login"
+msgstr "Đăng Nhập"
+
+msgid "Or"
+msgstr "Hoặc"
+
+msgid "Updatephonenumber"
+msgstr "Cập nhật số điện thoại"
+
+msgid "Update"
 msgstr "Cập nhật"
 
-msgid "services"
-msgstr "Dịch vụ"
+msgid "Sendactivationcode"
+msgstr "Gửi Mã kích hoạt"
 
-msgid "BACK TO FITNESS"
-msgstr "QUAY LẠI FITNESS"
+msgid "Send"
+msgstr "Gửi"
 
-msgid "Contact to hire ground"
-msgstr "Liên hệ thuê mặt bằng"
+msgid "Activeaccount"
+msgstr "Kích hoạt tài khoản"
+
+msgid "Activationcode"
+msgstr "Mã Kích Hoạt"
+
+msgid "Active"
+msgstr "Kích Hoạt"
+
+msgid "Recoverpassword"
+msgstr "Khôi phục mật khẩu"
+
+msgid "Fieldregisteremail"
+msgstr "Điền email đăng ký"
+
+msgid "Close"
+msgstr "Đóng"
+
+msgid "Createnewpassword"
+msgstr "Tạo mật khẩu mới"
+
+msgid "Newpassword"
+msgstr "Mật khẩu mới"
+
+msgid "Renewpassword"
+msgstr "Nhập lại mật khẩu mới"
+
+msgid "Validatename"
+msgstr "Vui lòng điền tên"
+
+msgid "Validatephone"
+msgstr "Vui lòng điền số điện thoại"
+
+msgid "Validatecharacter5"
+msgstr "Ít nhất 5 ký tự"
+
+msgid "Validatevalidemail"
+msgstr "Vui lòng điền email hợp lệ"
+
+msgid "Validatepassword"
+msgstr "Vui lòng điền mật khẩu"
+
+msgid "Validatenotmatched"
+msgstr "Mật khẩu không trùng khớp"
+
+msgid "Validatecharacter6"
+msgstr "Ít nhất 6 ký tự"
+
+msgid "Validateactivationcode"
+msgstr "Điền mã kích hoạt"
+
+msgid "Activationcodesendtophonenumber"
+msgstr "Mã kích hoạt đã được gửi đến số điện thoại"
+
+msgid "LoginFailed"
+msgstr "Email hoặc mật khẩu không đúng!"
+
+msgid "Existphone"
+msgstr "Số điện thoại đã được sử dụng"
+
+msgid "Invalidactivationcode"
+msgstr "Mã kích hoạt không hợp lệ"
+
+msgid "Activationcodesuccess"
+msgstr "Chúc mừng! Kích hoạt tài khoản thành công."
+
+msgid "Accounthasactived"
+msgstr "Tài khoản của bạn đã được kích hoạt."
+
+msgid "Unableactive"
+msgstr "Bạn không thể kích hoạt tài khoản này."
+
+msgid "WinnerListEmpty"
+msgstr "Hiện chưa có danh sách."
+
+# ************--COUNTRY TRANSLATE--*************------
+msgid "vn_84"
+msgstr "Việt Nam"
+
+msgid "kr_82"
+msgstr "Hàn Quốc"
+
+msgid "tw_886"
+msgstr "Đài Loan"
+
+msgid "jp_81"
+msgstr "Nhật Bản"
+
+msgid "sg_65"
+msgstr "Singapore"
+
+msgid "my_60"
+msgstr "Malaysia"
+
+msgid "kh_855"
+msgstr "Campuchia"
+
+msgid "th_66"
+msgstr "Thái Lan"
+
+msgid "Trungquoc"
+msgstr "Trung Quốc"
+
+msgid "Hongkong"
+msgstr "Hồng Kông"
+
+msgid "RegisterSuccess"
+msgstr "Chúc mừng bạn đã đăng ký thành công, Một mã số đã được gửi tới điện thoại, hãy xác minh để tiếp tục."
+
+msgid "Email_exist"
+msgstr "Email đã được đăng ký"
+
+msgid "Phone_exist"
+msgstr "Số điện thoại đã được đăng ký"
+
+msgid "slogan_about"
+msgstr "Bay là Thích ngay! Bay khắp Việt Nam & Quốc tế"
+
+msgid "Time_reg_text"
+msgstr "Thời gian đăng ký"
+
+msgid "Time_reg"
+msgstr "Từ nay đến 27/12/2018"
+
+msgid "Detail_info"
+msgstr "Thông tin chi tiết:"
+
+msgid "Buy_location"
+msgstr "Mua ở đâu:"
+
+msgid "PaymentInfo"
+msgstr "Thanh toán ngay bằng các loại thẻ Visa/Master/AMEX/JCB/thẻ ATM của 29 ngân hàng lớn tại Việt Nam"
+
+msgid "about_text"
+msgstr "mục: 'Đặt vé' "
+
+msgid "author"
+msgstr "Bài dự thi của"
+
+msgid "About2"
+msgstr "Giới Thiệu Chương Trình"
+
+
+
+
+
+

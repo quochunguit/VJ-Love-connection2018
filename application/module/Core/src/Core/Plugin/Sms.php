@@ -62,10 +62,10 @@ class Sms extends AbstractPlugin implements ServiceManagerAwareInterface {
         if ($phone != '' && $message != '') {
             require_once VENDOR_INCLUDE_DIR . '/nusoap/nusoap.php';
 
-            $soapWSDL = 'http://210.211.109.118/apibrandname/send?wsdl';
-            $soapUserName = 'abbottensure';
-            $soapPass = '';
-            $soapBrandName = 'BzCMSCustom';
+            $soapWSDL = VJ_WSDL_DEFINE;
+            $soapUserName = VJ_SOAP_USERNAME;
+            $soapPass = VJ_SOAP_PASSWORD;
+            $soapBrandName = '';
 
             try {
                 $proxyhost = '';
@@ -75,21 +75,23 @@ class Sms extends AbstractPlugin implements ServiceManagerAwareInterface {
                 $client = new \nusoap_client($soapWSDL, 'wsdl', $proxyhost, $proxyport, $proxyusername, $proxypassword, 20, 20);
             } catch (Exception $ex) {
                 array_push($this->exeption, $ex);
+                //print_r($ex);die;
             }
+            //print_r($client);die;
 
             try {
-                $result = $client->call("send", array(
-                    "USERNAME" => $soapUserName,
-                    "PASSWORD" => $soapPass,
-                    "BRANDNAME" => $soapBrandName,
-                    'TYPE'=>1,
-                    "PHONE" => $phone,
-                    "MESSAGE" => $message 
-                ));
-                //print_r($result); die;
+                $client = new \SoapClient(VJ_WSDL_DEFINE);
+                $result = $client->__soapCall("SentSMSDOM", array('request'=>array('ClientCredential'=>array("Username" => $soapUserName,
+                    "Password" => $soapPass),
+                    "phonenumber" => $phone,
+                    "content" => $message
+                )));
+                print_r($result);die;
 
                 if (array_key_exists('return', $result)) {
+                    echo 'aaaaaa';die;
                     $code = $result['result'];
+
                     if ($code == 0) {
                         $resultInfo = array('status' => true, 'message' => 'Gửi tin nhắn thành công!');
                     } else {
@@ -99,6 +101,7 @@ class Sms extends AbstractPlugin implements ServiceManagerAwareInterface {
                     $resultInfo = array('status' => false, 'message' => 'Đã xảy ra lỗi!');
                 }
             } catch (Exception $ex) {
+                echo $ex->getMessage();die;
                 $resultInfo = array('status' => false, 'message' => 'Đã xảy ra lỗi!');
             }
         } else {
@@ -109,6 +112,67 @@ class Sms extends AbstractPlugin implements ServiceManagerAwareInterface {
     }
 
     /*----- End Nusoap SMS ----- */
+
+    /*----- SOAP SMS ----- */
+
+    public function sendSoap($phone = '', $message = '') {
+        $checkVnPhone = $this->checkVnPhone($phone);
+        if($checkVnPhone){
+            $remoteFunction = 'SentSMSDOM';
+        }else{
+            $remoteFunction = 'SentSMSITL';
+        }
+        $options = array(
+            'cache_wsdl' => 0,
+            'trace' => 1,
+            'stream_context' => stream_context_create(array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            )));
+        $soapClient = new \SoapClient(VJ_WSDL_DEFINE,$options);
+
+        // Setup the RemoteFunction parameters
+        $ap_param = array('request'=>array('ClientCredential'=>array('Username'=> VJ_SOAP_USERNAME,
+            'Password'    =>    VJ_SOAP_PASSWORD),
+            'phonenumber'     =>    $phone,'content'=>$message));
+
+        // Call RemoteFunction ()
+        $error = 0;
+        try {
+            $result = $soapClient->__call($remoteFunction, array($ap_param));
+            $result = (array)$result;
+
+            if($result[$remoteFunction.'Result']->_Success==1){
+                $resultInfo = array('status' => true, 'message' => 'Send sms Success!');
+            }else{
+                $resultInfo = array('status' => false, 'message' => 'Send sms Failed!');
+            }
+            return $resultInfo;
+        } catch (SoapFault $fault) {
+            $error = 1;
+            print("
+            alert('Sorry, blah returned the following ERROR: ".$fault->faultcode."-".$fault->faultstring.". We will now take you back to our home page.');
+            window.location = 'main.php';
+            ");
+        }
+
+
+    }
+
+    private function checkVnPhone($phone){
+        if(substr($phone,0,2)== '84'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+
+    /*----- End SOAP SMS ----- */
 
 
 

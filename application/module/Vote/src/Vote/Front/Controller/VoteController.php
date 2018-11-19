@@ -80,7 +80,7 @@ class VoteController extends FrontController {
 
         $resultSave = $voteService->saveInfo(array('user_id'=>$userId, 'title'=>$title, 'object_id'=>$objectId, 'type'=>$type, 'ip'=>$this->getIpClient(), 'extension'=>$extension));
         if ($resultSave['status']) {
-            $numCount = $voteModel->getCountDataVote($objectId, $type);
+            $numCount = $voteModel->getCountDataVote($objectId, $type, $extension);
             $resutlSave = $contestModel->save(array($type => $numCount), $objectId);//Update count for contest
             if($resutlSave['status']){
                 $this->returnJsonAjax(array('status' => true, 'message' => $textSuccess,'currentCount'=> $numCount));

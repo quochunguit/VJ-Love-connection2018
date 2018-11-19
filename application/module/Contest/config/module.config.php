@@ -38,13 +38,12 @@ return array(
                 'options' => array(
                     'route' => '/[:lang]/:slug/:id[/]',
                     'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id' => '[0-9]+',
-                        'slug'=> '[a-zA-Z][a-zA-Z0-9_-]*'
+                        'slug'=> '[\w_-]+'
                     ),
                     'defaults' => array(
                         'controller' => 'Contest\Front\Controller\Contest',
-                        'action' => 'submit',
+                        'action' => 'detail',
                     ),
                 ),
             ),

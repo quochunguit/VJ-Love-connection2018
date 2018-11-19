@@ -21,7 +21,7 @@ return array(
             'api-register' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/user-register[/]',
+                    'route'    => '/[:lang]/user-register[/]',
                      'defaults' => array(
                         'controller' => 'User\Front\Controller\User',
                         'action'     => 'apiregister',
@@ -32,7 +32,7 @@ return array(
             'api-register-verify-sms' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/user-verify-sms[/]',
+                    'route'    => '/[:lang]/user-verify-sms[/]',
                      'defaults' => array(
                         'controller' => 'User\Front\Controller\User',
                         'action'     => 'apiverifysms',
@@ -138,7 +138,7 @@ return array(
             'api-update-profile' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/user-update-profile[/]',
+                    'route'    => '/[:lang]/user-update-profile[/]',
                      'defaults' => array(
                         'controller' => 'User\Front\Controller\User',
                         'action'     => 'apiupdateprofile',
@@ -151,7 +151,7 @@ return array(
             'user-forget-pass' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/user-forget-pass[/]',
+                    'route'    => '/[:lang]/user-forget-pass[/]',
                      'defaults' => array(
                         'controller' => 'User\Front\Controller\User',
                         'action'     => 'forgetpass',
@@ -162,7 +162,7 @@ return array(
             'user-recover' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/user-recover[/]',
+                    'route'    => '/[:lang]/user-recover[/]',
                      'defaults' => array(
                         'controller' => 'User\Front\Controller\User',
                         'action'     => 'recover',

@@ -23,7 +23,7 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
     }
     public function init() {
         parent::init();
-        $this->addElements();
+        $this->addElements('vi','contest');
                 
     }
 
@@ -55,19 +55,10 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
         ));
 
         $this->add(array(
-            'name' => 'intro',
+            'name' => 'descriptions',
             'attributes' => array(
                 'type' => 'textarea',
-                'class' => ' form-control',
-                'name' => 'intro',
-                'rows'  => '5'
-            ),
-        ));
-        $this->add(array(
-            'name' => 'body',
-            'attributes' => array(
-                'type' => 'textarea',
-                'id' => 'body',
+                'id' => 'descriptions',
                 'class' => ' form-control'
             ),
         ));
@@ -88,14 +79,15 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
             )
         ));  
 
-       $this->add(array(
-            'name' => 'ordering',
+
+        $this->add(array(
+            'name' => 'images',
             'attributes' => array(
                 'type' => 'text',
                 'class' => 'form-control',
-                'id' => 'ordering'
+                'id' => 'images'
             ),
-        )); 
+        ));
 
         $this->add(array(
             'name' => 'featured',
@@ -106,51 +98,8 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
             )
         ));
 
-         //image crop
-        $this->add(array(
-            'name' => 'image',
-            'attributes' => array(
-                'type' => 'text',
-                'id' => 'image',
-                'class' => ' form-control'
-            ),
-        ));
 
-        $this->add(array(
-            'name' => 'x_image',
-            'attributes' => array(
-                'type' => 'text',
-                'id' => 'x_image',
-                'class' => ' form-control'
-            ),
-        ));
 
-        $this->add(array(
-            'name' => 'y_image',
-            'attributes' => array(
-                'type' => 'text',
-                'id' => 'y_image',
-                'class' => ' form-control'
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'w_image',
-            'attributes' => array(
-                'type' => 'text',
-                'id' => 'w_image',
-                'class' => ' form-control'
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'h_image',
-            'attributes' => array(
-                'type' => 'text',
-                'id' => 'h_image',
-                'class' => ' form-control'
-            ),
-        ));
 
         $this->add(array(
             'name' => 'delete_image',
@@ -162,15 +111,7 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
         ));
         //-------------
 
-        $this->add(array(
-            'name' => 'submit_date',
-            'attributes' => array(
-                'type' => 'text',
-                'id' => 'submit_date',
-                'class' => ' form-control',
-                'value' => date('Y-m-d H:i:s')
-            ),
-        )); 
+
 
         $this->add(array(
             'name' => 'user_id',
@@ -217,26 +158,9 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
                         ),
             )));
 
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'body',
-                        'required' => false,
-                        'validators' => array(
-                            array(
-                                'name' => 'StringLength',
-                                'options' => array(
-                                    'encoding' => 'UTF-8',
-                                    'min' => 1,
-                                ),
-                            ),
-                        ),
-            )));
 
             $inputFilter->add($factory->createInput(array(
                         'name' => 'slug',
-                        'required' => false,
-            )));
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'intro',
                         'required' => false,
             )));
 
@@ -251,40 +175,11 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
             )));
 
             $inputFilter->add($factory->createInput(array(
-                    'name' => 'ordering',
-                    'required' => false,
-            )));
-
-            $inputFilter->add($factory->createInput(array(
                     'name' => 'featured',
                     'required' => false,
             )));
 
-           //-- image ------
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'image',
-                        'required' => false,
-            )));
 
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'x_image',
-                        'required' => false,
-            )));
-
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'y_image',
-                        'required' => false,
-            )));
-
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'w_image',
-                        'required' => false,
-            )));
-
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'h_image',
-                        'required' => false,
-            )));
 
             $inputFilter->add($factory->createInput(array(
                         'name' => 'delete_image',
@@ -293,10 +188,6 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
 
             //----------------------------------
 
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'submit_date',
-                        'required' => false,
-            )));
 
             $inputFilter->add($factory->createInput(array(
                         'name' => 'user_id',

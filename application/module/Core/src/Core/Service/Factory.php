@@ -145,11 +145,8 @@ class Factory {
 
     public function contentTypeGroup($key = '') {
         $arr = array();
-        $arr['retail'] = array('id' => 'retail', 'title' => 'Retail');
-        $arr['residential'] = array('id' => 'residential', 'title' => 'Residential');
-        $arr['fitness'] = array('id' => 'fitness', 'title' => 'Fitness');
-        $arr['static_content'] = array('id' => 'static_content', 'title' => 'Static content');
-        
+        $arr['content'] = array('id' => 'content', 'title' => 'Content');
+
         if ($key) {
             return $arr[$key];
         }

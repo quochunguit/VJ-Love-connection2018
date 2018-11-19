@@ -117,7 +117,7 @@ class CoreController extends EventController {
         } else {
             //get global description
             $sitedesc = $this->setting('core.metadescription');
-            $headMeta()->appendName('description', $sitedesc);
+            //$headMeta()->appendName('description', 'a');
         }
         if (array_key_exists('keywords', $data) && !empty($data['keywords'])) {
             $headMeta()->appendName('keywords', $data['keywords']);
@@ -136,7 +136,12 @@ class CoreController extends EventController {
         $sitetitle = $this->setting('core.sitename');
         $this->layout()->siteMeta = array('title'=>$sitetitle,'description'=>$sitedesc);
 
-        $headTitle->append($sitetitle);
+        //$headTitle->append($sitetitle);
+    }
+
+    public function translate($keyText = '', $textDomain = 'default', $locale = null){
+        $translate = $this->getHelper('translate');
+        return $translate($keyText, $textDomain, $locale);
     }
 
 

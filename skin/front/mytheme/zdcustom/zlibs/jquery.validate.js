@@ -461,6 +461,15 @@ $.extend( $.validator, {
 				this.defaultShowErrors();
 			}
 		},
+		addErrors: function (errors) {
+			for (var i = 0; i < errors.length; i++) {
+				this.errorList.push({
+					element: $(errors[i].element)[0],
+					message: errors[i].message
+				});
+			}
+			this.showErrors();
+		},
 
 		// http://jqueryvalidation.org/Validator.resetForm/
 		resetForm: function() {

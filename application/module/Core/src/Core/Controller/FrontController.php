@@ -202,10 +202,7 @@ class FrontController extends CoreController {
     /*====== End Block onDispatch ============*/
 
     /*====== All function common ==============*/
-    public function translate($keyText = '', $textDomain = 'default', $locale = null){
-        $translate = $this->getHelper('translate');
-        return $translate($keyText, $textDomain, $locale);
-    }
+
 
     public function apiProcessPaging($paging = array()){
         $pagingFix = array();
@@ -281,6 +278,7 @@ class FrontController extends CoreController {
             $userFix['address'] = $user['address'];
             $userFix['avatar'] = $user['social_picture'];
             $userFix['is_updated_info'] =  $user['is_updated_info']; //Flag update info
+            $userFix['mobile_code'] =  $user['mobile_code'];
             $userFix['status'] = $user['status'];
         }
 
@@ -297,10 +295,10 @@ class FrontController extends CoreController {
             }  
 
             if($user['is_updated_info'] == 0 && $status == 0 && $user['social_type'] == 'Google'){
-                return array('status'=>false, 'status_key'=>'reg_gg', 'message'=>'Đăng ký bằng Google!');
+                return array('status'=>false, 'id'=>$user['id'], 'name'=>$user['name'], 'status_key'=>'reg_gg', 'location'=>$user['location'], 'phone'=>$user['phone'], 'message'=>'Đăng ký bằng Google!');
             }
             if($user['is_updated_info'] == 1 && $status == 0){
-                return array('status'=>false, 'status_key'=>'inactive', 'location'=>$user['location'], 'phone'=>$user['phone'], 'message'=>'Tài khoản chưa active!');
+                return array('status'=>false, 'id'=>$user['id'], 'name'=>$user['name'], 'status_key'=>'inactive', 'location'=>$user['location'], 'phone'=>$user['phone'], 'message'=>'Tài khoản chưa active!');
             }
 
             if($user['is_updated_info'] == 1 && $status == 2){
@@ -366,7 +364,43 @@ class FrontController extends CoreController {
         }
         $str = implode($charSpace, $strArray);
 
+        $str = str_replace(' ','-',$str);
+        $str = $this->seo_friendly_url($str);
         return $str;
+    }
+
+    private function seo_friendly_url($string){
+        $string = str_replace(array('[\', \']'), '', $string);
+        $string = preg_replace('/\[.*\]/U', '', $string);
+        $string = preg_replace('/&(amp;)?#?[a-z0-9]+;/i', '-', $string);
+        $string = htmlentities($string, ENT_COMPAT, 'utf-8');
+        $string = preg_replace('/&([a-z])(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig|quot|rsquo);/i', '\\1', $string );
+        $string = preg_replace(array('/[^a-z0-9]/i', '/[-]+/') , '-', $string);
+        return strtolower(trim($string, '-'));
+    }
+
+    public function clearText($string){
+
+        $string = preg_replace("/[^\pL0-9_\s]/", "", $string);
+        return strtolower(trim($string, ' '));
+
+    }
+
+    public function _substr($str, $length, $minword = 3)
+    {
+        $sub = '';
+        $len = 0;
+        foreach (explode(' ', $str) as $word)
+        {
+            $part = (($sub != '') ? ' ' : '') . $word;
+            $sub .= $part;
+            $len += strlen($part);
+            if (strlen($word) > $minword && strlen($sub) >= $length)
+            {
+                break;
+            }
+        }
+        return $sub . (($len < strlen($str)) ? '...' : '');
     }
 
     /*====== End All function common ==============*/

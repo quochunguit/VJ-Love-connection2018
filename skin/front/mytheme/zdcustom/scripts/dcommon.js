@@ -6,12 +6,16 @@ $(function () {
     App.Contact.init(); 
     App.Subscribe.init();
     App.VoteShare.init();
-    //App.Facebook.init();
     
     if($(".btn-login-facebook").length > 0 || $(".fb-share").length > 0){App.Facebook.init();}
     App.Google.init();
+    setTimeout(function(){
+        var checkFg = $('#show-fg').val();
+        if(checkFg){
+            helperJs.bzOpenPopup({items: { src: '#pop-recover' } });
+        }
+        ; }, 1000);
 
-    App.Contest.init();
 });
 
 //--All site
@@ -19,7 +23,69 @@ App.Site = function(){
 
     var init = function(){
         changeLang();
+        forgotpass();
+        formValidate();
+        recoverpass();
     };
+
+    var forgotpass = function(){
+        $(".btn-forgotpass").click(function(){
+            $.ajax({
+                url: baseurl + "/"+languageShort+"/user-forget-pass",
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    email:$('#fgemail').val()
+                },
+                success: function (res) {
+
+                    helperJs.bzClosePopup();
+                    helperJs.bzOpenPopup(
+                        {items:
+                        { src: '#pop-alert'},
+                            beforeOpen(){
+                        $('#pop-alert > div > p').text(res.message);
+                    },
+                    afterClose(){
+                        location.href ='/';
+
+                    }
+                }
+            );
+                }
+            });
+        });
+    }
+
+    var recoverpass = function(){
+        $(".btn-recovertpass").click(function(){
+            $.ajax({
+                url: baseurl +"/"+languageShort+"/user-recover",
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    password:$('#rcvpass').val(),
+                    cfpassword:$('#re-rcvpass').val(),
+                    forget_pass_code:$('#show-fg').val(),
+                },
+                success: function (res) {
+                    helperJs.bzClosePopup();
+                    helperJs.bzOpenPopup(
+                        {items:
+                        { src: '#pop-alert'},
+                            beforeOpen(){
+                        $('#pop-alert > div > p').text(res.message);
+                    },
+                    afterClose(){
+                        setTimeout(function(){ App.Popup.openLogin(); }, 1000);
+
+                    }
+                }
+            );
+                }
+            });
+        });
+    }
 
     var changeLang = function(selectChangeLang){
         var $elChaneLang = $(selectChangeLang);
@@ -34,53 +100,10 @@ App.Site = function(){
         }
     };
 
-    var globalSearch = function(formEl){
-        var $formSearch = $(formEl);
-        if($formSearch.length > 0){
-            var $keyWord = $formSearch.find('#s_key_word').val();
-            if($keyWord!==''){
-                $formSearch.submit();
-            }
-        }
-    };
-
-    //--Auto resize element
-    var autoResize = function(id){
-        var newheight;
-        var newwidth;
-
-        if(document.getElementById){
-            newheight = document.getElementById(id).contentWindow.document .body.scrollHeight;
-            newwidth = document.getElementById(id).contentWindow.document .body.scrollWidth;
-        }
-
-        document.getElementById(id).height = (newheight) + "px";
-        document.getElementById(id).width = (newwidth) + "px";
+    var showUserLogin = function(userid, username){
+        $('li.login').html('<a href="javascript:void(0);" onclick="App.Site.userLogout('+userid+');" class="popup-is-open" data-htmlclass="html-popup-content"><i class="icomoon icon-login" aria-hidden="true"></i> '+username+'</a>');
+        $('li.send-contest a').attr({'onclick': 'App.Site.goToContestSubmit('+userid+')'});
     }
-
-    //--Auto add class img-resposive for image--
-    var autoAddClassRespImage = function(contaner){
-        var $els = $(contaner).find('img');
-        if($els.length > 0){
-            $els.each(function(){
-                $(this).addClass('img-responsive').removeAttr('style');
-            });
-        }
-    };
-
-    //Auto add class resp for Iframe---
-    var autoAddClassRespIframe = function(contaner){
-        var $els = $(contaner).find('iframe');
-        if($els.length > 0){
-            $els.each(function(){
-                var src = $(this).attr('src');
-                var elNewstr = '<div class="embed-responsive embed-responsive-16by9">'+
-                                '<iframe allowfullscreen frameborder="0" class="embed-responsive-item" src="'+src+'"></iframe>'+
-                                '</div>';
-                $(this).replaceWith(elNewstr);
-            });
-        }
-    };
 
     var userLogout = function(userId){
         $.ajax({
@@ -94,18 +117,466 @@ App.Site = function(){
         });
     };
 
-    var logoutSuccess = function(){
-        console.log('success');
-        location.reload();
+    var logoutSuccess = function(res){
+        if(res.status){
+            location.reload();
+        }else{
+            console.log(res.message);
+        }
+
+    }
+
+    var goToContestSubmit = function(userId){
+        //check user login
+        $.ajax({
+            url: baseurl+"/user-profile",
+            dataType: 'json',
+            data: {
+                user_id:userId
+            },
+            type:'post',
+            success: function(res){
+                if(res.status){
+                    //go to contest submit page
+                    window.location.href = baseurl + '/' + languageShort + '/contest-submit';
+                }else{
+                        //alert(res.message);
+                        if(res.phone != ''){
+                            App.Popup.openResendCode();
+                            $('#resend-phone').val(res.phone);
+                            $('#resend-location').val(res.location + '_' + res.phone.substr(0, 2));
+                        }else{
+                            //show update phone popup
+                            App.Popup.openUpdatePhone();
+                        }
+
+
+                }
+            }
+        });
+    }
+
+    var formValidate = function(){
+        //register form
+        var register_validate = $("form[name='register-form']").validate({
+            onkeyup: false,
+            onfocusout: false,
+            // Specify validation rules
+            rules: {
+                regname: "required",
+                regphone: {
+                    required: true,  // <-- no such method called "matches"!
+                    minlength:5,
+
+                },
+                regemail: {
+                    required: true,
+                    // Specify that email should be validated
+                    // by the built-in "email" rule
+                    email: true,
+                },
+                regpassword: {
+                    required: true,
+                    minlength: 6
+                },
+                regrepassword: {
+                    minlength: 6,
+                    equalTo : '[name="regpassword"]'
+                }
+            },
+            // Specify validation error messages
+            messages: {
+                regname : trans_Validatename,
+                regphone: {
+                    required: trans_Validatephone,
+                    minlength: trans_Validatecharacter5
+                },
+                regemail: trans_Validatevalidemail,
+                regpassword: {
+                    required: trans_Validatepassword,
+                    minlength: trans_Validatecharacter6
+                },
+                regrepassword: {
+                    equalTo: trans_Validatenotmatched,
+                    minlength: trans_Validatecharacter6
+                }
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+
+            errorPlacement: function(error, element) {
+                var pa_element = element.closest('.form-group');
+                pa_element.addClass('error');
+
+                element = element.next().children();
+                element.text(error.text());
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                var pa_element = $(element).closest('.form-group');
+                pa_element.removeClass('error');
+            },
+            submitHandler: function(form) {
+                var reg_name = $('#reg-name').val();
+                var reg_phone = $('#reg-phone').val();
+                var country_code = $('#reg-location').val();
+                var location = country_code.split('_')[0];
+                var phone_code = country_code.split('_')[1];
+                var reg_email = $('#reg-email').val();
+                var reg_password = $('#reg-password').val();
+                var reg_repassword = $('#reg-repassword').val();
+
+                $.ajax({
+                    url: baseurl+"/"+languageShort+"/user-register",
+                    dataType: 'json',
+                    data: {
+                        'name': reg_name,
+                        'phone': reg_phone,
+                        'email': reg_email,
+                        'phonecode': phone_code,
+                        'location': location,
+                        'password': reg_password,
+                        'cfpassword': reg_repassword
+                    },
+                    type:'post',
+                    success: function(res){
+
+                        if(res.status){
+                            helperJs.bzOpenPopup(
+                                {items:
+                                { src: '#pop-alert'},
+                                    beforeOpen(){
+                                    $('#pop-alert > div > p').text(res.message);
+                                    $('#pop-alert > div > div > button').text(res.button);
+                                    },
+                                    afterClose(){
+
+                                        setTimeout(function(){ showActivationFillCode(res.data); }, 1000);
+
+                                    }
+                                }
+                            );
+
+                        }else{
+                            var elementError = res.element;
+                            var error = res.message;
+                            var errorArray = {};
+                            var element = elementError;
+                            errorArray[element] = error;
+                            register_validate.showErrors(errorArray);
+                    }
+                    }
+                });
+                return false;
+            }
+        });
+
+        //login form
+        var login_validate = $("form[name='login-form']").validate({
+            onkeyup: false,
+            onfocusout: false,
+            // Specify validation rules
+            rules: {
+                loginemail: {
+                    required: true,
+                    // Specify that email should be validated
+                    // by the built-in "email" rule
+                    email: true
+                },
+                loginpassword: {
+                    required: true,
+                    minlength: 6
+                }
+            },
+
+            // Specify validation error messages
+            messages: {
+                loginpassword: {
+                    required: trans_Validatepassword,
+                    minlength: trans_Validatecharacter6
+                },
+                loginemail: trans_Validatevalidemail
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+
+            errorPlacement: function(error, element) {
+                var pa_element = element.closest('.form-group');
+                pa_element.addClass('error');
+
+                element = element.next().children();
+                element.text(error.text());
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                var pa_element = $(element).closest('.form-group');
+                pa_element.removeClass('error');
+            },
+            submitHandler: function(form) {
+                var login_email = $('#login-email').val();
+                var login_password = $('#login-password').val();
+
+                $.ajax({
+                    url: baseurl+"/user-login",
+                    dataType: 'json',
+                    data: {
+                        'email': login_email,
+                        'password': login_password
+                    },
+                    type:'post',
+                    success: function(res){
+                        if(res.status){
+                            location.reload();
+                        }else{
+                            if(res.status_key == 'inactive'){
+                                App.Site.showUserLogin(res.id, res.name);
+
+                                //alert(res.message);
+                                if(res.phone != ''){
+                                    App.Popup.openResendCode();
+                                    $('#resend-phone').val(res.phone);
+                                    $('#resend-location').val(res.location + '_' + res.phone.substr(0, 2));
+                                }else{
+                                    //show update phone popup
+                                    App.Popup.openUpdatePhone();
+                                }
+
+                            }else{
+                                $('#login-error').html(trans_LoginFailed);
+                            }
+                        }
+                    }
+                });
+                return false;
+            }
+        });
+
+        //update phone form
+        var updatephone_validate = $("form[name='updatephone-form']").validate({
+            onkeyup: false,
+            onfocusout: false,
+            // Specify validation rules
+            rules: {
+                phonenumber: {
+                    required: true,  // <-- no such method called "matches"!
+                    minlength:5
+                }
+            },
+
+            // Specify validation error messages
+            messages: {
+                phonenumber: {
+                    required: trans_Validatephone,
+                    minlength: trans_Validatecharacter5
+                }
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+
+            errorPlacement: function(error, element) {
+                var pa_element = element.closest('.form-group');
+                pa_element.addClass('error');
+
+                element = element.next().children();
+                element.text(error.text());
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                var pa_element = $(element).closest('.form-group');
+                pa_element.removeClass('error');
+            },
+            submitHandler: function(form) {
+                var phone = $('#phone-number').val();
+                var country_code = $('#location').val();
+                var location = country_code.split('_')[0];
+                var phone_code = country_code.split('_')[1];
+
+                if(phone && phone != ''){ //check phone function later
+                    $.ajax({
+                        url: baseurl+"/"+languageShort+"/user-update-profile",
+                        dataType: 'json',
+                        data: {
+                            'act': 'sendcode',
+                            'location': location,
+                            'phonecode': phone_code,
+                            'phone': phone
+                        },
+                        type:'post',
+                        success: function(res){
+                            console.log(res);
+                            if(res.status){
+                                //$('#phone-active-modal').modal('hide');
+                                //show activation fill code
+                                showActivationFillCode(res.data);
+                            }else{
+                                $('#phone-number').closest('.form-group').addClass('error');
+                                $('#phone-number').next().children().text(res.message);
+                            }
+                        }
+                    });
+                }
+                return false;
+            }
+        });
+
+        //resend code form
+        var resendcode_validate = $("form[name='resendcode-form']").validate({
+            onkeyup: false,
+            onfocusout: false,
+            // Specify validation rules
+            rules: {
+                phonenumber: {
+                    required: true,  // <-- no such method called "matches"!
+                    minlength:5
+                }
+            },
+
+            // Specify validation error messages
+            messages: {
+                phonenumber: {
+                    required: trans_Validatephone,
+                    minlength: trans_Validatecharacter5
+                }
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+
+            errorPlacement: function(error, element) {
+                var pa_element = element.closest('.form-group');
+                pa_element.addClass('error');
+
+                element = element.next().children();
+                element.text(error.text());
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                var pa_element = $(element).closest('.form-group');
+                pa_element.removeClass('error');
+            },
+            submitHandler: function(form) {
+                //check phonenumber
+                var phone = $('#resend-phone').val();
+                var country_code = $('#resend-country').val();
+                var location = country_code.split('_')[0];
+                var phone_code = country_code.split('_')[1];
+
+                //save change phone
+                $.ajax({
+                    url: baseurl+"/"+languageShort+"/user-update-profile",
+                    dataType: 'json',
+                    data: {
+                        'act': 'updatephone',
+                        'location': location,
+                        'phonecode': phone_code,
+                        'phone': phone
+                    },
+                    type:'post',
+                    success: function(res){
+                        if(res.status){
+                            $('#resend-phone').closest('.form-group').removeClass('error');
+
+                            showActivationFillCode(res.data);
+                        }else{
+                            $('#resend-phone').closest('.form-group').addClass('error');
+                            $('#resend-phone').next().children().text(res.message);
+                        }
+                    }
+                });
+
+                return false;
+            }
+        });
+
+        $('#resend-country').change(function(){
+            $('#resend-phone').val('');
+        });
+
+        //resend code form
+        var activecode_validate = $("form[name='activecode-form']").validate({
+            onkeyup: false,
+            onfocusout: false,
+            // Specify validation rules
+            rules: {
+                receivecodenumber: "required"
+            },
+
+            // Specify validation error messages
+            messages: {
+                receivecodenumber: trans_Validateactivationcode
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+
+            errorPlacement: function(error, element) {
+                var pa_element = element.closest('.form-group');
+                pa_element.addClass('error');
+
+                element = element.next().children();
+                element.text(error.text());
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                var pa_element = $(element).closest('.form-group');
+                pa_element.removeClass('error');
+            },
+            submitHandler: function(form) {
+                var mobile_code = $('#receive-code-number').val();
+                $.ajax({
+                    url: baseurl+"/"+languageShort+"/user-verify-sms",
+                    dataType: 'json',
+                    data: {
+                        'mobile_code': mobile_code
+                    },
+                    type:'post',
+                    success: function(res){
+                        if(res.status){
+                            helperJs.bzOpenPopup(
+                                {items:
+                                { src: '#pop-alert'},
+                                    beforeOpen(){
+                                $('#pop-alert > div > p').text(res.message);
+                                $('#pop-alert > button.change-text-pop').text(trans_Continue);
+                            },
+                            afterClose(){
+                                location.href = baseurl+'/'+languageShort+'/contest-submit';
+
+                            }
+                        }
+                        )
+
+
+                        }else{
+                            $('#receive-code-number').closest('.form-group').addClass('error');
+                            $('#receive-code-number').next().children().text(res.message);
+                        }
+                    }
+                });
+                return false;
+            }
+        });
+
+    }
+
+    var showActivationFillCode = function(data){
+        //$('#code-active-modal').modal('show');
+        App.Popup.openActiveCode();
+        $('#pop-activecode .note').html(trans_Activationcodesendtophonenumber+' +'+data.phone+' ('+data.mobile_code+')');
+    }
+
+    var showWinnerList = function(){
+        helperJs.bzClosePopup();
+        helperJs.bzOpenPopup(
+            {items:
+                    { src: '#pop-alert'},
+                beforeOpen(){
+                    $('#pop-alert > div > p').text(trans_WinnerListEmpty);
+                },
+                afterClose(){
+                }
+            });
     }
 
     return {
         init:init,
-        autoResize:autoResize,
-        globalSearch:globalSearch,
-        autoAddClassRespImage:autoAddClassRespImage,
-        autoAddClassRespIframe:autoAddClassRespIframe,
-        userLogout:userLogout
+        showUserLogin: showUserLogin,
+        userLogout:userLogout,
+        showWinnerList: showWinnerList,
+        goToContestSubmit: goToContestSubmit
     };
 }();    
 //--End All site
@@ -227,7 +698,7 @@ App.Facebook = function(){
 
                 cookie: true,
                 oauth: true,
-                version    : 'v2.5'
+                version    : 'v2.9'
             });
         };
 
@@ -276,18 +747,22 @@ App.Facebook = function(){
             saveUserComplete = function(res){
                 if(res.data.status == "0") { //nếu chưa active
                     if (res.data.phone == "") {
-                        //show modal popup with phone input
-                        $('#phone-active-modal').modal('show');
+                        //show update phone popup
+                        App.Popup.openUpdatePhone();
                     }
 
                     if(res.need_active){
                         //show resend popup with phone editable
-                        $('#resend-code-modal').modal('show');
+                        App.Popup.openResendCode();
                         $('#resend-phone').val(res.data.phone);
                         $('#resend-location').val(res.data.location + '_' + res.data.phone.substr(0, 2));
                     }
+
                 }else{
-                    //actived user logged in
+                    if(res.status){
+                        location.href = baseurl+'/'+languageShort+'/contest-submit';
+                    }
+
                 }
             }
         });
@@ -319,6 +794,8 @@ App.Facebook = function(){
         init:init
     }
 }();
+
+
 
 //--Google
 App.Google = function () {
@@ -411,20 +888,23 @@ App.Google = function () {
                             console.log(res);
                             //location.reload();
                             if(res.status){
+                                App.Site.showUserLogin(res.data.id, res.data.name);
+
                                 if(res.data.status == "0") { //nếu chưa active
                                     if (res.data.phone == "") {
-                                        //show modal popup with phone input
-                                        $('#phone-active-modal').modal('show');
+                                        //show update phone popup
+                                        App.Popup.openUpdatePhone();
                                     }
 
                                     if(res.need_active){
                                         //show resend popup with phone editable
-                                        $('#resend-code-modal').modal('show');
+                                        App.Popup.openResendCode();
                                         $('#resend-phone').val(res.data.phone);
                                         $('#resend-location').val(res.data.location + '_' + res.data.phone.substr(0, 2));
                                     }
                                 }else{
                                     //actived user logged in
+                                    location.reload();
                                 }
                             }
                         }
@@ -433,8 +913,8 @@ App.Google = function () {
                             console.log(error);
                         }
 
-                        $('.google-signin').html('<div id="my-signin2"></div>');
-                        gapi.signin2.render('my-signin2', {
+                        //$('.google-signin').html('<div id="my-signin2"></div>');
+                        /*gapi.signin2.render('my-signin2', {
                             'scope': 'profile email',
                             'width': 240,
                             'height': 50,
@@ -442,187 +922,46 @@ App.Google = function () {
                             'theme': 'dark',
                             'onsuccess': onSuccess,
                             'onfailure': onFailure
-                          });
+                          });*/
+                        attachSignin = function(element) {
+                            auth2.attachClickHandler(element, {},
+                                function(googleUser) {
+                                    onSuccess(googleUser);
+                                    //document.getElementById('name').innerText = "Signed in: " +
+                                        //googleUser.getBasicProfile().getName();
+                                }, function(error) {
+                                    console.log(JSON.stringify(error, undefined, 2));
+                                });
+                        }
+
+                        attachSignin(document.getElementById('my-signin2'));
+
                     }
                 });
             });
         });
 
-        $('#activation-code-send-btn').click(function(){
-            var phone = $('#phone-number').val();
-            var country_code = $('#location').val();
-            var location = country_code.split('_')[0];
-            var phone_code = country_code.split('_')[1];
+        /*$('#activation-code-send-btn').click(function(){
 
-            if(phone && phone != ''){ //check phone function later
-                $.ajax({
-                    url: baseurl+"/user-update-profile",
-                    dataType: 'json',
-                    data: {
-                        'act': 'sendcode',
-                        'location': location,
-                        'phonecode': phone_code,
-                        'phone': phone
-                    },
-                    type:'post',
-                    success: function(res){
-                        console.log(res);
-                        if(res.status){
-                            $('#phone-active-modal').modal('hide');
-                            //show activation fill code
-                            showActivationFillCode(res.data);
-                        }
-                    }
-                });
-            }
-        });
+        });*/
 
         var showActivationFillCode = function(data){
-            $('#code-active-modal').modal('show');
-            $('#mobile-code').html(data.mobile_code);
+            //$('#code-active-modal').modal('show');
+            App.Popup.openActiveCode();
+            $('#pop-activecode .note').html(trans_Activationcodesendtophonenumber + ' +'+data.phone);
         }
 
-        $('#active-btn').click(function(){
-            var mobile_code = $('#receive-code-number').val();
-            if(mobile_code.length == 4){
-                $.ajax({
-                    url: baseurl+"/user-verify-sms",
-                    dataType: 'json',
-                    data: {
-                        'mobile_code': mobile_code
-                    },
-                    type:'post',
-                    success: function(res){
-                        alert(res.message);
-                        location.reload();
-                    }
-                });
-            }
-        });
 
-        $('#edit-phone').click(function(){
-            var action = $(this).attr('action');
 
-            if(action == 'edit'){
-                $('#resend-phone').removeAttr('readonly');
-                $('#resend-phone').focus();
-                $(this).text('Save');
-                $(this).attr({'action':'save'});
-            }else if(action = 'save'){
-                var phone = $('#resend-phone').val();
-                var country_code = $('#resend-location').val();
-                var location = country_code.split('_')[0];
-                var phone_code = country_code.split('_')[1];
+        /*$('#reg-account-btn').click(function(){
 
-                //save change phone
-                $.ajax({
-                    url: baseurl+"/user-update-profile",
-                    dataType: 'json',
-                    data: {
-                        'act': 'updatephone',
-                        'location': location,
-                        'phonecode': phone_code,
-                        'phone': phone
-                    },
-                    type:'post',
-                    success: function(res){
-                        if(res.status){
-                            $('#resend-phone').attr({'readonly': ''});
-                            $('#edit-phone').text('Edit');
-                            $('#edit-phone').attr({'action':'edit'});
-                        }
-                    }
-                });
-            }
-
-        });
-
-        $('#resend-btn').click(function(){
-            var country_code = $('#resend-location').val();
-            var location = country_code.split('_')[0];
-
-            $.ajax({
-                url: baseurl+"/user-update-profile",
-                dataType: 'json',
-                data: {
-                    'act': 'sendcode',
-                    'location': location
-                },
-                type:'post',
-                success: function(res){
-                    if(res.status){
-                        $('#resend-code-modal').modal('hide');
-                        showActivationFillCode(res.data);
-                    }
-                }
-            });
-        });
-
-        $('#reg-account-btn').click(function(){
-            var reg_name = $('#reg-name').val();
-            var reg_phone = $('#reg-phone').val();
-            var country_code = $('#reg-location').val();
-            var location = country_code.split('_')[0];
-            var phone_code = country_code.split('_')[1];
-            var reg_email = $('#reg-email').val();
-            var reg_password = $('#reg-password').val();
-            var reg_repassword = $('#reg-repassword').val();
-
-            $.ajax({
-                url: baseurl+"/user-register",
-                dataType: 'json',
-                data: {
-                    'name': reg_name,
-                    'phone': reg_phone,
-                    'email': reg_email,
-                    'phonecode': phone_code,
-                    'location': location,
-                    'password': reg_password,
-                    'cfpassword': reg_repassword
-                },
-                type:'post',
-                success: function(res){
-                    alert(res.message);
-                    if(res.status){
-                        //redirect to login page
-                        location.href = baseurl + '/vi/login';
-                    }
-                }
-            });
         });
 
         $('#login-btn').click(function(){
-            var login_email = $('#login-email').val();
-            var login_password = $('#login-password').val();
+            //validate form
 
-            $.ajax({
-                url: baseurl+"/user-login",
-                dataType: 'json',
-                data: {
-                    'email': login_email,
-                    'password': login_password
-                },
-                type:'post',
-                success: function(res){
-                    if(res.status){
-                        location.reload();
-                    }else{
-                        if(res.status_key == 'inactive'){
-                            alert(res.message);
-                            if(res.phone != ''){
-                                $('#resend-code-modal').modal('show');
-                                $('#resend-phone').val(res.phone);
-                                $('#resend-location').val(res.location + '_' + res.phone.substr(0, 2));
-                            }else{
-                                //show modal popup with phone input
-                                $('#phone-active-modal').modal('show');
-                            }
 
-                        }
-                    }
-                }
-            });
-        });
+        });*/
     };
 
     return {
@@ -630,332 +969,6 @@ App.Google = function () {
     }
 }();
 
-//--Contest Submit
-App.Contest = function (){
-    /*var video_duration_limit = 60;
-    var media_type = 'video';
-    var media_images = '';
-    var image_upload_error = '';
-
-    var init = function(){
-        //new upload
-
-
-        //dropzone
-        $(document).ready(function(){
-            Dropzone.forElement(".dropzone").options.autoProcessQueue = false;
-            Dropzone.forElement(".dropzone").options.maxFiles = 10;
-            Dropzone.forElement(".dropzone").options.parallelUploads = 10;
-
-            $('#switch_left').click(function(){
-                media_type = 'video';
-                $('.multi-image-upload').addClass('disabledArea');
-                $('.video-upload').removeClass('disabledArea');
-            });
-
-            $('#switch_right').click(function(){
-                media_type = 'images';
-                $('.multi-image-upload').removeClass('disabledArea');
-                $('.video-upload').addClass('disabledArea');
-            });
-        });
-
-        //contest submit button event
-        $('#contestSubmit').click(function(){
-            //reset validate
-            $('#video-title-error').html('');
-            $('#video-des-error').html('');
-            $('#video-file-error').html('');
-
-            //validate video upload form
-            var video_title = $('#video-title').val();
-            var video_description = $('#video-description').val();
-            var video_file = $('#fileupload').val();
-
-            if(video_title == ''){$('#video-title-error').html('Title should not be empty!'); return;}
-            if(video_description.length < 1){$('#video-des-error').html('Description must be over 50 words!'); return;}
-
-            //if video upload option chosen
-            if(media_type == 'video'){
-                if(video_file == ''){$('#video-file-error').html('Choose a video file to upload!'); return;}
-                //check video file type
-                var file_ext = $('#fileupload').val().split('.').pop().toLowerCase();
-
-                if($.inArray(file_ext, ['mp4','avi','mov']) == -1) {
-                    alert('Invalid file format, we just allow mp4, avi, mov video format, choose another one, thanks!');
-                }else{
-                    //Get input files
-                    var file_data = $('#fileupload').prop('files')[0];
-                    //Get file type
-                    var type = file_data.type;
-
-                    //check video file duration
-                    var myVideos = [];
-                    myVideos.push(file_data);
-                    var video = document.createElement('video');
-                    video.preload = 'metadata';
-                    video.onloadedmetadata = function() {
-                        window.URL.revokeObjectURL(video.src);
-                        var duration = video.duration;
-                        myVideos[myVideos.length - 1].duration = duration;
-
-                        if(myVideos[0].duration < video_duration_limit){
-                            //start upload video
-                            startUploadVideo(file_data);
-                        }else{
-                            alert('Video upload should not be longer than 1 minute!');
-                        }
-                    }
-                    video.src = URL.createObjectURL(file_data);
-                }
-            }else if(media_type == 'images'){
-                if($('.dz-file-preview').length == 0 && $('.dz-image-preview').length == 0){
-                    $('#images-file-error').html('Choose image file to upload!'); return;
-                }else if($('.dz-image-preview').length > 10){
-                    $('#images-file-error').html('Maximum 10 images!'); return;
-                }
-
-                //start upload images
-                Dropzone.forElement(".dropzone").processQueue();
-                Dropzone.forElement(".dropzone").on("success", function (file, response) {
-                    var result = JSON.parse(response);
-                    if(result.status){
-                        if(media_images == ''){
-                            media_images += result.filename;
-                        }else{
-                            media_images += ',' + result.filename;
-                        }
-                    }else{
-                        image_upload_error += result.message;
-                    }
-                });
-                Dropzone.forElement(".dropzone").on("complete", function (file, response) {
-                    if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
-                        if(media_images != ''){
-                            finishSavingContestSubmit(media_images);
-                        }
-
-                        if(image_upload_error != ''){alert(image_upload_error);}
-                    }
-                });
-            }
-        });
-    }
-
-    var startUploadVideo = function(file_data){
-        //init form object
-        var form_data = new FormData();
-        //add file data to form object
-        form_data.append('file', file_data);
-        form_data.append('media_type', 'video');
-
-        //using ajax post
-        $.ajax({
-            url: baseurl+"/vi/contest-submit", //submit to contest submit action
-            dataType: 'text',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            type: 'post',
-            xhr: function ()
-            {
-                var jqXHR = null;
-                if ( window.ActiveXObject )
-                {
-                    jqXHR = new window.ActiveXObject( "Microsoft.XMLHTTP" );
-                }
-                else
-                {
-                    jqXHR = new window.XMLHttpRequest();
-                }
-                //Upload progress
-                jqXHR.upload.addEventListener( "progress", function ( evt )
-                {
-                    if ( evt.lengthComputable )
-                    {
-                        var percentComplete = Math.round( (evt.loaded * 100) / evt.total );
-                        //Do something with upload progress
-                        console.log( 'Uploaded percent', percentComplete );
-                    }
-                }, false );
-                //Download progress
-                jqXHR.addEventListener( "progress", function ( evt )
-                {
-                    if ( evt.lengthComputable )
-                    {
-                        var percentComplete = Math.round( (evt.loaded * 100) / evt.total );
-                        //Do something with download progress
-                        $('#bar1').css({'width': percentComplete +'%'});
-                        $('#percent1').html(percentComplete + '%');
-                        console.log( 'Downloaded percent', percentComplete );
-                    }
-                }, false );
-                return jqXHR;
-            },
-            success: function (res) {
-                var result = JSON.parse(res);
-                if(result.status){
-                    finishSavingContestSubmit(result.filename);
-                }else{
-                    alert(result.message);
-                }
-            }
-        });
-    }
-
-    var finishSavingContestSubmit = function(media){
-        var dataObject = {};
-        dataObject.media_title = $('#video-title').val();
-        dataObject.media_description = $('#video-description').val();
-        dataObject.media_type = media_type;
-        dataObject.media = media;
-
-        $.ajax({
-            type : "POST",
-            url  : baseurl+"/vi/contest-submit",
-            data : dataObject,
-            success :  function(res){
-                //do something here
-                var result = JSON.parse(res);
-                alert(result.message);
-            }
-        });
-    }*/
-
-    var init = function() {
-        createUploadHtml(1);
-
-        //send contest button
-        $('#send-contest-btn').click(function(){
-            var goal_location = $('#goal-location').val();
-            var contest_content = $('.contest-content').val();
-
-            if(goal_location == -1){
-                alert('Vui lòng chọn điểm đến');
-                return;
-            }
-            if($('.img-upload-item img').length == 0){
-                alert('chọn ít nhất 1 hình');
-                return;
-            }
-            if(contest_content == ''){
-                alert('Vui lòng gửi thông điệp');
-                return;
-            }
-            if(contest_content.match(/\S+/g).length > 1000){
-                alert('Thông điệp không được quá 1000 chữ');
-                return;
-            }
-
-            //send ajax
-            //append to form data
-            var formData = new FormData();
-            $('#image-upload-form').find('input[type=file]').each(function(index, file){
-                if(file.files[0] != undefined){
-                    formData.append('file[]', file.files[0]);
-                }
-            });
-
-            $.ajax({
-                url: baseurl + "/vi/contest-submit", //submit to contest submit action
-                dataType: 'text',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: formData,
-                type: 'post',
-                success: function (res) {
-                    var result = JSON.parse(res);
-                    if(result.status){
-                        finishSavingContestSubmit(result.fileuploaded);
-                    }else{
-                        alert(result.message);
-                    }
-                }
-            });
-        });
-    }
-
-    var addnewuploadhtml = function(num){
-        var current = num - 1;
-        var upload_image = $('.img-upload-area-'+current+ ' img');
-
-        if(upload_image.length == 0){
-            alert('Vui lòng upload ảnh');
-        }else{
-            if(num > 5){
-                alert('Upload tối đa 5 hình!');
-            }else{
-                createUploadHtml(num);
-            }
-
-            var upload_action = $('.img-upload-action-' + current);
-            upload_action.html('<span class="text-danger" onclick="App.Contest.removeuploadhtml('+current+')" for="img-upload-area-'+current+'"><i class="fa fa-trash"></i> XOÁ HÌNH</span>');
-        }
-    }
-
-    var createUploadHtml = function(num){
-        var next = num + 1;
-        var addButton = '<span class="text-success" onclick="App.Contest.addnewuploadhtml('+next+')" for="img-upload-area-'+num+'"><i class="fa fa-plus"></i> THÊM HÌNH</span>';
-
-        var img_upload_item = '<div class="img-upload-item col-md-12"><div class="col-md-4">Hình Ảnh '+num+'</div><div class="col-md-4 text-center img-upload-area-'+num+'"><div class="upload-btn-wrapper"><button class="btn btn-upload">UPLOAD ẢNH</button><input type="file" name="image-upload" for="img-upload-area-'+num+'" onchange="App.Contest.readURL(this);"/></div></div><div class="col-md-4 text-right img-upload-action img-upload-action-'+num+'">'+addButton+'</div></div>';
-        $('#image-upload-form').append(img_upload_item);
-    }
-
-    var removeuploadhtml = function(num){
-        $('.img-upload-area-'+num+' .upload-btn-wrapper').show();
-        $('.img-upload-area-'+num+' .select-image').remove();
-        $('.img-upload-area-'+num+' input').val('');
-    }
-
-    //new upload
-    var readURL = function(input){
-        if (input.files && input.files[0]) {
-            var upload_area = $(input).attr('for');
-            $('.'+upload_area + ' .upload-btn-wrapper').hide();
-            $('.'+upload_area).append('<div class="select-image"><img src="" alt="" /></div>')
-
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                //console.log(e.target.result);
-                $('.'+upload_area + ' img').attr('src', e.target.result)
-                    .width(150);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    var finishSavingContestSubmit = function(media){
-        var dataObject = {};
-        dataObject.media_title = 'Title';
-        dataObject.media_destination = $('#goal-location').val();
-        dataObject.media_description = $('.contest-content').val();
-        dataObject.media_type = 'images';
-        dataObject.media = media.join(',');
-
-        $.ajax({
-            type : "POST",
-            url  : baseurl+"/vi/contest-submit",
-            data : dataObject,
-            success :  function(res){
-                //do something here
-                var result = JSON.parse(res);
-                alert(result.message);
-            }
-        });
-    }
-
-
-    return {
-        init:init,
-        readURL:readURL,
-        addnewuploadhtml:addnewuploadhtml,
-        removeuploadhtml:removeuploadhtml
-    }
-}();
 
 //--Scroll
 App.Scroll = function () {
@@ -991,26 +1004,25 @@ App.VoteShare = function () {
         var title = $('meta[property="og:title"]').attr('content');
         var link = $('meta[property="og:url"]').attr('content');
         var img = $('meta[property="og:image"]').attr('content');
-        var caption = $('meta[property="og:site_name"]').attr('content');
         var description = $('meta[property="og:description"]').attr('content');
-        share(title, link, img, caption, description);
+        shareFB(title, link, img, description);
     };
 
-    var shareFB = function (name, link, img, caption, description) {
+    var shareFB = function (FBTitle,FBLink, FBPic, FBDesc) {
         if (typeof (FB) !== 'undefined') {
-            FB.ui(
-                {
-                    method: 'feed',
-                    name: name,
-                    link: link,
-                    picture: img,
-                    caption: caption,
-                    description: description
-                },
-                function (response) {
-                    App.Debug.consoleLog(response);
-                }
-            );
+            FB.ui({
+                method: 'share_open_graph',
+                action_type: 'og.shares',
+                action_properties: JSON.stringify({
+                    object: {
+                        'og:url': FBLink,
+                        'og:title': FBTitle,
+                        'og:description': FBDesc,
+                        'og:image': FBPic
+                    }
+                })
+            });
+
         } else {
             App.Debug.consoleLog('Please try again later...');
         }
@@ -1032,7 +1044,36 @@ App.VoteShare = function () {
                         'type':'votes'
                     },
                     success: function (res) {
-                        clickVote = true;
+                        if(res.status){
+                            helperJs.bzClosePopup();
+                            helperJs.bzOpenPopup(
+                                {items:
+                                        { src: '#pop-alert'},
+                                    beforeOpen(){
+                                        $('#pop-alert > div > p').text(res.message);
+                                    },
+                                    afterClose(){
+                                        //increase number likes
+                                        $('.count-like').text(res.currentCount);
+                                    }
+                                });
+                        }else{
+                                helperJs.bzClosePopup();
+                                helperJs.bzOpenPopup(
+                                    {items:
+                                            { src: '#pop-alert'},
+                                        beforeOpen(){
+                                            $('#pop-alert > div > p').text(res.message);
+                                        },
+                                        afterClose(){
+                                            if(res.is_login){
+                                                //show login popup
+                                                App.Popup.openLogin();
+                                            }
+                                        }
+                                    });
+                        }
+                        /*clickVote = true;
                         console.log(res);
                         if (res.status) {
                             var $classShowNum = $('.num_vote_' + objectId);
@@ -1056,7 +1097,7 @@ App.VoteShare = function () {
                         var voteButton = $('.vote-button-' + objectId);
                         voteButton.off('click');
                         voteButton.html('Voted');
-                        voteButton.removeClass('btn-info');
+                        voteButton.removeClass('btn-info');*/
                     }
                 });
             }
@@ -1122,7 +1163,8 @@ App.VoteShare = function () {
         init: init,
         shareSite: shareSite,
         share:share,
-        vote:vote
+        vote:vote,
+        shareFB:shareFB
     };
 }();
 
@@ -1214,18 +1256,56 @@ App.magnificPopup = function () {
 }();
 
 App.Popup = function () {
-    var open = function (id,url,res) {
+    var openForgotpass = function () {
+        helperJs.bzClosePopup();
+        setTimeout(function(){  helperJs.bzOpenPopup({items: { src: '#pop-forgotpass' } }); }, 1000);
 
     };
 
-    var close = function () {
+    var openLogin = function(){
+        helperJs.bzClosePopup();
+        setTimeout(function(){  helperJs.bzOpenPopup({items: { src: '#pop-login' } }); }, 500);
+    }
 
-    };
+    var openRegister = function(){
+        helperJs.bzClosePopup();
+        setTimeout(function(){  helperJs.bzOpenPopup({items: { src: '#pop-register' } }); }, 500);
+    }
 
+    var openUpdatePhone = function(){
+        helperJs.bzClosePopup();
+        setTimeout(function(){  helperJs.bzOpenPopup({items: { src: '#pop-updatephone' } }); }, 500);
+    }
+
+    var openActiveCode = function(){
+        helperJs.bzClosePopup();
+        setTimeout(function(){  helperJs.bzOpenPopup({items: { src: '#pop-activecode' } }); }, 500);
+    }
+
+    var openResendCode = function(){
+        helperJs.bzClosePopup();
+        setTimeout(function(){  helperJs.bzOpenPopup({items: { src: '#pop-resendcode' } }); }, 500);
+    }
+
+    var openPopAlert = function(){
+        helperJs.bzClosePopup();
+        setTimeout(function(){  helperJs.bzOpenPopup({items: { src: '#pop-alert' } }); }, 500);
+    }
+
+    var openPopContestSuccess = function(){
+        helperJs.bzClosePopup();
+        setTimeout(function(){  helperJs.bzOpenPopup({items: { src: '#pop-contestSuccess' } }); }, 500);
+    }
 
     return {
-        open: open,
-        close: close
+        openForgotpass: openForgotpass,
+        openLogin: openLogin,
+        openRegister: openRegister,
+        openUpdatePhone: openUpdatePhone,
+        openActiveCode: openActiveCode,
+        openResendCode: openResendCode,
+        openPopAlert: openPopAlert,
+        openPopContestSuccess: openPopContestSuccess
     };
 }();
 

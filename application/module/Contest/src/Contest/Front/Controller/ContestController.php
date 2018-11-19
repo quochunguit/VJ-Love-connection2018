@@ -11,38 +11,56 @@ class ContestController extends FrontController {
         $userLogin = $this->getUserLogin();
 
         $params = $this->getParams();
-        $model = $this->getContestModel();
-        $model->setLimit(10);
-        $model->setParams($params);
-        $listContest = $model->getItems();
-        $listContest = $listContest->toArray();
+        $this->layout()->setVariables(array('parent_page'=>'home', 'page'=>'contest'));
+        //$model = $this->getContestModel();
+        //$model->setLimit(6);
+        //$model->setParams($params);
+        //$listContest = $model->getItems();
+        //$listContest = $listContest->toArray();
         //print_r($listContest );die;
-        $this->setMetaData(array(), $this->translate('Danh sách bài chia sẻ'));
+        $this->setMetaData(array(), $this->translate('Gallery'));
+
+        $modelBestContest = $this->getContestModel();
+        $modelBestContest->setLimit(10);
+        $modelBestContest->setState('order.field', 'votes');
+        $bestContest = $modelBestContest->getItems();
+        $bestContest = $bestContest->toArray();
+
+        $modelNewestContest = $this->getContestModel();
+        $modelNewestContest->setParams($params);
+        $modelNewestContest->setLimit(6);
+        $modelNewestContest->setState('order.field', 'created');
+        $newestContest = $modelNewestContest->getItems();
+        $newestContest = $newestContest->toArray();
 
         //return to view index.phtml
         return new ViewModel(array(
-            'posts' => $listContest,
-            'paging' => $model->getPaging(),
+            'userLogin'=> $userLogin,
+            'newestContest'=> $newestContest,
+            'bestContent' => $bestContest,
+            'paging' => $modelNewestContest->getPaging()
         ));
 
 	}
 
 	public function submitAction(){
+        $this->setMetaData(array(), $this->translate('Submitions'));
+
 	    /*Check user login*/
         $codeShort = $this->getLangCode(true);
         $userLogin = $this->getUserLogin();
+        $username = ($userLogin) ? @$userLogin['name'] : '';
         $model = $this->getContestModel();
+        $this->layout()->setVariables(array('parent_page'=>'home', 'page'=>'submit'));
+        $curLang = $this->getLangCode();
 
         if($userLogin['status']==1){
             if (!empty($_FILES['file'])) {
                 //check if this user has published contest
                 $publishContest = $model->getContestByUser($userLogin[id], 1, 0);
                 if($publishContest && count($publishContest) > 0){
-                    $this->returnJsonAjax(array('status' => false, 'message' => 'Bạn đã có bài được publish!'));
+                    $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('ContestPublished')));
                 }
-
-
-
                 /*if(isset($_POST['media_type']) && $_POST['media_type'] == 'video'){
                     if($file_type == "video/mov" || $file_type  == "video/mp4" || $file_type == "video/avi") {
                         $file_size_limit = 31457280;
@@ -76,8 +94,8 @@ class ContestController extends FrontController {
                     $sumSize += $value;
                 }
 
-                if($sumSize > 52428800){
-                    $this->returnJsonAjax(array('status' => false, 'message' => 'File size must be smaller than 50MB'));
+                if($sumSize > 5242880){
+                    $this->returnJsonAjax(array('status' => false, 'limit_capacity'=>true, 'message' => $this->translate('Max_Capacity')));
                 }
 
                 for($i = 0; $i < count($_FILES["file"]["name"]); $i++){
@@ -95,10 +113,10 @@ class ContestController extends FrontController {
                             //$this->returnJsonAjax(array('status' => true, 'filename'=> $newName, 'message' => 'Upload images successfully!'));
                             array_push($fileuploaded, $newName);
                         } else { // if not success
-                            $this->returnJsonAjax(array('status' => false, 'message' => 'error upload, please try again!'));
+                            $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('UploadImageError')));
                         }
                     }else{
-                        $this->returnJsonAjax(array('status'=>false,'message'=>'Invalid file format, we just allow jpg, png image format, choose another one, thanks!'));
+                        $this->returnJsonAjax(array('status'=>false,'message'=> $this->translate('ImageFormatError')));
                     }
                 }
                 $this->returnJsonAjax(array('status' => true, 'fileuploaded'=> $fileuploaded, 'message' => 'Upload images successfully!'));
@@ -124,12 +142,13 @@ class ContestController extends FrontController {
                     $contestInfos["images"] = $mediaValue;
                 }
                 $contestInfos["slug"] = $this->slug($mediaTitle);
+                $contestInfos['language']= $curLang;
 
                 $contestModel = $this->getContestModel();
                 $return = $contestModel->save($contestInfos);
 
                 if ($return['status']) {
-                    return  $this->returnJsonAjax(array('status' => true, 'message' => 'save contest successfully!'));
+                    return  $this->returnJsonAjax(array('status' => true, 'message' => $this->translate('SaveContestSuccessful')));
                 }
             }
         }else{
@@ -139,14 +158,50 @@ class ContestController extends FrontController {
             if($userLogin['phone']==0){
                 $_SESSION['need_update']==true;
             }
-            return $this->redirectToRoute('login',array('lang'=>$codeShort));
+            return $this->redirectToRoute('home',array('lang'=>$codeShort));
         }
 
 
         return new ViewModel(array(
-
+            'username'=>$username
         ));
 	}
+
+	public function detailAction(){
+        $params = $this->getParams();
+        $contestModel = $this->getContestModel();
+        $this->layout()->setVariables(array('parent_page'=>'home', 'page'=>'detail'));
+        $codeShort = $this->getLangCode(true);
+
+        $contest_id = $params['id'];
+        $contest_slug = $params['slug'];
+        $contest_infos = $contestModel->getByIdAndSlug($contest_id, false);
+        $userModel = $this->getUserModel();
+        $userContest = $userModel->getItem(array('id'=>$contest_infos['user_id']));
+
+        $modelBestContest = $this->getContestModel();
+        $modelBestContest->setLimit(10);
+        $modelBestContest->setState('order.field', 'votes');
+        $bestContest = $modelBestContest->getItems();
+        $bestContest = $bestContest->toArray();
+        $imageArray = explode(',',$contest_infos['images']);//print_r($imageArray);die;
+
+        $titleShare = str_replace("'","´",$contest_infos['title']);
+        $desShare = $this->_substr($contest_infos['descriptions'],20);
+        $desShare = str_replace("'","´",$desShare);
+        $urlShare = BASE_URL.'/'.$codeShort.'/'.$contest_slug.'/'.$contest_id;
+        $urlImage = BASE_URL_MEDIA.'/images/'.$imageArray[0];
+
+        return new ViewModel(array(
+            'contest_infos'=> $contest_infos,
+            'bestContent' => $bestContest,
+            'titleShare'=>$titleShare,
+            'urlshare'=>$urlShare,
+            'desShare'=>$desShare,
+            'urlImage'=>$urlImage,
+            'userName'=>$userContest['name']
+        ));
+    }
 
     public function gen_slug($str){
         //pecial accents

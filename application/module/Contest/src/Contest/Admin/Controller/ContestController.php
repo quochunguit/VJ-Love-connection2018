@@ -6,12 +6,21 @@ use Zend\EventManager\EventInterface as Event;
 use Zend\View\Model\ViewModel;
 use Core\Plugin\Youtube;
 
-class ContestController extends AdminController {
 
-   public $routerName = 'contest';
+class ContestController extends AdminController {
+    protected $userModel;
+
+    public $routerName = 'contest';
 
     public function __construct() {
         $this->modelServiceName = 'Contest\Admin\Model\Contest';
+    }
+
+    public function getUserModel() {
+        if (!$this->userModel) {
+            $this->userModel = $this->getServiceLocator()->get('User\Front\Model\User');
+        }
+        return $this->userModel;
     }
 
     public function getForm() {
@@ -61,11 +70,37 @@ class ContestController extends AdminController {
 
     public function onAfterPublish(Event $e){
         $params = $e->getParams();
-        $postModel = $this->getModel();
-        
+        $contestModel = $this->getModel();
         $postIds = $params['data']['Choose'];
+        $item=$contestModel->getItem(array('id'=>$postIds));
+        $userModel = $this->getUserModel();
+        $userItem = $userModel->getItem(array('id'=>$item['user_id']));
+        //print_r($userItem);die;
         if ($postIds) {
             foreach ($postIds as $postId) {
+                $mail = $this->getServiceLocator()->get('SendMail');
+
+                if($item['language']=='vi_VN'){
+                    $mail->send(array(
+                        'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
+                        'to' => array('name' => $userItem['name'], 'email' => $userItem['email']),
+                        'subject' => 'VIETJET - ĐÃ NHẬN BÀI DỰ THI CỦA BẠN THÀNH CÔNG!!!',
+                        'template' => 'email/submitsuccess',
+                        'data' => array(
+                            'contest_url'=>BASE_URL.'/vi/'.$item['slug'].'/'.$item['id'],
+                        )
+                    ));
+                }else{
+                    $mail->send(array(
+                        'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
+                        'to' => array('name' => $userItem['name'], 'email' => $userItem['email']),
+                        'subject' => 'VIETJET - YOUR SUBMISSION HAS BEEN RECEIVED SUCCESSFULLY!',
+                        'template' => 'email/submit_en',
+                        'data' => array(
+                            'contest_url'=>BASE_URL.'/en/'.$item['slug'].'/'.$item['id']
+                        )
+                    ));
+                }
                 //--TODO: send email--
                 // $item = $postModel->getByIdAndSlug($postId);
                 // if($item){

@@ -161,7 +161,7 @@ class Pagination {
     }
 
     //--************** Front **********************----
-    function getPagingLinkFront( $post = false) {
+    function getPagingLinkFront( $post = false, $noprevnext = false) {
         $page = $this->page;
         $pageCurrent = $page;
         $request_uri = $_SERVER['REQUEST_URI'];
@@ -200,7 +200,7 @@ class Pagination {
             $pageNumber = $page;
             // print 'previous' link only if we're not
             // on page one
-            if ($pageNumber > 1) {
+            if ($pageNumber > 1 && $noprevnext) {
                 $page = $pageNumber - 1;
                 if ($pageNumber > 1) {
                     if ($post) {
@@ -220,7 +220,7 @@ class Pagination {
 
             // print 'next' link only if we're not
             // on the last page
-            if ($pageNumber < $totalPages) {
+            if ($pageNumber < $totalPages && $noprevnext) {
                 $page = $pageNumber + 1;
                 if ($post) {
                     $next = " <li><a class=\"next\" href=\"javascript:;\" onclick=\" var page= " . $page . "; App.loadPage(page);  \" title='>>' >>></a> </li>";
@@ -253,19 +253,19 @@ class Pagination {
             for ($page = $start; $page <= $end; $page++) {
                 if ($page == $pageNumber) {
 
-                    $pagingLink[] = "<li class='active'><a style =\"cursor:default\" title='$page'> $page </a></li>";   // no need to create a link to current page
+                    $pagingLink[] = "<li class='page-item active'><a class='page-link' style =\"cursor:default\" title='$page'> $page </a></li>";   // no need to create a link to current page
                 } else {
                     if ($page == 1) {
                         if ($post) {
-                            $pagingLink[] = " <li><a href=\"javascript:;\" onclick=\" var page= " . $page . "; App.loadPage( page);  \" title='$page'>$page</a> </li>";
+                            $pagingLink[] = " <li class='page-item'><a class='page-link' href=\"javascript:;\" onclick=\" var page= " . $page . "; App.loadPage( page);  \" title='$page'>$page</a> </li>";
                         } else {
-                            $pagingLink[] = " <li><a href=\"$paging_url$page\"  class='paging' onclick=\" var page= " . $page . "; App.loadPage( page);  \" title='$page'>$page</a> </li>";
+                            $pagingLink[] = " <li class='page-item'><a class='page-link' href=\"$paging_url$page\"  class='paging' onclick=\" var page= " . $page . "; App.loadPage( page);  \" title='$page'>$page</a> </li>";
                         }
                     } else {
                         if ($post) {
-                            $pagingLink[] = " <li><a href=\"javascript:;\" onclick=\" var page= " . $page . "; App.loadPage( page);  \" title='$page'>$page</a> </li>";
+                            $pagingLink[] = " <li class='page-item'><a class='page-link' href=\"javascript:;\" onclick=\" var page= " . $page . "; App.loadPage( page);  \" title='$page'>$page</a> </li>";
                         } else {
-                            $pagingLink[] = " <li><a href=\"$paging_url$page\" onclick=\" var page= " . $page . "; App.loadPage( page);  \"  title='$page'>$page</a> </li>";
+                            $pagingLink[] = " <li class='page-item'><a class='page-link' href=\"$paging_url$page\" onclick=\" var page= " . $page . "; App.loadPage( page);  \"  title='$page'>$page</a> </li>";
                         }
                     }
                 }
@@ -274,7 +274,7 @@ class Pagination {
             $pagingLink = implode('  ', $pagingLink);
             // return the page navigation link
             //$pagingLink = '<ul>'. $first. $prev . $pagingLink . $next.$last .'</ul>';
-            $pagingLink = '<ul>'. $prev . $pagingLink . $next .'</ul>';
+            $pagingLink = '<ul class="pagination">'. $prev . $pagingLink . $next .'</ul>';
             $pagingLink = str_replace('<li></li>', '', $pagingLink);
         }
 

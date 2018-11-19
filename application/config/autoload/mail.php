@@ -9,22 +9,11 @@ return array(
                 'port' => 587,
                 'connection_class' => 'login', //“smtp”, “plain”, “login”, or “crammd5”, and defaults to “smtp”.
                 'connection_config' => array(
-                    'username' => 'nhaccong.vn@gmail.com',
-                    'password' => 'Minhkhang@1509',
+                    'username' => 'tuananhbizzon@gmail.com',
+                    'password' => '22121988abcXyz',
                     'ssl' => 'tls'
                 ),
             ),
         ),
     )
 );
-
-// return array(
-//     'mail' => array(
-//         'transport' => array(
-//             'options' => array(
-//                 'host' => 'smtpcorp.com',
-//                 'port' => 2525
-//             ),
-//         ),
-//     )
-// );

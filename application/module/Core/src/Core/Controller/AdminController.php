@@ -81,7 +81,7 @@ class AdminController extends CoreController {
             }
 
             unset($data['csrf']); //Remove csrf
-            $return = $this->getModel()->save($data);
+            $return = $this->getModel()->save($data,$id);
 
             $this->getEventManager()->trigger('onEdit', $this, $data);
             if ($return) {

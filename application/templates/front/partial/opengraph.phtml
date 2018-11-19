@@ -2,18 +2,20 @@
 	$siteMeta = $this->layout()->siteMeta;
 	$dataShare = $this->layout()->dataShare;
 	if($dataShare){
-	    $siteName = $dataShare['title'] ? $dataShare['title'] : $siteMeta['title'];
+		$siteName = $this->translate('Slogan');
 	    $srcImage =	$dataShare['image'] ? $dataShare['image'] : BASE_URL_SKIN_IMAGE.'/social-share.png';
 	    $title = $dataShare['title'] ? $dataShare['title'] : $siteMeta['title'];
-	    $description = $dataShare['description'] ? $dataShare['description'] : $siteMeta['description'];
+	    $description = $this->translate('Share_story');
 	    $urlShare = $dataShare['url'] ? $dataShare['url'] : BASE_URL;
 	}else{
-	    $siteName = $siteMeta['title'];
-	    $srcImage = BASE_URL_SKIN_IMAGE.'/social-share.png';
-	    $title = $siteMeta['title'];
-	    $description = $siteMeta['description'];
+	    $siteName = $this->translate('Slogan');
+	    $srcImage = BASE_URL_SKIN_IMAGE.'/og_img.jpg';
+	    $title = $this->translate('Slogan');
+	    $description = $this->translate('Share_story');
 	    $urlShare = BASE_URL;
 	}
+$myLocale = $this->layout()->myLocale;
+$myLocaleShort = $this->layout()->myLocaleShort;
 ?>
 
 <link rel="image_src" type="image/png" href="<?php echo $srcImage; ?>" />
@@ -21,7 +23,7 @@
 <meta name="revisit-after" content="3 days" />
 <meta name="rating" content="general" />
 <meta name="resource-type" content="document" />
-<meta name="distribution" content="global" />  
+<meta name="distribution" content="global" />
 
 <meta property="fb:app_id" content="<?php echo FB_APP_ID; ?>"/>
 <meta property="og:title" content="<?php echo $title; ?>" />
@@ -29,7 +31,7 @@
 <meta property="og:image" content="<?php echo $srcImage; ?>" />
 <meta property="og:url" content="<?php echo $urlShare; ?>" />
 <meta property="og:site_name" content="<?php echo $siteName; ?>" />
-<meta property="og:description" content="<?php echo $description; ?>" />   
+<meta property="og:description" content="<?php echo $description; ?>" />
 
 <meta name="twitter:title" content="<?php echo $title; ?>">
 <meta name="twitter:description" content="<?php echo $description; ?>">
