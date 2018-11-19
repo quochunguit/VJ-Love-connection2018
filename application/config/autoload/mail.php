@@ -9,8 +9,8 @@ return array(
                 'port' => 587,
                 'connection_class' => 'login', //“smtp”, “plain”, “login”, or “crammd5”, and defaults to “smtp”.
                 'connection_config' => array(
-                    'username' => 'tuananhbizzon@gmail.com',
-                    'password' => '22121988abcXyz',
+                    'username' => 'xxxxx@gmail.com',
+                    'password' => 'xxxxx',
                     'ssl' => 'tls'
                 ),
             ),
