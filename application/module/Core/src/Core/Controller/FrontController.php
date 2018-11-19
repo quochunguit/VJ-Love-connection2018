@@ -114,8 +114,33 @@ class FrontController extends CoreController {
     public function onDispatch(\Zend\Mvc\MvcEvent $e) {
         $this->languageProcess();
         //$this->detectDevice(); //TODO: detect device
+        $this->detectCountry();
 
         parent::onDispatch($e);
+    }
+
+    public function detectCountry(){
+        $yourIp = $this->getClientIp();
+        echo $yourIp;die;
+        $result =  file_get_contents('https://www.iplocate.io/api/lookup/'.$yourIp);
+        $result = json_decode($result);
+
+        print_r($result);die;
+
+    }
+
+
+
+    private function getClientIp() {
+        foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key) {
+            if (array_key_exists($key, $_SERVER) === true) {
+                foreach (explode(',', $_SERVER[$key]) as $ip) {
+                    if (filter_var($ip, FILTER_VALIDATE_IP) !== false) {
+                        return $ip;
+                    }
+                }
+            }
+        }
     }
 
     //-- Process Language--

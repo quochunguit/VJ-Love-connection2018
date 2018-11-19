@@ -1,4 +1,42 @@
-@media (min-width: 1200px)
+/*@media (min-width: 1200px){
     .main-menu-ul>li>a {
         min-width: 100px;
     }
+}*/
+@media (min-width: 992px){
+    .mod-list-item .item-last-row .content-item{
+        color: #FFFFFF;
+    }
+
+    .mod-list-item .item-last-row .content-item .like span{
+        color: #FFFFFF;
+    }
+}
+
+@media (min-width: 481px){
+    .mod-list-item .item-res-last-row .content-item{
+        color: #FFFFFF;
+    }
+
+    .mod-list-item .item-res-last-row .content-item .like span{
+        color: #FFFFFF;
+    }
+
+    .mod-list-item .item-last-row:last-child .content-item{
+        color: #FFFFFF;
+    }
+
+    .mod-list-item .item-last-row:last-child .content-item .like span{
+        color: #FFFFFF;
+    }
+}
+
+@media (max-width: 480px){
+    .mod-list-item .item-last-row:last-child .content-item{
+        color: #FFFFFF;
+    }
+
+    .mod-list-item .item-last-row:last-child .content-item .like span{
+        color: #FFFFFF;
+    }
+}
