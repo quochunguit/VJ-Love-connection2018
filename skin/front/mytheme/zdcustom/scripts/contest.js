@@ -73,6 +73,9 @@ Handle.Contest = function (){
         var check_form = checkContestSubmitForm();
 
         if(check_form){
+            //change flag submission to false
+            flag_submission = false;
+
             //append to form data
             var formData = new FormData();
             $(".form-share").find('input[type=file]').each(function(index, file){
@@ -82,7 +85,7 @@ Handle.Contest = function (){
             });
 
             $.ajax({
-                url: baseurl + "/vi/contest-submit", //submit to contest submit action
+                url: baseurl + "/"+languageShort+"/contest-submit", //submit to contest submit action
                 dataType: 'text',
                 cache: false,
                 contentType: false,
@@ -90,6 +93,9 @@ Handle.Contest = function (){
                 data: formData,
                 type: 'post',
                 success: function (res) {
+                    //change flag submission to true
+                    flag_submission = true;
+
                     var result = JSON.parse(res);
                     if(result.status){
                         finishSavingContestSubmit(result.fileuploaded);
@@ -106,6 +112,9 @@ Handle.Contest = function (){
                                         $('#pop-alert > div > p').text(result.message);
                                     },
                                     afterClose(){
+                                        if(result.user_contest_exist){
+                                            location.href = baseurl+'/'+languageShort+'/contest';
+                                        }
                                     }
                                 });
                         }
@@ -125,11 +134,17 @@ Handle.Contest = function (){
         dataObject.media_type = 'images';
         dataObject.media = media.join(',');
 
+        //change flag submission to false
+        flag_submission = false;
+
         $.ajax({
             type : "POST",
             url  : baseurl+"/"+languageShort+"/contest-submit",
             data : dataObject,
             success :  function(res){
+                //change flag submission to true
+                flag_submission = true;
+
                 //do something here
                 var result = JSON.parse(res);
 
@@ -214,6 +229,11 @@ Handle.Contest = function (){
             $('.coment .messages-error div').text(trans_CommentMoreThan1000);
             return false;
         }
+
+        if(!flag_submission){
+            return false;
+        }
+
         return true;
     }
 

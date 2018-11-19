@@ -436,20 +436,36 @@ class ContestController extends AdminController {
         $id = $params['id'];
 
         if($id){
-            $model = $this->getModel(); 
-            $item = $model->getByIdAndSlug($id);
+            $contestModel = $this->getModel();
+            $item=$contestModel->getItem(array('id'=>$id));
+            $userModel = $this->getUserModel();
+            $userItem = $userModel->getItem(array('id'=>$item['user_id']));
             if($item && $item['status'] == 0){
-                $resultSave = $model->save(array('status' => 2, 'id'=>$item['id'])); //Reject
+                $resultSave = $contestModel->save(array('status' => 2, 'id'=>$item['id'])); //Reject
                 if($resultSave['status']){
                     //--TODO: send email--
-                    // $mail = $this->getServiceLocator()->get('SendMail');
-                    // $mail->send(array(
-                    //     'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
-                    //     'to' => array('name' => $item['user_name'], 'email' => $item['user_email']),
-                    //     'subject' => 'Bài thi của bạn chưa hợp lệ!',
-                    //     'template' => 'email/contest_reject',
-                    //     'data' => array()
-                    // ));
+                    $mail = $this->getServiceLocator()->get('SendMail');
+                    if($item['language']=='vi_VN'){
+                        $mail->send(array(
+                            'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
+                            'to' => array('email' => $userItem['email']),
+                            'subject' => 'VIETJET - BÀI DỰ THI CỦA BẠN KHÔNG ĐƯỢC DUYỆT!',
+                            'template' => 'email/submirejected_vi',
+                            'data' => array(
+                                'contest_url'=>BASE_URL.'/vi/'.$item['slug'].'/'.$item['id'],
+                            )
+                        ));
+                    }else{
+                        $mail->send(array(
+                            'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
+                            'to' => array('name' => $userItem['name'], 'email' => $userItem['email']),
+                            'subject' => 'VIETJET - YOUR SUBMISSSION HAS BEEN DECLINED!',
+                            'template' => 'email/submirejected_en',
+                            'data' => array(
+                                'contest_url'=>BASE_URL.'/en/'.$item['slug'].'/'.$item['id']
+                            )
+                        ));
+                    }
                     //--TODO: End send email--
 
                     $this->returnJsonAjax(array('status' => true, 'message' => 'Đã từ chối bài thi, một email đã gửi tới cho user!'));

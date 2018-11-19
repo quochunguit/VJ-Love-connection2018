@@ -127,7 +127,7 @@ msgid "Experience_vietjet"
 msgstr "Trải nghiệm thú vị cùng Vietjet"
 
 msgid "New_submissions"
-msgstr "Bài dự thi Mới"
+msgstr "Bài dự thi mới"
 
 msgid "Share_comments"
 msgstr "Chia sẻ cảm nhận"
@@ -191,6 +191,9 @@ msgstr "Cuộc Thi “KẾT NỐI YÊU THƯƠNG, YÊU LÀ PHẢI TỚI” không
 
 msgid "ContestPublished"
 msgstr "Bạn đã có bài chia sẻ được đăng"
+
+msgid "UserContestExist"
+msgstr "Xin lỗi, bạn chỉ được tham gia một bài dự thi duy nhất, nếu như bạn đã gửi bài trước đó, hãy chờ bài được duyệt đăng nhé (trong vòng 24h)."
 
 msgid "UploadImageError"
 msgstr "Tải lên không thành công, vui lòng thử lại!"

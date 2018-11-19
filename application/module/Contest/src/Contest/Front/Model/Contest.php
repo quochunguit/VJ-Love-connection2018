@@ -158,6 +158,24 @@ class Contest extends FrontAppModel {
         return $items;
     }
 
+    public function limitContestByUser($userId){
+        $select = new Select($this->table);
+        $select->join('bz1_users', 'bz1_users.id=' . $this->table . '.user_id', array('user_name'=>'name','user_email'=>'email','user_phone'=>'phone','user_identify'=>'identify','user_avatar'=>'social_picture'));
+
+        if (!empty($columns)) {
+            $select->columns($columns);
+        }
+
+        if($userId){
+            $select->where(array($this->table . '.user_id' => $userId));
+        }
+
+        $result = $this->selectWith($select);
+        $items = $result->toArray();
+
+        return $items;
+    }
+
      /*public function getGroupByChild($type, $limit = 5, $status = 1, $rand = 'RAND()') {
         $limitFix = $limit > 0 ? " LIMIT $limit" : "";
         $statusStr = $status ? " AND p.status='" . $status . "'" : " ";

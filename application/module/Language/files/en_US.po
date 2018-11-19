@@ -16,10 +16,10 @@ msgid "Home"
 msgstr "Home"
 
 msgid "About"
-msgstr "     About      "
+msgstr "About"
 
 msgid "Submitions"
-msgstr "Share your story"
+msgstr "Share Your Story"
 
 msgid "Gallery"
 msgstr "Gallery"
@@ -46,7 +46,7 @@ msgid "Intro_text"
 msgstr "Dreaming of visiting Ha Noi & Hoi An acient cities? Craving for modern life of Ho Chi Minh city? Or fantasizing about Da Nang beautiful beaches? Tell us a story that shows how much you love Vietnam and its cultures, people, cuisines, or anything you love! - to have a chance to win return flight tickets from Vietjet. Take your love of Asia to new heights with Love Connection! If you love it, go for it!"
 
 msgid "Hot_submissions"
-msgstr "Hot submissions"
+msgstr "Hot Submissions"
 
 msgid "Book_now"
 msgstr "Book now to fly with Vietjet"
@@ -191,6 +191,9 @@ msgstr "We can not activate your account via SMS. Please check and provide your 
 
 msgid "ContestPublished"
 msgstr "You had a contest published already."
+
+msgid "UserContestExist"
+msgstr "Sorry, only one entry allowed per account holder. If you have already submitted, please wait for approval (within 24hrs)."
 
 msgid "UploadImageError"
 msgstr "Upload error, please try again!"

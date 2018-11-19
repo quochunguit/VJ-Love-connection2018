@@ -224,48 +224,53 @@ App.Site = function(){
                 var reg_email = $('#reg-email').val();
                 var reg_password = $('#reg-password').val();
                 var reg_repassword = $('#reg-repassword').val();
-
-                $.ajax({
-                    url: baseurl+"/"+languageShort+"/user-register",
-                    dataType: 'json',
-                    data: {
-                        'name': reg_name,
-                        'phone': reg_phone,
-                        'email': reg_email,
-                        'phonecode': phone_code,
-                        'location': location,
-                        'password': reg_password,
-                        'cfpassword': reg_repassword
-                    },
-                    type:'post',
-                    success: function(res){
-
-                        if(res.status){
-                            helperJs.bzOpenPopup(
-                                {items:
-                                { src: '#pop-alert'},
-                                    beforeOpen(){
+                var flag = true;
+                if(flag){
+                    flag= false;
+                    $.ajax({
+                        url: baseurl+"/"+languageShort+"/user-register",
+                        dataType: 'json',
+                        data: {
+                            'name': reg_name,
+                            'phone': reg_phone,
+                            'email': reg_email,
+                            'phonecode': phone_code,
+                            'location': location,
+                            'password': reg_password,
+                            'cfpassword': reg_repassword
+                        },
+                        type:'post',
+                        success: function(res){
+                            flag= true;
+                            if(res.status){
+                                helperJs.bzOpenPopup(
+                                    {items:
+                                    { src: '#pop-alert'},
+                                        beforeOpen(){
                                     $('#pop-alert > div > p').text(res.message);
                                     $('#pop-alert > div > div > button').text(res.button);
-                                    },
-                                    afterClose(){
+                                },
+                                afterClose(){
 
-                                        setTimeout(function(){ showActivationFillCode(res.data); }, 1000);
+                                    setTimeout(function(){ showActivationFillCode(res.data); }, 1000);
 
-                                    }
                                 }
+                            }
                             );
 
                         }else{
+                            flag= true;
                             var elementError = res.element;
-                            var error = res.message;
-                            var errorArray = {};
-                            var element = elementError;
-                            errorArray[element] = error;
-                            register_validate.showErrors(errorArray);
-                    }
-                    }
-                });
+                    var error = res.message;
+                    var errorArray = {};
+                    var element = elementError;
+                    errorArray[element] = error;
+                    register_validate.showErrors(errorArray);
+                }
+            }
+        });
+                }
+
                 return false;
             }
         });

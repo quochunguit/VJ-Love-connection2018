@@ -324,7 +324,7 @@ var helperJs = (function () {
     var offset = $(selector).offset();
     var offsetTop = offset.top + verticalOffset;
     $('html,body,.view-container').animate({
-      scrollTop: offsetTop
+      scrollTop: offsetTop -100
     }, time);
   }
 

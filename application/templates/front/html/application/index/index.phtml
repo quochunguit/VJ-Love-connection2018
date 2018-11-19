@@ -6,9 +6,19 @@ $flyJourneys = array(0=>array('image'=>'Han Quoc.jpg','name'=>$this->translate('
 ,4=>array('image'=>'Nhat.jpg','name'=>$this->translate('jp_81')),5=>array('image'=>'Taiwan.jpg','name'=>$this->translate('tw_886')),6=>array('image'=>'Singapore.jpg','name'=>$this->translate('sg_65')),7=>array('image'=>'Thai.jpg','name'=>$this->translate('th_66')),8=>array('image'=>'Trung Quoc.jpg','name'=>$this->translate('Trungquoc')));
 ?>
 <?php if($myLocaleShort=='vi'): ?>
-<section class="module mod-banner-home bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home.jpg)"></section>
+<section class="module mod-banner-home bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home.jpg)">
+    <div class="arrow-bottom" onclick="helperJs.scrollToElement($('.mod-journey'), 500)">
+        <span class="icomoon icon-chevron-left"></span>
+    </div>
+</section>
 <?php else: ?>
-    <section class="module mod-banner-home bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home-eng.png)"></section>
+    <section class="module mod-banner-home bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home-eng.png)">
+
+            <div class="arrow-bottom" onclick="helperJs.scrollToElement($('.mod-journey'), 500)">
+                <span class="icomoon icon-chevron-left"></span>
+            </div>
+
+    </section>
 <?php endif; ?>
     <section class="module mod-state-content bg">
         <div class="container">
@@ -45,7 +55,7 @@ $flyJourneys = array(0=>array('image'=>'Han Quoc.jpg','name'=>$this->translate('
                         <div class="title-red">
                             <h1><?php echo $this->translate('Flight_Information'); ?></h1>
                         </div>
-                        <p><?php echo $this->translate('Intro_text'); ?></p>
+                        <p style="text-align: justify;"><?php echo $this->translate('Intro_text'); ?></p>
                         <?php if (@$user && @$user['id']): ?>
                             <a class="btn btn-primary" href="javascript:void(0);" onclick="App.Site.goToContestSubmit(<?php echo @$user['id']; ?>);"><?php echo $this->translate('Submitions'); ?></a>
                         <?php else: ?>

@@ -1,4 +1,7 @@
-<?php if($myLocaleShort=='vi'): ?>
+<?php
+$myLocaleShort = $this->layout()->myLocaleShort;
+?>
+<?php  if($myLocaleShort=='vi'): ?>
 	<section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal.png)"></section>
 <?php else: ?>
 	<section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal-en.png)"></section>
@@ -11,7 +14,10 @@
 	<section class="module mod-trip">
 		<div class="container">
 			<h1><?php echo $this->translate('Flight_Information'); ?></h1>
-			<div class="table-status">
+			<div class="arrow-right d-md-none">
+				<span class="icomoon icon-chevron-right"></span>
+			</div>
+			<div class="table-status custom-scroll-horizontal">
 				<?php echo $flightinformation['body'] ?>
 			</div>
 		</div>

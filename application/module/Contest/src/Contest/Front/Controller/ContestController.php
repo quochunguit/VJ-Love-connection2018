@@ -21,14 +21,14 @@ class ContestController extends FrontController {
         $this->setMetaData(array(), $this->translate('Gallery'));
 
         $modelBestContest = $this->getContestModel();
-        $modelBestContest->setLimit(10);
+        $modelBestContest->setLimit(12);
         $modelBestContest->setState('order.field', 'votes');
         $bestContest = $modelBestContest->getItems();
         $bestContest = $bestContest->toArray();
 
         $modelNewestContest = $this->getContestModel();
         $modelNewestContest->setParams($params);
-        $modelNewestContest->setLimit(6);
+        $modelNewestContest->setLimit(12);
         $modelNewestContest->setState('order.field', 'created');
         $newestContest = $modelNewestContest->getItems();
         $newestContest = $newestContest->toArray();
@@ -57,10 +57,20 @@ class ContestController extends FrontController {
         if($userLogin['status']==1){
             if (!empty($_FILES['file'])) {
                 //check if this user has published contest
-                $publishContest = $model->getContestByUser($userLogin[id], 1, 0);
+                /*$publishContest = $model->getContestByUser($userLogin[id], 1, 0);
                 if($publishContest && count($publishContest) > 0){
                     $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('ContestPublished')));
+                }*/
+
+                $submitscontest = $model->limitContestByUser($userLogin[id]);
+                if($submitscontest && count($submitscontest) > 0){
+                    foreach($submitscontest as $k => $limitcontest){
+                        if($limitcontest['status'] != 2){
+                            $this->returnJsonAjax(array('status' => false, 'user_contest_exist' => true, 'message' => $this->translate('UserContestExist')));
+                        }
+                    }
                 }
+
                 /*if(isset($_POST['media_type']) && $_POST['media_type'] == 'video'){
                     if($file_type == "video/mov" || $file_type  == "video/mp4" || $file_type == "video/avi") {
                         $file_size_limit = 31457280;
