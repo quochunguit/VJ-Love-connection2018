@@ -1,6 +1,8 @@
 <?php
 	$siteMeta = $this->layout()->siteMeta;
 	$dataShare = $this->layout()->dataShare;
+	$myLocale = $this->layout()->myLocale;
+	$myLocaleShort = $this->layout()->myLocaleShort;
 	if($dataShare){
 		$siteName = $this->translate('Slogan');
 	    $srcImage =	$dataShare['image'] ? $dataShare['image'] : BASE_URL_SKIN_IMAGE.'/social-share.png';
@@ -9,13 +11,17 @@
 	    $urlShare = $dataShare['url'] ? $dataShare['url'] : BASE_URL;
 	}else{
 	    $siteName = $this->translate('Slogan');
-	    $srcImage = BASE_URL_SKIN_IMAGE.'/og_img.jpg';
+		if($myLocaleShort=='vi'){
+			$srcImage = BASE_URL_SKIN_IMAGE.'/og_img.jpg';
+		}else{
+			$srcImage = BASE_URL_SKIN_IMAGE.'/og_en.jpg';
+		}
+
 	    $title = $this->translate('Slogan');
 	    $description = $this->translate('Share_story');
 	    $urlShare = BASE_URL;
 	}
-$myLocale = $this->layout()->myLocale;
-$myLocaleShort = $this->layout()->myLocaleShort;
+
 ?>
 
 <link rel="image_src" type="image/png" href="<?php echo $srcImage; ?>" />
