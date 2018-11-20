@@ -18,6 +18,7 @@ class LanguageController extends FrontController {
             if($curLang['status'] == 1){
                 $this->setLangCode($code);
             }
+            $_SESSION['closePop'] = true;
         }
         //--End set lang
         if($urlRedirect){

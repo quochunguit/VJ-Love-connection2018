@@ -114,18 +114,19 @@ class FrontController extends CoreController {
     public function onDispatch(\Zend\Mvc\MvcEvent $e) {
         $this->languageProcess();
         //$this->detectDevice(); //TODO: detect device
-        $this->detectCountry();
+        //$this->detectCountry();
+        $_SESSION['chooseLang']= true;
 
         parent::onDispatch($e);
     }
 
     public function detectCountry(){
         $yourIp = $this->getClientIp();
-        echo $yourIp;die;
+        //echo $yourIp;die;
         $result =  file_get_contents('https://www.iplocate.io/api/lookup/'.$yourIp);
         $result = json_decode($result);
 
-        print_r($result);die;
+        //print_r($result);die;
 
     }
 

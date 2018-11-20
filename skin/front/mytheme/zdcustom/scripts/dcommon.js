@@ -14,7 +14,11 @@ $(function () {
         if(checkFg){
             helperJs.bzOpenPopup({items: { src: '#pop-recover' } });
         }
-        ; }, 1000);
+        var checkPopLang = $('#shopPopLang').val();
+        if(checkPopLang){
+            helperJs.bzOpenPopup({items: { src: '#pop-language' } });
+        }
+        ; }, 500);
 
 });
 

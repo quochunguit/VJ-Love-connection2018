@@ -355,6 +355,20 @@ $myLocaleShort = $this->layout()->myLocaleShort;
     </div>
 </div>
 
+<div id="pop-language" class="mfp-control mfp-hide bzPopup">
+    <?php if($myLocaleShort=='vi'): ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title"> <?php else: ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy-en.png" alt="" class="img-title"> <?php endif; ?>
+    <div class="pop-content text-center">
+        <p>Chọn ngôn ngữ / Select your language:</p>
+        <div class="button" style="float: left;">
+            <a href="<?php echo $this->url('language-switched', array('code'=>'en_US')); ?>"  class="btn btn-primary btn-close change-text-pop">EN</a>
+        </div>
+        <div class="button" style="float: right;">
+            <a href="<?php echo $this->url('language-switched', array('code'=>'vi_VN')); ?>" class="btn btn-primary btn-close change-text-pop">VI</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
 <div id="pop-contestSuccess" class="mfp-control mfp-hide bzPopup">
     <?php if($myLocaleShort=='vi'): ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title"> <?php else: ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy-en.png" alt="" class="img-title"> <?php endif; ?>
     <div class="pop-content text-center">
@@ -411,6 +425,9 @@ $myLocaleShort = $this->layout()->myLocaleShort;
         </form>
     </div>
 </div>
+<?php if($_SESSION['chooseLang']  && !$_SESSION['closePop']): ?>
+    <input type="hidden" id="shopPopLang" value="1"/>
+<?php endif; ?>
 <script>
     var trans_Validatename = "<?php echo $this->translate('Validatename'); ?>";
     var trans_Validatephone = "<?php echo $this->translate('Validatephone'); ?>";
