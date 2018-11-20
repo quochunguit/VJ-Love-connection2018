@@ -16,8 +16,8 @@ abstract class CoreForm extends Form implements ServiceLocatorAwareInterface {
     }
 
     public function setServiceLocator(\Zend\ServiceManager\ServiceLocatorInterface $serviceLocator) {
-        // $this->serviceLocator = $serviceLocator->getServiceLocator();
-        $this->serviceLocator = $serviceLocator; //TODO:Dev vendor_php_5_3_3.zip*/
+         $this->serviceLocator = $serviceLocator->getServiceLocator();
+        //$this->serviceLocator = $serviceLocator; //TODO:Dev vendor_php_5_3_3.zip*/
     }
 
     public function bind($object, $flags = FormInterface::VALUES_NORMALIZED) {
