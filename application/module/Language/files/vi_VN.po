@@ -391,6 +391,9 @@ msgstr "Bạn đã bình chọn thành công!"
 msgid "t_ctrans"
 msgstr "Điều kiện & Thể lệ chương trình"
 
+msgid "call_now"
+msgstr "Gọi ngay"
+
 
 
 

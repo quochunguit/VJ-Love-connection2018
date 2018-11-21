@@ -391,3 +391,6 @@ msgstr "Thank you for your voting submission!"
 
 msgid "t_ctrans"
 msgstr "Terms & Conditions"
+
+msgid "call_now"
+msgstr "Call now"
