@@ -92,7 +92,7 @@ return array(
             'api-login-fb' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/user-login-fb[/]',
+                    'route'    => '/[:lang]/user-login-fb[/]',
                      'defaults' => array(
                         'controller' => 'User\Front\Controller\User',
                         'action'     => 'apiloginfb',
@@ -103,7 +103,7 @@ return array(
             'api-login-gg' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/user-login-gg[/]',
+                    'route'    => '/[:lang]/user-login-gg[/]',
                      'defaults' => array(
                         'controller' => 'User\Front\Controller\User',
                         'action'     => 'apilogingg',

@@ -34,10 +34,10 @@ msgid "Sign_Up_Login"
 msgstr "Đăng kí / Đăng nhập"
 
 msgid "Slogan"
-msgstr "Cùng Vietjet Air, kết nối yêu thương, yêu là phải tới!"
+msgstr "Cùng Vietjet, Kết nối yêu thương, Yêu là phải tới!"
 
 msgid "Share_story"
-msgstr "Chia sẻ câu chuyện của bạn để nhận vé bay khứ hồi miễn phí khắp Châu Á lên đến 185 chuyến bay miễn phí."
+msgstr "Chia sẻ câu chuyện của bạn để nhận hàng trăm vé máy bay khứ hồi miễn phí khắp Châu Á"
 
 msgid "Submit_now"
 msgstr "Chia sẻ ngay"

@@ -332,6 +332,7 @@ public function apiloginfbAction(){
 
         $user = json_decode(file_get_contents($graph_url));
         $user->token =  $accessTokenRefresh;
+        //print_r($user);die;
         $return = array();
         if ($user->id) {
             $userModel = $this->getUserModel();
@@ -340,10 +341,12 @@ public function apiloginfbAction(){
                 $userLogin = $userExist;
             } else {
                 $userLogin = $this->fbcomplete($user);
+                //print_r($userLogin);die;
             }
 
                 //--Check user valid--
             $resultValid =  $this->checkUserStatus($userLogin);
+
             if($resultValid['status'] || $resultValid['status_key'] == 'reg_fb' ){
                 if($resultValid['status']){
                         //-Token login--
@@ -359,7 +362,19 @@ public function apiloginfbAction(){
                 $siteAuthAdapter = new \Core\Auth\Adapter\Social($userModel, 'Facebook');
                 $siteAuthAdapter->setCredential($userLogin);
                 $result = $auth->authenticate($siteAuthAdapter);
-                $this->returnJsonAjax(array('status'=>true,'message'=>'Đăng nhập thành công!','data'=>$userLoginFix));
+                if($userLoginFix['phone']==''){
+                    $this->returnJsonAjax(array('status'=>false,'phone'=>$userLoginFix['phone']));
+                }elseif($userLoginFix['status']==0){
+                    //echo 'aaaaaa';die;
+                    $this->returnJsonAjax(array('status'=>false,'phone'=>$userLoginFix['phone'],'location'=>$userLoginFix['location'],'need_active'=>true));
+                }else{
+                    if($userLoginFix['status']==1){
+                        $this->returnJsonAjax(array('status'=>true,'data'=>$userLoginFix));
+                    }else{
+                        $this->returnJsonAjax(array('status'=>false,'message'=>'Error, try again later!'));
+                    }
+                }
+
             }else{
                 $this->returnJsonAjax($resultValid); 
             }
@@ -391,6 +406,9 @@ public function fbcomplete($data)
 
             $userByEmail = get_object_vars($model->getUserByEmail($email));
             if ($userByEmail) { //Exist email
+                if($userByEmail['social_type']=='Google'){
+                    $this->returnJsonAjax(array('status' => false, 'status_key'=>'alert', 'message' => $this->translate('Email_exist')));
+                }
                 //$userinfo['activation_code'] = ''; //Auto active
                 //$userinfo['mobile_code'] = ''; //Auto active
                 //$userinfo['status'] = 1; //Auto active
@@ -502,6 +520,9 @@ public function fbcomplete($data)
                 //$userinfo['activation_code'] = ''; //Auto active
                 //$userinfo['mobile_code'] = ''; //Auto active
                 //$userinfo['status'] = 1; //Auto active
+                if($userByEmail['social_type'] != 'Google'){
+                    $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('Email_exist')));
+                }
 
                 $return = $model->save($userinfo, $userByEmail['id']);
             } else { //Not exist email

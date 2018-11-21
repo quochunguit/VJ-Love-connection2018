@@ -34,10 +34,10 @@ msgid "Sign_Up_Login"
 msgstr "Sign Up/Log In"
 
 msgid "Slogan"
-msgstr "Love Connection, Love Is Real Touch with Vietjet"
+msgstr "Love Connection, Love Is Real Touch"
 
 msgid "Share_story"
-msgstr "Share your story to receive free return tickets in Asia with 185 free flights."
+msgstr "Submit your story as to win chances of receiving free return tickets"
 
 msgid "Submit_now"
 msgstr "Submit now"

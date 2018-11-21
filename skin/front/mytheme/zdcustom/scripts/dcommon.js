@@ -826,7 +826,7 @@ App.Facebook = function(){
                     $("#fbuid").val(response.authResponse.userID);
                     //$(".loading-invisible").fadeIn();
                     $.ajax({
-                        url: baseurl+"/user-login-fb",
+                        url: baseurl+"/"+languageShort+"/user-login-fb",
                         dataType: 'json',
                         data: {
                             access_token:$("#token").val()
@@ -838,29 +838,43 @@ App.Facebook = function(){
             }
 
             saveUserComplete = function(res){
-                if(res.data.status == "0") { //nếu chưa active
-                    if (res.data.phone == "") {
-                        //show update phone popup
-                        App.Popup.openUpdatePhone();
-                    }
-
-                    if(res.need_active){
-                        //show resend popup with phone editable
-                        App.Popup.openResendCode();
-                        $('#resend-phone').val(res.data.phone);
-                        $('#resend-location').val(res.data.location + '_' + res.data.phone.substr(0, 2));
-                    }
-                    gtag('config', gaId, {
-                        'page_path': '/ga-step2-login-success'
-                    });
-
-                }else{
-                    gtag('config', gaId, {
-                        'page_path': '/ga-step2-login-success'
-                    });
                     if(res.status){
+
+
                         location.href = baseurl+'/'+languageShort+'/contest-submit';
-                    }
+                        gtag('config', gaId, {
+                            'page_path': '/ga-step2-login-success'
+                        });
+                    }else{
+
+                            if (res.phone == "") {
+                                //show update phone popup
+                                App.Popup.openUpdatePhone();
+                            }
+
+                            if(res.need_active){
+                                //show resend popup with phone editable
+                                App.Popup.openResendCode();
+                                $('#resend-phone').val(res.phone);
+                                $('#resend-location').val(res.location + '_' + res.phone.substr(0, 2));
+                            }
+                            gtag('config', gaId, {
+                                'page_path': '/ga-step2-login-success'
+                            });
+
+                            if(res.status_key=='alert'){
+                                helperJs.bzOpenPopup(
+                                    {items:
+                                    { src: '#pop-alert'},
+                                        beforeOpen(){
+                                    $('#pop-alert > div > p').text(res.message);
+                                },
+                                afterClose(){
+                                    //increase number likes
+                                    setTimeout(function(){  helperJs.bzOpenPopup({items: { src: '#pop-login' } }); }, 500);
+                                }
+                            });
+                            }
 
                 }
             }
@@ -968,7 +982,7 @@ App.Google = function () {
 
                                 //
                                 $.ajax({
-                                    url: baseurl+"/user-login-gg",
+                                    url: baseurl+"/" + languageShort +"/user-login-gg",
                                     dataType: 'json',
                                     data: {
                                         google_user: googleUser.getBasicProfile()
@@ -1011,11 +1025,20 @@ App.Google = function () {
                                     });
                                     location.href = baseurl+'/'+languageShort+'/contest-submit';
                                 }
+                            }else{
+                                helperJs.bzOpenPopup(
+                                {items:
+                                        { src: '#pop-alert'},
+                                    beforeOpen(){
+                                        $('#pop-alert > div > p').text(res.message);
+                                    },
+                                    afterClose(){
+                                    }});
                             }
                         }
 
                         onFailure = function(error){
-                            console.log(error);
+
                         }
 
                         //$('.google-signin').html('<div id="my-signin2"></div>');
