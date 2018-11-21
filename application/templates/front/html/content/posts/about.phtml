@@ -16,7 +16,11 @@ $user = $this->user();
     <div class="container">
         <article class="content-slide">
             <div class="heading-intro">
-                <h1><?php echo $this->translate('slogan_about') ?></h1>
+                <?php if($myLocaleShort=='vi'): ?>
+                <h1>Bay là Thích ngay!<br> Bay khắp Việt Nam & Quốc tế</h1>
+                <?php else: ?>
+                    <h1>Enjoy flying all over Vietnam and across Asia</h1>
+                <?php endif; ?>
             </div>
             <div class="status-detail">
                 <?php echo $about['body'] ?>
@@ -26,10 +30,10 @@ $user = $this->user();
                         <div class="col-lg-8">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <a href="https://www.vietjetair.com"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/icon-eart.png" alt="icon"> https://www.vietjetair.com</a>
+                                    <a href="https://www.vietjetair.com" style="white-space: nowrap;"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/icon-eart.png" alt="icon"> https://www.vietjetair.com</a>
                                 </div>
                                 <div class="col-lg-6">
-                                    <a href="https://www.vietjetair.com"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/icon-phone.png" alt="icon"> https://www.vietjetair.com</a>
+                                    <a href="https://www.vietjetair.com" style="white-space: nowrap;" ><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/icon-phone.png" alt="icon"> https://www.vietjetair.com</a>
                                 </div>
                                 <div class="col-lg-12">
                                     <a href="https://www.vietjetair.com"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/icon-fb.png" alt="icon"> https://www.facebook.com/vietjetairvietnam </a><?php echo ' '. $this->translate('about_text');   ?>

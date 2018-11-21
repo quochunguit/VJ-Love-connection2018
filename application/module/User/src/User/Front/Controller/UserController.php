@@ -129,7 +129,7 @@ class UserController extends FrontController {
                 return array('status' => false, 'message' => 'Số điện thoại phải là một chuối số!');
             }
 
-            $minLen = 10;
+            $minLen = 5;
             if (strlen($phone) < $minLen && substr($phone, 0, 1) == '0') {
                 return array('status' => false, 'message' => 'Số điện thoại phải ít nhất '.$minLen.' ký tự!');
             }else if(strlen($phone) < $minLen - 1){
@@ -261,7 +261,7 @@ public function apiverifyresendsmsAction(){
                $this->returnJsonAjax(array('status' => false, 'message' => 'Số điện thoại phải là một chuối số!'));
            }
 
-           $minLen = 10;
+           $minLen = 5;
            if (strlen($phone) < $minLen ) {
                $this->returnJsonAjax(array('status' => false, 'message' => 'Số điện thoại phải ít nhất '.$minLen.' ký tự!'));
            }
@@ -740,7 +740,7 @@ public function apiupdateprofileAction(){
             unset($_SESSION['need_update']);
             $this->returnJsonAjax(array('status'=>true, 'message'=>'Cập nhật thông tin thành công!','data'=>$curUser));
         }else{
-            $this->returnJsonAjax(array('status'=>false,'message'=>'Đã xảy ra lỗi, vui lòng thử lại sau!'));
+            $this->returnJsonAjax(array('status'=>false,'message'=> $this->translate('requesterror')));
         }
     }else{
         $this->returnJsonAjax($resultValid);

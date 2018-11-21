@@ -22,7 +22,7 @@ msgid "Submitions"
 msgstr "Gửi chia sẻ"
 
 msgid "Gallery"
-msgstr "Thư viện ảnh"
+msgstr "Bài dự thi"
 
 msgid "Flight_Information"
 msgstr "Hành trình bay"
@@ -390,6 +390,9 @@ msgstr "Bạn đã bình chọn thành công!"
 
 msgid "t_ctrans"
 msgstr "Điều kiện & Thể lệ chương trình"
+
+msgid "requesterror"
+msgstr "Đã có lỗi xảy ra, vui lòng thử lại sau!"
 
 msgid "call_now"
 msgstr "Gọi ngay"

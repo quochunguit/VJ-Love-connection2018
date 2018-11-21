@@ -392,5 +392,8 @@ msgstr "Thank you for your voting submission!"
 msgid "t_ctrans"
 msgstr "Terms & Conditions"
 
+msgid "requesterror"
+msgstr "Error occurred please try again later!"
+
 msgid "call_now"
 msgstr "Call now"
