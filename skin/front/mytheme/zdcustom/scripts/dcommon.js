@@ -174,7 +174,7 @@ App.Site = function(){
             success: function(res){
                 if(res.status){
                     //go to contest submit page
-                    gtag('config', 'UA-81046101-40', {
+                    gtag('config', gaId, {
                         'page_path': '/ga-submit-contest'
                     });
                     window.location.href = baseurl + '/' + languageShort + '/contest-submit';
@@ -451,7 +451,9 @@ App.Site = function(){
 
                     //add loading icon
                     $('#activation-code-send-btn').addClass('show-loading');
-
+                    gtag('config', gaId, {
+                        'page_path': '/ga-regis-normal-update-phone'
+                    });
                     $.ajax({
                         url: baseurl+"/"+languageShort+"/user-update-profile",
                         dataType: 'json',
@@ -466,8 +468,12 @@ App.Site = function(){
                             //remove loading icon
                             $('#activation-code-send-btn').removeClass('show-loading');
 
-                            gtag('config', 'UA-81046101-40', {
+                            gtag('config', gaId, {
                                 'page_path': '/ga-step3-update-phone'
+                            });
+
+                            gtag('config', gaId, {
+                                'page_path': '/ga-regis-normal-update-phone-success'
                             });
                             console.log(res);
                             if(res.status){
@@ -608,9 +614,10 @@ App.Site = function(){
                         $('#active-btn').removeClass('show-loading');
 
                         if(res.status){
-                            gtag('config', 'UA-81046101-40', {
+                            gtag('config', gaId, {
                                 'page_path': '/ga-step4-SMS-verify-success'
                             });
+                            fbq('track', 'registration-success');//
                             helperJs.bzOpenPopup(
                                 {items:
                                 { src: '#pop-alert'},
@@ -664,7 +671,7 @@ App.Site = function(){
         showWinnerList: showWinnerList,
         goToContestSubmit: goToContestSubmit
     };
-}();    
+}();
 //--End All site
 
 //--Contact
@@ -684,7 +691,7 @@ App.Contact = function(){
     var submit = function () {
         if (clickSubmit) {
             clickSubmit = false;
-            $form.find('#ajax-loading').slideDown();       
+            $form.find('#ajax-loading').slideDown();
             var data = $form.serialize();
             $.ajax({
                 url: baseurl + "/contact/",
@@ -694,8 +701,8 @@ App.Contact = function(){
                 success: function (res) {
                     clickSubmit = true;
                     $form.find('#ajax-loading').slideUp();
-                    if (res.status) {   
-                        if(res.url_redirect){      
+                    if (res.status) {
+                        if(res.url_redirect){
                             window.location.href = res.url_redirect;
                         }
                         App.Contact.resetForm(); //Reset
@@ -717,7 +724,7 @@ App.Contact = function(){
         submit:submit,
         resetForm:resetForm
     };
-}();    
+}();
 //--End contact
 
 
@@ -738,7 +745,7 @@ App.Subscribe = function(){
     var submit = function () {
         if (clickSubmit) {
             clickSubmit = false;
-            $form.find('#subscribe-ajax-loading').slideDown();       
+            $form.find('#subscribe-ajax-loading').slideDown();
             var data = $form.serialize();
             $.ajax({
                 url: baseurl + "/ajax/contact/subscribe",
@@ -748,8 +755,8 @@ App.Subscribe = function(){
                 success: function (res) {
                     clickSubmit = true;
                     $form.find('#subscribe-ajax-loading').slideUp();
-                    if (res.status) {   
-                        if(res.url_redirect){      
+                    if (res.status) {
+                        if(res.url_redirect){
                             window.location.href = res.url_redirect;
                         }
                         App.Contact.resetForm(); //Reset
@@ -771,7 +778,7 @@ App.Subscribe = function(){
         submit:submit,
         resetForm:resetForm
     };
-}();    
+}();
 //--End Subscribe
 
 //--FACEBOOK
@@ -843,12 +850,12 @@ App.Facebook = function(){
                         $('#resend-phone').val(res.data.phone);
                         $('#resend-location').val(res.data.location + '_' + res.data.phone.substr(0, 2));
                     }
-                    gtag('config', 'UA-81046101-40', {
+                    gtag('config', gaId, {
                         'page_path': '/ga-step2-login-success'
                     });
 
                 }else{
-                    gtag('config', 'UA-81046101-40', {
+                    gtag('config', gaId, {
                         'page_path': '/ga-step2-login-success'
                     });
                     if(res.status){
@@ -953,7 +960,7 @@ App.Google = function () {
                     }else{
                         onSuccess = function(googleUser){
                             var auth2 = gapi.auth2.getAuthInstance();
-                            
+
                             if (auth2.isSignedIn.get()) {
                                 console.log(googleUser.getBasicProfile());
                                 $('.google-signin').html('Logged in as: ' + googleUser.getBasicProfile().getName());
@@ -983,7 +990,7 @@ App.Google = function () {
                                 App.Site.showUserLogin(res.data.id, res.data.name);
 
                                 if(res.data.status == "0") { //nếu chưa active
-                                    gtag('config', 'UA-81046101-40', {
+                                    gtag('config', gaId, {
                                         'page_path': '/ga-step2-login-success'
                                     });
                                     if (res.data.phone == "") {
@@ -999,7 +1006,7 @@ App.Google = function () {
                                     }
                                 }else{
                                     //actived user logged in
-                                    gtag('config', 'UA-81046101-40', {
+                                    gtag('config', gaId, {
                                         'page_path': '/ga-step2-login-success'
                                     });
                                     location.href = baseurl+'/'+languageShort+'/contest-submit';

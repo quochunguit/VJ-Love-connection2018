@@ -388,6 +388,9 @@ msgstr "Bạn đã bình chọn bài dự thi này rồi!"
 msgid "SubmissionVoteSuccess"
 msgstr "Bạn đã bình chọn thành công!"
 
+msgid "t_ctrans"
+msgstr "Điều kiện & Thể lệ chương trình"
+
 
 
 

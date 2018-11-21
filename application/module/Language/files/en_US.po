@@ -388,3 +388,6 @@ msgstr "You voted this submission already!"
 
 msgid "SubmissionVoteSuccess"
 msgstr "Thank you for your voting submission!"
+
+msgid "t_ctrans"
+msgstr "Terms & Conditions"

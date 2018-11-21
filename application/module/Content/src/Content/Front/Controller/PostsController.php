@@ -19,7 +19,7 @@ class PostsController extends FrontController {
         $item2 = $postModel->getItem(array('type'=>'flight_information','language'=>$language));
         //print_r($news->toArray());die;
 
-        $this->setMetaData(array(), $this->translate('rule'));
+        $this->setMetaData(array(), $this->translate('t_ctrans'));
         $this->layout()->setVariables(array('page'=>'rule'));
         return new ViewModel(array(
             'rule'   => $item,

@@ -179,7 +179,7 @@ $myLocaleShort = $this->layout()->myLocaleShort;
                 </div>
             </div>
             <div class="button text-right">
-                <a href="javascript:void(0);" onclick="App.Popup.openRegister();" class="btn btn-default"><?php echo $this->translate('Signup'); ?></a>
+                <a href="javascript:void(0);" onclick="App.Popup.openRegister();gtag('config', '<?php echo $this->setting('core.GA_ID'); ?>', {'page_path': '/ga-regis-normal'});" class="btn btn-default"><?php echo $this->translate('Signup'); ?></a>
                 <button id="login-btn" class="btn btn-primary">
                     <div class="lds-rolling"><div></div></div>
                     <?php echo $this->translate('Login'); ?></button>
