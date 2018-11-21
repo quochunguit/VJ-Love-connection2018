@@ -25,7 +25,7 @@ class VoteController extends FrontController {
         }
 
         if(!$curUser){
-            $this->returnJsonAjax(array('status' => false, 'is_login'=> true, 'message' => 'User was not logged in!'));
+            $this->returnJsonAjax(array('status' => false, 'is_login'=> true, 'message' => $this->translate('UserNotLogin')));
         }
         
         $type = $params['type'];
@@ -62,17 +62,17 @@ class VoteController extends FrontController {
 
         $contest = $contestModel->getItemById($objectId);
         if(!$contest['id']){
-            $this->returnJsonAjax(array('status' => false, 'message' => 'Bài dự thi không tồn tại!'));
+            $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('SubmissionNotExist')));
         }
 
         if($type == 'votes'){
             $isVoted = $voteService->isVoted($objectId, $userId, $type, $extension);
             if ($isVoted) { //Voted
-                $this->returnJsonAjax(array('status' => false, 'message' => 'Bạn đã bình chọn bài dự thi này rồi!'));
+                $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('SubmissionVoted')));
             } 
 
             $title = 'Bình chọn bài dự thi';
-            $textSuccess = 'Bạn đã bình chọn thành công!';
+            $textSuccess = $this->translate('SubmissionVoteSuccess');
         }else{
             $title = 'Chia sẻ bài dự thi';
             $textSuccess = 'Bạn đã chia sẻ thành công!';

@@ -376,3 +376,15 @@ msgstr "Author"
 
 msgid "About2"
 msgstr "Introdution"
+
+msgid "UserNotLogin"
+msgstr "Please sign in to your account to vote!"
+
+msgid "SubmissionNotExist"
+msgstr "Submission was not exist!"
+
+msgid "SubmissionVoted"
+msgstr "You voted this submission already!"
+
+msgid "SubmissionVoteSuccess"
+msgstr "Thank you for your voting submission!"

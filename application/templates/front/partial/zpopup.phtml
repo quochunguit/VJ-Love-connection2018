@@ -109,7 +109,9 @@ $myLocaleShort = $this->layout()->myLocaleShort;
 
             <p class="note"><span>*</span> <?php echo $this->translate('Verified_organizer'); ?></p>
             <div class="button text-right">
-                <button id="reg-account-btn" class="btn btn-primary"><?php echo $this->translate('Signup'); ?></button>
+                <button id="reg-account-btn" class="btn btn-primary">
+                    <div class="lds-rolling"><div></div></div>
+                    <?php echo $this->translate('Signup'); ?></button>
             </div>
         </form>
     </div>
@@ -178,7 +180,9 @@ $myLocaleShort = $this->layout()->myLocaleShort;
             </div>
             <div class="button text-right">
                 <a href="javascript:void(0);" onclick="App.Popup.openRegister();" class="btn btn-default"><?php echo $this->translate('Signup'); ?></a>
-                <button id="login-btn" class="btn btn-primary"><?php echo $this->translate('Login'); ?></button>
+                <button id="login-btn" class="btn btn-primary">
+                    <div class="lds-rolling"><div></div></div>
+                    <?php echo $this->translate('Login'); ?></button>
             </div>
         </form>
     </div>
@@ -228,7 +232,9 @@ $myLocaleShort = $this->layout()->myLocaleShort;
                 </div>
             </div>
             <div class="button text-right">
-                <button id="activation-code-send-btn" class="btn btn-primary"><?php echo $this->translate('Update'); ?></button>
+                <button id="activation-code-send-btn" class="btn btn-primary">
+                    <div class="lds-rolling"><div></div></div>
+                    <?php echo $this->translate('Update'); ?></button>
             </div>
         </form>
     </div>
@@ -278,7 +284,9 @@ $myLocaleShort = $this->layout()->myLocaleShort;
                 </div>
             </div>
             <div class="button text-right">
-                <button id="resend-btn" class="btn btn-primary"><?php echo $this->translate('Send'); ?></button>
+                <button id="resend-btn" class="btn btn-primary">
+                    <div class="lds-rolling"><div></div></div>
+                    <?php echo $this->translate('Send'); ?></button>
             </div>
         </form>
     </div>
@@ -307,7 +315,9 @@ $myLocaleShort = $this->layout()->myLocaleShort;
             </div>
             <p class="note"></p>
             <div class="button text-right">
-                <button id="active-btn" class="btn btn-primary"><?php echo $this->translate('Active'); ?></button>
+                <button id="active-btn" class="btn btn-primary">
+                    <div class="lds-rolling"><div></div></div>
+                    <?php echo $this->translate('Active'); ?></button>
             </div>
         </form>
     </div>
@@ -339,7 +349,9 @@ $myLocaleShort = $this->layout()->myLocaleShort;
             </div>
 
             <div class="button text-right">
-                <a href="javascript:void(0)" onclick="window.closePopup();" class="btn btn-primary btn-forgotpass"><?php echo $this->translate('Send'); ?></a>
+                <a href="javascript:void(0)" onclick="window.closePopup();" class="btn btn-primary btn-forgotpass">
+                    <div class="lds-rolling"><div></div></div>
+                    <?php echo $this->translate('Send'); ?></a>
             </div>
         </form>
     </div>
@@ -360,10 +372,10 @@ $myLocaleShort = $this->layout()->myLocaleShort;
     <div class="pop-content text-center">
         <p>Chọn ngôn ngữ / Select your language:</p>
         <div class="button" style="float: left;">
-            <a href="<?php echo $this->url('language-switched', array('code'=>'en_US')); ?>"  class="btn btn-primary btn-close change-text-pop">ENGLISH</a>
+            <a onclick="App.Site.tracking('pop_en')" href="<?php echo $this->url('language-switched', array('code'=>'en_US')); ?>"  class="btn btn-primary btn-close change-text-pop">ENGLISH</a>
         </div>
         <div class="button" style="float: right;">
-            <a href="<?php echo $this->url('language-switched', array('code'=>'vi_VN')); ?>" class="btn btn-primary btn-close change-text-pop">VIETNAMESE</a>
+            <a onclick="App.Site.tracking('pop_vi')" href="<?php echo $this->url('language-switched', array('code'=>'vi_VN')); ?>" class="btn btn-primary btn-close change-text-pop">VIETNAMESE</a>
         </div>
         <div class="clear"></div>
     </div>
@@ -420,7 +432,9 @@ $myLocaleShort = $this->layout()->myLocaleShort;
             </div>
 
             <div class="button text-right">
-                <a href="javascript:void(0);" class="btn btn-primary btn-recovertpass"><?php echo $this->translate('Send'); ?></a>
+                <a href="javascript:void(0);" class="btn btn-primary btn-recovertpass">
+                    <div class="lds-rolling"><div></div></div>
+                    <?php echo $this->translate('Send'); ?></a>
             </div>
         </form>
     </div>

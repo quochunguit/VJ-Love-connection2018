@@ -30,10 +30,33 @@ App.Site = function(){
         forgotpass();
         formValidate();
         recoverpass();
+        tracking();
     };
+
+    var tracking = function(type){
+        if(type =='menu_vi'){
+            gtag('event', 'menu-VIET-Select');
+
+        }
+        if(type=='menu_en'){
+            gtag('event', 'menu-ENG-Select');
+        }
+        if(type == 'pop_en'){
+            gtag('event', 'popUp-ENG-Select');
+        }
+        if(type=='pop_vi'){
+            gtag('event', 'popUp-Viet-Select');
+        }
+    }
+
+
 
     var forgotpass = function(){
         $(".btn-forgotpass").click(function(){
+
+            //add loading icon
+            $('.btn-forgotpass').addClass('show-loading');
+
             $.ajax({
                 url: baseurl + "/"+languageShort+"/user-forget-pass",
                 type: 'post',
@@ -42,6 +65,8 @@ App.Site = function(){
                     email:$('#fgemail').val()
                 },
                 success: function (res) {
+                    //remmove loading icon
+                    $('.btn-forgotpass').removeClass('show-loading');
 
                     helperJs.bzClosePopup();
                     helperJs.bzOpenPopup(
@@ -63,6 +88,10 @@ App.Site = function(){
 
     var recoverpass = function(){
         $(".btn-recovertpass").click(function(){
+
+            //add loading icon
+            $('.btn-recovertpass').addClass('show-loading');
+
             $.ajax({
                 url: baseurl +"/"+languageShort+"/user-recover",
                 type: 'post',
@@ -73,6 +102,9 @@ App.Site = function(){
                     forget_pass_code:$('#show-fg').val(),
                 },
                 success: function (res) {
+                    //remmove loading icon
+                    $('.btn-recovertpass').removeClass('show-loading');
+
                     helperJs.bzClosePopup();
                     helperJs.bzOpenPopup(
                         {items:
@@ -142,6 +174,9 @@ App.Site = function(){
             success: function(res){
                 if(res.status){
                     //go to contest submit page
+                    gtag('config', 'UA-81046101-40', {
+                        'page_path': '/ga-submit-contest'
+                    });
                     window.location.href = baseurl + '/' + languageShort + '/contest-submit';
                 }else{
                         //alert(res.message);
@@ -231,6 +266,10 @@ App.Site = function(){
                 var flag = true;
                 if(flag){
                     flag= false;
+
+                    //add loading icon
+                    $('#reg-account-btn').addClass('show-loading');
+
                     $.ajax({
                         url: baseurl+"/"+languageShort+"/user-register",
                         dataType: 'json',
@@ -246,6 +285,11 @@ App.Site = function(){
                         type:'post',
                         success: function(res){
                             flag= true;
+
+                            //remove loading icon
+                            $('#reg-account-btn').removeClass('show-loading');
+
+                            gtag('event', 'registration-success');
                             if(res.status){
                                 helperJs.bzOpenPopup(
                                     {items:
@@ -323,6 +367,9 @@ App.Site = function(){
                 var login_email = $('#login-email').val();
                 var login_password = $('#login-password').val();
 
+                //add loading icon
+                $('#login-btn').addClass('show-loading');
+
                 $.ajax({
                     url: baseurl+"/user-login",
                     dataType: 'json',
@@ -332,6 +379,9 @@ App.Site = function(){
                     },
                     type:'post',
                     success: function(res){
+                        //remove loading icon
+                        $('#login-btn').removeClass('show-loading');
+
                         if(res.status){
                             location.reload();
                         }else{
@@ -398,6 +448,10 @@ App.Site = function(){
                 var phone_code = country_code.split('_')[1];
 
                 if(phone && phone != ''){ //check phone function later
+
+                    //add loading icon
+                    $('#activation-code-send-btn').addClass('show-loading');
+
                     $.ajax({
                         url: baseurl+"/"+languageShort+"/user-update-profile",
                         dataType: 'json',
@@ -409,6 +463,12 @@ App.Site = function(){
                         },
                         type:'post',
                         success: function(res){
+                            //remove loading icon
+                            $('#activation-code-send-btn').removeClass('show-loading');
+
+                            gtag('config', 'UA-81046101-40', {
+                                'page_path': '/ga-step3-update-phone'
+                            });
                             console.log(res);
                             if(res.status){
                                 //$('#phone-active-modal').modal('hide');
@@ -465,6 +525,9 @@ App.Site = function(){
                 var location = country_code.split('_')[0];
                 var phone_code = country_code.split('_')[1];
 
+                //add loading icon
+                $('#resend-btn').addClass('show-loading');
+
                 //save change phone
                 $.ajax({
                     url: baseurl+"/"+languageShort+"/user-update-profile",
@@ -477,6 +540,9 @@ App.Site = function(){
                     },
                     type:'post',
                     success: function(res){
+                        //add loading icon
+                        $('#resend-btn').removeClass('show-loading');
+
                         if(res.status){
                             $('#resend-phone').closest('.form-group').removeClass('error');
 
@@ -525,6 +591,10 @@ App.Site = function(){
             },
             submitHandler: function(form) {
                 var mobile_code = $('#receive-code-number').val();
+
+                //add loading icon
+                $('#active-btn').addClass('show-loading');
+
                 $.ajax({
                     url: baseurl+"/"+languageShort+"/user-verify-sms",
                     dataType: 'json',
@@ -533,7 +603,14 @@ App.Site = function(){
                     },
                     type:'post',
                     success: function(res){
+
+                        //remove loading icon
+                        $('#active-btn').removeClass('show-loading');
+
                         if(res.status){
+                            gtag('config', 'UA-81046101-40', {
+                                'page_path': '/ga-step4-SMS-verify-success'
+                            });
                             helperJs.bzOpenPopup(
                                 {items:
                                 { src: '#pop-alert'},
@@ -766,8 +843,14 @@ App.Facebook = function(){
                         $('#resend-phone').val(res.data.phone);
                         $('#resend-location').val(res.data.location + '_' + res.data.phone.substr(0, 2));
                     }
+                    gtag('config', 'UA-81046101-40', {
+                        'page_path': '/ga-step2-login-success'
+                    });
 
                 }else{
+                    gtag('config', 'UA-81046101-40', {
+                        'page_path': '/ga-step2-login-success'
+                    });
                     if(res.status){
                         location.href = baseurl+'/'+languageShort+'/contest-submit';
                     }
@@ -900,6 +983,9 @@ App.Google = function () {
                                 App.Site.showUserLogin(res.data.id, res.data.name);
 
                                 if(res.data.status == "0") { //nếu chưa active
+                                    gtag('config', 'UA-81046101-40', {
+                                        'page_path': '/ga-step2-login-success'
+                                    });
                                     if (res.data.phone == "") {
                                         //show update phone popup
                                         App.Popup.openUpdatePhone();
@@ -913,7 +999,10 @@ App.Google = function () {
                                     }
                                 }else{
                                     //actived user logged in
-                                    location.reload();
+                                    gtag('config', 'UA-81046101-40', {
+                                        'page_path': '/ga-step2-login-success'
+                                    });
+                                    location.href = baseurl+'/'+languageShort+'/contest-submit';
                                 }
                             }
                         }
@@ -1042,8 +1131,12 @@ App.VoteShare = function () {
         if (objectId && objectId !== '0') {
             if (clickVote) {
                 clickVote = false;
+
+                //add loading icon
+                $('#contest-vote').addClass('show-loading');
+
                 $.ajax({
-                    url: baseurl + "/api/vote",
+                    url: baseurl + "/"+languageShort+"/api/vote",
                     type: 'post',
                     dataType: 'json',
                     data: {
@@ -1053,6 +1146,9 @@ App.VoteShare = function () {
                         'type':'votes'
                     },
                     success: function (res) {
+                        //remove loading icon
+                        $('#contest-vote').removeClass('show-loading');
+
                         if(res.status){
                             helperJs.bzClosePopup();
                             helperJs.bzOpenPopup(

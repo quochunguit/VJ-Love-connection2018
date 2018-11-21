@@ -376,6 +376,18 @@ msgstr "Bài dự thi của"
 msgid "About2"
 msgstr "Giới Thiệu Chương Trình"
 
+msgid "UserNotLogin"
+msgstr "Vui lòng đăng nhập tài khoản của bạn!"
+
+msgid "SubmissionNotExist"
+msgstr "Bài dự thi không tồn tại!"
+
+msgid "SubmissionVoted"
+msgstr "Bạn đã bình chọn bài dự thi này rồi!"
+
+msgid "SubmissionVoteSuccess"
+msgstr "Bạn đã bình chọn thành công!"
+
 
 
 

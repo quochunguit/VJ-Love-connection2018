@@ -62,6 +62,50 @@ Handle.Contest = function (){
         $('#preview-send-contest').click(function(){
             submitContest();
         });
+
+        /**
+         * jQuery.textareaCounter
+         * Version 1.0
+         * Copyright (c) 2011 c.bavota - http://bavotasan.com
+         * Dual licensed under MIT and GPL.
+         * Date: 10/20/2011
+         **/
+        (function($){
+            $.fn.textareaCounter = function(options) {
+                // setting the defaults
+                // $("textarea").textareaCounter({ limit: 100 });
+                var defaults = {
+                    limit: 100
+                };
+                var options = $.extend(defaults, options);
+
+                // and the plugin begins
+                return this.each(function() {
+                    var obj, text, wordcount, limited;
+
+                    obj = $(this);
+                    //obj.after('<span style="font-size: 11px; clear: both; margin-top: 3px; display: block;" id="counter-text">Max. '+options.limit+' words</span>');
+
+                    obj.keyup(function() {
+                        text = obj.val();
+                        if(text === "") {
+                            wordcount = 0;
+                        } else {
+                            wordcount = $.trim(text).split(" ").length;
+                        }
+                        if(wordcount > options.limit) {
+                            $(".textarea-word-count").html('0/'+options.limit);
+                            limited = $.trim(text).split(" ", options.limit);
+                            limited = limited.join(" ");
+                            $(this).val(limited);
+                        } else {
+                            $(".textarea-word-count").html((options.limit - wordcount)+'/'+options.limit);
+                        }
+                    });
+                });
+            };
+        })(jQuery);
+        $("#share-content").textareaCounter({ limit: 1000 });
     }
 
     var openPopupPreview = function(){
@@ -84,6 +128,9 @@ Handle.Contest = function (){
                 }
             });
 
+            //add loading icon
+            $('#send-contest-btn').addClass('show-loading');
+
             $.ajax({
                 url: baseurl + "/"+languageShort+"/contest-submit", //submit to contest submit action
                 dataType: 'text',
@@ -95,6 +142,14 @@ Handle.Contest = function (){
                 success: function (res) {
                     //change flag submission to true
                     flag_submission = true;
+
+                    //add loading icon
+                    $('#send-contest-btn').removeClass('show-loading');
+
+                    gtag('event', 'submit-success');
+                    gtag('config', 'UA-81046101-40', {
+                        'page_path': '/ga-submit-success'
+                    });
 
                     var result = JSON.parse(res);
                     if(result.status){
@@ -137,6 +192,9 @@ Handle.Contest = function (){
         //change flag submission to false
         flag_submission = false;
 
+        //add loading icon
+        $('#send-contest-btn').addClass('show-loading');
+
         $.ajax({
             type : "POST",
             url  : baseurl+"/"+languageShort+"/contest-submit",
@@ -144,6 +202,9 @@ Handle.Contest = function (){
             success :  function(res){
                 //change flag submission to true
                 flag_submission = true;
+
+                //remove loading icon
+                $('#send-contest-btn').removeClass('show-loading');
 
                 //do something here
                 var result = JSON.parse(res);

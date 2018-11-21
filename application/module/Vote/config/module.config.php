@@ -12,7 +12,7 @@ return array(
            'vote' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/api/vote[/]',
+                    'route' => '/[:lang]/api/vote[/]',
                     'defaults' => array(
                         'controller' => 'Vote\Front\Controller\Vote',
                         'action' => 'vote',

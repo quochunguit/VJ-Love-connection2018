@@ -69,7 +69,7 @@
             $switchedUrl = $this->url('language-switched', array('code'=>$vL['lang_code']));
             ?>
 
-            <a href="<?php echo $switchedUrl; ?>" <?php echo $classActive; ?>><?php echo $vL['title_short']; ?></a>
+            <a onclick="App.Site.tracking('<?php if($vL['title_short']=='en'){echo 'menu_en';}else{echo 'menu_vi';} ?>')" href="<?php echo $switchedUrl; ?>" <?php echo $classActive; ?>><?php echo $vL['title_short']; ?></a>
             <?php if($kL < (count($languageList)-1)) echo '/'; ?>
         <?php } ?>
 

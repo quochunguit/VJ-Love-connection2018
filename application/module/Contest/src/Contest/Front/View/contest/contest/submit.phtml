@@ -84,11 +84,17 @@
                                 <div class="messages-error" style="bottom: 40px;">
                                     <div></div>
                                 </div>
+                                <lable class="textarea-word-count" style="float: left;">1000/1000</lable>
                                 <span><span>*</span> <?php echo $this->translate('Max_world'); ?></span>
                             </div>
                             <div class="group-btn">
-                                <button id="contest-preview" class="btn btn-gray"><?php echo $this->translate('Review'); ?></button>
-                                <button id="send-contest-btn" class="btn btn-primary"><?php echo $this->translate('Submitions'); ?></button>
+                                <button id="contest-preview" class="btn btn-gray">
+                                    <div class="lds-rolling"><div></div></div>
+                                    <?php echo $this->translate('Review'); ?></button>
+                                <button id="send-contest-btn" class="btn btn-primary">
+                                    <div class="lds-rolling"><div></div></div>
+                                    <?php echo $this->translate('Submitions'); ?>
+                                </button>
                             </div>
                         </form>
                     </div>
