@@ -2,8 +2,17 @@
 $myLocale = $this->layout()->myLocale;
 $myLocaleShort = $this->layout()->myLocaleShort;
 $user = $this->user();
-$flyJourneys = array(0=>array('image'=>'Han Quoc.jpg','name'=>$this->translate('kr_82')),1=>array('image'=>'Campuchia.jpg','name'=>$this->translate('kh_855')),2=>array('image'=>'Hong Kong.jpg','name'=>$this->translate('Hongkong')),3=>array('image'=>'Malaysia.jpg','name'=>$this->translate('my_60'))
-,4=>array('image'=>'Nhat.jpg','name'=>$this->translate('jp_81')),5=>array('image'=>'Taiwan.jpg','name'=>$this->translate('tw_886')),6=>array('image'=>'Singapore.jpg','name'=>$this->translate('sg_65')),7=>array('image'=>'Thai.jpg','name'=>$this->translate('th_66')),8=>array('image'=>'Trung Quoc.jpg','name'=>$this->translate('Trungquoc')));
+$flyJourneys = array(
+    0=>array('image'=>'Nhat.jpg','name'=>$this->translate('jp_81')),
+    1=>array('image'=>'Hong Kong.jpg','name'=>$this->translate('Hongkong')),
+    2=>array('image'=>'Trung Quoc.jpg','name'=>$this->translate('Trungquoc')),
+    3=>array('image'=>'Malaysia.jpg','name'=>$this->translate('my_60')),
+    4=>array('image'=>'Thai.jpg','name'=>$this->translate('th_66')),
+    5=>array('image'=>'Campuchia.jpg','name'=>$this->translate('kh_855')),
+    6=>array('image'=>'Singapore.jpg','name'=>$this->translate('sg_65')),
+    7=>array('image'=>'Taiwan.jpg','name'=>$this->translate('tw_886')),
+    8=>array('image'=>'Han Quoc.jpg','name'=>$this->translate('kr_82')),
+);
 ?>
 <?php if($myLocaleShort=='vi'): ?>
 <section class="module mod-banner-home bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home.jpg)">
