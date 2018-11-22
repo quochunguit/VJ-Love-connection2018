@@ -446,7 +446,7 @@ class ContestController extends AdminController {
                     //--TODO: send email--
                     $mail = $this->getServiceLocator()->get('SendMail');
                     if($item['language']=='vi_VN'){
-                        $mail->send(array(
+                        $mail->sendPhpMailler(array(
                             'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
                             'to' => array('email' => $userItem['email']),
                             'subject' => 'VIETJET - BÀI DỰ THI CỦA BẠN KHÔNG ĐƯỢC DUYỆT!',
@@ -456,7 +456,7 @@ class ContestController extends AdminController {
                             )
                         ));
                     }else{
-                        $mail->send(array(
+                        $mail->sendPhpMailler(array(
                             'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
                             'to' => array('name' => $userItem['name'], 'email' => $userItem['email']),
                             'subject' => 'VIETJET - YOUR SUBMISSSION HAS BEEN DECLINED!',

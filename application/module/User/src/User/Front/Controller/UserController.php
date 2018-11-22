@@ -196,7 +196,7 @@ public function apiverifysmsAction(){
                     unset($_SESSION['need_active']);
                     $mail = $this->getServiceLocator()->get('SendMail');
                     if($curLang=='vi'){
-                        $mail->send(array(
+                        $mail->sendPhpMailler(array(
                             'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
                             'to' => array('name' => $user['name'], 'email' => $user['email']),
                             'subject' => 'VIETJET - CHÀO MỪNG ĐẾN HÀNH TRÌNH  "KẾT NỐI YÊU THƯƠNG, YÊU LÀ PHẢI TỚI',
@@ -207,7 +207,7 @@ public function apiverifysmsAction(){
                             )
                         ));
                     }else{
-                        $mail->send(array(
+                        $mail->sendPhpMailler(array(
                             'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
                             'to' => array('name' => $user['name'], 'email' => $user['email']),
                             'subject' => 'VIETJET -  WELCOME TO THE "LOVE CONNECTION - LOVE IS REAL TOUCH" CAMPAIGN OF VIETJET.',
@@ -872,7 +872,7 @@ public function forgetpassAction(){
                             $mail = $this->getServiceLocator()->get('SendMail');
 
                             if($curLang=='vi'){
-                                $mail->send(array(
+                                $mail->sendPhpMailler(array(
                                     'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
                                     'to' => array('name' => $user['name'], 'email' => $user['email']),
                                     'subject' => 'VIETJET - NHẬN THÔNG BÁO BẠN ĐÃ QUÊN PASSWORD!',
@@ -884,7 +884,7 @@ public function forgetpassAction(){
                                     )
                                 ));
                             }else{
-                                $mail->send(array(
+                                $mail->sendPhpMailler(array(
                                     'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
                                     'to' => array('name' => $user['name'], 'email' => $user['email']),
                                     'subject' => 'VIETJET - YOUR PASSWORD HAS BEEN RESET!',

@@ -54,17 +54,18 @@ class IndexController extends FrontController{
     }
 
   public function testmailAction(){
-    ini_set('display_errors',1);
-    error_reporting(E_ALL & ~E_NOTICE);
-    $mail = $this->getServiceLocator()->get('SendMail');
-    $result = $mail->send(array(
-        'from' => array('email' => EMAIL_SEND_FROM_EMAIL),
-        'to' => array('email' => 'tuananhbizzon@gmail.com'),
-        'subject' => 'VIETJET - YOUR PASSWORD HAS BEEN RESET!',
-        'template' => 'email/forgotpass_en',
+//    ini_set('display_errors',1);
+//    error_reporting(E_ALL & ~E_NOTICE);
+//    $mail = $this->getServiceLocator()->get('SendMail');
+//    $mail->sendPhpMailler(array(
+//        'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
+//        'to' => array('name' =>'anh', 'email' => 'tuananhbizzon@gmail.com'),
+//        'subject' => 'VIETJET - NHẬN THÔNG BÁO BẠN ĐÃ QUÊN PASSWORD!',
+//        'template' => 'email/forgotpass'
+//    ));
+//    echo 'done';die;
 
-    ));
-    print_r($result);die;
+
 
   }
 }

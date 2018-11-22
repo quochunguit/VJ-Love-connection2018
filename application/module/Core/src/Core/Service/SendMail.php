@@ -26,6 +26,7 @@ class SendMail {
             $fromEmail = $info['from']['email'];
 
 
+
             $toName = $info['to']['name'];
             $toEmail = $info['to']['email'];
             $data = $info['data'];
@@ -44,7 +45,7 @@ class SendMail {
             $body->setParts(array($textPart,$htmlPart));
 
             $message = new Mail\Message();
-            $message->setFrom($fromEmail,$fromEmail, $fromEmail);
+            $message->setFrom($fromEmail,"<".$fromEmail.">", '');
             $message->addTo($toEmail, $toName);
             if($emailsCC){
                 foreach ($emailsCC as $value) {
@@ -70,6 +71,48 @@ class SendMail {
             echo $ex->getMessage();die;
             return -1;
         }     
+    }
+
+    function sendPhpMailler($info = array()){
+        $template = $info['template'];
+        $subject = $info['subject'];
+
+        $toEmail = $info['to']['email'];
+        $data = $info['data'];
+
+        $this->renderer = $this->getServiceLocator()->get('ViewRenderer');
+        $htmlBody = $this->renderer->render($template, $data);
+        //print_r($htmlBody);die;
+
+        require_once VENDOR_INCLUDE_DIR . '/phpmailer/class.phpmailer.php';
+        $config =  $this->getServiceLocator()->get('mailConfig');
+
+        $mail = new \PHPMailer(true);
+        $mail->CharSet = 'UTF-8';
+        $mail->isSMTP();
+        $mail->Host = $config['host'];
+        $mail->Port       = $config['port'];
+        $mail->SMTPSecure = $config['connection_config']['ssl'];
+        $mail->SMTPAuth   = true;
+        $mail->Username =  $config['connection_config']['username'];
+        $mail->Password = $config['connection_config']['password'];
+        $mail->SetFrom($config['connection_config']['username'],'From Email');
+        $mail->addAddress($toEmail, 'ToEmail');
+        //$mail->SMTPDebug = true;
+
+
+
+        $mail->Subject = $subject;
+        $mail->Body    =$htmlBody ;
+        $mail->IsHTML(true);
+
+
+        if(!$mail->send()) {
+            echo 'Message could not be sent.';die;
+            echo 'Mailer Error: ' . $mail->ErrorInfo;die;
+        } else {
+            echo 'Message has been sent';die;
+        }
     }
 
     function sendAttach($info = array(), $emailsCC = array()) {

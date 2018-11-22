@@ -90,6 +90,12 @@ return array(
 
                 return $transport;
             },
+            'mailConfig' => function ($sm) {
+                $config = $sm->get('Config');
+                return ($config['mail']['transport']['options']);
+
+            },
+
             'SendMail' => function ($sm) {
                 $mail = new Core\Service\SendMail($sm);
                 return $mail;
