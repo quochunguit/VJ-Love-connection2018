@@ -617,7 +617,6 @@ App.Site = function(){
                             gtag('config', gaId, {
                                 'page_path': '/ga-step4-SMS-verify-success'
                             });
-                            fbq('track', 'registration-success');//
                             helperJs.bzOpenPopup(
                                 {items:
                                 { src: '#pop-alert'},

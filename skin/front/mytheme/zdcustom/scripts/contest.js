@@ -202,7 +202,6 @@ Handle.Contest = function (){
             success :  function(res){
                 //change flag submission to true
                 flag_submission = true;
-                fbq('track', 'submit-success');
                 //remove loading icon
                 $('#send-contest-btn').removeClass('show-loading');
 
