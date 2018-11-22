@@ -698,7 +698,7 @@ public function apiprofileAction(){
 
     //--Update info
 public function apiupdateprofileAction(){
-    $params = $this->getParams();
+    $params = $this->getParams(self::METHOD_POST_PARAM);
     $resultValid = $this->validateUpdateProfile($params);
 
     if($resultValid['status']){
