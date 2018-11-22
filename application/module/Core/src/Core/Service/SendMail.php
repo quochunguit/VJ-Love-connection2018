@@ -25,6 +25,7 @@ class SendMail {
             $fromName = $info['from']['name'];
             $fromEmail = $info['from']['email'];
 
+
             $toName = $info['to']['name'];
             $toEmail = $info['to']['email'];
             $data = $info['data'];
@@ -43,7 +44,7 @@ class SendMail {
             $body->setParts(array($textPart,$htmlPart));
 
             $message = new Mail\Message();
-            $message->setFrom($fromEmail, $fromName);
+            $message->setFrom($fromEmail,$fromEmail, $fromEmail);
             $message->addTo($toEmail, $toName);
             if($emailsCC){
                 foreach ($emailsCC as $value) {
