@@ -648,7 +648,7 @@ App.Site = function(){
     var showActivationFillCode = function(data){
         //$('#code-active-modal').modal('show');
         App.Popup.openActiveCode();
-        $('#pop-activecode .note').html(trans_Activationcodesendtophonenumber+' +'+data.phone+' ('+data.mobile_code+')');
+        $('#pop-activecode .note').html(trans_Activationcodesendtophonenumber+' +'+data.phone);
     }
 
     var showWinnerList = function(){
