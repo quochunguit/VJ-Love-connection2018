@@ -52,4 +52,19 @@ class IndexController extends FrontController{
           //'paging' => $modelNewestContest->getPaging()
       ));
     }
+
+  public function testmailAction(){
+    ini_set('display_errors',1);
+    error_reporting(E_ALL & ~E_NOTICE);
+    $mail = $this->getServiceLocator()->get('SendMail');
+    $result = $mail->send(array(
+        'from' => array('email' => EMAIL_SEND_FROM_EMAIL),
+        'to' => array('email' => 'tuananhbizzon@gmail.com'),
+        'subject' => 'VIETJET - YOUR PASSWORD HAS BEEN RESET!',
+        'template' => 'email/forgotpass_en',
+
+    ));
+    print_r($result);die;
+
+  }
 }

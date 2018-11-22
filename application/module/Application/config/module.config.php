@@ -3,6 +3,20 @@ return array(
    
     'router' => array(
         'routes' => array(
+            'testmail' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/[:lang]/testmail',
+                    'constraints' => array(
+                        'lang' => '[0-9a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'testmail',
+                    ),
+                ),
+            ),
+
             'home' => array(
                  'type' => 'Segment',
                 'options' => array(
