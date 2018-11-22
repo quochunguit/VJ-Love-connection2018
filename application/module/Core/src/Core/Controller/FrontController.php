@@ -315,6 +315,9 @@ class FrontController extends CoreController {
     public function checkUserStatus($user=array()){
         if($user){
             $status = $user['status'];
+            if($user['is_updated_info'] == 1 && $status == 0){
+                return array('status'=>false, 'need_active'=>true, 'id'=>$user['id'], 'name'=>$user['name'], 'status_key'=>'inactive', 'location'=>$user['location'], 'phone'=>$user['phone'], 'message'=>'Tài khoản chưa active!');
+            }
             if($user['is_updated_info'] == 0 && $status == 0 && $user['social_type'] == 'Facebook'){
                 return array('status'=>false, 'status_key'=>'reg_fb','phone'=>$user['phone'], 'message'=>'Đăng ký bằng facebook!');
             }
@@ -326,9 +329,7 @@ class FrontController extends CoreController {
             if($user['is_updated_info'] == 0 && $status == 0 && $user['social_type'] == 'Google'){
                 return array('status'=>false, 'id'=>$user['id'], 'name'=>$user['name'], 'status_key'=>'reg_gg', 'location'=>$user['location'], 'phone'=>$user['phone'], 'message'=>'Đăng ký bằng Google!');
             }
-            if($user['is_updated_info'] == 1 && $status == 0){
-                return array('status'=>false, 'need_active'=>true, 'id'=>$user['id'], 'name'=>$user['name'], 'status_key'=>'inactive', 'location'=>$user['location'], 'phone'=>$user['phone'], 'message'=>'Tài khoản chưa active!');
-            }
+
 
             if($user['is_updated_info'] == 1 && $status == 2){
                 return array('status'=>false, 'status_key'=>'blocked', 'message'=>'Tài khoản đã bị khóa!');

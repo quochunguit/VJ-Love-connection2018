@@ -347,7 +347,7 @@ public function apiloginfbAction(){
                 //--Check user valid--
             $resultValid =  $this->checkUserStatus($userLogin);
 
-            if($resultValid['status'] || $resultValid['status_key'] == 'reg_fb' ){
+            if($resultValid['status'] || $resultValid['status_key'] == 'reg_fb' || $resultValid['need_active'] == true ){
                 if($resultValid['status']){
                         //-Token login--
                     $token = $this->createdUserToken($userLogin['id'],$userModel);
