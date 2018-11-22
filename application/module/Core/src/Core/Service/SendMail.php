@@ -111,7 +111,7 @@ class SendMail {
             echo 'Message could not be sent.';die;
             echo 'Mailer Error: ' . $mail->ErrorInfo;die;
         } else {
-            echo 'Message has been sent';die;
+            echo 'Message has been sent';
         }
     }
 
