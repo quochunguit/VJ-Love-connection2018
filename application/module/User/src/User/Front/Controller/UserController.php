@@ -520,7 +520,7 @@ public function fbcomplete($data)
                 //$userinfo['activation_code'] = ''; //Auto active
                 //$userinfo['mobile_code'] = ''; //Auto active
                 //$userinfo['status'] = 1; //Auto active
-                if($userByEmail['social_type'] != 'Facebook'){
+                if($userByEmail['social_type'] != 'Google'){
                     $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('Email_exist')));
                 }
 
