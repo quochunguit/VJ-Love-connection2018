@@ -371,10 +371,10 @@ $myLocaleShort = $this->layout()->myLocaleShort;
     <?php if($myLocaleShort=='vi'): ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title"> <?php else: ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy-en.png" alt="" class="img-title"> <?php endif; ?>
     <div class="pop-content text-center">
         <p>Chọn ngôn ngữ / Select your language:</p>
-        <div class="button" style="float: left;">
+        <div class="button left-style" >
             <a onclick="App.Site.tracking('pop_en')" href="<?php echo $this->url('language-switched', array('code'=>'en_US')); ?>"  class="btn btn-primary btn-close change-text-pop">ENGLISH</a>
         </div>
-        <div class="button" style="float: right;">
+        <div class="button right-style">
             <a onclick="App.Site.tracking('pop_vi')" href="<?php echo $this->url('language-switched', array('code'=>'vi_VN')); ?>" class="btn btn-primary btn-close change-text-pop">VIETNAMESE</a>
         </div>
         <div class="clear"></div>

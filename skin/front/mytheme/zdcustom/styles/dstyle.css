@@ -11,6 +11,7 @@
     .mod-list-item .item-last-row .content-item .like span{
         color: #FFFFFF;
     }
+   
 }
 
 @media (min-width: 481px){
@@ -29,6 +30,13 @@
     .mod-list-item .item-last-row:last-child .content-item .like span{
         color: #FFFFFF;
     }
+    .left-style{
+        float:left;
+    }
+    .right-style{
+        float:right;
+    }
+
 }
 
 @media (max-width: 480px){
