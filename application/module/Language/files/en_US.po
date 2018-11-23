@@ -234,6 +234,9 @@ msgstr "Send Activation Code"
 msgid "Send"
 msgstr "Send"
 
+msgid "Resend"
+msgstr "Resend"
+
 msgid "Activeaccount"
 msgstr "Active Account"
 
@@ -397,3 +400,60 @@ msgstr "Error occurred please try again later!"
 
 msgid "call_now"
 msgstr "Call now"
+
+msgid "maximumSMSsend"
+msgstr "You just can be received SMS message maximum 3 times"
+
+msgid "hanoi_osaka"
+msgstr "HaNoi - Osaka 12/12/2018"
+
+msgid "osaka_hcm"
+msgstr "Osaka - HCMC 14/12/2018"
+
+msgid "camranh_thuonghai"
+msgstr "Cam Ranh - ShangHai 17/12/2018"
+
+msgid "camranh_nghiao"
+msgstr "Cam Ranh - Yiwu 17/12/2018"
+
+msgid "camranh_hanchau"
+msgstr "Cam Ranh - Hangzhou 18/12/2018"
+
+msgid "danang_hanchau"
+msgstr "Da Nang - Hangzhou 18/12/2018"
+
+msgid "camranh_thientan"
+msgstr "Cam Ranh - Tianjin 18/12/2018 "
+
+msgid "hcm_kualalumpur"
+msgstr "HCMC - Kuala Lumpur 21/12/2018"
+
+msgid "bangkok_hcm"
+msgstr "Bangkok - HCMC 24/12/2018"
+
+msgid "hanoi_siemreap"
+msgstr "Hanoi - Siem Reap 26/12/2018"
+
+msgid "hcm_hongkong"
+msgstr "HCMC - Hong Kong 28/12/2018"
+
+msgid "singapore_hanoi"
+msgstr "Singapore - HaNoi 1/1/2019"
+
+msgid "daibac_hanoi"
+msgstr "Taipei - HaNoi 4/1/2019"
+
+msgid "hcm_daibac"
+msgstr "HCMC - Taipei 5/1/2019"
+
+msgid "seoul_danang"
+msgstr "Seoul - DaNang 8/1/2019"
+
+msgid "hcm_seoul"
+msgstr "HCMC - Seoul 9/1/2019"
+
+msgid "tokyo_hanoi"
+msgstr "Tokyo - HaNoi 11/1/2019"
+
+msgid "UserContestMaximum"
+msgstr "Sorry! We have received 20 submission from this account. Our admin team will check the entry and announce by email when it is approved. Please come back to update and share more."

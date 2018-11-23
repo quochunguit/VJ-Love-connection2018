@@ -1,4 +1,5 @@
 <?php
+
 $factory = $this->factory();
 echo $this->partial('partial/zhtpassword');
 echo $this->doctype();
@@ -11,7 +12,8 @@ echo $this->doctype();
         <?php echo $this->headTitle(); ?>
         <meta name="description" content="<?php echo $this->translate('Share_story'); ?>">
         <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0, user-scalable=no') ?>
-        <?php echo $this->partial('partial/opengraph'); ?>
+
+        <?php if($this->data){echo $this->partial('partial/opengraph',array('data'=>$this->data));}else{echo $this->partial('partial/opengraph');}  ?>
         <script>
             var baseurl = "<?php echo BASE_URL; ?>";
             var baseurlskinimage = "<?php echo BASE_URL_SKIN_IMAGE; ?>";

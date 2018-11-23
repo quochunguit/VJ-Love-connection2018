@@ -48,14 +48,7 @@ class UserForm extends CoreForm implements InputFilterAwareInterface {
                 'class' => 'required email form-control'
             ),
         ));
-        $this->add(array(
-            'name' => 'address',
-            'attributes' => array(
-                'type' => 'text',
-                'id' => 'address',
-                'class'=>' form-control'
-            ),
-        ));
+
         $this->add(array(
             'name' => 'phone',
             'attributes' => array(
@@ -207,11 +200,6 @@ class UserForm extends CoreForm implements InputFilterAwareInterface {
             ));
             $inputFilter->add($factory->createInput(array(
                         'name' => 'identify',
-                        'required' => false,
-                            )
-            ));
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'address',
                         'required' => false,
                             )
             ));

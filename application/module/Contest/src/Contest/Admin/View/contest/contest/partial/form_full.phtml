@@ -1,3 +1,4 @@
+<?php $des = array("hanoi_osaka", "osaka_hcm", "camranh_thuonghai", "camranh_nghiao", "camranh_hanchau", "danang_hanchau", "camranh_thientan", "hcm_kualalumpur", "bangkok_hcm", "hanoi_siemreap", "hcm_hongkong", "singapore_hanoi", "daibac_hanoi", "hcm_daibac", "seoul_danang", "hcm_seoul", "tokyo_hanoi"); ?>
 <div class="form-group">
     <label class="col-sm-2 control-label" for="">UserId</label>
     <div class="col-sm-10">
@@ -25,7 +26,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-sm-2 control-label" for="">Image</label>
+    <label class="col-sm-2 control-label" for="">Destination</label>
     <div class="col-sm-10">
     <?php $imageString = $data['images'];
     $imageArray= explode(',',$imageString);
@@ -36,11 +37,36 @@
     </div>
 </div>
 
+<div class="form-group">
+    <label class="col-sm-2 control-label" for="">Destination</label>
+    <div class="col-sm-10">
+       <select name="destination">
+           <?php foreach($des as $value):?>
+               <option <?php if($data['destination']==$value){echo "selected";} ?> value="<?php echo $value; ?>"><?php echo $this->translate($value); ?></option>
+           <?php endforeach; ?>
+       </select>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label" for="">Mark</label>
+    <div class="col-sm-10">
+        <?php echo $this->formInput($form->get('featured')); ?>
+    </div>
+</div>
+
 
 <div class="form-group">
     <label class="col-sm-2 control-label" for="">Status</label>
     <div class="col-sm-10">
         <?php echo $this->formSelect($form->get('status')); ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label" for="">Created</label>
+    <div class="col-sm-10">
+        <?php echo $this->formInput($form->get('created')); ?>
     </div>
 </div>
 <?php //echo $this->formHidden($form->get('csrf')); ?>

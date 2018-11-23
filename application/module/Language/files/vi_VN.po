@@ -70,10 +70,10 @@ msgid "Share"
 msgstr "Gửi Chia Sẻ"
 
 msgid "Target"
-msgstr "Lựa chọn điểm đến"
+msgstr "Chọn hành trình"
 
 msgid "List_target"
-msgstr "Danh sách điểm đến (Chọn 1)"
+msgstr "Danh sách hành trình (Chọn 1)"
 
 msgid "Upload_maximum"
 msgstr "Upload tối đa 5 hình ảnh về cảm nhận của bạn"
@@ -233,6 +233,9 @@ msgstr "Gửi Mã kích hoạt"
 
 msgid "Send"
 msgstr "Gửi"
+
+msgid "Resend"
+msgstr "Gửi Lại"
 
 msgid "Activeaccount"
 msgstr "Kích hoạt tài khoản"
@@ -397,7 +400,62 @@ msgstr "Đã có lỗi xảy ra, vui lòng thử lại sau!"
 msgid "call_now"
 msgstr "Gọi ngay"
 
+msgid "maximumSMSsend"
+msgstr "Bạn chỉ được gửi lại tin nhắn tối đa 3 lần"
 
+msgid "hanoi_osaka"
+msgstr "Hà Nội - Osaka 12/12/2018"
+
+msgid "osaka_hcm"
+msgstr "Osaka - TP.HCM 14/12/2018"
+
+msgid "camranh_thuonghai"
+msgstr "Cam Ranh - Thượng Hải 17/12/2018"
+
+msgid "camranh_nghiao"
+msgstr "Cam Ranh - Nghĩa Ô 17/12/2018"
+
+msgid "camranh_hanchau"
+msgstr "Cam Ranh - Hàn Châu 18/12/2018"
+
+msgid "danang_hanchau"
+msgstr "Đà Nẵng - Hàn Châu 18/12/2018"
+
+msgid "camranh_thientan"
+msgstr "Cam Ranh - Thiên tân 18/12/2018"
+
+msgid "hcm_kualalumpur"
+msgstr "TP.HCM - Kuala Lumpur 21/12/2018"
+
+msgid "bangkok_hcm"
+msgstr "Bangkok - TP.HCM 24/12/2018"
+
+msgid "hanoi_siemreap"
+msgstr "Hà Nội - Siem Reap 26/12/2018"
+
+msgid "hcm_hongkong"
+msgstr "Tp.HCM - Hong Kong 28/12/2018"
+
+msgid "singapore_hanoi"
+msgstr "Singapore - Hà Nội 1/1/2019"
+
+msgid "daibac_hanoi"
+msgstr "Đài Bắc - Hà Nội 4/1/2019"
+
+msgid "hcm_daibac"
+msgstr "TP.HCM - Đài Bắc 5/1/2019"
+
+msgid "seoul_danang"
+msgstr "Seoul - Đà Nẵng 8/1/2019"
+
+msgid "hcm_seoul"
+msgstr "TP.HCM- Seoul 9/1/2019"
+
+msgid "tokyo_hanoi"
+msgstr "Tokyo - Hà Nội 11/1/2019"
+
+msgid "UserContestMaximum"
+msgstr "Xin lỗi, BTC đã nhận 20 bài dự thi từ tài khoản này. Admin sẽ kiểm tra lại nội dung để tránh tình trạng spam và thông báo qua email với bạn các bài được duyệt. Bạn vui lòng quay lại sau để cập nhật nhé."
 
 
 

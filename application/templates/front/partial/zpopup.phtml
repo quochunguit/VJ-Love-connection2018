@@ -315,6 +315,7 @@ $myLocaleShort = $this->layout()->myLocaleShort;
             </div>
             <p class="note"></p>
             <div class="button text-right">
+                <a href="javascript:void(0);" onclick="App.Popup.openResendCode();" class="btn btn-default"><?php echo $this->translate('Resend'); ?></a>
                 <button id="active-btn" class="btn btn-primary">
                     <div class="lds-rolling"><div></div></div>
                     <?php echo $this->translate('Active'); ?></button>
@@ -375,7 +376,7 @@ $myLocaleShort = $this->layout()->myLocaleShort;
             <a onclick="App.Site.tracking('pop_en')" href="<?php echo $this->url('language-switched', array('code'=>'en_US')); ?>"  class="btn btn-primary btn-close change-text-pop">ENGLISH</a>
         </div>
         <div class="button right-style">
-            <a onclick="App.Site.tracking('pop_vi')" href="<?php echo $this->url('language-switched', array('code'=>'vi_VN')); ?>" class="btn btn-primary btn-close change-text-pop">VIETNAMESE</a>
+            <a onclick="App.Site.tracking('pop_vi')" href="<?php echo $this->url('language-switched', array('code'=>'vi_VN')); ?>" class="btn btn-primary btn-close change-text-pop">TIẾNG VIỆT</a>
         </div>
         <div class="clear"></div>
     </div>

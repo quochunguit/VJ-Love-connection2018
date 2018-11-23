@@ -249,12 +249,17 @@ class ContestController extends AdminController {
         ->setCellValue('C'.$indexCellTitle, 'Họ và tên')
         ->setCellValue('D'.$indexCellTitle, 'Email')
         ->setCellValue('E'.$indexCellTitle, 'Điện thoại')
-        ->setCellValue('F'.$indexCellTitle, 'Hình ảnh')
-        ->setCellValue('G'.$indexCellTitle, 'Thông điệp')
-        ->setCellValue('H'.$indexCellTitle, 'Ngày tham gia');
+        ->setCellValue('F'.$indexCellTitle, 'Thông điệp')
+            ->setCellValue('G'.$indexCellTitle, 'Điểm')
+        ->setCellValue('H'.$indexCellTitle, 'Ngày tham gia')
+        ->setCellValue('I'.$indexCellTitle, 'Trạng thái')
+        ->setCellValue('I'.$indexCellTitle, 'Chuyến đi đã chọn');
         
         $cell = 0;
+        $status ='';
         foreach($data as $key => $val){
+            if($val['created']=='0000-00-00'){$val['created']='2018-11-23';};
+            if($val['status']==0){$status='unpublish';}elseif($val['status']==1){$status='publish';}else{$status='Rejected';}
             $user = $factory->getUser($val['user_id']);
             $cell = 3 + $key;
             $objPHPExcel->setActiveSheetIndex(0)
@@ -263,9 +268,12 @@ class ContestController extends AdminController {
             ->setCellValue('C' . $cell, $user['name'])
             ->setCellValue('D' . $cell, $user['email'])
             ->setCellValue('E' . $cell, $user['phone'])
-            ->setCellValue('F' . $cell, $val['image'])
-            ->setCellValue('G' . $cell, $val['intro'])
-            ->setCellValue('H'. $cell, $val['submit_date']);
+
+            ->setCellValue('F' . $cell, $val['title'])
+                ->setCellValue('G' . $cell, $val['featured'])
+            ->setCellValue('H'. $cell, $val['created'])
+            ->setCellValue('I'. $cell, $status)
+            ->setCellValue('I'. $cell, $this->translate($val['destination']));
 
             $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
             $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(10);
@@ -342,9 +350,10 @@ class ContestController extends AdminController {
         $excel->writeLine($row_title);
         $excel->writeLine($row_space);
         $lineTitle = array(
-            'STT','Id', 'Họ và tên', 'Email', 'Điện thoại', 'Hình ảnh', 'Thông điệp','Ngày tham gia', 'Trạng thái');
+            'STT','Id', 'Họ và tên', 'Email', 'Điện thoại', 'Tiêu đề','Ngày tham gia','Điểm', 'Trạng thái');
         $excel->writeLine($lineTitle);
         foreach ($data as $key => $value) {
+            if($value['created']=='0000-00-00'){$value['created']='2018-11-23';};
             $user = $factory->getUser($value['user_id']);
             $image = 'images/'.$value['image'];
             $imgEl = '<img src="' . $image . '"/>'. $image;
@@ -354,9 +363,10 @@ class ContestController extends AdminController {
                 $user['name'],
                 $user['email'],
                 $user['phone'],
-                $imgEl,
-                $value['intro'],
-                $value['submit_date'],
+
+                $value['title'],
+                $value['created']->format('Y-m-d'),
+                $value['featured'],
                 $value['status'] == 1 ? 'Publish' : ($value['status'] == 2 ? 'Rejected' : 'Unpublish'),
                 ), "style='height:450px; width:450px;'"
             );
@@ -379,7 +389,7 @@ class ContestController extends AdminController {
         $winTypeArr = array('week','final'); //Validate win type
         if($winType && in_array($winType, $winTypeArr) && $postId){
             $postModel = $this->getModel();
-            $post = $postModel->getItemById($postId, array('id','title','user_id','submit_date','is_win_week','is_win_final'));
+            $post = $postModel->getItemById($postId, array('id','title','user_id','created','is_win_week','is_win_final'));
       
             if($post['is_win_'.$winType] == 0){
                  $isWin = 1;
@@ -419,7 +429,7 @@ class ContestController extends AdminController {
                         $winTextVn = ' ';
                         break;
                 }
-                $this->returnJsonAjax(array('status' => true, 'message' => $textAction. 'thắng giải'. $winTextVn .'thành công!'.$textAlertSendMail, 'textWinType'=>$textWinType));
+                $this->returnJsonAjax(array('status' => true, 'message' => $textAction. 'thắng giải'. $winTextVn .'thành công!', 'textWinType'=>$textWinType));
             }else{
                 $this->returnJsonAjax(array('status' => false, 'message' => 'Đã có lỗi xảy ra, vui lòng thử lại sau!')); 
             }

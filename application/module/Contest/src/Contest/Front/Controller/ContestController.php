@@ -63,11 +63,16 @@ class ContestController extends FrontController {
                 }*/
 
                 $submitscontest = $model->limitContestByUser($userLogin[id]);
+                $countContest = 0;
+                $maximuContest = 20;
                 if($submitscontest && count($submitscontest) > 0){
                     foreach($submitscontest as $k => $limitcontest){
                         if($limitcontest['status'] != 2){
-                            $this->returnJsonAjax(array('status' => false, 'user_contest_exist' => true, 'message' => $this->translate('UserContestExist')));
+                            $countContest++;
                         }
+                    }
+                    if($countContest >= $maximuContest){
+                        $this->returnJsonAjax(array('status' => false, 'user_contest_exist' => true, 'message' => $this->translate('UserContestMaximum')));
                     }
                 }
 
@@ -146,6 +151,7 @@ class ContestController extends FrontController {
                 $contestInfos["destination"] = $mediaDestination;
                 $contestInfos["descriptions"] = $mediaDes;
                 $contestInfos["type"] = $mediaType;
+                $contestInfos["created"] = date();
                 if($mediaType == 'video'){
                     $contestInfos["video"] = $mediaValue;
                 }else if($mediaType == 'images'){
@@ -201,6 +207,7 @@ class ContestController extends FrontController {
         $desShare = str_replace("'","´",$desShare);
         $urlShare = BASE_URL.'/'.$codeShort.'/'.$contest_slug.'/'.$contest_id;
         $urlImage = BASE_URL_MEDIA.'/images/'.$imageArray[0];
+        $this->layout()->setVariable('data', array('titleShare'=>$titleShare,'desShare'=>$desShare,'urlImage'=>$urlImage));
 
         return new ViewModel(array(
             'contest_infos'=> $contest_infos,

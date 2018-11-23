@@ -19,6 +19,8 @@
                         <th><?php echo $this->layoutHelper()->header('bz1_contests.votes', $state,'Votes'); ?></th>
                         <th><?php echo $this->layoutHelper()->header('bz1_contests.shares', $state,'Shares'); ?></th>
                         <th><?php echo $this->layoutHelper()->header('bz1_contests.submit_date', $state,'SubmitDate'); ?></th>
+                        <th>Destination</th>
+                        <th>Mark</th>
                         <th>Winner</th>
                         <th><?php echo $this->layoutHelper()->header('bz1_contests.status', $state,'Status'); ?></th>
                         <th>Reject</th>
@@ -47,8 +49,9 @@
                             </td>   
                             <td><?php echo $item['votes'] ?></td>
                             <td><?php echo $item['shares'] ?></td>           
-                            <td><?php echo $this->layoutHelper()->dateString($item['submit_date']) ?></td>
-                           
+                            <td><?php echo $item['created'] ?></td>
+                            <td><?php echo $this->translate($item['destination']); ?></td>
+                            <td><?php echo $item['featured']; ?></td>
                             <td style="width:150px;">
                                 <div>- Tuần:
                                     <a id="btn_week_<?php echo $item['id'];?>" href="javascript:;" onclick="javascript:setWin('week','<?php echo $item['id']; ?>');">

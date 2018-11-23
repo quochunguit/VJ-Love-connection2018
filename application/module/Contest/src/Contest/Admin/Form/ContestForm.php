@@ -89,13 +89,24 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
             ),
         ));
 
+
+
+        $this->add(array(
+            'name' => 'destination',
+            'attributes' => array(
+                'type' => 'text',
+                'class' => 'form-control',
+                'id' => 'destination'
+            ),
+        ));
+
         $this->add(array(
             'name' => 'featured',
-            'type' => 'Zend\Form\Element\Select',
-            'options' => array(
-                'value_options' => array('0'=>'No','1'=>'Yes') ,
-                'class'=>'form-control'
-            )
+            'attributes' => array(
+                'type' => 'text',
+                'class' => 'form-control',
+                'id' => 'featured'
+            ),
         ));
 
 
@@ -120,7 +131,16 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
                 'id' => 'user_id',
                 'class' => 'required form-control'
             ),
-        )); 
+        ));
+
+        $this->add(array(
+            'name' => 'created',
+            'attributes' => array(
+                'type' => 'text',
+                'id' => 'created',
+                'class' => ' form-control'
+            ),
+        ));
 
         // $this->add(array(
         //     'type' => 'Zend\Form\Element\Csrf',
@@ -165,6 +185,11 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
             )));
 
             $inputFilter->add($factory->createInput(array(
+                'name' => 'destination',
+                'required' => false,
+            )));
+
+            $inputFilter->add($factory->createInput(array(
                         'name' => 'type',
                         'required' => false,
             )));
@@ -177,6 +202,11 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
             $inputFilter->add($factory->createInput(array(
                     'name' => 'featured',
                     'required' => false,
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'created',
+                'required' => false,
             )));
 
 

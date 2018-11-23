@@ -23,7 +23,7 @@ $user = $this->user();
                 <?php endif; ?>
             </div>
             <div class="status-detail">
-                <?php echo $about['body'] ?>
+                <?php echo html_entity_decode($about['body']); ?>
                 <div class="buy-ticket">
                     <span class="place-buy"><?php echo $this->translate('Buy_location'); ?></span>
                     <div class="row">

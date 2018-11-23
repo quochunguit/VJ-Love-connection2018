@@ -3,7 +3,18 @@
 	$dataShare = $this->layout()->dataShare;
 	$myLocale = $this->layout()->myLocale;
 	$myLocaleShort = $this->layout()->myLocaleShort;
-	if($dataShare){
+
+
+$action = $this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('action', 'index');
+
+$action = array_pop(explode('\'', $action));
+	if($action=='detail'){
+		$urlShare = 'https://'. $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+		$siteName = $this->translate('Slogan');
+		$title = $data['titleShare'];
+		$description = $data['desShare'];
+		$srcImage = $data['urlImage'];
+	}elseif($dataShare){
 		$siteName = $this->translate('Slogan');
 	    $srcImage =	$dataShare['image'] ? $dataShare['image'] : BASE_URL_SKIN_IMAGE.'/social-share.png';
 	    $title = $dataShare['title'] ? $dataShare['title'] : $siteMeta['title'];

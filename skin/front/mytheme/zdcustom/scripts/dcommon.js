@@ -481,8 +481,20 @@ App.Site = function(){
                                 //show activation fill code
                                 showActivationFillCode(res.data);
                             }else{
-                                $('#phone-number').closest('.form-group').addClass('error');
-                                $('#phone-number').next().children().text(res.message);
+                                if(res.maximumsms){
+                                    helperJs.bzOpenPopup(
+                                    {items:
+                                            { src: '#pop-alert'},
+                                        beforeOpen(){
+                                            $('#pop-alert > div > p').text(res.message);
+                                        },
+                                        afterClose(){
+                                            location.href = baseurl+'/'+languageShort+'/';
+                                        }});
+                                }else{
+                                    $('#phone-number').closest('.form-group').addClass('error');
+                                    $('#phone-number').next().children().text(res.message);
+                                }
                             }
                         }
                     });
@@ -554,8 +566,21 @@ App.Site = function(){
 
                             showActivationFillCode(res.data);
                         }else{
-                            $('#resend-phone').closest('.form-group').addClass('error');
-                            $('#resend-phone').next().children().text(res.message);
+                            if(res.maximumsms){
+                                helperJs.bzOpenPopup(
+                                    {items:
+                                            { src: '#pop-alert'},
+                                        beforeOpen(){
+                                            $('#pop-alert > div > p').text(res.message);
+                                        },
+                                        afterClose(){
+                                            location.href = baseurl+'/'+languageShort+'/';
+                                        }});
+                            }else{
+                                $('#resend-phone').closest('.form-group').addClass('error');
+                                $('#resend-phone').next().children().text(res.message);
+                            }
+
                         }
                     }
                 });

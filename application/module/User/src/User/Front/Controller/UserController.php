@@ -734,13 +734,21 @@ public function apiupdateprofileAction(){
 
         $saveResult = $userModel->save($data, $userValid['id']);
 
-        $smsResult = $this->sendSMS($phone,$mobileCode);
-        if($saveResult['status'] && $smsResult['status']){
-            $curUser = $userModel->getUser($userValid['id']);
-            unset($_SESSION['need_update']);
-            $this->returnJsonAjax(array('status'=>true, 'message'=>'Cập nhật thông tin thành công!','data'=>$curUser));
+        $curUser = $userModel->getUser($userValid['id']);
+        $limitResend = 3;
+        if((int)$curUser['identify'] < $limitResend) {
+            $smsResult = $this->sendSMS($phone, $mobileCode);
+            if ($saveResult['status'] && $smsResult['status']) {
+                //increase send code
+                $userModel->increase(array('id' => $userValid['id']), 'identify');
+
+                unset($_SESSION['need_update']);
+                $this->returnJsonAjax(array('status' => true, 'message' => 'Cập nhật thông tin thành công!', 'data' => $curUser));
+            } else {
+                $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('requesterror')));
+            }
         }else{
-            $this->returnJsonAjax(array('status'=>false,'message'=> $this->translate('requesterror')));
+            $this->returnJsonAjax(array('status' => false, 'maximumsms'=>true, 'message' => $this->translate('maximumSMSsend')));
         }
     }else{
         $this->returnJsonAjax($resultValid);
@@ -823,7 +831,7 @@ private function validateUpdateProfile($params){
             return array('status' => false, 'message' => 'Số điện thoại phải nhiều nhất '.$maxLen.' ký tự!');
         }
 
-        if($curUser['phone'] != $phone){
+        if($curUser['phone'] != $phone_code . $this->countryPhoneFix($phone, $phone_code)){
             $check = $userModel->isExists('phone', $phone_code . $this->countryPhoneFix($phone, $phone_code));
             //$check = $userModel->isExists('phone', '0' . $this->phoneFix($phone));
             //$check1 = $userModel->isExists('phone', '84' . $this->phoneFix($phone));

@@ -84,7 +84,7 @@ $flyJourneys = array(
                                                     <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/mask.png" alt="mask">
                                                 </div>
                                                 <div class="item-avatar" style='background-image: url("<?php echo BASE_URL_SKIN_IMAGE . '/' . $item['image']; ?>");'>
-                                                    <a href="javascript:void(0)"  class="center-mask"></a>
+                                                    <a href="<?php echo $this->url('flightInformation',array('lang'=>$myLocaleShort)); ?>"  class="center-mask"></a>
                                                 </div>
                                                 <div class="img-air">
                                                     <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/air.png" alt="air">
@@ -127,7 +127,7 @@ $flyJourneys = array(
                                         </div>
                                     </div>
                                     <div class="content-item">
-                                        <h4><a href=""><?php echo $this->translate($item['destination']); ?></a> </h4>
+                                        <!--h4><a href=""><?php echo $this->translate($item['destination']); ?></a> </h4-->
                                         <p><?php echo $item['title']; ?></p>
                                     </div>
                                 </div>
