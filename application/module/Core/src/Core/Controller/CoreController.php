@@ -144,6 +144,13 @@ class CoreController extends EventController {
         return $translate($keyText, $textDomain, $locale);
     }
 
+    public function getShortLang($langCode){
+        if($langCode){
+            $langCodeArray= explode('_',$langCode);
+            return $langCodeArray[0];
+        }
+    }
+
 
     //--Crop---
     public function doCropImage($data=array()) {

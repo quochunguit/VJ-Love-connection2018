@@ -180,20 +180,27 @@ class ContestController extends AdminController {
     public function exportAction(){
         $params = $this->getParams();
         $type = $params['type'];
+        $factory = $this->getServiceLocator()->get('ServiceFactory');
+        $model = $this->getModel();
+        $data = $model->getDataExport();
         if($type == 'zip'){ //create_zip    
-            $postModel = $this->getModel();
-            $posts = $postModel->getDataExport();
-            if($posts){
+
+            if($data){
                 $zipName = 'image_'.date('Y_m_d_H_i_s').'.zip';  
                 $zipPathSave = WEB_ROOT.DS.'media'.DS.'tmp'.DS. $zipName;
                 $linkDownload = BASE_URL.'/media/tmp/'.$zipName;
 
                 $arrImg = array();
-                foreach ($posts as $kP => $vP) {
-                    $realImagePath = WEB_ROOT.DS.'media'.DS.'images'.DS.$vP['image'];
-                    if(file_exists($realImagePath)){
-                        $arrImg[]  = $realImagePath;
+                foreach ($data as $kP => $vP) {
+                    $arrImg2= explode(',',$vP['images']);
+
+                    foreach($arrImg2 as $v){
+                        $realImagePath = WEB_ROOT.DS.'media'.DS.'images'.DS.$v;
+                        if(file_exists($realImagePath)){
+                            $arrImg[]  = $realImagePath;
+                        }
                     }
+
                 }
                 $isSuccess = $this->createZip($arrImg, $zipPathSave);
                 if($isSuccess){
@@ -202,10 +209,9 @@ class ContestController extends AdminController {
                     echo 'Da xay ra loi, vui long thu lai sau!'; die;
                 }
             }
-            print_r($arrImg); die;
         }else{
-            $this->processExport();  /*Export with no image*/
-            //$this->processExportHasImage(); /*Export with image*/
+            //$this->processExport();  /*Export with no image*/
+            $this->processExportHasImage(); /*Export with image*/
         }
     }
 
@@ -249,15 +255,23 @@ class ContestController extends AdminController {
         ->setCellValue('C'.$indexCellTitle, 'Họ và tên')
         ->setCellValue('D'.$indexCellTitle, 'Email')
         ->setCellValue('E'.$indexCellTitle, 'Điện thoại')
-        ->setCellValue('F'.$indexCellTitle, 'Thông điệp')
-            ->setCellValue('G'.$indexCellTitle, 'Điểm')
-        ->setCellValue('H'.$indexCellTitle, 'Ngày tham gia')
-        ->setCellValue('I'.$indexCellTitle, 'Trạng thái')
-        ->setCellValue('I'.$indexCellTitle, 'Chuyến đi đã chọn');
+        ->setCellValue('F'.$indexCellTitle, 'Tiêu đề')
+        ->setCellValue('G'.$indexCellTitle, 'Thông điệp')
+        ->setCellValue('H'.$indexCellTitle, 'Hình ảnh 1')
+        ->setCellValue('I'.$indexCellTitle, 'Hình ảnh 2')
+        ->setCellValue('J'.$indexCellTitle, 'Hình ảnh 3')
+        ->setCellValue('K'.$indexCellTitle, 'Hình ảnh 4')
+        ->setCellValue('L'.$indexCellTitle, 'Hình ảnh 5')
+        ->setCellValue('M'.$indexCellTitle, 'Điểm')
+        ->setCellValue('N'.$indexCellTitle, 'Ngày tham gia')
+        ->setCellValue('O'.$indexCellTitle, 'Trạng thái')
+        ->setCellValue('P'.$indexCellTitle, 'URL')
+        ->setCellValue('Q'.$indexCellTitle, 'Chuyến đi đã chọn');
         
         $cell = 0;
         $status ='';
         foreach($data as $key => $val){
+            $arrayImg = explode(',',$val['images']);
             if($val['created']=='0000-00-00'){$val['created']='2018-11-23';};
             if($val['status']==0){$status='unpublish';}elseif($val['status']==1){$status='publish';}else{$status='Rejected';}
             $user = $factory->getUser($val['user_id']);
@@ -270,19 +284,36 @@ class ContestController extends AdminController {
             ->setCellValue('E' . $cell, $user['phone'])
 
             ->setCellValue('F' . $cell, $val['title'])
-                ->setCellValue('G' . $cell, $val['featured'])
-            ->setCellValue('H'. $cell, $val['created'])
-            ->setCellValue('I'. $cell, $status)
-            ->setCellValue('I'. $cell, $this->translate($val['destination']));
+                ->setCellValue('G' . $cell, $val['description'])
+                ->setCellValue('H' . $cell, '<img src="images/' . $arrayImg[0] . '"/>')
+                ->setCellValue('I' . $cell, '<img src="images/' . $arrayImg[1] . '"/>')
+                ->setCellValue('J' . $cell, '<img src="images/' . $arrayImg[2] . '"/>')
+                ->setCellValue('K' . $cell, '<img src="images/' . $arrayImg[3] . '"/>')
+                ->setCellValue('L' . $cell, '<img src="images/' . $arrayImg[4] . '"/>')
+
+                ->setCellValue('M' . $cell, $val['featured'])
+            ->setCellValue('N'. $cell, $val['created'])
+            ->setCellValue('O'. $cell, $status)
+                ->setCellValue('P'. $cell, BASE_URL.'/'.$this->getShortLang($val['language']).'/'.$val['slug'].'/'.$val['id'])
+            ->setCellValue('Q'. $cell, $this->translate($val['destination']));
 
             $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
             $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(10);
             $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(40);
             $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(40);
             $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(30);
-            $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(50);
             $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(50);
-            $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(100);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(100);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(100);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(100);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(100);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('M')->setWidth(50);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('N')->setWidth(50);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('O')->setWidth(50);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('P')->setWidth(50);
+
           
             $objPHPExcel->getActiveSheet()->getStyle('G'. $cell)->getAlignment()->setWrapText(true);
         }
@@ -350,13 +381,24 @@ class ContestController extends AdminController {
         $excel->writeLine($row_title);
         $excel->writeLine($row_space);
         $lineTitle = array(
-            'STT','Id', 'Họ và tên', 'Email', 'Điện thoại', 'Tiêu đề','Ngày tham gia','Điểm', 'Trạng thái');
+            'STT','Id', 'Họ và tên', 'Email', 'Điện thoại', 'Tiêu đề','Thông điệp','Hình ảnh 1','Hình ảnh 2','Hình ảnh 3','Hình ảnh 4','Hình ảnh 5', 'Ngày tham gia','Điểm','URL','Chuyến', 'Trạng thái');
         $excel->writeLine($lineTitle);
         foreach ($data as $key => $value) {
             if($value['created']=='0000-00-00'){$value['created']='2018-11-23';};
             $user = $factory->getUser($value['user_id']);
-            $image = 'images/'.$value['image'];
-            $imgEl = '<img src="' . $image . '"/>'. $image;
+            $imageArr = explode(',',$value['images']);
+            $image1 = 'images/'.$imageArr[0];
+            $image2 = 'images/'.$imageArr[1];
+            $image3 = 'images/'.$imageArr[2];
+            $image4 = 'images/'.$imageArr[3];
+            $image5 = 'images/'.$imageArr[4];
+
+            $imgEl1 = '<a   href="' .BASE_URL_MEDIA.'/'. $image1 . '"/>'.$image1;
+            $imgEl2 = '<a   href="' .BASE_URL_MEDIA.'/'. $image2 . '"/>'.$image2;
+            $imgEl3 = '<a   href="' .BASE_URL_MEDIA.'/'. $image3 . '"/>'.$image3;
+            $imgEl4 = '<a   href="' .BASE_URL_MEDIA.'/'. $image4 . '"/>'.$image4;
+            $imgEl5 = '<a   href="' .BASE_URL_MEDIA.'/'. $image5 . '"/>'.$image5;
+            $url = '<a   href="' .BASE_URL.'/'.$this->getShortLang($value['language']).'/'.$value['slug'].'/'.$value['id'] . '"/>'. BASE_URL.'/'.$this->getShortLang($value['language']).'/'.$value['slug'].'/'.$value['id'].'</a>';
             $excel->writeLine(array(
                 $key+1, 
                 $value['id'],
@@ -365,10 +407,17 @@ class ContestController extends AdminController {
                 $user['phone'],
 
                 $value['title'],
-                $value['created']->format('Y-m-d'),
+                $value['descriptions'],
+                $imgEl1,$imgEl2,$imgEl3,$imgEl4,$imgEl5,
+
+                $value['created'],
                 $value['featured'],
-                $value['status'] == 1 ? 'Publish' : ($value['status'] == 2 ? 'Rejected' : 'Unpublish'),
-                ), "style='height:450px; width:450px;'"
+                    $url,
+                $this->translate($value['destination']),
+                $value['status'] == 1 ? 'Publish' : ($value['status'] == 2 ? 'Rejected' : 'Unpublish')
+
+
+                )
             );
         }
         $excel->close();
