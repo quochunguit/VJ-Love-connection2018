@@ -10,6 +10,7 @@ $action = $this->getHelperPluginManager()->getServiceLocator()->get('application
 $action = array_pop(explode('\'', $action));
 	if($action=='detail'){
 		$urlShare = 'https://'. $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+
 		$siteName = $this->translate('Slogan');
 		$title = $data['titleShare'];
 		$description = $data['desShare'];

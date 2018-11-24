@@ -383,7 +383,12 @@ App.Site = function(){
                         $('#login-btn').removeClass('show-loading');
 
                         if(res.status){
-                            location.reload();
+                            if(voteActionFlag){
+                                var submissionId = $('#submission-id').val();
+                                App.VoteShare.vote(submissionId,false,'');
+                            }else{
+                                location.reload();
+                            }
                         }else{
                             if(res.status_key == 'inactive'){
                                 App.Site.showUserLogin(res.id, res.name);
@@ -650,7 +655,13 @@ App.Site = function(){
                                 $('#pop-alert > button.change-text-pop').text(trans_Continue);
                             },
                             afterClose(){
-                                location.href = baseurl+'/'+languageShort+'/contest-submit';
+                                if(voteActionFlag){
+                                    var submissionId = $('#submission-id').val();
+                                    App.VoteShare.vote(submissionId,false,'');
+                                }else{
+                                    location.href = baseurl+'/'+languageShort+'/contest-submit';
+                                }
+
 
                             }
                         }
@@ -863,9 +874,14 @@ App.Facebook = function(){
 
             saveUserComplete = function(res){
                     if(res.status){
+                        //if()
 
-
-                        location.href = baseurl+'/'+languageShort+'/contest-submit';
+                        if(voteActionFlag){
+                            var submissionId = $('#submission-id').val();
+                            App.VoteShare.vote(submissionId,false,'');
+                        }else{
+                            location.reload();
+                        }
                         gtag('config', gaId, {
                             'page_path': '/ga-step2-login-success'
                         });
@@ -1047,7 +1063,15 @@ App.Google = function () {
                                     gtag('config', gaId, {
                                         'page_path': '/ga-step2-login-success'
                                     });
-                                    location.href = baseurl+'/'+languageShort+'/contest-submit';
+                                    //location.href = baseurl+'/'+languageShort+'/contest-submit';
+                                    //check if user is in detail page
+                                    //console.log(voteActionFlag);
+                                    if(voteActionFlag){
+                                        var submissionId = $('#submission-id').val();
+                                        App.VoteShare.vote(submissionId,false,'');
+                                    }else{
+                                        location.reload();
+                                    }
                                 }
                             }else{
                                 helperJs.bzOpenPopup(
@@ -1189,6 +1213,9 @@ App.VoteShare = function () {
                 //add loading icon
                 $('#contest-vote').addClass('show-loading');
 
+                //active click flag
+                voteActionFlag = true;
+
                 $.ajax({
                     url: baseurl + "/"+languageShort+"/api/vote",
                     type: 'post',
@@ -1204,6 +1231,9 @@ App.VoteShare = function () {
                         $('#contest-vote').removeClass('show-loading');
 
                         if(res.status){
+                            //deactive click flag
+                            voteActionFlag = false;
+
                             helperJs.bzClosePopup();
                             helperJs.bzOpenPopup(
                                 {items:
@@ -1226,37 +1256,22 @@ App.VoteShare = function () {
                                         },
                                         afterClose(){
                                             if(res.is_login){
+                                                //allow click again
+                                                clickVote = true;
+
                                                 //show login popup
                                                 App.Popup.openLogin();
+                                            }
+                                            if(res.need_active){
+                                                clickVote = true;
+
+                                                //show resend code
+                                                App.Popup.openResendCode();
                                             }
                                         }
                                     });
                         }
-                        /*clickVote = true;
-                        console.log(res);
-                        if (res.status) {
-                            var $classShowNum = $('.num_vote_' + objectId);
-                            if ($classShowNum.length > 0) {
-                                var curNum = $classShowNum.eq(0).text();
-                                curNum = parseInt(curNum) + 1;
-                                $classShowNum.text(curNum);
-                            }
-                            alert(res.message);
-                        } else {
-                            if(res.is_login){
-                                //alert(res.message);
-                                //return to login page
-                                console.log('return to login page');
-                                location.href = baseurl;
-                            }else{
-                                alert(res.message);
-                            }   
-                        }
 
-                        var voteButton = $('.vote-button-' + objectId);
-                        voteButton.off('click');
-                        voteButton.html('Voted');
-                        voteButton.removeClass('btn-info');*/
                     }
                 });
             }

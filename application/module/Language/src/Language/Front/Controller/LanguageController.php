@@ -22,6 +22,11 @@ class LanguageController extends FrontController {
         }
         //--End set lang
         if($urlRedirect){
+           // echo $urlRedirect;die;
+            $len = strlen($urlRedirect);
+            $tmpUrl = substr($urlRedirect,3,$len);
+            $curLang = $this->getLangCode(true);
+            $urlRedirect = '/'.$curLang.$tmpUrl;
             $this->redirectToUrl($urlRedirect);
         }else{
             $codeShort = $this->getLangCode(true);

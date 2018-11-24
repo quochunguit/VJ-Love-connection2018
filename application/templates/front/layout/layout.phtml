@@ -24,6 +24,7 @@ echo $this->doctype();
             var languageShort = "<?php echo $this->layout()->myLocaleShort; ?>";
             var trans_Continue  = "<?php echo $this->translate('Continue'); ?>";
             var gaId = "<?php  echo $this->setting('core.GA_ID'); ?>";
+            var voteActionFlag = false;
         </script>
         <?php echo $this->partial('partial/css'); ?>
         <?php echo $this->partial('partial/tag_manager'); ?>
@@ -54,6 +55,7 @@ echo $this->doctype();
     ?>
 
     <body class="<?php if($page=='home'){echo 'page-home';}else{echo 'page-internal';} ; ?> <?php echo $classCustom; ?>">
+    <?php echo $this->partial('partial/ga'); ?>
         <div id="wrapper">
             <?php echo $this->partial('partial/zheader'); ?>
             <main id="main-content" role="main">
@@ -65,7 +67,7 @@ echo $this->doctype();
 
         <?php echo $this->inlineScript(); ?>
         <?php echo $this->partial('partial/js'); ?>
-        <?php echo $this->partial('partial/ga'); ?>
+
 
 
 

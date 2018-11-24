@@ -61,6 +61,7 @@ $myLocaleShort = $this->layout()->myLocaleShort;
                 </div>
                 <div class="like-post">
                     <span class="like">Like :</span> <span class="count-like"><?php echo $contest_infos['votes'];?></span> <a href="javascript:void(0);" id="contest-vote" onclick="App.VoteShare.vote(<?php echo $contest_infos['id']; ?>,false,'');" class="btn btn-green"><div class="lds-rolling"><div></div></div>Like</a>
+                    <input type="hidden" id="submission-id" value="<?php echo $contest_infos['id']; ?>" />
                 </div>
             </div>
             <div class="text-center">

@@ -743,6 +743,7 @@ public function apiupdateprofileAction(){
                 $userModel->increase(array('id' => $userValid['id']), 'identify');
 
                 unset($_SESSION['need_update']);
+                unset($curUser['mobile_code']);
                 $this->returnJsonAjax(array('status' => true, 'message' => 'Cập nhật thông tin thành công!', 'data' => $curUser));
             } else {
                 $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('requesterror')));

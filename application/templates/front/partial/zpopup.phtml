@@ -1,5 +1,6 @@
 <?php
 $myLocaleShort = $this->layout()->myLocaleShort;
+$curUrl = $_SERVER['REQUEST_URI'];
 ?>
 <div id="pop-register" class="mfp-control bzPopup mfp-hide">
     <?php if($myLocaleShort=='vi'): ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title"> <?php else: ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy-en.png" alt="" class="img-title"> <?php endif; ?>
@@ -373,10 +374,10 @@ $myLocaleShort = $this->layout()->myLocaleShort;
     <div class="pop-content text-center">
         <p>Chọn ngôn ngữ / Select your language:</p>
         <div class="button left-style" >
-            <a onclick="App.Site.tracking('pop_en')" href="<?php echo $this->url('language-switched', array('code'=>'en_US')); ?>"  class="btn btn-primary btn-close change-text-pop">ENGLISH</a>
+            <a onclick="App.Site.tracking('pop_en')" href="<?php echo $this->url('language-switched', array('code'=>'en_US')).'?url_redirect='.$curUrl; ?>"  class="btn btn-primary btn-close change-text-pop">ENGLISH</a>
         </div>
         <div class="button right-style">
-            <a onclick="App.Site.tracking('pop_vi')" href="<?php echo $this->url('language-switched', array('code'=>'vi_VN')); ?>" class="btn btn-primary btn-close change-text-pop">TIẾNG VIỆT</a>
+            <a onclick="App.Site.tracking('pop_vi')" href="<?php echo $this->url('language-switched', array('code'=>'vi_VN')).'?url_redirect='.$curUrl; ?>" class="btn btn-primary btn-close change-text-pop">TIẾNG VIỆT</a>
         </div>
         <div class="clear"></div>
     </div>
