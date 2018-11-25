@@ -52,7 +52,7 @@ class Contest extends AppModel {
     public function getDefaultListQuery() {
 
         $select = new Select($this->table);
-        $select->join('bz1_users', 'bz1_users.id=' . $this->table . '.user_id', array('user_name'=>'name','user_email'=>'email','user_phone'=>'phone','user_identify'=>'identify','user_avatar'=>'social_picture'));
+        $select->join('bz1_users', 'bz1_users.id=' . $this->table . '.user_id', array('user_created'=>'created','user_name'=>'name','user_email'=>'email','user_phone'=>'phone','user_identify'=>'identify','user_avatar'=>'social_picture'));
 
         $status = $this->getState('filter.status');
         if (strlen($status) > 0) {

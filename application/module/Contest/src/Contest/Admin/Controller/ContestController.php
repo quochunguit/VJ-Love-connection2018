@@ -384,9 +384,10 @@ class ContestController extends AdminController {
             'STT','Id', 'Họ và tên', 'Email', 'Điện thoại', 'Tiêu đề','Thông điệp','Hình ảnh 1','Hình ảnh 2','Hình ảnh 3','Hình ảnh 4','Hình ảnh 5', 'Ngày tham gia','Điểm','Votes','URL','Chuyến', 'Trạng thái',"Winner");
         $excel->writeLine($lineTitle);
         foreach ($data as $key => $value) {
-            if($value['created']=='0000-00-00'){$value['created']='2018-11-23';};
-            $winner = 'No';
             $user = $factory->getUser($value['user_id']);
+            if($value['created']=='0000-00-00 00:00:00'){$value['created']=$user['created'];};
+            $winner = 'No';
+
             $imageArr = explode(',',$value['images']);
             $image1 = 'images/'.$imageArr[0];
             $image2 = 'images/'.$imageArr[1];

@@ -27,6 +27,7 @@
                 </thead>
                 <tbody>
                     <?php foreach ($items as $item) : ?>
+                        <?php if($item['created']=='0000-00-00 00:00:00'){$item['created']=$item['user_created']; } ?>
                         <tr>
                             <td><input type="checkbox" class="checkitem" name="data[Choose][]"  value="<?php echo $item['id']; ?>"/></td>
                             
