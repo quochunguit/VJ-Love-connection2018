@@ -11,7 +11,7 @@ class Contest extends AppModel {
     public $table = 'bz1_contests';
     public $context = 'contest';
 
-    public function save($data, $id) {
+    public function save($data, $id, $primarykey = 'id') {
         $dateSave = date('Y-m-d H:i:s');
         if ($data['id'] || $id) {
             $data['modified'] = $dateSave;

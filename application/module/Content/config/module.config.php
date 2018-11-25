@@ -53,6 +53,17 @@ return array(
                 ),
             ),
 
+            'winner' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/[:lang]/winner-list[/]',
+                    'defaults' => array(
+                        'controller' => 'Content\Front\Controller\Posts',
+                        'action'     => 'winner',
+                    ),
+                ),
+            ),
+
 
             'content' => array(
                 'type'    => 'segment',

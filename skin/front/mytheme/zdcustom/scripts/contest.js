@@ -42,7 +42,9 @@ Handle.Contest = function (){
                 $('#preview-title').text($('#share-title').val());
 
                 //preview content
-                $('#preview-content').html($('#share-content').val().replace(/\r?\n/g,'<br/>'));
+                var shareContent = $('#share-content').val().replace(/<(?:.|\n)*?>/gm, '');
+                shareContent = shareContent.replace(/\r?\n/g,'<br/>');
+                $('#preview-content').html(shareContent);
 
                 //show popup
                 openPopupPreview();
@@ -182,10 +184,12 @@ Handle.Contest = function (){
     }
 
     var finishSavingContestSubmit = function(media){
+        var shareContent = $('#share-content').val().replace(/<(?:.|\n)*?>/gm, '');
+        shareContent = shareContent.replace(/\r?\n/g,'<br/>');
         var dataObject = {};
         dataObject.media_title = $('#share-title').val();
         dataObject.media_destination = $('#goal-location').val();
-        dataObject.media_description = $('#share-content').val().replace(/\r?\n/g,'<br/>');
+        dataObject.media_description = shareContent;
         dataObject.media_type = 'images';
         dataObject.media = media.join(',');
 

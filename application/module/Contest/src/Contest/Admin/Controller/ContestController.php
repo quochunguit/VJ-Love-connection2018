@@ -81,20 +81,20 @@ class ContestController extends AdminController {
                 $mail = $this->getServiceLocator()->get('SendMail');
 
                 if($item['language']=='vi_VN'){
-                    $mail->send(array(
+                    $mail->sendPhpMailler(array(
                         'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
                         'to' => array('name' => $userItem['name'], 'email' => $userItem['email']),
-                        'subject' => 'VIETJET - ĐÃ NHẬN BÀI DỰ THI CỦA BẠN THÀNH CÔNG!!!',
+                        'subject' => 'VIETJET - BÀI DỰ THI CỦA BẠN ĐÃ ĐƯỢC DUYỆT THÀNH CÔNG',
                         'template' => 'email/submitsuccess',
                         'data' => array(
                             'contest_url'=>BASE_URL.'/vi/'.$item['slug'].'/'.$item['id'],
                         )
                     ));
                 }else{
-                    $mail->send(array(
+                    $mail->sendPhpMailler(array(
                         'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
                         'to' => array('name' => $userItem['name'], 'email' => $userItem['email']),
-                        'subject' => 'VIETJET - YOUR SUBMISSION HAS BEEN RECEIVED SUCCESSFULLY!',
+                        'subject' => 'VIETJET - YOUR SUBMISSION HAS BEEN APPROVED SUCCESSFULLY!',
                         'template' => 'email/submit_en',
                         'data' => array(
                             'contest_url'=>BASE_URL.'/en/'.$item['slug'].'/'.$item['id']
@@ -381,10 +381,11 @@ class ContestController extends AdminController {
         $excel->writeLine($row_title);
         $excel->writeLine($row_space);
         $lineTitle = array(
-            'STT','Id', 'Họ và tên', 'Email', 'Điện thoại', 'Tiêu đề','Thông điệp','Hình ảnh 1','Hình ảnh 2','Hình ảnh 3','Hình ảnh 4','Hình ảnh 5', 'Ngày tham gia','Điểm','URL','Chuyến', 'Trạng thái');
+            'STT','Id', 'Họ và tên', 'Email', 'Điện thoại', 'Tiêu đề','Thông điệp','Hình ảnh 1','Hình ảnh 2','Hình ảnh 3','Hình ảnh 4','Hình ảnh 5', 'Ngày tham gia','Điểm','Votes','URL','Chuyến', 'Trạng thái',"Winner");
         $excel->writeLine($lineTitle);
         foreach ($data as $key => $value) {
             if($value['created']=='0000-00-00'){$value['created']='2018-11-23';};
+            $winner = 'No';
             $user = $factory->getUser($value['user_id']);
             $imageArr = explode(',',$value['images']);
             $image1 = 'images/'.$imageArr[0];
@@ -399,6 +400,9 @@ class ContestController extends AdminController {
             $imgEl4 = '<a   href="' .BASE_URL_MEDIA.'/'. $image4 . '"/>'.$image4;
             $imgEl5 = '<a   href="' .BASE_URL_MEDIA.'/'. $image5 . '"/>'.$image5;
             $url = '<a   href="' .BASE_URL.'/'.$this->getShortLang($value['language']).'/'.$value['slug'].'/'.$value['id'] . '"/>'. BASE_URL.'/'.$this->getShortLang($value['language']).'/'.$value['slug'].'/'.$value['id'].'</a>';
+            if($value['is_win_week']==1){
+                $winner = 'Yes';
+            }
             $excel->writeLine(array(
                 $key+1, 
                 $value['id'],
@@ -412,9 +416,11 @@ class ContestController extends AdminController {
 
                 $value['created'],
                 $value['featured'],
+                    $value['votes'],
                     $url,
                 $this->translate($value['destination']),
-                $value['status'] == 1 ? 'Publish' : ($value['status'] == 2 ? 'Rejected' : 'Unpublish')
+                $value['status'] == 1 ? 'Publish' : ($value['status'] == 2 ? 'Rejected' : 'Unpublish'),
+                    $winner
 
 
                 )
@@ -450,34 +456,54 @@ class ContestController extends AdminController {
                  $textWinType = '<span style="color:Red; font-weight:bold">No</span>';
             }
 
-            $resultSave = $postModel->save(array('is_win_'.$winType => $isWin, 'id'=> $postId));
+            $resultSave = $postModel->save(array('is_win_'.$winType => $isWin),$postId);
             if($resultSave['status']){
-                switch ($winType) {
-                    case 'week':
-                        //--TODO: send email--
-                        // $item = $postModel->getByIdAndSlug($postId);
-                        // if($item['is_win_week'] == 1){
-                        //     $mail = $this->getServiceLocator()->get('SendMail');
-                        //     $mail->send(array(
-                        //         'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
-                        //         'to' => array('name' => $item['user_name'], 'email' => $item['user_email']),
-                        //         'subject' => 'Chúc mừng chia sẻ của bạn được chọn nhận giải!',
-                        //         'template' => 'email/contest_winner_week',
-                        //         'data' => array()
-                        //     ));
-                        //     $textAlertSendMail = ' Một email đã gửi đến cho user.';
-                        // }
-                        //--TODO: End send email--
-
-                        $winTextVn = ' tuần ';
-                        break;
-                    case 'final':
-                        $winTextVn = ' chung cuộc ';
-                        break;
-                    default:
-                        $winTextVn = ' ';
-                        break;
-                }
+//                switch ($winType) {
+//                    case 'week':
+//                        //--TODO: send email--
+//                         $item = $postModel->getByIdAndSlug($postId);
+//                         $userModel = $this->getUserModel();
+//                         $userItem = $userModel->getItem(array('id'=>$item['user_id']));
+//                        if($item['is_win_week'] == 1) {
+//                            if ($item['language'] == 'vi_VN') {
+//                                $mail = $this->getServiceLocator()->get('SendMail');
+//                                $mail->sendPhpMailler(array(
+//                                    'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
+//                                    'to' => array('name' => $userItem['name'], 'email' => $userItem['email']),
+//                                    'subject' => 'VIETJET - CHÚC MỪNG BẠN ĐÃ THẮNG GIẢI THƯỞNG CUỘC THI "KẾT NỐI YÊU THƯƠNG - YÊU LÀ PHẢI TỚI"',
+//                                    'template' => 'email/winner',
+//                                    'data' => array(
+//                                        'contest_url' => BASE_URL . '/vi/' . $item['slug'] . '/' . $item['id'],
+//                                        'destination' =>$this->translate($item['destination'])
+//                                    )
+//                                ));
+//                            } else {
+//                                $mail = $this->getServiceLocator()->get('SendMail');
+//                                $mail->sendPhpMailler(array(
+//                                    'from' => array('name' => EMAIL_SEND_FROM_NAME, 'email' => EMAIL_SEND_FROM_EMAIL),
+//                                    'to' => array('name' => $userItem['name'], 'email' => $userItem['email']),
+//                                    'subject' => 'VIETJET -  CONGRATULATION! YOU ARE THE WINNER OF “LOVE CONNECTION - LOVE IS REAL TOUCH” CAMPAIGN OF VIETJET',
+//                                    'template' => 'email/winner_en',
+//                                    'data' => array(
+//                                        'contest_url' => BASE_URL . '/vi/' . $item['slug'] . '/' . $item['id'],
+//                                        'destination' =>$this->translate($item['destination'])
+//                                    )
+//                                ));
+//                            }
+//                        }
+//
+//                        //--TODO: End send email--
+//
+//                        $winTextVn = ' tuần ';
+//                        break;
+//                    case 'final':
+//                        $winTextVn = ' chung cuộc ';
+//                        break;
+//                    default:
+//                        $winTextVn = ' ';
+//                        break;
+//                }
+                $winTextVn = ' tuần ';
                 $this->returnJsonAjax(array('status' => true, 'message' => $textAction. 'thắng giải'. $winTextVn .'thành công!', 'textWinType'=>$textWinType));
             }else{
                 $this->returnJsonAjax(array('status' => false, 'message' => 'Đã có lỗi xảy ra, vui lòng thử lại sau!')); 

@@ -145,9 +145,9 @@ class ContestController extends FrontController {
 
                 $contestInfos = array();
                 $contestInfos["user_id"] = $userLogin->id;
-                $contestInfos["title"] = $mediaTitle;
+                $contestInfos["title"] = strip_tags($mediaTitle,'<br>');
                 $contestInfos["destination"] = $mediaDestination;
-                $contestInfos["descriptions"] = $mediaDes;
+                $contestInfos["descriptions"] = strip_tags($mediaDes,'<br>');
                 $contestInfos["type"] = $mediaType;
                 $contestInfos["created"] = date();
                 if($mediaType == 'video'){
@@ -201,8 +201,10 @@ class ContestController extends FrontController {
         $imageArray = explode(',',$contest_infos['images']);//print_r($imageArray);die;
 
         $titleShare = str_replace("'","´",$contest_infos['title']);
-        $desShare = $this->_substr($contest_infos['descriptions'],20);
+        $titleShare = str_replace('"','¨',$titleShare);
+        $desShare = $this->_substr($contest_infos['descriptions'],40);
         $desShare = str_replace("'","´",$desShare);
+        $desShare = str_replace('"','¨',$desShare);
         $urlShare = BASE_URL.'/'.$codeShort.'/'.$contest_slug.'/'.$contest_id;
         $urlImage = BASE_URL_MEDIA.'/images/'.$imageArray[0];
         $this->layout()->setVariable('data', array('titleShare'=>$titleShare,'desShare'=>$desShare,'urlImage'=>$urlImage));

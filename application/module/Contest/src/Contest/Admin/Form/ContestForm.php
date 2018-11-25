@@ -190,6 +190,11 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
             )));
 
             $inputFilter->add($factory->createInput(array(
+                'name' => 'descriptions',
+                'required' => true,
+            )));
+
+            $inputFilter->add($factory->createInput(array(
                         'name' => 'type',
                         'required' => false,
             )));

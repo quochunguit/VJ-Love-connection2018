@@ -58,8 +58,8 @@
                 <li class="<?php if($page=='flight'){echo 'active';} ?>" >
                     <a href="<?php echo $this->url('flightInformation',array('lang'=>$myLocaleShort)) ?>"><?php echo $this->translate('Flight_Information'); ?></a>
                 </li>
-                <li>
-                    <a href="javascript:void(0);" onclick="App.Site.showWinnerList();"><?php echo $this->translate('Winners_List'); ?></a>
+                <li class="<?php if($page=='winner'){echo 'active';} ?>">
+                    <a href="<?php echo $this->url('winner',array('lang'=>$myLocaleShort)) ?>"><?php echo $this->translate('Winners_List'); ?></a>
                 </li>
                 <li class="language">
       <span>

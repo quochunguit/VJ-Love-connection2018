@@ -1,0 +1,29 @@
+<?php
+$myLocaleShort = $this->layout()->myLocaleShort;
+?>
+
+    <!-- module 'Mod Banner Internal' -->
+    <?php  if($myLocaleShort=='vi'): ?>
+        <section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal.png)"></section>
+    <?php else: ?>
+        <section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal-en.png)"></section>
+    <?php endif; ?>
+
+    <div class="container">
+    </div>
+    <div class="bg-body-trip">
+        <!-- module 'Mod Trip' -->
+        <section class="module mod-trip mod-winner">
+            <div class="container" style="min-height: 400px;">
+                <h1><?php echo $this->translate('winner'); ?></h1>
+                <div class="arrow-right d-md-none">
+                    <span class="icomoon icon-chevron-right"></span>
+                </div>
+                <div class="table-status custom-scroll-horizontal">
+                    <?php echo $winner['body'] ?>
+
+                </div>
+            </div>
+        </section>
+
+    </div>

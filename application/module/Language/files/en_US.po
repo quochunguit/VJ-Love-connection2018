@@ -457,3 +457,6 @@ msgstr "Tokyo - HaNoi 11/1/2019"
 
 msgid "UserContestMaximum"
 msgstr "Sorry! We have received 20 submission from this account. Our admin team will check the entry and announce by email when it is approved. Please come back to update and share more."
+
+msgid "winner"
+msgstr "Winners List"

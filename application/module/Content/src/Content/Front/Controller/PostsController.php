@@ -59,6 +59,22 @@ class PostsController extends FrontController {
 
         ));
     }
+
+    public function winnerAction(){
+        $postModel = $this->getPostModel();
+        $language = $this->getLangCode();
+        $type ='content_winner';
+
+        $item = $postModel->getItem(array('type'=>$type,'language'=>$language));
+        //print_r($news->toArray());die;
+
+        $this->setMetaData(array(), $this->translate('winner'));
+        $this->layout()->setVariables(array('page'=>'winner'));
+        return new ViewModel(array(
+            'winner'   => $item
+
+        ));
+    }
     // -- end Tin tuc
     //*******************************************************************
 

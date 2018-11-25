@@ -391,7 +391,7 @@ $curUrl = $_SERVER['REQUEST_URI'];
         <p><?php echo $this->translate('SaveContestSuccessful_waiting'); ?></p>
         <p><?php echo $this->translate('Gold_hour'); ?></p>
         <div class="button text-center">
-            <a target="_blank" href="https://vietjetair.com" class="btn btn-primary btn-close change-text-pop"><?php echo $this->translate('Book_now'); ?></a>
+            <a target="_blank" href="https://vietjetair.com" onclick="gtag('event', 'BOOK-YOUR-FLIGHT-AFTER-SUBMIT-Button-click');" class="btn btn-primary btn-close change-text-pop"><?php echo $this->translate('Book_now'); ?></a>
         </div>
     </div>
 </div>

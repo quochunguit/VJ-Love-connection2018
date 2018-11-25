@@ -457,6 +457,7 @@ msgstr "Tokyo - Hà Nội 11/1/2019"
 msgid "UserContestMaximum"
 msgstr "Xin lỗi, BTC đã nhận 20 bài dự thi từ tài khoản này. Admin sẽ kiểm tra lại nội dung để tránh tình trạng spam và thông báo qua email với bạn các bài được duyệt. Bạn vui lòng quay lại sau để cập nhật nhé."
 
-
+msgid "winner"
+msgstr "Danh sách trúng giải"
 
 
