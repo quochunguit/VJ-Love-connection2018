@@ -1267,6 +1267,8 @@ App.VoteShare = function () {
 
                                                 //show resend code
                                                 App.Popup.openResendCode();
+                                                $('#resend-phone').val(res.phone);
+                                                $('#resend-location').val(res.location + '_' + res.phone.substr(0, 2));
                                             }
                                         }
                                     });

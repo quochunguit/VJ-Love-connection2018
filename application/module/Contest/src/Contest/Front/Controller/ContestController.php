@@ -106,11 +106,9 @@ class ContestController extends FrontController {
                 //print_r($_FILES["file"]);
 
                 foreach($_FILES["file"]["size"] as $k => $value){
-                    $sumSize += $value;
-                }
-
-                if($sumSize > 5242880){
-                    $this->returnJsonAjax(array('status' => false, 'limit_capacity'=>true, 'message' => $this->translate('Max_Capacity')));
+                    if($value > 5242880){
+                        $this->returnJsonAjax(array('status' => false, 'limit_capacity'=>true, 'message' => $this->translate('Max_Capacity')));
+                    }
                 }
 
                 for($i = 0; $i < count($_FILES["file"]["name"]); $i++){

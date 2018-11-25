@@ -75,7 +75,7 @@ Handle.Contest = function (){
                 // setting the defaults
                 // $("textarea").textareaCounter({ limit: 100 });
                 var defaults = {
-                    limit: 100
+                    limit: 1000
                 };
                 var options = $.extend(defaults, options);
 
@@ -284,7 +284,7 @@ Handle.Contest = function (){
             return false;
         }
 
-        if($('#share-content').val().match(/\S+/g).length > 1000){
+        if($.trim($('#share-content').val()).split(" ").length >= 1000){
             $('.coment').addClass('error');
             $('.coment .messages-error div').text(trans_CommentMoreThan1000);
             return false;

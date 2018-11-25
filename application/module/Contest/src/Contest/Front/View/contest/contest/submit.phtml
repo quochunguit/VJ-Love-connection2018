@@ -7,7 +7,7 @@
     var trans_InsertComment = "<?php echo $this->translate('InsertComment'); ?>";
     var trans_MaxCapacity = "<?php echo $this->translate('Max_Capacity'); ?>";
     var trans_ImageFormatError = "<?php echo $this->translate('ImageFormatError'); ?>";
-    var trans_CommentMoreThan1000 = "<?php echo $this->translate('SaveContestSuccessful'); ?>";
+    var trans_CommentMoreThan1000 = "<?php echo $this->translate('CommentMoreThan1000'); ?>";
     var flag_submission = true;
 </script>
 <?php  $myLocaleShort = $this->layout()->myLocaleShort; ?>
@@ -51,7 +51,7 @@
                                             <option value="tokyo_hanoi"><?php echo $this->translate('tokyo_hanoi'); ?></option>
                                         </select>
                                         <div class="messages-error">
-                                            <div><?php echo $this->translate('Target'); ?></div>
+                                            <div><?php echo $this->translate('CommentMoreThan1000'); ?></div>
                                         </div>
                                     </div>
                                 </div>
