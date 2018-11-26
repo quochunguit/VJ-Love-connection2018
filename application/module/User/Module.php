@@ -101,6 +101,15 @@ class Module implements AutoloaderProviderInterface {
             $userForm = new AccountForm();
             return $userForm;
         },
+                'User\Front\Service\UserService' => function($sm) {
+
+                    $userService = new Front\Service\UserService();
+                    return $userService;
+                },
+                'User\Front\Service\UserLoginCookie' => function($sm) {
+                    $service = new Front\Service\UserLoginCookie();
+                    return $service;
+                },
                 'UserService' => 'User\Front\Factory\Service\UserServiceFactory'
             ),
         );

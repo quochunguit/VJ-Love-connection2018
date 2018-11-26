@@ -4,6 +4,7 @@ namespace Core\Controller;
 
 use Core\Controller\CoreController;
 use Zend\View\Model\ViewModel;
+use Core\Auth\Adapter\DbCookie;
 
 class FrontController extends CoreController {
 
@@ -115,7 +116,11 @@ class FrontController extends CoreController {
         $this->languageProcess();
         //$this->detectDevice(); //TODO: detect device
         //$this->detectCountry();
-        $_SESSION['chooseLang']= true;
+        $this->userAutoLogin();
+
+        $_SESSION['chooseLang']=true;
+
+
 
         parent::onDispatch($e);
     }
@@ -148,7 +153,9 @@ class FrontController extends CoreController {
     public function languageProcess(){
         $params = $this->getParams();
         $langRoute = $params['lang'];
+
         if($langRoute){
+
             $validLang = array('vi', 'en');
             if(in_array($langRoute, $validLang)){
                 switch ($langRoute) {
@@ -167,6 +174,7 @@ class FrontController extends CoreController {
             $contrl = $params['controller'];
             $action = $params['action'];
             if(!$params['code'] && $contrl == 'Application\Controller\Index' && $action == 'index'){
+
                 $this->langRedirectDefault();
             }
             //End Only home to fix lang
@@ -194,12 +202,22 @@ class FrontController extends CoreController {
     }
 
     private function getDefaultLang(){
-        $langCodeDefault = 'vi_VN';
-        $langModel = $this->getLangModel();
-        $lang = $langModel->getItem(array('is_default'=>1, 'status'=>1));
-        if($lang){
-            $langCodeDefault = $lang['lang_code'];
+
+        $userLoginCookieService = $this->getServiceLocator()->get('User\Front\Service\UserLoginCookie');
+        $langcode = $userLoginCookieService->getCookie('LanguageCookie');
+        if($langcode){
+            $_SESSION['closePop']=true;
+            $langCodeDefault = $langcode;
+        }else{
+            $langCodeDefault = 'vi_VN';
+            $langModel = $this->getLangModel();
+            $lang = $langModel->getItem(array('is_default'=>1, 'status'=>1));
+            if($lang){
+                $langCodeDefault = $lang['lang_code'];
+            }
         }
+
+
             
         return $langCodeDefault;
     }
@@ -433,6 +451,61 @@ class FrontController extends CoreController {
         return $sub . (($len < strlen($str)) ? '...' : '');
     }
 
+
+
+    /*---  Auto login if have cookie ---*/
+    public function userAutoLogin(){
+        $userLoginCookieService = $this->getServiceLocator()->get('User\Front\Service\UserLoginCookie');
+        $uTokenLogin = $userLoginCookieService->getCookie(USER_LOGIN_COOKIE_NAME);
+        $userLogin = $this->getUserLogin();
+        //echo $uTokenLogin;die;
+        if(!$userLogin){
+            if($uTokenLogin){
+                $userLoginCookie = $this->getUserByTokenLogin(array('token'=>$uTokenLogin, 'platform'=>'web'));
+                //print_r($userLoginCookie);die;
+                if($userLoginCookie){
+                    $data = array('token' => $userLoginCookie['token']);
+                    $auth = $this->getServiceLocator()->get('FrontAuthService');
+
+                    $userModel = $this->getUserModel();
+
+                    $siteAuthAdapter = new DbCookie($userModel,'');
+                    $siteAuthAdapter->setCredential($data);
+                    $result = $auth->authenticate($siteAuthAdapter);
+                    if ($result->isValid()) {
+                        $user = $siteAuthAdapter->getIdentity();
+                        if($user){
+                            //Refresh Set cookie variables
+                            $userLoginCookieService->setCookie(USER_LOGIN_COOKIE_NAME,$user['token']);
+                            //End Refresh Set cookie variables
+                            //$this->userAddOnline($user); //Add online
+                        }
+
+                    }
+                }
+            }
+        }else{
+            if(!$uTokenLogin){
+                //Refresh Set cookie variables
+                $userLoginCookieService->setCookie(USER_LOGIN_COOKIE_NAME,$userLogin['token']);
+                //End Refresh Set cookie variables
+            }
+        }
+    }
+
+    public function getUserByTokenLogin($utokenLogin='') {
+        if($utokenLogin){
+            $userModel = $this->getUserModel();
+            $userToken = $userModel->getUserByToken($utokenLogin['token']);
+            if($userToken){
+
+                    return $userToken;
+
+            }
+        }
+
+        return array();
+    }
     /*====== End All function common ==============*/
 
 }

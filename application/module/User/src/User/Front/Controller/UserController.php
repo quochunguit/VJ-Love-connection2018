@@ -190,6 +190,8 @@ public function apiverifysmsAction(){
 
                         //-Token login--
                     $this->createdUserToken($userId, $userModel);
+                    $userLoginCookieService = $this->getServiceLocator()->get('User\Front\Service\UserLoginCookie');
+                    $userLoginCookieService->setCookie($user['token'],USER_LOGIN_COOKIE_NAME);
                         //-End Token login--
 
                     $user = $userModel->getUser($userId);
@@ -348,20 +350,17 @@ public function apiloginfbAction(){
             $resultValid =  $this->checkUserStatus($userLogin);
 
             if($resultValid['status'] || $resultValid['status_key'] == 'reg_fb' || $resultValid['need_active'] == true ){
-                if($resultValid['status']){
-                        //-Token login--
-                    $token = $this->createdUserToken($userLogin['id'],$userModel);
-                    if($token){
-                        $userLogin['token'] = $token;
-                    }
-                        //-End Token login--
-                }
+
 
                 $userLoginFix = $this->apiProcessUser($userLogin);
                 $auth = $this->getServiceLocator()->get('FrontAuthService');
                 $siteAuthAdapter = new \Core\Auth\Adapter\Social($userModel, 'Facebook');
                 $siteAuthAdapter->setCredential($userLogin);
                 $result = $auth->authenticate($siteAuthAdapter);
+                $token = $this->createdUserToken($userLoginFix['id'],$userModel);
+                if($token){
+                    $userLogin['token'] = $token;
+                }
                 if($userLoginFix['phone']==''){
                     $this->returnJsonAjax(array('status'=>false,'phone'=>$userLoginFix['phone']));
                 }elseif($userLoginFix['status']==0){
@@ -369,6 +368,8 @@ public function apiloginfbAction(){
                     $this->returnJsonAjax(array('status'=>false,'phone'=>$userLoginFix['phone'],'location'=>$userLoginFix['location'],'need_active'=>true));
                 }else{
                     if($userLoginFix['status']==1){
+                        $userLoginCookieService = $this->getServiceLocator()->get('User\Front\Service\UserLoginCookie');
+                        $userLoginCookieService->setCookie($userLoginFix['token'],USER_LOGIN_COOKIE_NAME);
                         $this->returnJsonAjax(array('status'=>true,'data'=>$userLoginFix));
                     }else{
                         $this->returnJsonAjax(array('status'=>false,'message'=>'Error, try again later!'));
@@ -464,22 +465,17 @@ public function fbcomplete($data)
             $resultValid =  $this->checkUserStatus($userLogin);
 
             if($resultValid['status'] || $resultValid['status_key'] == 'reg_gg' || $resultValid['status_key']=='inactive' ){
-                if($resultValid['status']){
-                        //-Token login--
-                    $token = $this->createdUserToken($userLogin['id'],$userModel);
-
-                    if($token){
-                        $userLogin['token'] = $token;
-                    }
-                        //-End Token login--
-                }
-
                 $userLoginFix = $this->apiProcessUser($userLogin);
 
                 $auth = $this->getServiceLocator()->get('FrontAuthService');
                 $siteAuthAdapter = new \Core\Auth\Adapter\Social($userModel, 'Google');
                 $siteAuthAdapter->setCredential($userLogin);
                 $result = $auth->authenticate($siteAuthAdapter);
+                $token = $this->createdUserToken($userLoginFix['id'],$userModel);
+
+                if($token){
+                    $userLogin['token'] = $token;
+                }
 
                 if(!$resultValid['status']){
                     if($userLogin['phone']!=''){
@@ -488,6 +484,8 @@ public function fbcomplete($data)
                         $this->returnJsonAjax(array('status' => true, 'message' => 'Đăng nhập thành công!','need_update'=>true, 'data' => $userLoginFix));
                     }
                 }else{
+                    $userLoginCookieService = $this->getServiceLocator()->get('User\Front\Service\UserLoginCookie');
+                    $userLoginCookieService->setCookie($userLoginFix['token'],USER_LOGIN_COOKIE_NAME);
                     $this->returnJsonAjax(array('status' => true, 'message' => 'Đăng nhập thành công!', 'data' => $userLoginFix));
                 }
 
@@ -585,7 +583,14 @@ public function fbcomplete($data)
 
         $return = array();
         if ($result->isValid()) {
+
             $user = $siteAuthAdapter->getIdentity();
+            $token = $this->createdUserToken($user['id'],$userModel);
+            if($token){
+                $userLogin['token'] = $token;
+            }
+            $userLoginCookieService = $this->getServiceLocator()->get('User\Front\Service\UserLoginCookie');
+            $userLoginCookieService->setCookie($userLogin['token'],USER_LOGIN_COOKIE_NAME);
             if ($user) {
                 //--Check user valid--
                 $resultValid =  $this->checkUserStatus($user);
@@ -639,6 +644,8 @@ public function apilogoutAction(){
         if($user){
             $authService = $this->getServiceLocator()->get('FrontAuthService');
             $authService->clearIdentity();
+            $userLoginCookieService = $this->getServiceLocator()->get('User\Front\Service\UserLoginCookie');
+            $userLoginCookieService->removeCookie(USER_LOGIN_COOKIE_NAME);
             $this->returnJsonAjax(array('status'=>true,'message'=>'Thoát tài khoản thành công!'));
         }else{
             $this->returnJsonAjax(array('status'=>false,'message'=>'Bạn chưa đăng nhập nên không thể thoát!'));

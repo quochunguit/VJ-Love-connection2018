@@ -240,6 +240,9 @@ msgstr "Gửi Lại"
 msgid "Activeaccount"
 msgstr "Kích hoạt tài khoản"
 
+msgid "HaveActiveaccountyet"
+msgstr "Bạn đã có mã kích hoạt?"
+
 msgid "Activationcode"
 msgstr "Mã Kích Hoạt"
 

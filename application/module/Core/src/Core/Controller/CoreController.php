@@ -377,6 +377,7 @@ class CoreController extends EventController {
             $sessionContainer = new Container('translate_locale');
             $sessionContainer->offsetSet('myLocale', $langCode);
             $translator->setLocale($langCode);
+
         }
     }
 

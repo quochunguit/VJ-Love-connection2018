@@ -16,9 +16,12 @@ class LanguageController extends FrontController {
             $langModel = $this->getLangModel();
             $curLang = $langModel->getItem(array('lang_code'=>$code));
             if($curLang['status'] == 1){
+                $_SESSION['closePop'] = true;
                 $this->setLangCode($code);
             }
-            $_SESSION['closePop'] = true;
+
+            $userLoginCookieService = $this->getServiceLocator()->get('User\Front\Service\UserLoginCookie');
+            $userLoginCookieService->setCookie($code,'LanguageCookie');
         }
         //--End set lang
         if($urlRedirect){
@@ -28,6 +31,7 @@ class LanguageController extends FrontController {
             $curLang = $this->getLangCode(true);
             $urlRedirect = '/'.$curLang.$tmpUrl;
             $this->redirectToUrl($urlRedirect);
+
         }else{
             $codeShort = $this->getLangCode(true);
             $this->redirectToRoute('home', array('lang'=>$codeShort));

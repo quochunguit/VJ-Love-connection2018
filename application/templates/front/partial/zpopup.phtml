@@ -248,6 +248,8 @@ $curUrl = $_SERVER['REQUEST_URI'];
             <?php echo $this->translate('Sendactivationcode'); ?>
         </h2>
 
+        <p class="text-center"><?php echo $this->translate('HaveActiveaccountyet'); ?> <a href="javascript:void(0);" onclick="App.Popup.openActiveCode();"><?php echo $this->translate('Activeaccount'); ?></a></p>
+
         <form action="" name="resendcode-form">
             <div class="form-group row ">
 

@@ -109,6 +109,15 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
             ),
         ));
 
+        $this->add(array(
+            'name' => 'votes',
+            'attributes' => array(
+                'type' => 'text',
+                'class' => 'form-control',
+                'id' => 'votes'
+            ),
+        ));
+
 
 
 
@@ -186,6 +195,10 @@ class ContestForm extends CoreForm implements InputFilterAwareInterface {
 
             $inputFilter->add($factory->createInput(array(
                 'name' => 'destination',
+                'required' => false,
+            )));
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'votes',
                 'required' => false,
             )));
 

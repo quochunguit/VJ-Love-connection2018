@@ -208,7 +208,7 @@ class ContestController extends FrontController {
         $urlShare = BASE_URL.'/'.$codeShort.'/'.$contest_slug.'/'.$contest_id;
         $urlImage = BASE_URL_MEDIA.'/images/'.$imageArray[0];
         $this->layout()->setVariable('data', array('titleShare'=>$titleShare,'desShare'=>$desShare,'urlImage'=>$urlImage));
-
+        $this->setMetaData(array(), $titleShare);
         return new ViewModel(array(
             'contest_infos'=> $contest_infos,
             'bestContent' => $bestContest,
