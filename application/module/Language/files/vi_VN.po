@@ -431,7 +431,7 @@ msgid "hcm_kualalumpur"
 msgstr "TP.HCM - Kuala Lumpur 21/12/2018"
 
 msgid "bangkok_hcm"
-msgstr "Bangkok - TP.HCM 24/12/2018"
+msgstr "Singapore – TP.HCM 24/12/2018"
 
 msgid "hanoi_siemreap"
 msgstr "Hà Nội - Siem Reap 26/12/2018"
@@ -440,7 +440,7 @@ msgid "hcm_hongkong"
 msgstr "Tp.HCM - Hong Kong 28/12/2018"
 
 msgid "singapore_hanoi"
-msgstr "Singapore - Hà Nội 1/1/2019"
+msgstr "Bangkok – TP.HCM 1/1/2019"
 
 msgid "daibac_hanoi"
 msgstr "Đài Bắc - Hà Nội 4/1/2019"
