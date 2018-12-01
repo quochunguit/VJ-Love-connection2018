@@ -736,6 +736,7 @@ public function apiupdateprofileAction(){
 
         if($userValid && (!$userValid['phone'] || $params['act'] == 'updatephone') && $phone){
            $data['phone'] = $phone;
+           $data['mobile_code'] = $mobileCode;
         }
             //--End Update email, phone if email, phone is null---
 
