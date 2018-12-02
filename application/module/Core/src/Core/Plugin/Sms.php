@@ -24,14 +24,14 @@ class Sms extends AbstractPlugin implements ServiceManagerAwareInterface {
         //echo 'aaaa';die;
         if($phone && $sms){
             $infoArray = array(
-                            "u" => USERNAME,
-                            "pwd" => PASSCODE,
-                            "from" => SENDER, //1900xxxx
+                            "u" => 'emerald_verify',
+                            "pwd" => 'vmg7a',
+                            "from" => 'Verify', //1900xxxx
                             "phone" => $phone,
                             "sms" => $sms
                         );
 
-            return $this->postCurl('https://cloudsms.vietguys.biz:4438/api/index.php', $infoArray, BASE_URL);
+            return $this->postCurl('https://cloudsms.vietguys.biz:8088/api/', $infoArray, BASE_URL);
         }
     }
 

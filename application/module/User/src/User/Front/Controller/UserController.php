@@ -307,8 +307,15 @@ public function apiverifyresendsmsAction(){
    }
 
    private function sendSMS($phone, $message){
+       $factory = $this->getFactory();
+       $isOnLive = $factory->isOnLive();
        $sms = new Sms();
-       $return = $sms->sendSoap($phone,'Your activation code: '.$message);
+       if($isOnLive){
+           $return = $sms->sendSoap($phone,'Your activation code: '.$message);
+       }else{
+           $return = $sms->vietGuySms($phone,'Your activation code: '.$message);
+       }
+
        return $return;
 }
     //--End register
@@ -736,7 +743,7 @@ public function apiupdateprofileAction(){
 
         if($userValid && (!$userValid['phone'] || $params['act'] == 'updatephone') && $phone){
            $data['phone'] = $phone;
-           $data['mobile_code'] = $mobileCode;
+            $data['mobile_code'] = $mobileCode;
         }
             //--End Update email, phone if email, phone is null---
 
