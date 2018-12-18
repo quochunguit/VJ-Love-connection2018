@@ -463,4 +463,20 @@ msgstr "Xin lỗi, BTC đã nhận 20 bài dự thi từ tài khoản này. Admi
 msgid "winner"
 msgstr "Danh sách trúng giải"
 
+msgid "Search"
+msgstr "Tìm Kiếm"
 
+msgid "SearchPlaceholder"
+msgstr "Tiêu đề, nội dung..."
+
+msgid "Noresult"
+msgstr "Không có kết quả"
+
+msgid "SearchResults"
+msgstr "Kết quả tìm kiếm"
+
+msgid "WinnerSubmit"
+msgstr "Chia sẻ hình ảnh sau chuyến bay"
+
+msgid "WinnerSubmissionList"
+msgstr "Hình ảnh sau chuyến bay"

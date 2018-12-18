@@ -5,12 +5,18 @@
 
 <?php if($myLocaleShort=='vi'): ?>
     <section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal.png)">
+        <div class="banner-internal-mb d-block d-md-none">
+            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal-mb-vi.jpg" alt="">
+        </div>
         <div class="logo-tn">
             <a href="https://thanhnien.vn/doi-song/vietjet-air-ket-noi-yeu-thuong-voi-giai-thuong-dac-biet-nhat-tu-truoc-den-nay-1027482.html?utm_source=LoveConnection&utm_medium=HeadLogo-click" target="_blank"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/logo-tn.png" alt="logo-tn"></a>
         </div>
     </section>
 <?php else: ?>
     <section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal-en.png)">
+        <div class="banner-internal-mb d-block d-md-none">
+            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal-mb-en.jpg" alt="">
+        </div>
         <div class="logo-tn">
             <a href="https://thanhnien.vn/doi-song/vietjet-air-ket-noi-yeu-thuong-voi-giai-thuong-dac-biet-nhat-tu-truoc-den-nay-1027482.html?utm_source=LoveConnection&utm_medium=HeadLogo-click" target="_blank"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/logo-tn.png" alt="logo-tn"></a>
         </div>
@@ -23,6 +29,18 @@
 
     <section class="module mod-list-articel">
         <div class="container">
+            <form action="" method="post" class="form-share">
+                <div class="form-group row">
+
+                    <label for="title" class="col-sm-4"><?php echo $this->translate('Search') ?></label>
+
+                    <div class="col-input col-sm-8">
+                        <div class="msg-input ">
+                            <input type="text" class="form-control" id="contest-search" name="contest-search" placeholder="<?php echo $this->translate('SearchPlaceholder') ?>">
+                        </div>
+                    </div>
+                </div>
+            </form>
             <div class="list-item-v1">
                 <div class="title-red">
                     <h1><?php echo $this->translate('Hot_submissions') ?></h1>
@@ -62,7 +80,11 @@
             <div class="list-item-v2">
 
                 <div class="title-red">
-                    <h1><?php echo $this->translate('New_submissions') ?></h1>
+                    <?php if(isset($_POST['contest-search'])) : ?>
+                        <h1><?php echo $this->translate('SearchResults') ?></h1>
+                    <?php else: ?>
+                        <h1><?php echo $this->translate('New_submissions') ?></h1>
+                    <?php endif; ?>
                 </div>
                 <div class="mod-list-item mod-list-item-v2">
                     <div class="list-slide row">

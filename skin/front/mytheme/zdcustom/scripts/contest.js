@@ -337,6 +337,141 @@ Handle.Contest = function (){
 
     }
 
+    /*winner contest send button*/
+    $('#preview-send-submit-contest').click(function(){
+        winnerSubmitContest();
+    });
+    $('#send-winner-contest').click(function(){
+        winnerSubmitContest();
+    });
+
+    var winnerSubmitContest = function(){
+        var check_form = checkContestSubmitForm();
+        console.log(check_form);
+
+        if(check_form){
+            //change flag submission to false
+            flag_submission = false;
+
+            //append to form data
+            var formData = new FormData();
+            $(".form-share").find('input[type=file]').each(function(index, file){
+                if(file.files[0] != undefined){
+                    formData.append('file[]', file.files[0]);
+                }
+            });
+
+            //add loading icon
+            $('#send-winner-contest').addClass('show-loading');
+
+            $.ajax({
+                url: baseurl + "/"+languageShort+"/winner-submit", //submit to contest submit action
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                type: 'post',
+                success: function (res) {
+                    //change flag submission to true
+                    flag_submission = true;
+
+                    //add loading icon
+                    $('#send-contest-btn').removeClass('show-loading');
+
+                    gtag('event', 'submit-success');
+                    gtag('config', 'UA-81046101-40', {
+                        'page_path': '/ga-submit-success'
+                    });
+
+                    var result = JSON.parse(res);
+                    if(result.status){
+                        finishSavingWinerSubmit(result.fileuploaded);
+                    }else{
+                        if(result.limit_capacity){
+                            $('#empty-upload-error').removeClass('d-none');
+                            $('#empty-upload-error span').text(trans_MaxCapacity);
+                        }else{
+                            helperJs.bzClosePopup();
+                            helperJs.bzOpenPopup(
+                                {items:
+                                        { src: '#pop-alert'},
+                                    beforeOpen(){
+                                        $('#pop-alert > div > p').text(result.message);
+                                    },
+                                    afterClose(){
+                                        if(result.user_contest_exist){
+                                            location.href = baseurl+'/'+languageShort+'/list-winner-submit';
+                                        }
+                                    }
+                                });
+                        }
+
+
+                    }
+                }
+            });
+        }
+    }
+
+    var finishSavingWinerSubmit = function(media){
+        var shareContent = $('#share-content').val().replace(/<(?:.|\n)*?>/gm, '');
+        shareContent = shareContent.replace(/\r?\n/g,'<br/>');
+        var dataObject = {};
+        dataObject.media_title = $('#share-title').val();
+        dataObject.media_destination = $('#goal-location').val();
+        dataObject.media_description = shareContent;
+        dataObject.media_type = 'winner';
+        dataObject.media = media.join(',');
+
+        //change flag submission to false
+        flag_submission = false;
+
+        //add loading icon
+        $('#send-contest-btn').addClass('show-loading');
+
+        $.ajax({
+            type : "POST",
+            url  : baseurl+"/"+languageShort+"/winner-submit",
+            data : dataObject,
+            success :  function(res){
+                //change flag submission to true
+                flag_submission = true;
+                //remove loading icon
+                $('#send-contest-btn').removeClass('show-loading');
+
+                //do something here
+                var result = JSON.parse(res);
+
+                if(result.status){
+                    helperJs.bzClosePopup();
+                    helperJs.bzOpenPopup(
+                        {items:
+                                { src: '#pop-contestSuccess'},
+                            beforeOpen(){
+                            },
+                            afterClose(){
+                                location.href = baseurl+'/'+languageShort+'/list-winner-submit';
+                            }
+                        });
+                }else{
+                    helperJs.bzClosePopup();
+                    helperJs.bzOpenPopup(
+                        {items:
+                                { src: '#pop-alert'},
+                            beforeOpen(){
+                                $('#pop-alert > div > p').text(result.message);
+                            },
+                            afterClose(){
+
+                            }
+                        });
+                }
+
+
+            }
+        });
+    }
 
     return {
         init:init

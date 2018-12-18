@@ -463,3 +463,21 @@ msgstr "Sorry! We have received 20 submission from this account. Our admin team 
 
 msgid "winner"
 msgstr "Winners List"
+
+msgid "Search"
+msgstr "Search Contest"
+
+msgid "SearchPlaceholder"
+msgstr "Title, description..."
+
+msgid "Noresult"
+msgstr "No results found"
+
+msgid "SearchResults"
+msgstr "Search results"
+
+msgid "WinnerSubmit"
+msgstr "After Trip Story"
+
+msgid "WinnerSubmissionList"
+msgstr "After Trip Gallery"

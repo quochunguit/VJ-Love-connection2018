@@ -57,6 +57,33 @@ class ContestController extends AdminController {
         $params = $e->getParams();
         $this->processCropImage('image', $params);     
     }
+    public function editAction() {
+        $id = $this->params()->fromRoute('id', 0);
+        $form = $this->getForm();
+        $params = $this->getParams();
+        if ($this->isValidForm($form)) {
+            $data = $form->getData();
+
+            $data = $this->getEventManager()->prepareArgs($data);
+            $this->getEventManager()->trigger('onBeforeEdit', $this, $data);
+
+            unset($data['csrf']); //Remove csrf
+            unset($data['type']);
+            unset($data['language']);
+            $return = $this->getModel()->save($data,$id);
+
+            $this->getEventManager()->trigger('onEdit', $this, $data);
+            if ($return) {
+                $this->addMessage('Save success');
+                return $this->navigate($params, $return['id']);
+            } else {
+                $this->addMessage($return['message']);
+            }
+        }
+        $item = $this->getItem();
+        $form->bind($item);
+        return array('form' => $form, 'id' => $id, 'data' => $item);
+    }
 
     public function onBeforeEdit(Event $e) {
         $params = $e->getParams();

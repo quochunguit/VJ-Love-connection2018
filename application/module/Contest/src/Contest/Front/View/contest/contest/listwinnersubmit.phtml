@@ -1,0 +1,180 @@
+<!-- module 'Mod Banner Internal' -->
+<?php
+$myLocaleShort = $this->layout()->myLocaleShort;
+?>
+
+<?php if($myLocaleShort=='vi'): ?>
+    <section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal.png)">
+        <div class="banner-internal-mb d-block d-md-none">
+            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal-mb-vi.jpg" alt="">
+        </div>
+        <div class="logo-tn">
+            <a href="https://thanhnien.vn/doi-song/vietjet-air-ket-noi-yeu-thuong-voi-giai-thuong-dac-biet-nhat-tu-truoc-den-nay-1027482.html?utm_source=LoveConnection&utm_medium=HeadLogo-click" target="_blank"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/logo-tn.png" alt="logo-tn"></a>
+        </div>
+    </section>
+<?php else: ?>
+    <section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal-en.png)">
+        <div class="banner-internal-mb d-block d-md-none">
+            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal-mb-en.jpg" alt="">
+        </div>
+        <div class="logo-tn">
+            <a href="https://thanhnien.vn/doi-song/vietjet-air-ket-noi-yeu-thuong-voi-giai-thuong-dac-biet-nhat-tu-truoc-den-nay-1027482.html?utm_source=LoveConnection&utm_medium=HeadLogo-click" target="_blank"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/logo-tn.png" alt="logo-tn"></a>
+        </div>
+    </section>
+<?php endif; ?>
+
+</section>
+
+<div class="bg-sendshare bg" style="padding-bottom: 100px;">
+
+    <section class="module mod-list-articel">
+        <div class="container">
+            <form action="" method="post" class="form-share">
+                <div class="form-group row">
+                    <div class="col-input col-sm-8">
+                        <div class="msg-input ">
+                            <input type="text" class="form-control" id="contest-search" name="contest-search" placeholder="<?php echo $this->translate('SearchPlaceholder') ?>">
+                        </div>
+                    </div>
+                    <div class="col-sm-4"><button class="btn btn-primary">
+                        <div class="lds-rolling"><div></div></div>
+                        <?php echo $this->translate('Search'); ?>
+                    </button></div>
+                </div>
+            </form>
+            <!--div class="list-item-v1">
+                <div class="title-red">
+                    <h1><?php echo $this->translate('Hot_submissions') ?></h1>
+                </div>
+                <div class="mod-list-item" data-module="slide-list-av">
+                    <div class="list-slide">
+                        <?php if ($bestContent): ?>
+                            <?php foreach ($bestContent as $item): ?>
+                                <?php $images = explode(',', $item['images']); $image = $images[0];?>
+                                <div class="item">
+                                    <div class="item-image">
+                                        <div class="mark-image">
+                                            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/mask.png" alt="mask">
+                                        </div>
+                                        <div class="item-avatar" style='background-image: url("<?php echo BASE_URL . '/media/images/' . $image; ?>");'>
+                                            <a href="<?php echo $this->url('contest-detail', array('lang'=>$this->layout()->myLocaleShort, 'slug'=>$item['slug'], 'id'=>$item['id'])) ?>" class="center-mask"></a>
+                                        </div>
+                                    </div>
+                                    <div class="content-item">
+
+                                        <p><?php echo $item['title']; ?></p>
+                                        <div class="status-item">
+                                            <span class="author"><?php echo $item['name']; ?></span>
+                                            <span class="like">Like: <span><?php echo $item['votes']; ?></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div style="display: block;with:100px;height:200px"></div>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+
+            </div-->
+            <div class="list-item-v2">
+
+                <!--div class="title-red">
+                    <?php if(isset($_POST['contest-search'])) : ?>
+                        <h1><?php echo $this->translate('SearchResults') ?></h1>
+                    <?php else: ?>
+                        <h1><?php echo $this->translate('New_submissions') ?></h1>
+                    <?php endif; ?>
+                </div-->
+                <div class="mod-list-item mod-list-item-v2">
+                    <div class="list-slide row">
+                        <?php if ($newestContest): ?>
+                            <?php
+                            $array_chunk = array_chunk($newestContest, 3);
+                            $lastItems = $array_chunk[count($array_chunk) - 1];
+                            $sumCountItems = count($newestContest);
+                            $lastItemsCount = count($lastItems);
+                            $itemNum = 1;
+                            ?>
+                            <?php foreach ($newestContest as $item): ?>
+                                <?php
+                                $lastItemclass = '';
+                                if($paging->getPagingLinkFront() == '') {
+                                    if($lastItemsCount == 1){
+                                        if ($sumCountItems % 2 == 0) {
+                                            if(count($array_chunk) > 1){
+                                                if($item['id'] == $array_chunk[count($array_chunk) - 2][count($array_chunk[0]) - 1]['id']){
+                                                    $lastItemclass = ' item-res-last-row';
+                                                }
+                                            }
+                                        }
+                                    }
+                                    foreach ($lastItems as $lastItem) {
+                                        if($item['id'] == $lastItem['id']){
+                                            $lastItemclass = ' item-last-row';
+
+                                            if ($sumCountItems % 2 == 0) {
+                                                if($lastItemsCount == 2){
+                                                    if($itemNum == 1 || $itemNum == 2){
+                                                        $lastItemclass .= ' item-res-last-row';
+                                                    }
+                                                }else if($lastItemsCount == 3){
+                                                    if($itemNum == 3 || $itemNum == 2){
+                                                        $lastItemclass .= ' item-res-last-row';
+                                                    }
+                                                }
+                                            }
+                                            $itemNum++;
+                                        }
+                                    }
+                                }
+                                ?>
+                                <?php $images = explode(',', $item['images']); $image = $images[0];?>
+                                <div class="item col-lg-4 col-sm-6<?php echo $lastItemclass; ?>">
+                                    <div class="item-image">
+                                        <div class="mark-image">
+                                            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/mask.png" alt="mask">
+                                        </div>
+                                        <div class="item-avatar" style='background-image: url("<?php echo BASE_URL . '/media/images/' . $image; ?>");'>
+                                            <a href="<?php echo $this->url('contest-detail', array('lang'=>$this->layout()->myLocaleShort, 'slug'=>$item['slug'], 'id'=>$item['id'])) ?>" class="center-mask"></a>
+                                        </div>
+                                    </div>
+                                    <div class="content-item">
+                                        <h4><a href="<?php echo $this->url('contest-detail', array('lang'=>$this->layout()->myLocaleShort, 'slug'=>$item['slug'], 'id'=>$item['id'])) ?>"><?php echo $destination_translate[$item['destination']]; ?></a> </h4>
+                                        <p><?php echo $item['title']; ?></p>
+                                        <div class="status-item">
+                                            <span class="author"><?php echo $item['name']; ?></span>
+                                            <span class="like">Like: <span><?php echo $item['votes']; ?></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div style="display: block;with:100px;height:200px">
+                                <lable><?php echo $this->translate('Noresult') ?></lable>
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <nav aria-label="Page navigation" class="nav-paginaion">
+            <?php echo $paging->getPagingLinkFront(); ?>
+
+        </nav>
+
+
+        <?php if ($userLogin && $userLogin['id']): ?>
+            <p class="text-center"><a href="javascript:void(0);" class="btn btn-yellow" onclick="App.Site.goToContestSubmit(<?php echo $userLogin['id']; ?>);"><?php echo $this->translate('Share_comments'); ?></a></p>
+        <?php else: ?>
+            <p class="text-center"><a href="javascript:void(0);" class="btn btn-yellow" onclick="App.Popup.openLogin();"><?php echo $this->translate('Share_comments'); ?></a></p>
+        <?php endif; ?>
+    </div>
+</div>

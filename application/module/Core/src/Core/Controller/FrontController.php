@@ -120,7 +120,14 @@ class FrontController extends CoreController {
 
         $_SESSION['chooseLang']=true;
 
+        $model = $this->getContestModel();
+        $userLogin = $this->getUserLogin();
 
+        $win_contest = false;
+        if($userLogin['status']==1) {
+            $win_contest = $model->getContestByUser($userLogin['id'], 1, 0, 1);
+            $this->layout()->setVariables(array('win_contest'=>$win_contest));
+        }
 
         parent::onDispatch($e);
     }

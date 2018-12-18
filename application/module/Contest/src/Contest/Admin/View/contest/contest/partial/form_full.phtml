@@ -62,12 +62,30 @@
 </div>
 
 
-<div class="form-group">
-    <label class="col-sm-2 control-label" for="">Status</label>
-    <div class="col-sm-10">
-        <?php echo $this->formSelect($form->get('status')); ?>
+<!--    <td>--><?php //echo $this->layoutHelper()->publishString($data['status']); ?><!--</td>-->
+<!--    <td>-->
+<!--        --><?php
+//        switch ($data['status']) {
+//            case 1:
+//                echo '---';
+//                break;
+//            case 0:
+//                echo '<a id="btn_reject_'. $data['id'].'" href="javascript:;" onclick="javascript:reject(\''.$data['id'].'\');"><span style="color:Black; font-weight:bold">Reject</span>';
+//                break;
+//            case 2:
+//                echo '<span style="color:Red; font-weight:bold">Rejected</span>';
+//                break;
+//        }
+//        ?>
+<!--        </a>-->
+<!--    </td>-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="">Status</label>
+        <div class="col-sm-10">
+            <?php echo $this->formSelect($form->get('status')); ?>
+        </div>
     </div>
-</div>
+
 
 <div class="form-group">
     <label class="col-sm-2 control-label" for="">Created</label>

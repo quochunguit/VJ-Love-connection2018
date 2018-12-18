@@ -47,6 +47,26 @@ return array(
                     ),
                 ),
             ),
+            'winner-submit' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/[:lang]/winner-submit[/]',
+                    'defaults' => array(
+                        'controller' => 'Contest\Front\Controller\Contest',
+                        'action' => 'winnersubmit',
+                    ),
+                ),
+            ),
+            'list-winner-submit' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/[:lang]/list-winner-submit[/]',
+                    'defaults' => array(
+                        'controller' => 'Contest\Front\Controller\Contest',
+                        'action' => 'listwinnersubmit',
+                    ),
+                ),
+            ),
 
             //--************************* ADMIN ***************************
             'contest-admin' => array(

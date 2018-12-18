@@ -116,6 +116,7 @@ App.handleStatus = function(){
     if($('.change_status').length > 0){
         $('.change_status').click(function(){
             var dataAction = $(this).attr('data-action');
+
             //check current row
             $(this).parent('td').parent('tr').find('.checkitem').attr('checked', true);
             //submit form

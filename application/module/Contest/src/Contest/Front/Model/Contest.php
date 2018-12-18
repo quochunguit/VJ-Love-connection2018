@@ -36,13 +36,21 @@ class Contest extends FrontAppModel {
         if ($keyword) {
             $keyword = addslashes(trim($keyword));
             //$keyword = mysql_real_escape_string(trim($keyword));
-            $select->where("(". $this->table.".title like '%$keyword%')");
+            //$select->where("(". $this->table.".title like '%$keyword%')");
+            $select->where(" (". $this->table.".title like '%$keyword%' or ". $this->table.".descriptions like '%$keyword%') ");
         }
 
 
         $type = $this->getState('filter.type');
         if (!empty($type)) {
             $select->where(array('type' => $type));
+        }
+
+        $winnerContest = $this->getState('filter.winnercontest');
+        if($winnerContest){
+            $select->where(array('type' => $winnerContest));
+        }else{
+            $select->where(array('type <> "winner"'));
         }
 
         //order
@@ -116,7 +124,7 @@ class Contest extends FrontAppModel {
         return array();
     }
 
-    public function getContestByUser($userId, $status = '', $limit = 0) {
+    public function getContestByUser($userId, $status = '', $limit = 0, $is_win_week = '', $type = '') {
 
         $select = new Select($this->table);
         $select->join('bz1_users', 'bz1_users.id=' . $this->table . '.user_id', array('user_name'=>'name','user_email'=>'email','user_phone'=>'phone','user_identify'=>'identify','user_avatar'=>'social_picture'));
@@ -133,6 +141,14 @@ class Contest extends FrontAppModel {
 
         if($userId){
             $select->where(array($this->table . '.user_id' => $userId));
+        }
+
+        if($is_win_week){
+            $select->where(array($this->table . '.is_win_week' => $is_win_week));
+        }
+
+        if($type){
+            $select->where(array($this->table . '.type' => $type));
         }
 
         /*if($fromDate){

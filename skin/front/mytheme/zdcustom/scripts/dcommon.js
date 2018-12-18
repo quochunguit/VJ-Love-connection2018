@@ -195,6 +195,39 @@ App.Site = function(){
         });
     }
 
+    var goToWinnerSubmit = function(userId){
+        //check user login
+        $.ajax({
+            url: baseurl+"/user-profile",
+            dataType: 'json',
+            data: {
+                user_id:userId
+            },
+            type:'post',
+            success: function(res){
+                if(res.status){
+                    //go to contest submit page
+                    gtag('config', gaId, {
+                        'page_path': '/ga-submit-contest'
+                    });
+                    window.location.href = baseurl + '/' + languageShort + '/winner-submit';
+                }else{
+                    //alert(res.message);
+                    if(res.phone != ''){
+                        App.Popup.openResendCode();
+                        $('#resend-phone').val(res.phone);
+                        $('#resend-location').val(res.location + '_' + res.phone.substr(0, 2));
+                    }else{
+                        //show update phone popup
+                        App.Popup.openUpdatePhone();
+                    }
+
+
+                }
+            }
+        });
+    }
+
     var formValidate = function(){
         //register form
         var register_validate = $("form[name='register-form']").validate({
@@ -704,7 +737,8 @@ App.Site = function(){
         showUserLogin: showUserLogin,
         userLogout:userLogout,
         showWinnerList: showWinnerList,
-        goToContestSubmit: goToContestSubmit
+        goToContestSubmit: goToContestSubmit,
+        goToWinnerSubmit: goToWinnerSubmit
     };
 }();
 //--End All site

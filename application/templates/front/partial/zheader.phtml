@@ -1,6 +1,7 @@
 <?php
   $parentPage = $this->layout()->parent_page;
   $page = $this->layout()->page;
+  $win_contest = $this->layout()->win_contest;
 
   $factory = $this->factory();
   $user = $this->user();
@@ -45,15 +46,44 @@
                     </div>
 
                 </li>
-                <li  class="send-contest <?php if($page=='submit'){echo 'active';}; ?>">
+                <li  class="send-contest <?php if($page=='submit' || $page=='winnersubmit'){echo 'active';}; ?>">
                     <?php if (@$user && @$user['id']): ?>
                         <a href="javascript:void(0);" onclick="App.Site.goToContestSubmit(<?php echo @$user['id']; ?>);"><?php echo $this->translate('Submitions'); ?></a>
                     <?php else: ?>
                         <a href="javascript:void(0);" onclick="App.Popup.openLogin();"><?php echo $this->translate('Submitions'); ?></a>
                     <?php endif; ?>
+
+                    <?php if (@$user && @$user['id'] && $win_contest): ?>
+                        <?php //$contestmodel = $this->getContestModel();
+                        //$win_contest = $model->getContestByUser(@$user['id'], 1, 0, 1);
+                        //if($win_contest && count($win_contest) > 0):
+                        ?>
+
+                        <div class="nav-item-arrows d-lg-none">
+                            <i class="icomoon icon-chevron-down" aria-hidden="true"></i>
+                        </div>
+                        <div class="dropdown-menu main-menu-dropdown">
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="App.Site.goToWinnerSubmit(<?php echo @$user['id']; ?>);"><?php echo $this->translate('WinnerSubmit'); ?></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <?php //endif; ?>
+                    <?php endif; ?>
                 </li>
-                <li class="<?php if($page=='contest' || $page=='detail'){echo 'active';} ?>">
+                <li class="<?php if($page=='contest' || $page=='detail' || $page=='winnercontest'){echo 'active';} ?>">
                     <a href="<?php echo $this->url('contest', array('lang'=>$myLocaleShort)) ?>"><?php echo $this->translate('Gallery'); ?></a>
+                    <div class="nav-item-arrows d-lg-none">
+                        <i class="icomoon icon-chevron-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="dropdown-menu main-menu-dropdown">
+                        <ul>
+                            <li>
+                                <a href="<?php echo $this->url('list-winner-submit',array('lang'=>$myLocaleShort)) ?>"><?php echo $this->translate('WinnerSubmissionList'); ?></a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="<?php if($page=='flight'){echo 'active';} ?>" >
                     <a href="<?php echo $this->url('flightInformation',array('lang'=>$myLocaleShort)) ?>"><?php echo $this->translate('Flight_Information'); ?></a>

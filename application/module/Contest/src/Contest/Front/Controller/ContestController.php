@@ -23,6 +23,8 @@ class ContestController extends FrontController {
         $modelBestContest = $this->getContestModel();
         $modelBestContest->setLimit(12);
         $modelBestContest->setState('order.field', 'votes');
+        $modelBestContest->setState('filter.keyword', false);
+        $modelBestContest->setState('filter.winnercontest', false);
         $bestContest = $modelBestContest->getItems();
         $bestContest = $bestContest->toArray();
 
@@ -30,6 +32,12 @@ class ContestController extends FrontController {
         $modelNewestContest->setParams($params);
         $modelNewestContest->setLimit(12);
         $modelNewestContest->setState('order.field', 'created');
+        //if exist contest search keyword
+        if(isset($params['contest-search'])){
+            $modelNewestContest->setState('filter.keyword', $params['contest-search']);
+        }else{
+            $modelNewestContest->setState('filter.keyword', false);
+        }
         $newestContest = $modelNewestContest->getItems();
         $newestContest = $newestContest->toArray();
 
@@ -217,6 +225,167 @@ class ContestController extends FrontController {
             'desShare'=>$desShare,
             'urlImage'=>$urlImage,
             'userName'=>$userContest['name']
+        ));
+    }
+
+    public function winnersubmitAction(){
+        $this->setMetaData(array(), $this->translate('Winer Submitions'));
+
+        /*Check user login*/
+        $codeShort = $this->getLangCode(true);
+        $userLogin = $this->getUserLogin();
+        $username = ($userLogin) ? @$userLogin['name'] : '';
+        $model = $this->getContestModel();
+        $this->layout()->setVariables(array('parent_page'=>'submit', 'page'=>'winnersubmit'));
+        $curLang = $this->getLangCode();
+
+        if($userLogin['status']==1){
+            //check if user has winner contest
+            $win_contest = $model->getContestByUser($userLogin[id], 1, 0, 1);
+            if($win_contest && count($win_contest) > 0){
+                $is_win_week = true;
+            }else{
+                $is_win_week = false;
+            }
+
+            //check if user has winner submission
+//            $win_submit = $model->getContestByUser($userLogin[id], '', 0, '', 'winner');
+//            if($win_submit && count($win_submit) > 0){
+//                $is_win_submited = true;
+//            }else{
+//                $is_win_submited = false;
+//            }
+
+            if (!empty($_FILES['file'])) {
+                //winner just can post 1 winner submit
+                if(!$is_win_week){
+                    $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('Bạn không được viết bài chiến thắng!')));
+                }
+
+//                if($is_win_submited){
+//                    $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('Bạn đã viết bài chiến thắng rồi!')));
+//                }
+
+                $fileuploaded = array();
+                $sumSize = 0;
+                //print_r($_FILES["file"]);
+
+                foreach($_FILES["file"]["size"] as $k => $value){
+                    if($value > 5242880){
+                        $this->returnJsonAjax(array('status' => false, 'limit_capacity'=>true, 'message' => $this->translate('Max_Capacity')));
+                    }
+                }
+
+                for($i = 0; $i < count($_FILES["file"]["name"]); $i++){
+                    //print_r($file);
+                    $file_type = strtolower($_FILES["file"]["type"][$i]);
+                    if($file_type == "image/jpeg" || $file_type == "image/png"){
+                        $target_dir = WEB_ROOT . '/media/images/';
+
+                        $digits = 3;
+                        $random = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
+                        $newName = round(microtime(true) * 1000) . $random . substr($_FILES["file"]["name"][$i], -4);
+
+                        if (move_uploaded_file($_FILES["file"]["tmp_name"][$i], $target_dir . $newName)) {
+                            //if success uploading file, save to database
+                            //$this->returnJsonAjax(array('status' => true, 'filename'=> $newName, 'message' => 'Upload images successfully!'));
+                            array_push($fileuploaded, $newName);
+                        } else { // if not success
+                            $this->returnJsonAjax(array('status' => false, 'message' => $this->translate('UploadImageError')));
+                        }
+                    }else{
+                        $this->returnJsonAjax(array('status'=>false,'message'=> $this->translate('ImageFormatError')));
+                    }
+                }
+                $this->returnJsonAjax(array('status' => true, 'fileuploaded'=> $fileuploaded, 'message' => 'Upload images successfully!'));
+            }
+
+            //save contest submit to database
+            if(isset($_POST["media"])){
+                $mediaTitle = $_POST["media_title"];
+                $mediaDestination = $_POST["media_destination"];
+                $mediaDes = $_POST["media_description"];
+                $mediaType = $_POST["media_type"];
+                $mediaValue = $_POST["media"];
+
+                $contestInfos = array();
+                $contestInfos["user_id"] = $userLogin->id;
+                $contestInfos["title"] = strip_tags($mediaTitle,'<br>');
+                $contestInfos["destination"] = $mediaDestination;
+                $contestInfos["descriptions"] = strip_tags($mediaDes,'<br>');
+                $contestInfos["type"] = $mediaType;
+                $contestInfos["created"] = date();
+                $contestInfos["images"] = $mediaValue;
+
+                $contestInfos["slug"] = $this->slug($mediaTitle);
+                $contestInfos['language']= $curLang;
+
+                $contestModel = $this->getContestModel();
+                $return = $contestModel->save($contestInfos);
+
+                if ($return['status']) {
+                    return  $this->returnJsonAjax(array('status' => true, 'message' => $this->translate('SaveContestSuccessful')));
+                }
+            }
+        }else{
+            if($userLogin['phone']!=0 && $userLogin['status']==0){
+                $_SESSION['need_active']==true;
+            }
+            if($userLogin['phone']==0){
+                $_SESSION['need_update']==true;
+            }
+            return $this->redirectToRoute('home',array('lang'=>$codeShort));
+        }
+
+
+        return new ViewModel(array(
+            'username'=>$username,
+            'is_win_week'=>$is_win_week,
+            'is_win_submited'=>$is_win_submited
+        ));
+    }
+
+    public function listwinnersubmitAction(){
+        /*Check user login*/
+        $userLogin = $this->getUserLogin();
+
+        $params = $this->getParams();
+        $this->layout()->setVariables(array('parent_page'=>'contest', 'page'=>'winnercontest'));
+        //$model = $this->getContestModel();
+        //$model->setLimit(6);
+        //$model->setParams($params);
+        //$listContest = $model->getItems();
+        //$listContest = $listContest->toArray();
+        //print_r($listContest );die;
+        $this->setMetaData(array(), $this->translate('Gallery'));
+
+        $modelBestContest = $this->getContestModel();
+        $modelBestContest->setLimit(12);
+        $modelBestContest->setState('order.field', 'votes');
+        $modelBestContest->setState('filter.keyword', false);
+        $modelBestContest->setState('filter.winnercontest', 'winner');
+        $bestContest = $modelBestContest->getItems();
+        $bestContest = $bestContest->toArray();
+
+        $modelNewestContest = $this->getContestModel();
+        $modelNewestContest->setParams($params);
+        $modelNewestContest->setLimit(12);
+        $modelNewestContest->setState('order.field', 'created');
+        //if exist contest search keyword
+        if(isset($params['contest-search'])){
+            $modelNewestContest->setState('filter.keyword', $params['contest-search']);
+        }else{
+            $modelNewestContest->setState('filter.keyword', false);
+        }
+        $newestContest = $modelNewestContest->getItems();
+        $newestContest = $newestContest->toArray();
+
+        //return to view index.phtml
+        return new ViewModel(array(
+            'userLogin'=> $userLogin,
+            'newestContest'=> $newestContest,
+            'bestContent' => $bestContest,
+            'paging' => $modelNewestContest->getPaging()
         ));
     }
 

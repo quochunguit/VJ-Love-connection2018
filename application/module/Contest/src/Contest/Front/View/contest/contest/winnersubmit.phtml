@@ -1,0 +1,190 @@
+<script>
+    var trans_Image_upload_missing = "<?php echo $this->translate('Image_upload_missing'); ?>";
+    var trans_image = "<?php echo $this->translate('Image'); ?>";
+    var trans_Uploadfile = "<?php echo $this->translate('Uploadfile'); ?>";
+    var trans_Insert_photo = "<?php echo $this->translate('Insert_photo'); ?>";
+    var trans_Delete_photo = "<?php echo $this->translate('Delete_photo'); ?>";
+    var trans_InsertComment = "<?php echo $this->translate('InsertComment'); ?>";
+    var trans_MaxCapacity = "<?php echo $this->translate('Max_Capacity'); ?>";
+    var trans_ImageFormatError = "<?php echo $this->translate('ImageFormatError'); ?>";
+    var trans_CommentMoreThan1000 = "<?php echo $this->translate('CommentMoreThan1000'); ?>";
+    var flag_submission = true;
+</script>
+<?php  $myLocaleShort = $this->layout()->myLocaleShort; ?>
+<?php if($myLocaleShort=='vi'): ?>
+    <section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal.png)">
+        <div class="banner-internal-mb d-block d-md-none">
+            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal-mb-vi.jpg" alt="">
+        </div>
+        <div class="logo-tn">
+            <a href="https://thanhnien.vn/doi-song/vietjet-air-ket-noi-yeu-thuong-voi-giai-thuong-dac-biet-nhat-tu-truoc-den-nay-1027482.html?utm_source=LoveConnection&utm_medium=HeadLogo-click" target="_blank"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/logo-tn.png" alt="logo-tn"></a>
+        </div>
+    </section>
+<?php else: ?>
+    <section class="module mod-banner-internal bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal-en.png)">
+        <div class="banner-internal-mb d-block d-md-none">
+            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-internal-mb-en.jpg" alt="">
+        </div>
+        <div class="logo-tn">
+            <a href="https://thanhnien.vn/doi-song/vietjet-air-ket-noi-yeu-thuong-voi-giai-thuong-dac-biet-nhat-tu-truoc-den-nay-1027482.html?utm_source=LoveConnection&utm_medium=HeadLogo-click" target="_blank"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/logo-tn.png" alt="logo-tn"></a>
+        </div>
+    </section>
+<?php endif; ?>
+
+<div class="bg-sendshare bg">
+    <!-- module 'Mod Form Share' -->
+    <section class="module mod-form-share">
+        <div class="container">
+            <article>
+                <div class="border-lv-2">
+                    <div class="border-lv-3">
+                        <h1><?php echo $this->translate('Submitions'); ?></h1>
+                        <div class="form-share" name="form-share">
+                            <div class="form-group select-box">
+                                <label for="place"><?php echo $this->translate('Target'); ?>:</label>
+                                <div class="col-input col-sm-7" style="padding: 5px;">
+                                    <div class="msg-input ">
+                                        <select class="form-control selectpicker selectbox " id="goal-location" name="place">
+                                            <option value="-1"><?php echo $this->translate('List_target'); ?></option>
+                                            <option value="hanoi_osaka"><?php echo $this->translate('hanoi_osaka'); ?></option>
+                                            <option value="osaka_hcm"><?php echo $this->translate('osaka_hcm'); ?></option>
+                                            <option value="camranh_thuonghai"><?php echo $this->translate('camranh_thuonghai'); ?></option>
+                                            <option value="camranh_nghiao"><?php echo $this->translate('camranh_nghiao'); ?></option>
+                                            <option value="camranh_hanchau"><?php echo $this->translate('camranh_hanchau'); ?></option>
+                                            <option value="danang_hanchau"><?php echo $this->translate('danang_hanchau'); ?></option>
+                                            <option value="camranh_thientan"><?php echo $this->translate('camranh_thientan'); ?></option>
+                                            <option value="hcm_kualalumpur"><?php echo $this->translate('hcm_kualalumpur'); ?></option>
+                                            <option value="bangkok_hcm"><?php echo $this->translate('bangkok_hcm'); ?></option>
+                                            <option value="hanoi_siemreap"><?php echo $this->translate('hanoi_siemreap'); ?></option>
+                                            <option value="hcm_hongkong"><?php echo $this->translate('hcm_hongkong'); ?></option>
+                                            <option value="singapore_hanoi"><?php echo $this->translate('singapore_hanoi'); ?></option>
+                                            <option value="daibac_hanoi"><?php echo $this->translate('daibac_hanoi'); ?></option>
+                                            <option value="hcm_daibac"><?php echo $this->translate('hcm_daibac'); ?></option>
+                                            <option value="seoul_danang"><?php echo $this->translate('seoul_danang'); ?></option>
+                                            <option value="hcm_seoul"><?php echo $this->translate('hcm_seoul'); ?></option>
+                                            <option value="tokyo_hanoi"><?php echo $this->translate('tokyo_hanoi'); ?></option>
+                                        </select>
+                                        <div class="messages-error">
+                                            <div><?php echo $this->translate('Target'); ?></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="note-upload">
+                                <p><?php echo $this->translate('Upload_maximum'); ?>
+                                    <br><span>*</span> ( <?php echo $this->translate('Max_Capacity'); ?> )</p>
+                            </div>
+                            <div class="group-parent-upload">
+                                <div class="form-group group-upload-img">
+                                    <label for=""><?php echo $this->translate('Image'); ?> <span class="sl">1</span> - </label>
+                                    <input type="file" class="img-upload form-control">
+                                    <img src="#" class="img-load d-none" style="max-width: 130px;" alt="">
+                                    <a href="javascript:void(0);" class="btn btn-yellow"><?php echo $this->translate('Uploadfile'); ?></a>
+                                    <div class="edit-upload">
+                                        <a href="javascript:void(0);" class="add-img"><span class="icomoon icon-add2"></span> <?php echo $this->translate('Insert_photo'); ?></a>
+                                        <a href="javascript:void(0);" class="add-del d-none"><?php echo $this->translate('Delete_photo'); ?></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="note-upload d-none" id="empty-upload-error">
+                                <span><?php echo $this->translate('Image_upload_missing'); ?></span>
+                            </div>
+                            <div class="form-group row ">
+
+                                <label for="title" class="col-sm-5" ><?php echo $this->translate('Subject'); ?></label>
+
+                                <div class="col-input col-sm-7">
+                                    <div class="msg-input ">
+                                        <input type="text" class="form-control" id="share-title" name="sharetitle" placeholder="">
+                                        <div class="messages-error">
+                                            <div><?php echo $this->translate('Title_missing'); ?></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group coment">
+                                <label for=""><?php echo $this->translate('Messages'); ?></label>
+                                <textarea style="width: 100%; height: 150px; border-color: #CCC; padding-left: 5px;" id="share-content" name="sharecontent"></textarea>
+                                <div class="messages-error" style="bottom: 40px;">
+                                    <div></div>
+                                </div>
+                                <lable class="textarea-word-count" style="float: left;">1000/1000</lable>
+                                <span><span>*</span> <?php echo $this->translate('Max_world'); ?></span>
+                            </div>
+                            <div class="group-btn">
+                                <button id="contest-preview" class="btn btn-gray">
+                                    <div class="lds-rolling"><div></div></div>
+                                    <?php echo $this->translate('Review'); ?></button>
+                                <button id="send-winner-contest" class="btn btn-primary">
+                                    <div class="lds-rolling"><div></div></div>
+                                    <?php echo $this->translate('Submitions'); ?>
+                                </button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+            </article>
+        </div>
+    </section>
+</div>
+
+<div id="pop-articel" class="mfp-control mfp-hide bzPopup">
+    <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title">
+    <div class="pop-content">
+        <div class="pop-head text-center">
+            <h4 id="preview-title"></h4>
+            <h6><?php echo $this->translate('StoryOf'); ?> <strong id="preview-username"><?php echo $username; ?></strong></h6>
+        </div>
+        <div class="line"></div>
+        <div class="articel-detail">
+            <div class="articel-slider" id="article-slider">
+
+            </div>
+            <div id="preview-content">
+
+            </div>
+        </div>
+        <div class="button text-center">
+            <a href="javascript:void(0);" id="preview-send-submit-contest" class="btn btn-primary"><?php echo $this->translate('Submitions'); ?></a>
+        </div>
+    </div>
+</div>
+
+<?php if(!$is_win_week):?>
+<script>
+    setTimeout(function(){
+        helperJs.bzClosePopup();
+        helperJs.bzOpenPopup(
+            {items:
+                    { src: '#pop-alert'},
+                beforeOpen(){
+                    $('#pop-alert > div > p').text('Bạn phải là người chiến thắng tuần để được post bài winner! click ok để sang trang chia sẻ');
+                },
+                afterClose(){
+                    location.href = baseurl+'/'+languageShort+'/contest-submit';
+
+                }
+            });
+    }, 500);
+
+</script>
+
+<?php elseif($is_win_submited):?>
+<script>
+    setTimeout(function(){
+        helperJs.bzClosePopup();
+        helperJs.bzOpenPopup(
+            {items:
+                    { src: '#pop-alert'},
+                beforeOpen(){
+                    $('#pop-alert > div > p').text('Bạn đã viết bài chiến thắng rồi!');
+                },
+                afterClose(){
+                    location.href = baseurl+'/'+languageShort+'/list-winner-submit';
+
+                }
+            });
+    }, 500);
+
+</script>
+<?php endif; ?>
