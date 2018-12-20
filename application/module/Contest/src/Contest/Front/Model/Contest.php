@@ -37,7 +37,7 @@ class Contest extends FrontAppModel {
             $keyword = addslashes(trim($keyword));
             //$keyword = mysql_real_escape_string(trim($keyword));
             //$select->where("(". $this->table.".title like '%$keyword%')");
-            $select->where(" (". $this->table.".title like '%$keyword%' or ". $this->table.".descriptions like '%$keyword%') ");
+            $select->where(" (bz1_users.name like '%$keyword%') ");
         }
 
 

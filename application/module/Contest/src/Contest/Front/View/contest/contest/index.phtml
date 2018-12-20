@@ -79,8 +79,13 @@
             </div>
             <div class="list-item-v2">
 
-                <div class="title-red">
+                <div class="title-red" id="search-scroll-area">
                     <?php if(isset($_POST['contest-search'])) : ?>
+                        <script>
+                            setTimeout(function(){$([document.documentElement, document.body]).animate({
+                                scrollTop: $("#search-scroll-area").offset().top - 100
+                            }, 1000)}, 500);
+                        </script>
                         <h1><?php echo $this->translate('SearchResults') ?></h1>
                     <?php else: ?>
                         <h1><?php echo $this->translate('New_submissions') ?></h1>
@@ -150,7 +155,9 @@
                                 </div>
                             <?php endforeach; ?>
                             <?php else: ?>
-                            <div style="display: block;with:100px;height:200px"></div>
+                            <div style="display: block;with:100px;height:200px; padding-left: 15px;">
+                                <lable><?php echo $this->translate('Noresult') ?></lable>
+                            </div>
                         <?php endif; ?>
 
                     </div>
