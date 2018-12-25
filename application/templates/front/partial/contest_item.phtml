@@ -1,0 +1,23 @@
+<?php if ($newestContest): ?>
+    <?php foreach ($newestContest as $item): ?>
+        <?php $images = explode(',', $item['images']); $image = $images[0];?>
+        <div class="item col-lg-4 col-sm-6">
+            <div class="item-image">
+                <div class="mark-image">
+                    <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/mask.png" alt="mask">
+                </div>
+                <div class="item-avatar" style='background-image: url("<?php echo BASE_URL . '/media/images/' . $image; ?>");'>
+                    <a href="<?php echo $this->url('contest-detail', array('lang'=>$this->layout()->myLocaleShort, 'slug'=>$item['slug'], 'id'=>$item['id'])) ?>" class="center-mask"></a>
+                </div>
+            </div>
+            <div class="content-item">
+                <h4><a href="<?php echo $this->url('contest-detail', array('lang'=>$this->layout()->myLocaleShort, 'slug'=>$item['slug'], 'id'=>$item['id'])) ?>"><?php echo $destination_translate[$item['destination']]; ?></a> </h4>
+                <p><?php echo $item['title']; ?></p>
+                <div class="status-item">
+                    <span class="author"><?php echo $item['name']; ?></span>
+                    <span class="like">Like: <span><?php echo $item['votes']; ?></span></span>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>

@@ -346,6 +346,39 @@ msgstr "China"
 msgid "Hongkong"
 msgstr "Hong Kong"
 
+msgid "Nhatban"
+msgstr "Japan"
+
+msgid "Thailan"
+msgstr "Thailand"
+
+msgid "Dailoan"
+msgstr "Taiwan"
+
+msgid "Nhatban_des"
+msgstr "Dress up in Kimono and explore Japanese old towns!"
+
+msgid "Trungquoc_des"
+msgstr "Fly to China for breath taking landscapes!"
+
+msgid "Malaysia_des"
+msgstr "Drop in to Malaysia for delicious Laksa?"
+
+msgid "Thailan_des"
+msgstr "Wanna “YOLO” in Khaosan, fly to Thailand now!"
+
+msgid "Singapore_des"
+msgstr "Go nuts with shopping in Singapore’s malls!"
+
+msgid "Cambodia_des"
+msgstr "Discover Cambodian heritage inside ancient temples!"
+
+msgid "Hongkong_des"
+msgstr "Check-in to Hong Kong to sample local delicacy!"
+
+msgid "Dailoan_des"
+msgstr "Reach Taiwan for peaceful Juifen? Fly now!"
+
 msgid "RegisterSuccess"
 msgstr "Registration successful, A code has been sent to your phone, please verify to proceed."
 
@@ -481,3 +514,6 @@ msgstr "After Trip Story"
 
 msgid "WinnerSubmissionList"
 msgstr "After Trip Gallery"
+
+msgid "Load_more"
+msgstr "More Story"

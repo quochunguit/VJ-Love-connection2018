@@ -93,9 +93,8 @@ class UserController extends AdminController {
         ->setCellValue('C'.$indexCellTitle, 'Họ và tên')
         ->setCellValue('D'.$indexCellTitle, 'Email')
         ->setCellValue('E'.$indexCellTitle, 'Điện thoại')
-        ->setCellValue('F'.$indexCellTitle, 'CMND')
-        ->setCellValue('G'.$indexCellTitle, 'Link Face')
-        ->setCellValue('H'.$indexCellTitle, 'Status');
+        ->setCellValue('F'.$indexCellTitle, 'Status')
+        ->setCellValue('G'.$indexCellTitle, 'Created');
         
         $cell = 0;
         foreach($data as $key => $val){
@@ -107,10 +106,8 @@ class UserController extends AdminController {
             ->setCellValue('C' . $cell, $val['name'])
             ->setCellValue('D' . $cell, $val['email'])
             ->setCellValue('E' . $cell, $val['phone'])
-            ->setCellValue('F' . $cell, $val['identify'])
-            ->setCellValue('G' . $cell, $val['social_id'])
-            ->setCellValue('H' . $cell, $val['status'] == 1 ? 'Publish' : ($value['status'] == 2 ? 'Rejected' : 'Unpublish'));
-
+            ->setCellValue('F' . $cell, $val['status'] == 1 ? 'Publish' : ($val['status'] == 2 ? 'Rejected' : 'Unpublish'))
+                ->setCellValue('G' . $cell, $val['created']);
             $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
             $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(10);
             $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(40);

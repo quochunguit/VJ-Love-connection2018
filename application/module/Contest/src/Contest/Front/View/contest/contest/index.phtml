@@ -92,7 +92,7 @@
                     <?php endif; ?>
                 </div>
                 <div class="mod-list-item mod-list-item-v2">
-                    <div class="list-slide row">
+                    <div class="row">
                         <?php if ($newestContest): ?>
                             <?php
                                 $array_chunk = array_chunk($newestContest, 3);
@@ -102,6 +102,7 @@
                                 $itemNum = 1;
                             ?>
                             <?php foreach ($newestContest as $item): ?>
+
                                 <?php
                                     $lastItemclass = '';
                                     if($paging->getPagingLinkFront() == '') {
@@ -169,10 +170,21 @@
     </section>
 
     <div class="container">
-        <nav aria-label="Page navigation" class="nav-paginaion">
-                <?php echo $paging->getPagingLinkFront(); ?>
+        <?php if($paging->getPagingLinkFront()): ?>
+        <div class="paginaion-bar-container">
+                <?php //print_r($paging); //echo $paging->getPagingLinkFront(); ?>
 
-        </nav>
+                <div class="ajax-paging">
+                    <span id="contest-load-more" class="icomoon icon-chevron-left" title="<?php echo $this->translate('Load_more'); ?>"></span>
+                    <input id="contest-cur-page" type="hidden" value="1" />
+
+                        <div class="lds-rolling">
+                            <div></div>
+                        </div>
+                </div>
+
+        </div>
+        <?php endif; ?>
 
 
         <?php if ($userLogin && $userLogin['id']): ?>

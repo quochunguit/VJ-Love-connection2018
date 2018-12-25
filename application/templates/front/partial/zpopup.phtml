@@ -372,7 +372,16 @@ $curUrl = $_SERVER['REQUEST_URI'];
 </div>
 
 <div id="pop-language" class="mfp-control mfp-hide bzPopup">
-    <?php if($myLocaleShort=='vi'): ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy.png" alt="" class="img-title"> <?php else: ?> <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-amy-en.png" alt="" class="img-title"> <?php endif; ?>
+<!--    --><?php //if($myLocaleShort=='vi'): ?><!-- <img src="--><?php //echo BASE_URL_SKIN_IMAGE; ?><!--/img-amy.png" alt="" class="img-title"> --><?php //else: ?><!-- <img src="--><?php //echo BASE_URL_SKIN_IMAGE; ?><!--/img-amy-en.png" alt="" class="img-title"> --><?php //endif; ?>
+    <!-----------new-------------->
+    <div class="plane_popup">
+        <div class="img_plane_popup">
+            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/planes.png" alt="">
+        </div>
+        <div class="txt_plane_popup">
+            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/text_plane.png" alt="">
+        </div>
+    </div>
     <div class="pop-content text-center">
         <p>Chọn ngôn ngữ / Select your language:</p>
         <div class="button left-style" >

@@ -45,9 +45,16 @@ class IndexController extends FrontController{
         $newestContest = $newestContest->toArray();
         $this->setMetaData(array(), $this->translate('Slogan'));
 
+        //get list content_window
+        $postModel = $this->getPostModel();
+        $content_windows = $postModel->getAllContentTypePost('content_window');
+        //$content_windows = $content_windows->toArray();
+
+
       return new ViewModel(array(
           'newestContest'=> $newestContest,
-          'bestContest' => $bestContest
+          'bestContest' => $bestContest,
+          'content_windows'=>$content_windows
 
           //'paging' => $modelNewestContest->getPaging()
       ));

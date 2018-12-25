@@ -67,6 +67,16 @@ return array(
                     ),
                 ),
             ),
+            'contest-ajax-load' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/contest-ajax-load[/]',
+                    'defaults' => array(
+                        'controller' => 'Contest\Front\Controller\Contest',
+                        'action' => 'contestajaxload',
+                    ),
+                ),
+            ),
 
             //--************************* ADMIN ***************************
             'contest-admin' => array(

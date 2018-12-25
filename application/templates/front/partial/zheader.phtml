@@ -73,12 +73,15 @@
                     <?php endif; ?>
                 </li>
                 <li class="<?php if($page=='contest' || $page=='detail' || $page=='winnercontest'){echo 'active';} ?>">
-                    <a href="<?php echo $this->url('contest', array('lang'=>$myLocaleShort)) ?>"><?php echo $this->translate('Gallery'); ?></a>
+                    <a href="javascript:void(0)"><?php echo $this->translate('Gallery'); ?></a>
                     <div class="nav-item-arrows d-lg-none">
                         <i class="icomoon icon-chevron-down" aria-hidden="true"></i>
                     </div>
                     <div class="dropdown-menu main-menu-dropdown">
                         <ul>
+                            <li>
+                                <a href="<?php echo $this->url('contest', array('lang'=>$myLocaleShort)) ?>"><?php echo $this->translate('Gallery'); ?></a>
+                            </li>
                             <li>
                                 <a href="<?php echo $this->url('list-winner-submit',array('lang'=>$myLocaleShort)) ?>"><?php echo $this->translate('WinnerSubmissionList'); ?></a>
                             </li>

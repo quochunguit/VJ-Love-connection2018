@@ -711,6 +711,10 @@ App.Site = function(){
             }
         });
 
+        //index page window click
+        $('.cw-list-item .item').click(function(){
+            $('.content-item-des.active').removeClass('active');
+        });
     }
 
     var showActivationFillCode = function(data){

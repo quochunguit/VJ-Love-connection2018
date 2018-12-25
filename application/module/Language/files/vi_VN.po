@@ -346,6 +346,39 @@ msgstr "Trung Quốc"
 msgid "Hongkong"
 msgstr "Hồng Kông"
 
+msgid "Nhatban"
+msgstr "Nhật Bản"
+
+msgid "Thailan"
+msgstr "Thái Lan"
+
+msgid "Dailoan"
+msgstr "Đài Loan"
+
+msgid "Nhatban_des"
+msgstr "Diện kimono, ghé thăm phố cổ Nhật Bản thôi!"
+
+msgid "Trungquoc_des"
+msgstr "Bay Trung Quốc, thăm thắng cảnh ngoạn mục!"
+
+msgid "Malaysia_des"
+msgstr "Hay ghé Malaysia, mình “măm măm” Laksa?"
+
+msgid "Thailan_des"
+msgstr "Khaosan quẩy xập xình, tới luôn Thái Lan ơi!"
+
+msgid "Singapore_des"
+msgstr "Mua sắm tưng bừng, Singapore triển liền!"
+
+msgid "Cambodia_des"
+msgstr "Thích đền đài cổ kính? Vi vu Campuchia ngay!"
+
+msgid "Hongkong_des"
+msgstr "Check-in tới tấp, ăn cả Hongkong nào!"
+
+msgid "Dailoan_des"
+msgstr "Dạo bước Julifen thanh bình, Đài Loan bay thôi!"
+
 msgid "RegisterSuccess"
 msgstr "Chúc mừng bạn đã đăng ký thành công, Một mã số đã được gửi tới điện thoại, hãy xác minh để tiếp tục."
 
@@ -480,3 +513,6 @@ msgstr "Chia sẻ hình ảnh sau chuyến bay"
 
 msgid "WinnerSubmissionList"
 msgstr "Hình ảnh sau chuyến bay"
+
+msgid "Load_more"
+msgstr "Xem thêm bài dự thi"

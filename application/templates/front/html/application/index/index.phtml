@@ -15,9 +15,9 @@ $flyJourneys = array(
 );
 ?>
 <?php if($myLocaleShort=='vi'): ?>
-<section class="module mod-banner-home bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home.jpg)">
+<section class="module mod-banner-home bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home-vi.gif)">
     <div class="banner-home-mb d-block d-md-none">
-        <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home-mb-vi.png" alt="">
+        <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home-mb-vi.gif" alt="">
     </div>
     <div class="logo-tn">
         <a href="https://thanhnien.vn/doi-song/vietjet-air-ket-noi-yeu-thuong-voi-giai-thuong-dac-biet-nhat-tu-truoc-den-nay-1027482.html?utm_source=LoveConnection&utm_medium=HeadLogo-click" target="_blank"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/logo-tn.png" alt="logo-tn"></a>
@@ -27,9 +27,9 @@ $flyJourneys = array(
     </div>
 </section>
 <?php else: ?>
-    <section class="module mod-banner-home bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home-eng.png)">
+    <section class="module mod-banner-home bg" style="background-image: url(<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home-en.gif)">
         <div class="banner-home-mb d-block d-md-none">
-            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home-mb-en.png" alt="">
+            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/banner-home-mb-en.gif" alt="">
         </div>
         <div class="logo-tn">
             <a href="https://thanhnien.vn/doi-song/vietjet-air-ket-noi-yeu-thuong-voi-giai-thuong-dac-biet-nhat-tu-truoc-den-nay-1027482.html?utm_source=LoveConnection&utm_medium=HeadLogo-click" target="_blank"><img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/logo-tn.png" alt="logo-tn"></a>
@@ -40,6 +40,46 @@ $flyJourneys = array(
 
     </section>
 <?php endif; ?>
+    <section>
+        <div class="container">
+            <div class="col-lg-12 journey-right">
+                <div class="mod-list-item cw-list-item" data-module="slide-list-multi">
+                    <div class="list-slide slide-multi">
+                        <?php if ($content_windows): ?>
+                            <?php foreach ($content_windows as $item): ?>
+
+                                <div class="item">
+                                    <div class="content-item-des<?php if($item['status'] == 1){echo ' active';} ?>">
+                                        <span><?php echo $this->translate($item['title'].'_des'); ?></span>
+
+                                    </div>
+                                    <div class="item-image">
+                                        <div class="mark-image">
+                                            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/mask.png" alt="mask">
+                                        </div>
+                                        <div class="item-avatar" style='background-image: url("<?php echo BASE_URL_MEDIA_IMAGE . '/' . $item['image']; ?>");'>
+                                            <a href="javascript:void(0);"  class="center-mask"></a>
+                                        </div>
+                                        <div class="img-air<?php if($item['status'] == 1){echo ' active';} ?>">
+                                            <?php if($item['status'] == 1): ?>
+                                            <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/air.png" alt="air">
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                    <div class="content-item">
+                                        <span><?php echo $this->translate($item['title']); ?></span>
+
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
     <section class="module mod-state-content bg">
         <div class="container">
             <div class="row align-items-center">

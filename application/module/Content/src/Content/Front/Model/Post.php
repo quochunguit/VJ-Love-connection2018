@@ -251,4 +251,14 @@ class Post extends FrontAppModel {
         return array();
     }
 
+    public function getAllContentTypePost($content_type){
+        $select = new Select($this->table);
+        if($content_type){
+            $select->where(array($this->table . '.type' => $content_type));
+        }
+        $result = $this->selectWith($select);
+        $items = $result->toArray();
+        return $items;
+    }
+
 }

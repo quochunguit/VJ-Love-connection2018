@@ -6,6 +6,7 @@
 @media (min-width: 992px){
     .mod-list-item .item-last-row .content-item{
         color: #FFFFFF;
+        top:20px;
     }
 
     .mod-list-item .item-last-row .content-item .like span{
@@ -54,3 +55,177 @@
 .icon-chevron-left{
     cursor: pointer;
 }
+.cw-list-item .slick-list{padding-top: 50px; padding-bottom: 10px;}
+.cw-list-item .slick-arrow{}
+.cw-list-item .content-item-des{position: absolute;top: -55px;
+    width: 200px;
+    left: 0px;
+    text-align: justify;
+    font-size: 14px;
+    max-width: 153px;
+    word-spacing: -3px;}
+.cw-list-item .content-item-des p{margin-bottom: 0;}
+.cw-list-item .img-air.active{
+    opacity: 1;
+    z-index: 3;
+}
+.cw-list-item .content-item-des{opacity: 0; font-size: 13px;}
+.cw-list-item .content-item{font-size: 14px;}
+.cw-list-item .item:hover .content-item-des{opacity:1;}
+.cw-list-item .slick-arrow {
+    top: 130px;
+}
+@media (max-width: 1024px){
+    .cw-list-item .slick-arrow {
+        top: 115px;
+    }
+}
+
+@media (max-width: 768px){
+    .cw-list-item .content-item-des {
+        top: -55px;
+    }
+    .cw-list-item .content-item-des.active{opacity: 1;}
+
+    .cw-list-item .slick-arrow {
+        top: 120px;
+    }
+}
+
+@media (max-width: 480px){
+    .cw-list-item .slick-list {
+        padding-top: 60px;
+    }
+
+    .cw-list-item .content-item-des {
+        top: -60px;
+        font-size: 12px;
+        text-align: justify;
+        line-height: 20px;
+        max-width: 100px;
+    }
+
+    .cw-list-item .slick-arrow {
+        top: 130px;
+    }
+}
+
+#pop-language{
+    background:none;
+    padding-top:0;
+}
+.plane_popup{
+    position:relative;
+    height:320px;
+}
+
+#pop-language .pop-content p{
+    font-size:19px;
+    color:#fff;
+}
+.img_plane_popup {
+    max-width:426px;
+}
+
+@keyframes plane {
+    0%   {right: -500px; bottom:-20px; opacity:0 }
+    100% {right: -50px; bottom:30px;opacity:1}
+}
+
+/* The element to apply the animation to */
+.img_plane_popup {
+    position:absolute;
+    animation-name: plane;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    z-index:5;
+}
+
+@keyframes text {
+    0%   {left: 0px; top:50px; opacity:0 }
+    100% {left: -180px; top:0px;opacity:1}
+}
+
+/* The element to apply the animation to */
+
+.txt_plane_popup {
+    position:absolute;
+    animation-name: text;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-delay:1.7s;
+}
+
+@keyframes text_mobile {
+    0%   {right: 60px; top:0px; opacity:0 }
+    100% {right: 180px; top:-40px;opacity:1}
+}
+
+@keyframes plane_mobile {
+    0%   {right: -500px; bottom:-20px; opacity:0 }
+    100% {right: -30px; bottom:30px;opacity:1}
+}
+/* The animation code */
+@media only screen and (max-width: 767px) {
+    .bzPopup .pop-content p{
+        font-size:16px;
+    }
+    .plane_popup{
+        height:180px;
+    }
+    .img_plane_popup{
+        width:235px;
+        animation-name: plane_mobile;
+    }
+    .txt_plane_popup{
+        width:125px;
+        animation-name: text_mobile;
+    }
+    .txt_plane_popup img{
+
+    }
+}
+
+
+.paginaion-bar-container{
+    position: relative;
+    height: 110px;
+}
+.arrow-bottom{left: -25px;}
+.paginaion-bar-container .ajax-paging{
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    font-size: 48px;
+    margin: auto;
+    color: yellow;
+    left: -25px;
+    right: 0;
+    top: 10px;
+    -webkit-transform-origin: center;
+    -ms-transform-origin: center;
+    transform-origin: center;
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    display: block;
+    -webkit-animation: d 1s infinite linear;
+    animation: d 1s infinite linear;
+    -webkit-animation-duration: .8s;
+    animation-duration: .8s;
+}
+
+.paginaion-bar-container .ajax-paging .lds-rolling{
+    width: 25px!important;
+    height: 25px!important;
+    top: -5px;
+    left: 10px;
+}
+
+.paginaion-bar-container .ajax-paging .lds-rolling div, .paginaion-bar-container .ajax-paging .lds-rolling div:after{
+    width: 25px;
+    height: 25px;
+    border-color: #E91E63;
+    border-top-color: transparent;
+}
+

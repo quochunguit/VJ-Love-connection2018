@@ -65,6 +65,16 @@ Handle.Contest = function (){
             submitContest();
         });
 
+        //contest ajax load more
+        $('#contest-load-more').click(function(){
+            contestAjaxLoad($(this), 'contest');
+        });
+
+        //contest ajax load more
+        $('#winner-load-more').click(function(){
+            contestAjaxLoad($(this), 'winner');
+        });
+
         /**
          * jQuery.textareaCounter
          * Version 1.0
@@ -469,6 +479,42 @@ Handle.Contest = function (){
                 }
 
 
+            }
+        });
+    }
+
+    var contestAjaxLoad = function(element, contest_type){
+        var next_page = parseInt($('#contest-cur-page').val()) + 1;
+        var formData = new FormData();
+        formData.append('page', next_page);
+        formData.append('contest_type', contest_type);
+
+        //start loading
+        $('.paginaion-bar-container .ajax-paging').addClass('show-loading');
+        element.hide();
+
+        $.ajax({
+            url: baseurl + "/contest-ajax-load", //submit to contest submit action
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            type: 'post',
+            success: function (res) {
+                var response = JSON.parse(res);
+                var html = response.html;
+
+                //end loading
+                $('.paginaion-bar-container .ajax-paging').removeClass('show-loading');
+                element.show();
+
+                if(html == ''){
+                    element.remove();
+                }
+
+                $('.mod-list-item .row').append(html);
+                $('#contest-cur-page').val(next_page);
             }
         });
     }
