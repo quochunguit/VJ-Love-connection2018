@@ -60,7 +60,7 @@
 .cw-list-item .content-item-des{position: absolute;top: -55px;
     width: 200px;
     left: 0px;
-    text-align: justify;
+    text-align: left;
     font-size: 14px;
     max-width: 153px;
     word-spacing: -1px;}
