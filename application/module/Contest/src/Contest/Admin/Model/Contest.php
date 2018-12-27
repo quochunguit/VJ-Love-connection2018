@@ -79,7 +79,12 @@ class Contest extends AppModel {
 
         $type = $this->getState('filter.type');
         if (!empty($type)) {
-            $select->where(array($this->table.'.type' => $type));
+            if($type !='winner'){
+                $select->where(array($this->table.'.type <>"winner"'));
+            }else{
+                $select->where(array($this->table.'.type' => $type));
+            }
+
         }
 
         $is_win_week = $this->getState('filter.is_win_week');
