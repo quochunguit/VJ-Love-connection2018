@@ -501,7 +501,7 @@ msgid "Search"
 msgstr "Search Contest"
 
 msgid "SearchPlaceholder"
-msgstr "Title, description..."
+msgstr "Enter username..."
 
 msgid "Noresult"
 msgstr "No results found"

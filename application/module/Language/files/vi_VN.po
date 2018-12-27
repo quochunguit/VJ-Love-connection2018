@@ -500,7 +500,7 @@ msgid "Search"
 msgstr "Tìm Kiếm"
 
 msgid "SearchPlaceholder"
-msgstr "Tiêu đề, nội dung..."
+msgstr "Tên người dự thi..."
 
 msgid "Noresult"
 msgstr "Không có kết quả"
