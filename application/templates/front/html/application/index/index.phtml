@@ -86,9 +86,17 @@ $flyJourneys = array(
                 <div class="col-md-5 state-content-left">
                     <div class="state-img">
                         <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/img-person.png" alt="images">
-<!--                        <div class="play-icon">-->
-<!--                            <a href="#"><img src="--><?php //echo BASE_URL_SKIN_IMAGE; ?><!--/icon-play.png" alt="play"></a>-->
-<!--                        </div>-->
+                      <div class="play-icon">
+                          <?php if($myLocaleShort=='vi'): ?>
+                           <a href="//www.youtube.com/embed/Sv-aB-3mHRs?autoplay=1&autohide=1&fs=1&rel=0&hd=1&wmode=transparent&enablejsapi=1&html5=1" data-id="" data-popup="video" data-htmlclass="html-popup-video" class="popup-is-open">
+                               <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/icon-play.png" alt="play">
+                           </a>
+                          <?php else: ?>
+                              <a href="//www.youtube.com/embed/KMcW3-_SutY?autoplay=1&autohide=1&fs=1&rel=0&hd=1&wmode=transparent&enablejsapi=1&html5=1" data-id="" data-popup="video" data-htmlclass="html-popup-video" class="popup-is-open">
+                                  <img src="<?php echo BASE_URL_SKIN_IMAGE; ?>/icon-play.png" alt="play">
+                              </a>
+                          <?php endif; ?>
+                       </div>
                     </div>
                 </div>
                 <div class="col-md-7 state-content-right">
