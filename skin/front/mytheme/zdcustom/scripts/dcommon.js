@@ -31,6 +31,7 @@ App.Site = function(){
         formValidate();
         recoverpass();
         tracking();
+        solveVideoMp3Conflict();
     };
 
     var tracking = function(type){
@@ -734,6 +735,34 @@ App.Site = function(){
                 afterClose(){
                 }
             });
+    }
+
+    var solveVideoMp3Conflict = function(){
+        //backup mp3 iframe
+        var mp3_iframe_bk;
+        //play status
+        var video_playing = false;
+
+        $html = $('html');
+        $html.on('click', '.popup-is-open', (e) => {
+            const ele = e.currentTarget;
+            let tmpPopup = $(ele).data('popup');
+            if (tmpPopup === 'video') {
+                //mute mp3
+                var mp3_iframe = $("#audio");
+                mp3_iframe_bk = mp3_iframe.clone();
+                mp3_iframe.remove();
+                video_playing = true;
+            }
+        });
+
+        $html.on('click', '.popup-is-close, .mask-pop-overlay', (e) => {
+            if (video_playing) {
+                //unmute mp3
+                $("body").append(mp3_iframe_bk);
+                mp3_iframe_bk = null;
+            }
+        })
     }
 
     return {
