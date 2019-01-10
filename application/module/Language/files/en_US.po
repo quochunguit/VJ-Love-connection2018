@@ -517,3 +517,6 @@ msgstr "After Trip Gallery"
 
 msgid "Load_more"
 msgstr "More Story"
+
+msgid "LoveConnectionJourney"
+msgstr "Love Connection Journey"

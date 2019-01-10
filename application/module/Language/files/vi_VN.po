@@ -516,3 +516,6 @@ msgstr "Hình ảnh sau chuyến bay"
 
 msgid "Load_more"
 msgstr "Xem thêm bài dự thi"
+
+msgid "LoveConnectionJourney"
+msgstr "Hành trình Kết nối yêu thương"

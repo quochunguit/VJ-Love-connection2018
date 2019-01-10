@@ -93,39 +93,15 @@ $myLocaleShort = $this->layout()->myLocaleShort;
                             <?php
                             $array_chunk = array_chunk($newestContest, 3);
                             $lastItems = $array_chunk[count($array_chunk) - 1];
-                            $sumCountItems = count($newestContest);
-                            $lastItemsCount = count($lastItems);
-                            $itemNum = 1;
+
                             ?>
                             <?php foreach ($newestContest as $item): ?>
                                 <?php
                                 $lastItemclass = '';
                                 if($paging->getPagingLinkFront() == '') {
-                                    if($lastItemsCount == 1){
-                                        if ($sumCountItems % 2 == 0) {
-                                            if(count($array_chunk) > 1){
-                                                if($item['id'] == $array_chunk[count($array_chunk) - 2][count($array_chunk[0]) - 1]['id']){
-                                                    $lastItemclass = ' item-res-last-row';
-                                                }
-                                            }
-                                        }
-                                    }
                                     foreach ($lastItems as $lastItem) {
                                         if($item['id'] == $lastItem['id']){
                                             $lastItemclass = ' item-last-row';
-
-                                            if ($sumCountItems % 2 == 0) {
-                                                if($lastItemsCount == 2){
-                                                    if($itemNum == 1 || $itemNum == 2){
-                                                        $lastItemclass .= ' item-res-last-row';
-                                                    }
-                                                }else if($lastItemsCount == 3){
-                                                    if($itemNum == 3 || $itemNum == 2){
-                                                        $lastItemclass .= ' item-res-last-row';
-                                                    }
-                                                }
-                                            }
-                                            $itemNum++;
                                         }
                                     }
                                 }
