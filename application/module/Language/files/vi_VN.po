@@ -519,3 +519,9 @@ msgstr "Xem thêm bài dự thi"
 
 msgid "LoveConnectionJourney"
 msgstr "Hành trình Kết nối yêu thương"
+
+msgid "VideoTitle1"
+msgstr "DỄ DÀNG BAY - ĐẾN NGAY NHẬT BẢN CÙNG VIETJET"
+
+msgid "VideoTitle2"
+msgstr "HỒ HỮU HẠNH VÀ HÀNH TRÌNH KẾT NỐI YÊU THƯƠNG"

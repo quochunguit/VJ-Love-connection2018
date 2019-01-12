@@ -520,3 +520,9 @@ msgstr "More Story"
 
 msgid "LoveConnectionJourney"
 msgstr "Love Connection Journey"
+
+msgid "VideoTitle1"
+msgstr "ENJOY FLYING - TRAVEL TO JAPAN WITH VIETJET"
+
+msgid "VideoTitle2"
+msgstr "HO HUU HANH AND HIS LOVE CONNECTION JOURNEY"
