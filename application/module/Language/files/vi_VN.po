@@ -532,5 +532,8 @@ msgstr "CÓ MỘT HÀ NỘI TUYỆT VỜI TRONG MẮT TRAVEL BLOGGER WEN YI HUAN
 msgid "VideoTitle4"
 msgstr "BAY ĐÀ NẴNG, HỘI AN CÙNG TRAVEL BLOGGER HÀN QUỐC JEON MYEONGKYUN"
 
+msgid "VideoTitle6"
+msgstr "CÓ MỘT SEOUL THẬT KHÁC QUA GÓC NHÌN CỦA TRẦN QUANG ĐẠI"
+
 msgid "VideoTitle5"
 msgstr "NGUYỄN XUÂN THAO: "BỐ ƠI, CON NHỚ BỐ!""
