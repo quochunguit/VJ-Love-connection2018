@@ -404,10 +404,18 @@ class ContestController extends FrontController {
         $newestContest = $modelNewestContest->getItems();
         $newestContest = $newestContest->toArray();
 
-        $template = 'partial/contest_item';
+        $viewModel = new ViewModel(array(
+            'newestContest' => $newestContest,
+            'myLocaleShort' => $this->getLangCode(true)
+        ));
+        $viewModel->setTemplate('contest/contest/contest_item');
+        $renderer = $this->getViewRender();
+        $htmlBody = $renderer->render($viewModel);
+
+        /*$template = 'partial/contest_item';
         $data = array('newestContest'=>$newestContest);
         $this->renderer = $this->getServiceLocator()->get('ViewRenderer');
-        $htmlBody = $this->renderer->render($template, $data);
+        $htmlBody = $this->renderer->render($template, $data);*/
         //echo $htmlBody;
         //exit();
         $this->returnJsonAjax(array('status'=>true, 'html'=>$htmlBody));
